@@ -1,0 +1,92 @@
+
+$ink--size: 300px
+
+.button
+  +transition(all 0.05s ease-in-out)
+  font:
+    family: $sans-serif--title
+    weight: bold
+    size: 0.9rem
+  text:
+    transform: uppercase
+    decoration: none
+    shadow: 0 1px 1px rgba(darken($color--blue, 10%), 0.5)
+  letter-spacing: 0.05em
+  overflow: hidden
+  padding: 0.5rem 1.5rem
+  position: relative
+  display: inline-block
+  border-radius: 2pt
+  background-color: rgba($color--white, 0.3)
+  cursor: pointer
+
+  &.m-blue
+    color: $color--white
+    background-color: $color--blue
+
+    &:visited, &:active
+      color: $color--white
+
+    &:hover
+      background-color: darken($color--blue, 5%)
+
+    &:active
+      background-color: darken($color--blue, 8%)
+
+    .button--ink
+      animation:
+        name: ink-drop--blue
+        duration: 0.75s
+      background-color: adjust-hue($color--blue, -15deg)
+
+  &.m-transparent
+    color: $color--blue
+    background-color: transparent
+    text-shadow: none
+    box-sizing: border-box
+
+    &:visited, &:active
+      color: $color--blue
+
+    &:hover
+      background-color: rgba($color--gray, 0.05)
+
+    &:active
+      background-color: rgba($color--gray, 0.15)
+
+    .button--ink
+      animation:
+        name: ink-drop--blue
+        duration: 0.75s
+      background-color: adjust-hue($color--blue, -15deg)
+
+  &--ink-container
+    position: absolute
+    display: flex
+    align-items: center
+    justify-content: center
+    width: $ink--size
+    height: $ink--size
+    pointer-events: none
+
+  &--ink
+    border-radius: 100%
+
+
+// Ink effect
+=ink-animation($suffix)
+  $animation-name: ink-drop--#{$suffix}
+  +keyframes($animation-name)
+    @content
+
+// Blue
++ink-animation(blue)
+  0%
+    width: 1px
+    height: 1px
+    opacity: 1
+
+  100%
+    width: $ink--size
+    height: $ink--size
+    opacity: 0

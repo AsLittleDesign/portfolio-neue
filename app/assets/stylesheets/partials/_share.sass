@@ -1,0 +1,81 @@
+
+$size: 40px
+
+.share
+  -webkit-filter: url("#goo")
+  filter: url("#goo")
+  position: fixed
+  top: 1.5rem
+  right: 1.5rem
+  width: $size
+  
+  &--network,
+  &--expand
+    +transition(all 0.35s ease-in-out)
+    transform: translateY(0)
+    height: $size
+    width: $size
+    position: absolute
+    right: 0
+    left: 0
+    top: 0
+    margin: auto
+    display: flex
+    align-items: center
+    justify-content: center
+    cursor: pointer
+    border-radius: 100%
+    background-color: $color--dark-gray
+    color: $color--white
+  
+  &--expand
+    box-shadow: 1px 1px 2px rgba(0,0,0,0.2)
+    transform: scale(1.2)
+    
+    > .icon--x:before
+      display: none
+
+    [js-share="true"] &
+      transform: scale(0.8)
+      background-color: $color--red
+      box-shadow: 0 0 0 transparent
+      
+      > .icon--share:before
+        display: none
+      
+      > .icon--x:before
+        display: initial
+  
+  &--network
+    [js-share="true"] &
+      $spacing: $size + 20px
+      
+      &.m-facebook
+        transform: translateY($spacing)
+        
+        &:active
+          transform: translateY($spacing) scale(0.8)
+      
+      &.m-twitter
+        transform: translateY($spacing * 2)
+        
+        &:active
+          transform: translateY($spacing * 2) scale(0.8)
+      
+      &.m-instagram
+        transform: translateY($spacing * 3)
+        
+        &:active
+          transform: translateY($spacing * 3) scale(0.8)
+      
+      &.m-linkedin
+        transform: translateY($spacing * 4)
+        
+        &:active
+          transform: translateY($spacing * 4) scale(0.8)
+  
+  &--icon
+    font-size: 0.85rem
+
+#blob-filter
+  display: none

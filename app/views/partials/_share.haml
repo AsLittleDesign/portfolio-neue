@@ -1,0 +1,23 @@
+.share(js-share="false")
+  .share--network.m-facebook
+    .share--icon.icon--facebook
+
+  .share--network.m-twitter
+    .share--icon.icon--twitter
+    
+  .share--network.m-instagram
+    .share--icon.icon--instagram
+    
+  .share--network.m-linkedin
+    .share--icon.icon--linkedin
+    
+  .share--expand(js-share-expand)
+    .share--icon.icon--share
+    .share--icon.icon--x
+
+%svg(xmlns="http://www.w3.org/2000/svg" version="1.1" id="blob-filter")
+  %defs
+    %filter#goo
+      %feGaussianBlur(in="SourceGraphic" stdDeviation="10" result="blur")
+      %feColorMatrix(in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7" result="goo")
+      %feBlend(in="SourceGraphic" in2="goo")

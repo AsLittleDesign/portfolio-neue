@@ -1,0 +1,72 @@
+{
+  "checksum": {
+    "previous": "87dded63b0a78cdf4480c4d1cbaf492a6f4331f772ab422e840d8933f1d4c408",
+    "current": "87dded63b0a78cdf4480c4d1cbaf492a6f4331f772ab422e840d8933f1d4c408"
+  },
+  "fonts": [
+    "app/assets/fonts/icons/font/icons.ttf",
+    "app/assets/fonts/icons/font/icons.svg",
+    "app/assets/fonts/icons/font/icons.woff",
+    "app/assets/fonts/icons/font/icons.eot"
+  ],
+  "glyphs": {
+    "facebook": {
+      "codepoint": 61696,
+      "source": "app/assets/fonts/icons/glyphs/facebook.svg"
+    },
+    "instagram": {
+      "codepoint": 61697,
+      "source": "app/assets/fonts/icons/glyphs/instagram.svg"
+    },
+    "linkedin": {
+      "codepoint": 61698,
+      "source": "app/assets/fonts/icons/glyphs/linkedin.svg"
+    },
+    "photo": {
+      "codepoint": 61699,
+      "source": "app/assets/fonts/icons/glyphs/photo.svg"
+    },
+    "share": {
+      "codepoint": 61701,
+      "source": "app/assets/fonts/icons/glyphs/share.svg"
+    },
+    "twitter": {
+      "codepoint": 61700,
+      "source": "app/assets/fonts/icons/glyphs/twitter.svg"
+    },
+    "x": {
+      "codepoint": 61702,
+      "source": "app/assets/fonts/icons/glyphs/x.svg"
+    }
+  },
+  "options": {
+    "autowidth": false,
+    "config": "fontcustom.yml",
+    "css_selector": ".icon--{{glyph}}",
+    "debug": true,
+    "font_ascent": 448,
+    "font_descent": 64,
+    "font_design_size": 16,
+    "font_em": 512,
+    "font_name": "icons",
+    "force": true,
+    "input": {
+      "templates": "app/assets/fonts/icons/templates",
+      "vectors": "app/assets/fonts/icons/glyphs"
+    },
+    "no_hash": true,
+    "output": {
+      "css": "app/assets/stylesheets/base",
+      "fonts": "app/assets/fonts/icons/font",
+      "preview": "app/assets/fonts/icons/font"
+    },
+    "preprocessor_path": null,
+    "quiet": false,
+    "templates": [
+      "_icons.scss"
+    ]
+  },
+  "templates": [
+    "app/assets/stylesheets/base/_icons.scss"
+  ]
+}

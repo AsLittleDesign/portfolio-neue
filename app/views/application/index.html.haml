@@ -1,0 +1,28 @@
+- content_for :head do
+  = stylesheet_link_tag "pages/index", media: "all", "data-turbolinks-track" => true
+
+- content_for :scripts do
+  = javascript_include_tag "pages/index", "data-turbolinks-track" => true
+
+%section.fringe(snap-point)
+  %h1
+    .name.m-red(js-fringe="red") Dave Scott McCarthy
+    .name.m-blue(js-fringe="blue") Dave Scott McCarthy
+    .name(js-fringe="base") Dave Scott McCarthy
+
+  %h3.title Designer / Developer
+
+%section.photography(snap-point)
+  = image_tag "parallax/photography/background", class: "photography--image-layer", :"js-parallax" => "background"
+  = image_tag "parallax/photography/midground", class: "photography--image-layer", :"js-parallax" => "midground"
+  = image_tag "parallax/photography/foreground", class: "photography--image-layer m-foreground", :"js-parallax" => "foreground"
+  %h1.photography--title PHOTOGRAPHY
+  -# .photography--body
+    -# %p Photography is a personal art that enables one to see things from a different perspective. One of the greatest things for one's psyche is being in the moment, just you and your camera. Dave uses photography not only as an exercise in the arts, but also as an escape; a way to connect with and understand  better.
+  = link_to photography_path, :class => "button m-blue" do
+    Explore
+
+%section.table(snap-point)
+  %h1.table--title TABLE.co
+  .table--body
+    %p Non quis reprehenderit est cillum quis et enim aute amet veniam excepteur ea exercitation magna. Minim sint ad proident dolore. Quis amet adipisicing labore consectetur ea cillum aliquip ea laborum. Labore pariatur cillum quis esse commodo magna et enim id excepteur deserunt aliquip.

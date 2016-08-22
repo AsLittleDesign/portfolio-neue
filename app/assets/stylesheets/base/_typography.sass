@@ -1,0 +1,51 @@
+
+html
+  text-rendering: optimizeLegibility
+  -webkit-font-smoothing: antialiased
+  -moz-osx-font-smoothing: grayscale
+  font:
+    size: 17px
+    family: $sans-serif
+
+  &.wf-active
+    font-family: $sans-serif--title
+
+  @media #{ $device--small }
+    font-size: 15px
+
+h1
+  font-size: 3rem
+  position: relative
+  letter-spacing: 0.5em
+  right: -0.25em
+  line-height: 1.33em
+  text:
+    transform: uppercase
+    align: center
+  margin:
+    top: 0
+    bottom: 1rem
+
+  @media #{ $device--small }
+    font-size: 2rem
+
+h2
+  font-size: 2rem
+
+h3
+  letter-spacing: 0.5em
+  font:
+    family: $serif
+    weight: normal
+    size: 1rem
+  text:
+    transform: uppercase
+    align: center
+
+p
+  letter-spacing: 0.03em
+  line-height: 1.5em
+  font:
+    family: $serif
+    weight: normal
+    size: 1rem

@@ -1,0 +1,28 @@
+.icon--facebook:before,
+.icon--instagram:before,
+.icon--linkedin:before,
+.icon--photo:before,
+.icon--share:before,
+.icon--twitter:before,
+.icon--x:before {
+  display: inline-block;
+  font-family: "icons";
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  line-height: 1;
+  text-decoration: inherit;
+  text-rendering: optimizeLegibility;
+  text-transform: none;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-smoothing: antialiased;
+}
+
+.icon--facebook:before { content: "\f100"; }
+.icon--instagram:before { content: "\f101"; }
+.icon--linkedin:before { content: "\f102"; }
+.icon--photo:before { content: "\f103"; }
+.icon--share:before { content: "\f105"; }
+.icon--twitter:before { content: "\f104"; }
+.icon--x:before { content: "\f106"; }

@@ -1,0 +1,528 @@
+as_it_falls:
+  title: As It Falls
+  description: A dramatic image of a stormfront rolling in over the fields.
+  orientation: horizontal
+  url: https://d2vez5w0ugqe83.cloudfront.net/photography/asitfalls.jpg
+  thumb_url: https://d2vez5w0ugqe83.cloudfront.net/photography/thumbnails/asitfalls.jpg
+  location: Folsom, California
+  tags:
+    - Landscape
+    - Weather
+
+pollen:
+  title: Pollen
+  description: An up close shot of a bee pollenating a blackberry bush.
+  orientation: horizontal
+  url: https://d2vez5w0ugqe83.cloudfront.net/photography/bee.jpg
+  thumb_url: https://d2vez5w0ugqe83.cloudfront.net/photography/thumbnails/bee.jpg
+  location: Folsom, California
+  tags:
+    - Nature
+    - Wildlife
+    - Macro
+
+el_capitan:
+  title: El Capitan
+  description: A monochromatic still of the mountain El Capitan in Yosemite shot from below.
+  orientation: horizontal
+  url: https://d2vez5w0ugqe83.cloudfront.net/photography/cliff.jpg
+  thumb_url: https://d2vez5w0ugqe83.cloudfront.net/photography/thumbnails/cliff.jpg
+  location: Yosemite National Park, California
+  tags:
+    - Nature
+    - Landscape
+    - Black & White
+    - Mountains
+
+emerald:
+  title: Emerald
+  description: An up close of a dragonfly resting on a tree. It was so vibrant, that I couldn‘t help but take a picture.
+  orientation: horizontal
+  url: https://d2vez5w0ugqe83.cloudfront.net/photography/dragonfly.jpg
+  thumb_url: https://d2vez5w0ugqe83.cloudfront.net/photography/thumbnails/dragonfly.jpg
+  location: Folsom, California
+  tags:
+    - Wildlife
+    - Macro
+
+pendulum:
+  title: Pendulum
+  description: A shot showing the delicate balance that flow artists manage while performing.
+  orientation: horizontal
+  url: https://d2vez5w0ugqe83.cloudfront.net/photography/DSCF7282.jpg
+  thumb_url: https://d2vez5w0ugqe83.cloudfront.net/photography/thumbnails/DSCF7282.jpg
+  location: San Francisco, California
+  tags:
+    - Flow Art
+    - Fire
+    - People
+
+jumping_through_hoops:
+  title: Jumping Through Hoops
+  description: A flow artist literally jumping through a hoop while performing.
+  orientation: horizontal
+  url: https://d2vez5w0ugqe83.cloudfront.net/photography/DSCF7409.jpg
+  thumb_url: https://d2vez5w0ugqe83.cloudfront.net/photography/thumbnails/DSCF7409.jpg
+  location: San Francisco, California
+  tags:
+    - Flow Art
+    - Fire
+    - People
+
+set_the_world_on_fire:
+  title: Set the World on Fire
+  description: A flow artist setting the ground around him on fire in a beautiful demonstration.
+  orientation: horizontal
+  url: https://d2vez5w0ugqe83.cloudfront.net/photography/DSCF7829.jpg
+  thumb_url: https://d2vez5w0ugqe83.cloudfront.net/photography/thumbnails/DSCF7829.jpg
+  location: San Francisco, California
+  tags:
+    - Flow Art
+    - Fire
+    - People
+
+velvet:
+  title: Velvet
+  description: A flow artist dancing with fire, lighting just one side of her body with warm light.
+  orientation: horizontal
+  url: https://d2vez5w0ugqe83.cloudfront.net/photography/DSCF8042.jpg
+  thumb_url: https://d2vez5w0ugqe83.cloudfront.net/photography/thumbnails/DSCF8042.jpg
+  location: San Francisco, California
+  tags:
+    - Flow Art
+    - Fire
+    - People
+
+wonder:
+  title: Wonder
+  description: A flow artist focusing intensely on her art, watching the fire dance just out of reach of her body.
+  orientation: horizontal
+  url: https://d2vez5w0ugqe83.cloudfront.net/photography/DSCF8062.jpg
+  thumb_url: https://d2vez5w0ugqe83.cloudfront.net/photography/thumbnails/DSCF8062.jpg
+  location: San Francisco, California
+  tags:
+    - Flow Art
+    - Fire
+    - People
+
+in_the_moment:
+  title: In the Moment
+  description: A flow artist dancing, mimicing the movement of the fire she holds in a moment of instinct.
+  orientation: horizontal
+  url: https://d2vez5w0ugqe83.cloudfront.net/photography/DSCF8597.jpg
+  thumb_url: https://d2vez5w0ugqe83.cloudfront.net/photography/thumbnails/DSCF8597.jpg
+  location: San Francisco, California
+  tags:
+    - Flow Art
+    - Fire
+    - People
+
+spin:
+  title: Spin
+  description: A flow artist using circular motion in his performance to give a particular balance and composition to it.
+  orientation: horizontal
+  url: https://d2vez5w0ugqe83.cloudfront.net/photography/DSCF8778.jpg
+  thumb_url: https://d2vez5w0ugqe83.cloudfront.net/photography/thumbnails/DSCF8778.jpg
+  location: San Francisco, California
+  tags:
+    - Flow Art
+    - Fire
+    - People
+
+crossed:
+  title: Crossed
+  description: A flow artist spinning fire, capturing a moment of intense focus and clarity.
+  orientation: horizontal
+  url: https://d2vez5w0ugqe83.cloudfront.net/photography/DSCF8802.jpg
+  thumb_url: https://d2vez5w0ugqe83.cloudfront.net/photography/thumbnails/DSCF8802.jpg
+  location: San Francisco, California
+  tags:
+    - Portrait
+    - Flow Art
+    - Fire
+    - People
+
+meteor:
+  title: Meteor
+  description: A flow artist as he looks as if he is in battle, ready to toss fire at an enemy.
+  orientation: horizontal
+  url: https://d2vez5w0ugqe83.cloudfront.net/photography/DSCF8811.jpg
+  thumb_url: https://d2vez5w0ugqe83.cloudfront.net/photography/thumbnails/DSCF8811.jpg
+  location: San Francisco, California
+  tags:
+    - Flow Art
+    - Fire
+    - People
+
+coronation:
+  title: Coronation
+  description: A flow artist appearing to create a crown of fire, showing a peaceful, controlled demeanor.
+  orientation: horizontal
+  url: https://d2vez5w0ugqe83.cloudfront.net/photography/DSCF8998.jpg
+  thumb_url: https://d2vez5w0ugqe83.cloudfront.net/photography/thumbnails/DSCF8998.jpg
+  location: San Francisco, California
+  tags:
+    - Flow Art
+    - Fire
+    - People
+
+incense:
+  title: Incense
+  description: When still life photography isn‘t so still. Smoke, while ordinarily a indication of destruction, can also be beautiful.
+  orientation: horizontal
+  url: https://d2vez5w0ugqe83.cloudfront.net/photography/incense.jpg
+  thumb_url: https://d2vez5w0ugqe83.cloudfront.net/photography/thumbnails/incense.jpg
+  location: El Dorado Hills, California
+  tags:
+    - Still Life
+    - Black & White
+    - Smoke
+
+solitude:
+  title: Solitude
+  description: A lone tree, isolated from others alike.
+  orientation: vertical
+  url: https://d2vez5w0ugqe83.cloudfront.net/photography/tree.jpg
+  thumb_url: https://d2vez5w0ugqe83.cloudfront.net/photography/thumbnails/tree.jpg
+  location: Yosemite National Park, California
+  tags:
+    - Nature
+    - Black & White
+    - Landscape
+    - Trees
+
+towards_the_dusk:
+  title: Towards the Dusk
+  description: As a storm clears, a boat sails into the distance, as if being drawn by the escaping light beyond the clouds.
+  orientation: horizontal
+  url: https://d2vez5w0ugqe83.cloudfront.net/photography/10.jpg
+  thumb_url: https://d2vez5w0ugqe83.cloudfront.net/photography/thumbnails/10.jpg
+  location: San Francisco, California
+  tags:
+    - Seascape
+    - Bridges
+    - Weather
+    - Sunset
+
+chinese_new_year:
+  title: Chinese New Year
+  description: Paper lanterns illuminate the branches of a tree with a warm, red light.
+  orientation: horizontal
+  url: https://d2vez5w0ugqe83.cloudfront.net/photography/12.jpg
+  thumb_url: https://d2vez5w0ugqe83.cloudfront.net/photography/thumbnails/12.jpg
+  location: San Francisco, California
+  tags:
+    - Chinese New Year
+    - Trees
+    - Events
+    - Nighttime
+
+pause_in_the_storm:
+  title: A Pause in the Storm
+  description: The streets are illuminated by the reflections of neon lights during a pause in the rain.
+  orientation: vertical
+  url: https://d2vez5w0ugqe83.cloudfront.net/photography/17.jpg
+  thumb_url: https://d2vez5w0ugqe83.cloudfront.net/photography/thumbnails/17.jpg
+  location: San Francisco, California
+  tags:
+    - Weather
+    - Cityscape
+
+through_the_mist:
+  title: Through the Mist
+  description: Street lights cutting through the fog in a feeble attempt at clarity.
+  orientation: horizontal
+  url: https://d2vez5w0ugqe83.cloudfront.net/photography/DSCF1892.jpg
+  thumb_url: https://d2vez5w0ugqe83.cloudfront.net/photography/thumbnails/DSCF1892.jpg
+  location: Pleasanton, California
+  tags:
+    - Black & White
+    - Weather
+    - Nighttime
+
+celebration:
+  title: Celebration
+  description: Fireworks illuminating the bay, proclaiming the beginning of the Super Bowl festivities.
+  orientation: horizontal
+  url: https://d2vez5w0ugqe83.cloudfront.net/photography/DSCF3252.jpg
+  thumb_url: https://d2vez5w0ugqe83.cloudfront.net/photography/thumbnails/DSCF3252.jpg
+  location: San Francisco, California
+  tags:
+    - Bridges
+    - Fireworks
+    - Events
+    - Long Exposure
+    - Nighttime
+
+bloom:
+  title: Bloom
+  description: Fireworks being launched, nearly replicating the other.
+  orientation: horizontal
+  url: https://d2vez5w0ugqe83.cloudfront.net/photography/DSCF3271.jpg
+  thumb_url: https://d2vez5w0ugqe83.cloudfront.net/photography/thumbnails/DSCF3271.jpg
+  location: San Francisco, California
+  tags:
+    - Fireworks
+    - Events
+    - Nighttime
+
+steps_to_wherever:
+  title: Steps to Wherever
+  description: The aftermath of fireworks being launched over the bay. The illuminated smoke almost seems to create a stairway leading to who knows where.
+  orientation: horizontal
+  url: https://d2vez5w0ugqe83.cloudfront.net/photography/DSCF3280.jpg
+  thumb_url: https://d2vez5w0ugqe83.cloudfront.net/photography/thumbnails/DSCF3280.jpg
+  location: San Francisco, California
+  tags:
+    - Fireworks
+    - Events
+    - Bridges
+    - Black & White
+    - Nighttime
+
+monolith:
+  title: Monolith
+  description: An illuminated Coit Tower seemingly fading into nothing.
+  orientation: vertical
+  url: https://d2vez5w0ugqe83.cloudfront.net/photography/DSCF3580.jpg
+  thumb_url: https://d2vez5w0ugqe83.cloudfront.net/photography/thumbnails/DSCF3580.jpg
+  location: San Francisco, California
+  tags:
+    - Architecture
+    - Black & White
+    - Nighttime
+
+blossom:
+  title: Blossom
+  description: A tree in bloom in the springtime.
+  orientation: horizontal
+  url: https://d2vez5w0ugqe83.cloudfront.net/photography/DSCF4092.jpg
+  thumb_url: https://d2vez5w0ugqe83.cloudfront.net/photography/thumbnails/DSCF4092.jpg
+  location: Pleasanton, California
+  tags:
+    - Nature
+    - Trees
+    - Still Life
+
+serenity:
+  title: Serenity
+  description: The sun setting over a peaceful ocean.
+  orientation: horizontal
+  url: https://d2vez5w0ugqe83.cloudfront.net/photography/DSCF4490.jpg
+  thumb_url: https://d2vez5w0ugqe83.cloudfront.net/photography/thumbnails/DSCF4490.jpg
+  location: San Francisco, California
+  tags:
+    - Sunset
+    - Beach
+    - Seascape
+
+golden_light:
+  title: Golden Light
+  description: The sun setting, casting beautiful golden light over a seemingly content, and calm ocean.
+  orientation: horizontal
+  url: https://d2vez5w0ugqe83.cloudfront.net/photography/DSCF4568.jpg
+  thumb_url: https://d2vez5w0ugqe83.cloudfront.net/photography/thumbnails/DSCF4568.jpg
+  location: San Francisco, California
+  tags:
+    - Sunset
+    - Beach
+    - Seascape
+
+perfect_moment:
+  title: In the Perfect Moment
+  description: A photographer steadies his tripod, preparing to capture the perfect moment.
+  orientation: horizontal
+  url: https://d2vez5w0ugqe83.cloudfront.net/photography/DSCF4614.jpg
+  thumb_url: https://d2vez5w0ugqe83.cloudfront.net/photography/thumbnails/DSCF4614.jpg
+  location: San Francisco, California
+  tags:
+    - Sunset
+    - Beach
+    - Seascape
+    - People
+
+above_the_clouds:
+  title: Above the Clouds
+  description: The lights of cars streak by above the clouds at Twin Peaks.
+  orientation: horizontal
+  url: https://d2vez5w0ugqe83.cloudfront.net/photography/DSCF4709.jpg
+  thumb_url: https://d2vez5w0ugqe83.cloudfront.net/photography/thumbnails/DSCF4709.jpg
+  location: San Francisco, California
+  tags:
+    - Long Exposure
+    - Landscape
+    - Nighttime
+    - Stars
+
+san_francisco:
+  title: San Francisco
+  description: The city illuminates the night with a vast array of colored lights.
+  orientation: horizontal
+  url: https://d2vez5w0ugqe83.cloudfront.net/photography/DSCF5341.jpg
+  thumb_url: https://d2vez5w0ugqe83.cloudfront.net/photography/thumbnails/DSCF5341.jpg
+  location: Treasure Island, California
+  tags:
+    - Long Exposure
+    - Nighttime
+    - Cityscape
+    - Weather
+    - Bridges
+    - Seascape
+
+break_of_day:
+  title: Break of Day
+  description: The hills are illuminated by a small glimpse of sunlight through the clouds.
+  orientation: horizontal
+  url: https://d2vez5w0ugqe83.cloudfront.net/photography/DSCF5442.jpg
+  thumb_url: https://d2vez5w0ugqe83.cloudfront.net/photography/thumbnails/DSCF5442.jpg
+  location: Marin County, California
+  tags:
+    - Landscape
+    - Weather
+    - Mountains
+
+mist:
+  title: Mist
+  description: The Golden Gate Bridge is partially visible through the shroud of fog.
+  orientation: horizontal
+  url: https://d2vez5w0ugqe83.cloudfront.net/photography/DSCF5587.jpg
+  thumb_url: https://d2vez5w0ugqe83.cloudfront.net/photography/thumbnails/DSCF5587.jpg
+  location: San Francisco, California
+  tags:
+    - Beach
+    - Landscape
+    - Seascape
+    - Weather
+    - Bridges
+    - Long Exposure
+    - Black & White
+
+day_fades:
+  title: Day Fades
+  description: The sun sets on San Francisco, birthing beautiful yellow hues.
+  orientation: horizontal
+  url: https://d2vez5w0ugqe83.cloudfront.net/photography/DSCF5778.jpg
+  thumb_url: https://d2vez5w0ugqe83.cloudfront.net/photography/thumbnails/DSCF5778.jpg
+  location: San Francisco, California
+  tags:
+    - Landscape
+    - Sunset
+
+treasure:
+  title: Treasure
+  description: The sun falls on the small town of Missoula, illuminating a beautiful valley.
+  orientation: horizontal
+  url: https://d2vez5w0ugqe83.cloudfront.net/photography/DSCF6109.jpg
+  thumb_url: https://d2vez5w0ugqe83.cloudfront.net/photography/thumbnails/DSCF6109.jpg
+  location: Missoula, Montana
+  tags:
+    - Landscape
+    - Sunset
+    - Weather
+    - Mountains
+
+starfall:
+  title: Starfall
+  description: Time spins the stars over the hills of Montana.
+  orientation: horizontal
+  url: https://d2vez5w0ugqe83.cloudfront.net/photography/DSCF6241.jpg
+  thumb_url: https://d2vez5w0ugqe83.cloudfront.net/photography/thumbnails/DSCF6241.jpg
+  location: Missoula, Montana
+  tags:
+    - Long Exposure
+    - Nighttime
+    - Landscape
+    - Stars
+    - Black & White
+
+wake:
+  title: Wake
+  description: A Kayaker riding the water of a river.
+  orientation: horizontal
+  url: https://d2vez5w0ugqe83.cloudfront.net/photography/DSCF6494.jpg
+  thumb_url: https://d2vez5w0ugqe83.cloudfront.net/photography/thumbnails/DSCF6494.jpg
+  location: Missoula, Montana
+  tags:
+    - Sports
+    - People
+
+broken_masterpieces:
+  title: Broken Masterpieces
+  description: “My mind is full of broken masterpieces.“
+  orientation: horizontal
+  url: https://d2vez5w0ugqe83.cloudfront.net/photography/DSCF5270.jpg
+  thumb_url: https://d2vez5w0ugqe83.cloudfront.net/photography/thumbnails/DSCF5270.jpg
+  location: San Francisco, California
+  tags:
+    - People
+    - Portrait
+
+fade:
+  title: Fades
+  description: The night fights the day, the collision resulting in brilliant gold.
+  orientation: horizontal
+  url: https://d2vez5w0ugqe83.cloudfront.net/photography/DSCF5626.jpg
+  thumb_url: https://d2vez5w0ugqe83.cloudfront.net/photography/thumbnails/DSCF5626.jpg
+  location: San Francisco, California
+  tags:
+    - Sunset
+    - Seascape
+    - Beach
+    - Weather
+
+cliffside:
+  title: Cliffside
+  description: Paths wind down the sides of the hills, allowing journeymen to discover new, extraordinary places.
+  orientation: horizontal
+  url: https://d2vez5w0ugqe83.cloudfront.net/photography/DSCF5526.jpg
+  thumb_url: https://d2vez5w0ugqe83.cloudfront.net/photography/thumbnails/DSCF5526.jpg
+  location: Marin County, California
+  tags:
+    - Mountains
+    - Landscape
+    - Seascape
+    - Weather
+    - Black & White
+
+pier:
+  title: Pier
+  description: A pier juts into the water as tourists and locals alike find peace in the ocean, and the view.
+  orientation: horizontal
+  url: https://d2vez5w0ugqe83.cloudfront.net/photography/DSCF5798.jpg
+  thumb_url: https://d2vez5w0ugqe83.cloudfront.net/photography/thumbnails/DSCF5798.jpg
+  location: San Francisco, California
+  tags:
+    - Seascape
+    - Black & White
+    - People
+
+twisted_stories:
+  title: Twisted Stories
+  description: Stories twist and become bound, creating new ones.
+  orientation: horizontal
+  url: https://d2vez5w0ugqe83.cloudfront.net/photography/DSCF6037.jpg
+  thumb_url: https://d2vez5w0ugqe83.cloudfront.net/photography/thumbnails/DSCF6037.jpg
+  location: Pleasanton, California
+  tags:
+    - Still Life
+
+emily:
+  title: Emily
+  description: My sister, Emily.
+  orientation: vertical
+  url: https://d2vez5w0ugqe83.cloudfront.net/photography/emily.jpg
+  thumb_url: https://d2vez5w0ugqe83.cloudfront.net/photography/thumbnails/emily.jpg
+  location: Roseville, California
+  tags:
+    - People
+    - Portrait
+
+music_as_a_moment:
+  title: Music as a Moment
+  description: Long strings that when struck in the right way, create music.
+  orientation: horizontal
+  url: https://d2vez5w0ugqe83.cloudfront.net/photography/guitar.jpg
+  thumb_url: https://d2vez5w0ugqe83.cloudfront.net/photography/thumbnails/guitar.jpg
+  location: Cameron Park, California
+  tags:
+    - Still Life

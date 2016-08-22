@@ -1,0 +1,29 @@
+!!!
+%html
+  %head
+    - description = yield :description
+    - canonical_url = yield :canonical_url
+
+    = csrf_meta_tags
+
+    %link(href="#{ canonical_url }" rel="canonical")
+    %title= yield :title
+
+    -# Open Graph
+    %meta(charset="UTF-8")
+    %meta(name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1")
+    %meta(name="description" content="#{ description }")
+    -# %meta(name="apple-itunes-app" content="app-id=1053785051")
+
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+
+    = yield :head
+
+  %body
+    -# = render "partials/share"
+
+    = yield
+
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = yield :scripts
+    = render "utilities/analytics"

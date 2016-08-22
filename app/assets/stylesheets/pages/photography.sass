@@ -1,0 +1,101 @@
+
+@import "../base/config"
+@import "../base/mixins"
+
+$image-spacing: 5px
+
+body
+  background-color: $color--white
+
+.invisible
+  display: none
+  visibility: hidden
+  opacity: 0
+
+.photography-intro
+  background-color: $color--off-white
+  padding:
+    top: 1rem
+    bottom: 1rem
+
+  &--title
+    text-transform: uppercase
+    text-align: center
+    margin-top: 1rem
+    color: $color--dark-gray
+
+  &--body
+    color: $color--dark-gray
+
+  &--top
+    display: flex
+    justify-content: space-between
+    align-items: center
+
+  &--about, &--back
+    @media #{$device--small}
+      display: none
+
+.photos
+  position: relative
+  margin:
+    top: 2rem
+    bottom: 2rem
+
+.photo
+  +transition(all 0.15s ease-in-out)
+  position: absolute
+  display: block
+  border-radius: 3pt
+  background:
+    size: 100%
+    position: center
+    repeat: no-repeat
+
+  @media #{$device--small}
+    position: relative
+    width: 100%
+    margin:
+      left: $image-spacing
+      right: $image-spacing
+      bottom: 3rem
+
+.title
+  +transition(all 0.3s ease-in-out)
+  pointer-events: none
+  font-family: $serif
+  font-size: 0.9rem
+  text-transform: uppercase
+  letter-spacing: 0.25em
+  color: $color--gray
+  position: absolute
+  padding: 0 ($image-spacing * 2)
+  display: flex
+  align-items: center
+  opacity: 0
+
+  &.m-left
+    height: 100%
+    right: 100%
+    justify-content: flex-end
+    text-align: right
+    transform: translateX(-$image-spacing / 2)
+
+    .photo:hover &
+      opacity: 1
+      transform: translateX(0)
+
+  &.m-right
+    height: 100%
+    left: 100%
+    transform: translateX($image-spacing / 2)
+
+    .photo:hover &
+      opacity: 1
+      transform: translateX(0)
+
+  &.m-bottom
+    width: 100%
+    top: calc(100% + 0.5rem)
+    opacity: 1
+    justify-content: center

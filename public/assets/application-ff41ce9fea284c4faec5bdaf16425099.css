@@ -1,0 +1,26 @@
+@font-face {
+  font-family: "Museo Sans";
+  src: url(font-path("museo_sans/400.ttf"));
+  src: url('font-path("museo_sans/400.ttf")?#iefix') format("truetype");
+  font-weight: normal;
+  font-style: normal; }
+
+@font-face {
+  font-family: "Museo Sans";
+  src: font-url("/museo_sans/400.ttf");
+  src: font-url("/museo_sans/400.ttf?#iefix") format("truetype");
+  font-weight: normal;
+  font-style: normal; }
+
+*, *:before, *:after {
+  box-sizing: inherit; }
+
+html {
+  box-sizing: border-box;
+  font-family: Georgia; }
+  html.wf-active {
+    font-family: "Museo Sans"; }
+
+body {
+  margin: 0;
+  padding: 0; }
