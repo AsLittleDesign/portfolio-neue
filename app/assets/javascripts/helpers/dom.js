@@ -20,12 +20,23 @@ function forEachNode(nodeList, callback, scope) {
 }
 
 
-function attr(el, attr, val) {
+function attr(el, attrName, val) {
   if (val) {
-    return el.setAttribute(attr, val);
+    el.setAttribute(attrName, val);
+
   } else {
-    return el.getAttribute(attr);
+    return el.getAttribute(attrName);
   }
+}
+
+
+function toggleAttr(el, attrName) {
+  attr(el, attrName, attr(el, attrName) == "false" ? "true" : "false");
+}
+
+
+function toggleClass(el, className) {
+  el.classList.toggle(className);
 }
 
 
@@ -51,6 +62,7 @@ function getPosition(el) {
 
     el = el.offsetParent;
   }
+
   return {
     left: xPos,
     right: xPos + width,
@@ -60,6 +72,31 @@ function getPosition(el) {
     width: width
   };
 }
+
+
+function getOffsetLeft (elem) {
+  var offsetLeft = 0;
+  do {
+    if (!isNaN(elem.offsetLeft)) {
+      offsetLeft += elem.offsetLeft;
+    }
+  } while(elem = elem.offsetParent);
+
+  return offsetLeft;
+}
+
+
+function getOffsetTop (elem) {
+  var offsetTop = 0;
+  do {
+    if (!isNaN(elem.offsetTop)) {
+      offsetTop += elem.offsetTop;
+    }
+  } while(elem = elem.offsetParent);
+
+  return offsetTop;
+}
+
 
 
 function getScrollTop() {

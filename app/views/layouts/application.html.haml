@@ -20,9 +20,10 @@
     = yield :head
 
   %body
-    -# = render "partials/share"
-
-    = yield
+    .wrapper(js-blur="false")
+      = yield
+    .pop(js-pop--wrapper)
+      .pop--background(js-pop--background)
 
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = yield :scripts

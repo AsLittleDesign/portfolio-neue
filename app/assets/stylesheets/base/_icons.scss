@@ -1,3 +1,11 @@
+.icon--arrow--down:before,
+.icon--arrow--left:before,
+.icon--arrow--right:before,
+.icon--arrow--up:before,
+.icon--arrow-circle--down:before,
+.icon--arrow-circle--left:before,
+.icon--arrow-circle--right:before,
+.icon--arrow-circle--up:before,
 .icon--facebook:before,
 .icon--instagram:before,
 .icon--linkedin:before,
@@ -19,6 +27,14 @@
   font-smoothing: antialiased;
 }
 
+.icon--arrow--down:before { content: "\f107"; }
+.icon--arrow--left:before { content: "\f108"; }
+.icon--arrow--right:before { content: "\f109"; }
+.icon--arrow--up:before { content: "\f10a"; }
+.icon--arrow-circle--down:before { content: "\f10b"; }
+.icon--arrow-circle--left:before { content: "\f10c"; }
+.icon--arrow-circle--right:before { content: "\f10d"; }
+.icon--arrow-circle--up:before { content: "\f10e"; }
 .icon--facebook:before { content: "\f100"; }
 .icon--instagram:before { content: "\f101"; }
 .icon--linkedin:before { content: "\f102"; }

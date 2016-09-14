@@ -1,9 +1,8 @@
 
 //= require turbolinks
-
 //= require helpers/utils
 //= require helpers/dom
-
+//= require helpers/pop
 //= require ./webfont
 
 
@@ -21,21 +20,14 @@ ready(function() {
   // shareHandler();
   buttonHandler();
   modalHandler();
+
+  ready(function () {
+    menus.forEach(function (data) {
+      var actionMenu = new ActionMenu(data);
+      actionMenu.init();
+    });
+  });
 });
-
-
-// function shareHandler() {
-//   $("[js-share-expand]")[0].addEventListener("click", function() {
-//     var container = $("[js-share]")[0];
-
-//     if (attr(container, "js-share") == "true") {
-//       attr(container, "js-share", "false");
-
-//     } else {
-//       attr(container, "js-share", "true");
-//     }
-//   });
-// }
 
 
 function buttonHandler() {
@@ -44,7 +36,8 @@ function buttonHandler() {
     return false;
   }
 
-  buttons.forEach(function(button) {
+  for (var i = 0; i < buttons.length; i++) {
+    var button = buttons[i];
     var inkSize = 300;
 
     button.addEventListener("click", function(e){
@@ -67,7 +60,7 @@ function buttonHandler() {
         }, 600);
       }
     });
-  });
+  };
 }
 
 
@@ -79,7 +72,9 @@ function modalHandler() {
     return false;
   }
 
-  modalToggles.forEach(function(toggle) {
+  for (var i = 0; i < modalToggles.length; i++) {
+    var toggle = modalToggles[i];
+
     // prevent propagation of click events from elements
     // within a toggle element.
     if (toggle.children.length) {
@@ -97,7 +92,7 @@ function modalHandler() {
 
       modal.classList.toggle("s-active");
     });
-  });
+  };
 }
 
 

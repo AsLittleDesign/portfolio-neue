@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   require "yaml"
   require 'uri'
+  require 'miro'
 
   def index
   end
@@ -19,5 +20,6 @@ class ApplicationController < ActionController::Base
     photos = YAML.load_file("#{Rails.root}/config/photography.yml")
 
     @photo = photos[page]
+    @colors = Miro::DominantColors.new @photo["url"]
   end
 end

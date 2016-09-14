@@ -23,6 +23,7 @@ section
   width: 100%
 
 .fringe
+  position: relative
   display: flex
   align-items: center
   justify-content: center
@@ -56,6 +57,33 @@ section
 
 .title
   color: $color--gray
+
+.social
+  position: absolute
+  bottom: 5rem
+  left: 0
+  right: 0
+  margin: auto
+  display: flex
+  align-items: center
+  justify-content: center
+
+  > .social--option
+    border: 1px solid $color--light-gray
+
+  &--option
+    width: 150px
+    padding: 0.8rem
+    flex-shrink: 0
+    text-align: center
+    color: $color--gray
+    background-color: $color--white
+    cursor: pointer
+    border-radius: 8pt
+    line-height: 1rem
+    
+    + .social--option
+      margin-left: 0.5rem
 
 .photography
   background-color: $color--gray

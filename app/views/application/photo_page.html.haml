@@ -1,12 +1,25 @@
 
 - content_for :head do
-  = stylesheet_link_tag "pages/photo_page", media: "all", "data-turbolinks-track" => true
+  = stylesheet_link_tag "pages/photo_page", media: "all"
 
-.container.photo--top
+.container.photo-header
   = link_to photography_path, :class => "button m-blue" do
-    < Photography
+    %span.icon--arrow--left
+    Photography
 
-.container
-  = image_tag @photo["url"], :class => "photo--image"
-  %h2= @photo["title"]
-  %p= @photo["description"]
+:sass
+  body
+    background:
+      color: #{@colors.to_hex.first}
+      image: linear-gradient(45deg, #{@colors.to_hex.first}, #{@colors.to_hex.last})
+      size: cover
+      position: center
+      repeat: no-repeat
+
+.container.photo-body
+  .photo-body--image-container
+    = image_tag @photo["url"], :class => "photo-body--image"
+
+  .photo-body--description
+    %h4= @photo["title"]
+    %p= @photo["description"]

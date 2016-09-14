@@ -7,12 +7,6 @@ html
     size: 17px
     family: $sans-serif
 
-  &.wf-active
-    font-family: $sans-serif--title
-
-  @media #{ $device--small }
-    font-size: 15px
-
 h1
   font-size: 3rem
   position: relative
@@ -26,8 +20,12 @@ h1
     top: 0
     bottom: 1rem
 
+  .wf-active &
+    font-family: $sans-serif--title
+
   @media #{ $device--small }
-    font-size: 2rem
+    font-size: 1.8rem
+    letter-spacing: 0.4em
 
 h2
   font-size: 2rem
@@ -41,6 +39,18 @@ h3
   text:
     transform: uppercase
     align: center
+
+h4
+  font-size: 1rem
+  letter-spacing: 0.5em
+  right: -0.25em
+  line-height: 1.33em
+  text:
+    transform: uppercase
+    align: center
+  margin:
+    top: 0
+    bottom: 1rem
 
 p
   letter-spacing: 0.03em

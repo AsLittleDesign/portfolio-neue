@@ -1,4 +1,11 @@
 
+// MAIN TODOS
+// Simplify algorithm
+// - Most methods should only need one parameter.
+// - Eliminate redundancy
+// - Ensure a common language when referring to types of data. E.g. Slots == a value in a position array.
+// Don't display vertical images at a large size.
+
 var documentInitialized = false;
 document.addEventListener('DOMContentLoaded', function(){
   // quit if this function has already been called
@@ -16,14 +23,6 @@ PositionImages = {
   // An array of info for each image.
   images: [],
 
-  seedImages: function() {
-    var length = imageMetadata.length;
-
-    for (var i = 0; i <= length; i++) {
-      this.images.push(false);
-    }
-  },
-
   imagesReady: function() {
     var ready = true;
 
@@ -40,12 +39,13 @@ PositionImages = {
     return ready;
   },
 
+
   // Event when the images array changes triggered by this.setImageData().
   imagesChangedEvent: new Event("imagesChanged"),
 
   // Sets data for this.images[imageData] if provided an index,
   // Or sets data for this.images if not provided an index.
-  addImageData: function(imageData, index) {
+  addImageData: function(imageData) {
     if (imageData && typeof imageData == "object") {
       this.images.push(imageData);
       window.dispatchEvent(this.imagesChangedEvent);
@@ -54,6 +54,7 @@ PositionImages = {
       console.error("setImageData() must be given an object to add an image. Please check your use of this.setImageData.");
     }
   },
+
 
   // An array of sizes.
   sizes: [],
@@ -72,13 +73,15 @@ PositionImages = {
   },
 
   updateTotalHeight: function(newHeight) {
-    this.totalHeight += newHeight + this.spacing;
+    this.totalHeight += newHeight + this.getSpacing() / 2;
 
     document.getElementById("photos").style.height = this.totalHeight + "px";
   },
 
-  // Spacing between images (pixels)
-  spacing: 5,
+  // Spacing == 1rem
+  getSpacing: function() {
+    return parseFloat(getComputedStyle($("body")[0]).fontSize);
+  },
 
   // Information on the window size, and the container
   // for the images.
@@ -89,38 +92,41 @@ PositionImages = {
     this.windowInfo = this.getWindowInfo();
   },
 
-  // Initializes the resizing, and positioning of all images.
+
+  defaultPosition: [false, false, false, false, false, false],
+
   init: function() {
     this.updateWindowInfo();
-
-    // Gets basic image metadata from the DOM and adds it to
-    // the this.imageMetadata array.
     this.getImageMetadata();
-
-    // Creates a matrix used for image positioning.
     this.generatePositionMatrix();
-
     this.renderImages();
 
-    window.onresize = function() {
-      this.updateWindowInfo();
-      this.resetTotalHeight();
-
-      this.images.forEach(function(image, index) {
-        if (image.el) {
-          image.el = this.setImagePosition(image, image.el, index);
-          this.setTitlePosition(image.el.children[0], index);
-        }
-
-        if (this.windowInfo.width > 768) {
-          var size = this.getImageSize(image, index);
-          this.updateTotalHeight(size.height);
-        }
-      }.bind(this));
-    }.bind(this);
+    window.onresize = this.handleResize.bind(this);
   },
 
 
+  handleResize: function() {
+    this.updateWindowInfo();
+    this.resetTotalHeight();
+
+    this.images.forEach(function(img, index) {
+      if (img.el) {
+        img.el = this.setImagePosition(img, img.el, index);
+        this.setTitlePosition(img.el.children[0], index);
+        img.calculatedSize = this.getImageSize(img, index);
+      }
+
+      if (this.windowInfo.width > 768) {
+        this.updateTotalHeight(img.calculatedSize.height);
+      }
+
+      this.images[index] = img;
+    }.bind(this));
+  },
+
+
+  // Gets basic image metadata from the DOM and adds it to
+  // the this.imageMetadata array.
   getImageMetadata: function() {
     var infoElement = $("[js-photo-info]")[0];
     var imageElements = Array.prototype.slice.call(infoElement.children);
@@ -143,12 +149,8 @@ PositionImages = {
   // be placed in.
   generatePositionMatrix: function() {
     for (var i = 0; i <= this.imageMetadata.length - 1; i++) {
-      // Default to an open position array if there is
-      // no previous image. E.g. if it's the first image.
-      var lastPosition = this.positionMatrix.length ? this.positionMatrix[i - 1] : [false, false, false, false, false, false];
-
       // Get size group.
-      var sizeGroup = this.getSizeGroup(lastPosition, i);
+      var sizeGroup = this.getSizeGroup(i);
 
       // Update history and size array
       this.sizes.push(sizeGroup);
@@ -158,18 +160,18 @@ PositionImages = {
       }
 
       // Generate position array.
-      var positionArray = this.generatePositionArray(lastPosition, sizeGroup);
-      this.positionMatrix.push(positionArray);
+      this.positionMatrix.push(this.calcPosition(i));
     }
   },
 
 
   // Returns an array for positioning an image.
   // Assumes sizeGroup is valid for available slots.
-  generatePositionArray: function(lastPosition, sizeGroup) {
-    var slotReq            = this.getSlotReq(sizeGroup),
-        prevSelected       = this.getSelected(lastPosition),
-        potentialPositions = [];
+  calcPosition: function(index) {
+    var lastPosition = this.positionMatrix.length ? this.positionMatrix[index - 1] : this.defaultPosition,
+        slotReq      = this.getSlotReq(this.sizes[index]),
+        prevSelected = this.getSelected(lastPosition),
+        positions    = [];
 
     // If there is a previously selected position...
     if (prevSelected.length) {
@@ -178,56 +180,53 @@ PositionImages = {
 
       // If there is not a valid position in the first possible slot...
       if (lastPosition[0]) {
-        var firstValidIndex   = prevSelected[prevSelected.length - 1] + 1,
-            lastValidIndex    = firstValidIndex + slotReq - 1,
-            potentialPosition = [];
+        var firstIndex = lastSelectedIndex + 1,
+            position   = [];
 
         for (var i = 0; i <= 5; i++) {
-          if (i >= firstValidIndex && i <= lastValidIndex) {
-            potentialPosition.push(true);
+          if (i >= firstIndex && i <= firstIndex + slotReq - 1) {
+            position.push(true);
 
           } else {
-            potentialPosition.push(false);
+            position.push(false);
           }
         }
-        potentialPositions.push(potentialPosition);
+        positions.push(position);
 
       // If there is a valid position in the first possible slot...
       } else {
         // If there is a valid position before the previous selected slot...
         if (firstSelectedIndex - 1 >= slotReq - 1  && !lastPosition[firstSelectedIndex - slotReq - 1]) {
-          var firstValidIndex   = firstSelectedIndex - slotReq,
-              lastValidIndex    = firstSelectedIndex - 1,
-              potentialPosition = [];
+          var firstIndex = firstSelectedIndex - slotReq,
+              position   = [];
 
           for (var i = 0; i <= 5; i++) {
-            if (i >= firstValidIndex && i <= lastValidIndex) {
-              potentialPosition.push(true);
+            if (i >= firstIndex && i <= firstSelectedIndex - 1) {
+              position.push(true);
 
             } else {
-              potentialPosition.push(false);
+              position.push(false);
             }
           }
 
-          potentialPositions.push(potentialPosition);
+          positions.push(position);
         }
 
         // If there is a valid position after the previous selected slot...
         if (lastSelectedIndex + slotReq <= 5) {
-          var firstValidIndex   = prevSelected[prevSelected.length - 1] + 1,
-              lastValidIndex    = firstValidIndex + slotReq - 1,
-              potentialPosition = [];
+          var firstIndex = lastSelectedIndex + 1,
+              position   = [];
 
           for (var i = 0; i <= 5; i++) {
-            if (i >= firstValidIndex && i <= lastValidIndex) {
-              potentialPosition.push(true);
+            if (i >= firstIndex && i <= firstIndex + slotReq - 1) {
+              position.push(true);
 
             } else {
-              potentialPosition.push(false);
+              position.push(false);
             }
           }
 
-          potentialPositions.push(potentialPosition);
+          positions.push(position);
         }
       }
 
@@ -235,42 +234,35 @@ PositionImages = {
     } else {
       for (var i = 0; i <= 5; i++) {
         if (i + slotReq - 1 <= 5) {
-          var potentialPosition = [];
+          var position = [];
           for (var i2 = 0; i2 <= 5; i2++) {
             if (i2 >= i && i2 <= i + slotReq - 1) {
-              potentialPosition.push(true);
+              position.push(true);
 
             } else {
-              potentialPosition.push(false);
+              position.push(false);
             }
           }
 
-          potentialPositions.push(potentialPosition);
+          positions.push(position);
         }
       }
     }
 
-    var positionArray;
-    // If there are more than one potential positions for an image.
-    if (potentialPositions.length > 1) {
-      var selectedSlot = potentialPositions[Math.floor(Math.random() * potentialPositions.length)];
+    if (positions.length === 1) {
+      return positions[0];
 
-      positionArray = selectedSlot;
-
-    // If there is only one potential position for an image;
     } else {
-      positionArray = potentialPositions[0];
+      return positions[Math.floor(Math.random() * positions.length)];
     }
-
-    return positionArray;
   },
 
 
   // Gets the size group of the image based on the last calculated image,
   // biased towards more attractive layouts.
-  getSizeGroup: function(lastSlots, index) {
-    var lastSize = this.sizeHistory.length ? this.sizeHistory[0] : "default",
-        orientation = this.imageMetadata[index].orientation;
+  getSizeGroup: function(index) {
+    var lastPosition = this.positionMatrix.length ? this.positionMatrix[index - 1] : this.defaultPosition,
+        lastSize = this.sizeHistory.length ? this.sizeHistory[0] : "default";
 
     var small = {
       modifier: 6,
@@ -281,14 +273,14 @@ PositionImages = {
 
     var medium = {
       modifier: 4,
-      validated: this.isValidSize("medium", lastSlots),
+      validated: this.isValidSize("medium", lastPosition),
       historyCount: 0,
       sequentialCount: 0
     };
 
     var large = {
       modifier: 2,
-      validated: this.isValidSize("large", lastSlots),
+      validated: this.isValidSize("large", lastPosition),
       historyCount: 0,
       sequentialCount: 0
     };
@@ -352,7 +344,7 @@ PositionImages = {
 
     var largeProbability = function() {
       var historyCountModifier = large.historyCount - large.sequentialCount;
-      if (large.sequentialCount === 1 || large.historyCount === 1 || orientation === "vertical") {
+      if (large.sequentialCount === 1 || large.historyCount === 1) {
         return 0;
 
       } else {
@@ -379,26 +371,22 @@ PositionImages = {
       group = "none";
     }
 
-    console.log(orientation, group);
-
     return group;
   },
 
 
   // Returns boolean representing
-  isValidSize: function(sizeGroup, lastSlots) {
+  isValidSize: function(sizeGroup, lastPosition) {
     var slotReq = this.getSlotReq(sizeGroup),
         valid = false;
 
-    lastSlots.forEach(function(slot, index) {
-      var slotPotentiallyValid = !slot && index + slotReq <= lastSlots.length;
-
-      if (slotPotentiallyValid) {
+    lastPosition.forEach(function(slot, index) {
+      if (!slot && index + slotReq <= lastPosition.length) {
         var group = [],
             lastIndex = index + slotReq;
 
         for (i = index; i <= lastIndex; i++) {
-          if (!lastSlots[i]) {
+          if (!lastPosition[i]) {
             group.push(i);
 
             if (group.length >= slotReq) {
@@ -449,72 +437,80 @@ PositionImages = {
 
 
   renderImages: function() {
-    this.imageMetadata.forEach(function(image, index) {
-      this.setImageInfo(image, index);
+    this.imageMetadata.forEach(function(img, index) {
+      var protoImage = new Image();
+      protoImage.src = img.url;
+      protoImage.onload = function() {
+        img.width = protoImage.width;
+        img.height = protoImage.height;
+        img.calculatedSize = this.getImageSize(img, index);
+        this.addImageData(img);
+      }.bind(this);
     }.bind(this));
 
     window.addEventListener("imagesChanged", function() {
-      var index = this.images.length - 1,
-          newImage = this.images[index];
+      var index = this.images.length - 1;
 
-      this.renderImage(newImage, index);
+      this.renderImage(this.images[index], index);
     }.bind(this));
   },
 
 
-  setImageInfo: function(img, index) {
-    var protoImage = new Image();
-    protoImage.src = img.url;
-    protoImage.onload = function() {
-      img.width = protoImage.width;
-      img.height = protoImage.height;
-      this.addImageData(img, index);
-    }.bind(this);
-  },
-
-
-  getImageSize: function(image, index) {
-    var aspectRatio = this.calcAspectRatio(image.width, image.height);
+  getImageSize: function(img, index) {
+    var aspectRatio = this.calcAspectRatio(img.width, img.height);
 
     if (this.windowInfo.width < 768) {
-      var imageWidth = this.windowInfo.container - this.spacing * 2;
+      var imgWidth = this.windowInfo.container;
 
       return {
-        width: imageWidth,
-        height: (aspectRatio.height / aspectRatio.width) * imageWidth
+        width: imgWidth,
+        height: (aspectRatio.height / aspectRatio.width) * imgWidth
       };
 
     } else {
-      var slotReq   = this.getSlotReq(this.sizes[index]),
-          spacingFactor = this.spacing * 6 / 5,
-          imageWidth = (this.windowInfo.container / 6) * slotReq - spacingFactor;
+      var imgWidth = this.calculatePositionWidth(this.positionMatrix[index]) - this.getSpacing();
 
       return {
-        width: imageWidth,
-        height: (aspectRatio.height / aspectRatio.width) * imageWidth
+        width: imgWidth,
+        height: (aspectRatio.height / aspectRatio.width) * imgWidth
       };
     }
   },
 
 
-  renderImage: function(image, index) {
-    var size = this.getImageSize(image, index)
-        container = document.getElementById("photos");
+  calculatePositionWidth: function(position) {
+    var takenSlots = [];
+    position.forEach(function(slot) {
+      if (slot) {
+        takenSlots.push(true);
+      }
+    });
 
-    image.el = this.createImageElement(image, index);
-    this.images[index] = image;
+    var right = position[position.length - 1],
+        slotWidth = this.getSlotWidth();
 
-    this.updateTotalHeight(size.height);
-
-    container.appendChild(image.el);
+    return takenSlots.length * (slotWidth + this.getSpacing());
   },
 
 
-  setImagePosition: function(image, el, index) {
+  renderImage: function(img, index) {
+    var size = this.getImageSize(img, index),
+        container = document.getElementById("photos");
+
+    img.el = this.createImageElement(index);
+    this.images[index] = img;
+
+    this.updateTotalHeight(size.height);
+
+    container.appendChild(img.el);
+  },
+
+
+  setImagePosition: function(img, el, index) {
+    var size = this.getImageSize(img, index);
+
     // Mobile size
     if (this.windowInfo.width <= 768) {
-      var size = this.getImageSize(image, index);
-
       el.style.width = size.width + "px";
       el.style.height = size.height + "px";
       el.style.top = "";
@@ -523,16 +519,15 @@ PositionImages = {
       return el;
 
     } else {
-      var size = this.getImageSize(image, index),
-          padding = (this.windowInfo.width - this.windowInfo.container) / 2,
-          emptySlotsLeft = this.getEmptySlots(this.positionMatrix[index]).left,
-          spacingLeft = emptySlotsLeft.length ? this.spacing * 6 / 5 / 2 : 0;
+      var emptyLeftPosition = this.getEmptySlots(this.positionMatrix[index]).left;
 
-          leftPosition =
-            padding +
-            emptySlotsLeft.length *
-            this.windowInfo.container / 6 +
-            spacingLeft +
+      for (i = emptyLeftPosition.length - 1; i <= 4; i++) {
+        emptyLeftPosition.push(false);
+      }
+
+      var leftPosition =
+            (this.windowInfo.width - this.windowInfo.container) / 2 +
+            this.calculatePositionWidth(emptyLeftPosition) +
             "px";
 
       el.style.width  = size.width + "px";
@@ -542,6 +537,11 @@ PositionImages = {
 
       return el;
     }
+  },
+
+
+  getSlotWidth: function() {
+    return this.windowInfo.container / 6 - this.getSpacing() * 5 / 6;
   },
 
 
@@ -622,35 +622,40 @@ PositionImages = {
   },
 
 
-  createImageElement: function(image, index) {
-    var el = document.createElement("a");
-    el.style.backgroundImage  = "url(" + image.url + ")";
+  createImageElement: function(index) {
+    var img = this.images[index],
+        el = document.createElement("a"),
+        hoverEl = document.createElement("div");
+    el.style.backgroundImage  = "url(" + img.url + ")";
     el.setAttribute("class", "photo");
-    el.setAttribute("href", "/photography/" + image.identifier);
-    el = this.setImagePosition(image, el, index);
+    el.setAttribute("href", "/photography/" + img.identifier);
+    el = this.setImagePosition(img, el, index);
+
+    hoverEl.setAttribute("class", "photo--hover icon--arrow-circle--right")
 
     var title = this.setTitlePosition(document.createElement("div"), index),
-        text = document.createTextNode(image.title);
+        text = document.createTextNode(img.title);
 
     title.appendChild(text);
+    el.appendChild(hoverEl);
     el.appendChild(title);
 
     return el;
   },
 
 
-  getEmptySlots: function(positionArray) {
+  getEmptySlots: function(position) {
     var emptySlots = {
       left: [],
       right: []
     };
 
     var preceding = true;
-    for (var i = 0; i <= positionArray.length - 1; i++) {
-      if (!positionArray[i] && preceding) {
+    for (var i = 0; i <= position.length - 1; i++) {
+      if (!position[i] && preceding) {
         emptySlots.left.push(true);
 
-      } else if (!positionArray[i] && !preceding) {
+      } else if (!position[i] && !preceding) {
         emptySlots.right.push(true);
 
       } else {
@@ -686,21 +691,20 @@ PositionImages = {
   // Gets the width of the window, and calculates container width
   // based on the window width.
   getWindowInfo: function() {
-    var width     = window.innerWidth,
+    var width     = parseInt(window.getComputedStyle($("body")[0], null).getPropertyValue("width")),
         container = null;
 
     if (width > 1170) {
-      container = 1148;
+      container = 1170 - this.getSpacing();
 
     } else if (width > 992) {
-      container = 970;
+      container = 992 - this.getSpacing();
 
     } else if (width > 768) {
-      container = 750;
+      container = 768 - this.getSpacing();
 
     } else {
-      container = width;
-      // TODO: Default to CSS vertical layout;
+      container = width - this.getSpacing();
     }
 
     return {

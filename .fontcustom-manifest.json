@@ -1,7 +1,7 @@
 {
   "checksum": {
-    "previous": "87dded63b0a78cdf4480c4d1cbaf492a6f4331f772ab422e840d8933f1d4c408",
-    "current": "87dded63b0a78cdf4480c4d1cbaf492a6f4331f772ab422e840d8933f1d4c408"
+    "previous": "bc862aece26b921d1b6b750c6f4d5128a97c4bc3b390d95addda52ed6f459196",
+    "current": "bc862aece26b921d1b6b750c6f4d5128a97c4bc3b390d95addda52ed6f459196"
   },
   "fonts": [
     "app/assets/fonts/icons/font/icons.ttf",
@@ -10,6 +10,38 @@
     "app/assets/fonts/icons/font/icons.eot"
   ],
   "glyphs": {
+    "arrow--down": {
+      "codepoint": 61703,
+      "source": "app/assets/fonts/icons/glyphs/arrow--down.svg"
+    },
+    "arrow--left": {
+      "codepoint": 61704,
+      "source": "app/assets/fonts/icons/glyphs/arrow--left.svg"
+    },
+    "arrow--right": {
+      "codepoint": 61705,
+      "source": "app/assets/fonts/icons/glyphs/arrow--right.svg"
+    },
+    "arrow--up": {
+      "codepoint": 61706,
+      "source": "app/assets/fonts/icons/glyphs/arrow--up.svg"
+    },
+    "arrow-circle--down": {
+      "codepoint": 61707,
+      "source": "app/assets/fonts/icons/glyphs/arrow-circle--down.svg"
+    },
+    "arrow-circle--left": {
+      "codepoint": 61708,
+      "source": "app/assets/fonts/icons/glyphs/arrow-circle--left.svg"
+    },
+    "arrow-circle--right": {
+      "codepoint": 61709,
+      "source": "app/assets/fonts/icons/glyphs/arrow-circle--right.svg"
+    },
+    "arrow-circle--up": {
+      "codepoint": 61710,
+      "source": "app/assets/fonts/icons/glyphs/arrow-circle--up.svg"
+    },
     "facebook": {
       "codepoint": 61696,
       "source": "app/assets/fonts/icons/glyphs/facebook.svg"

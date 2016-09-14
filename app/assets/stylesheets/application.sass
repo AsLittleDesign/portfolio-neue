@@ -7,11 +7,14 @@
 @import "base/layout"
 @import "base/buttons"
 @import "base/modals"
+@import "base/pop"
 
 @import "partials/share"
 
 *, *:before, *:after
   box-sizing: inherit
+  -webkit-tap-highlight-color: rgba(0,0,0,0)
+  -webkit-tap-highlight-color: transparent /* For some Androids */
 
 html
   box-sizing: border-box
@@ -20,3 +23,11 @@ body
   margin: 0
   padding: 0
   overflow-x: hidden
+  position: relative
+
+.wrapper
+  +transition(transform 0.15s ease-out, filter 0.15s ease-out)
+  filter: blur(0)
+
+  &[js-blur="true"]
+    filter: blur(20px)
