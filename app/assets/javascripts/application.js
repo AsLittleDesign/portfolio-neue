@@ -1,8 +1,10 @@
 
 //= require turbolinks
+//= require fastclick
 //= require helpers/utils
 //= require helpers/dom
 //= require helpers/pop
+//= require helpers/nouislider
 //= require ./webfont
 
 
@@ -20,6 +22,8 @@ ready(function() {
   // shareHandler();
   buttonHandler();
   modalHandler();
+
+  new FastClick(document.body);
 
   ready(function () {
     menus.forEach(function (data) {

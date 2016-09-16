@@ -1,0 +1,99 @@
+%section.photography
+  .viewfinder
+    .viewfinder--top
+      .viewfinder--top-icon.icon--viewfinder--fhd-60
+      .viewfinder--top-time
+        %span 12
+        %small m
+        %span 36
+        %small s
+      .viewfinder--chip
+        .icon--viewfinder--chip-1
+        .icon--viewfinder--arrow-up
+      .viewfinder--chip
+        .icon--viewfinder--chip-2
+      .viewfinder--top-icon.icon--viewfinder--l
+      .viewfinder--top-icon.icon--viewfinder--n
+    .photography--container
+      = image_tag "parallax/photography/background", class: "photography--image-layer", :"js-parallax" => "background"
+      = image_tag "parallax/photography/midground", class: "photography--image-layer", :"js-parallax" => "midground"
+      = image_tag "parallax/photography/foreground", class: "photography--image-layer m-foreground", :"js-parallax" => "foreground"
+      
+      .viewfinder--overlay(js-viewfinder-overlay)
+        .viewfinder--overlay-grid.m-vertical
+          .viewfinder--overlay-line
+          .viewfinder--overlay-line
+          .viewfinder--overlay-line
+          .viewfinder--overlay-line
+          .viewfinder--overlay-line
+          .viewfinder--overlay-line
+
+        .viewfinder--overlay-grid.m-horizontal
+          .viewfinder--overlay-line
+          .viewfinder--overlay-line
+          .viewfinder--overlay-line.m-green
+          .viewfinder--overlay-line
+
+        .viewfinder--center
+
+        .viewfinder--exposure
+          .viewfinder--exposure-icon.icon--viewfinder--exposure
+
+          .viewfinder--select-notch-icon.icon--viewfinder--select-notch
+          
+          .viewfinder--frames-icon.icon--viewfinder--frames
+
+          .viewfinder--exposure-notch.m-labeled
+            .viewfinder--exposure-notch-label 3
+          .viewfinder--exposure-notch
+          .viewfinder--exposure-notch
+          .viewfinder--exposure-notch.m-labeled
+            .viewfinder--exposure-notch-label 2
+          .viewfinder--exposure-notch
+          .viewfinder--exposure-notch
+          .viewfinder--exposure-notch.m-labeled
+            .viewfinder--exposure-notch-label 1
+          .viewfinder--exposure-notch
+          .viewfinder--exposure-notch
+          .viewfinder--exposure-notch.m-labeled
+            .viewfinder--exposure-notch-label 0
+          .viewfinder--exposure-notch
+          .viewfinder--exposure-notch
+          .viewfinder--exposure-notch.m-labeled
+            .viewfinder--exposure-notch-label -1
+          .viewfinder--exposure-notch
+          .viewfinder--exposure-notch
+          .viewfinder--exposure-notch.m-labeled
+            .viewfinder--exposure-notch-label -2
+          .viewfinder--exposure-notch
+          .viewfinder--exposure-notch
+          .viewfinder--exposure-notch.m-labeled
+            .viewfinder--exposure-notch-label -3
+          -# %input(type="range" min="0" max="100" value="100" js-slider="exposure")
+
+        .viewfinder--right
+          .icon--viewfinder--v-film
+          .icon--viewfinder--dr-200
+
+        .viewfinder--focus
+          .viewfinder--focus-labels
+            .viewfinder--focus-label.m-small 0.1
+            .viewfinder--focus-label.m-medium 0.5
+            .viewfinder--focus-label 1.0
+            .viewfinder--focus-label 2.0
+            .viewfinder--focus-label 3.0
+            .viewfinder--focus-label 5.0
+            .viewfinder--focus-label 10
+            .viewfinder--focus-label.m-medium 20
+            .viewfinder--focus-label.m-small
+              %span.m-infinity ∞
+              %span.m-subscript m
+          %input(type="range" min="0" max="100" value="80" js-slider="focus" data-orientation="vertical")
+
+    .viewfinder--bottom
+      test
+
+  
+  %h1.photography--title PHOTOGRAPHY
+  = link_to photography_path, :class => "button m-blue photography--cta" do
+    Explore

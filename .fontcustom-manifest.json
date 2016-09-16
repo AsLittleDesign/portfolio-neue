@@ -1,7 +1,7 @@
 {
   "checksum": {
-    "previous": "bc862aece26b921d1b6b750c6f4d5128a97c4bc3b390d95addda52ed6f459196",
-    "current": "bc862aece26b921d1b6b750c6f4d5128a97c4bc3b390d95addda52ed6f459196"
+    "previous": "0075907c856054ac863e85b44a51a583c80e33af7b423031b9e4f51300f9c802",
+    "current": "0075907c856054ac863e85b44a51a583c80e33af7b423031b9e4f51300f9c802"
   },
   "fonts": [
     "app/assets/fonts/icons/font/icons.ttf",
@@ -42,6 +42,14 @@
       "codepoint": 61710,
       "source": "app/assets/fonts/icons/glyphs/arrow-circle--up.svg"
     },
+    "connect": {
+      "codepoint": 61711,
+      "source": "app/assets/fonts/icons/glyphs/connect.svg"
+    },
+    "contact": {
+      "codepoint": 61713,
+      "source": "app/assets/fonts/icons/glyphs/contact.svg"
+    },
     "facebook": {
       "codepoint": 61696,
       "source": "app/assets/fonts/icons/glyphs/facebook.svg"
@@ -54,6 +62,10 @@
       "codepoint": 61698,
       "source": "app/assets/fonts/icons/glyphs/linkedin.svg"
     },
+    "mail": {
+      "codepoint": 61712,
+      "source": "app/assets/fonts/icons/glyphs/mail.svg"
+    },
     "photo": {
       "codepoint": 61699,
       "source": "app/assets/fonts/icons/glyphs/photo.svg"
@@ -65,6 +77,50 @@
     "twitter": {
       "codepoint": 61700,
       "source": "app/assets/fonts/icons/glyphs/twitter.svg"
+    },
+    "viewfinder--arrow-up": {
+      "codepoint": 61719,
+      "source": "app/assets/fonts/icons/glyphs/viewfinder--arrow-up.svg"
+    },
+    "viewfinder--chip-1": {
+      "codepoint": 61720,
+      "source": "app/assets/fonts/icons/glyphs/viewfinder--chip-1.svg"
+    },
+    "viewfinder--chip-2": {
+      "codepoint": 61721,
+      "source": "app/assets/fonts/icons/glyphs/viewfinder--chip-2.svg"
+    },
+    "viewfinder--dr-200": {
+      "codepoint": 61717,
+      "source": "app/assets/fonts/icons/glyphs/viewfinder--dr-200.svg"
+    },
+    "viewfinder--exposure": {
+      "codepoint": 61714,
+      "source": "app/assets/fonts/icons/glyphs/viewfinder--exposure.svg"
+    },
+    "viewfinder--fhd-60": {
+      "codepoint": 61722,
+      "source": "app/assets/fonts/icons/glyphs/viewfinder--fhd-60.svg"
+    },
+    "viewfinder--frames": {
+      "codepoint": 61715,
+      "source": "app/assets/fonts/icons/glyphs/viewfinder--frames.svg"
+    },
+    "viewfinder--l": {
+      "codepoint": 61723,
+      "source": "app/assets/fonts/icons/glyphs/viewfinder--l.svg"
+    },
+    "viewfinder--n": {
+      "codepoint": 61724,
+      "source": "app/assets/fonts/icons/glyphs/viewfinder--n.svg"
+    },
+    "viewfinder--select-notch": {
+      "codepoint": 61716,
+      "source": "app/assets/fonts/icons/glyphs/viewfinder--select-notch.svg"
+    },
+    "viewfinder--v-film": {
+      "codepoint": 61718,
+      "source": "app/assets/fonts/icons/glyphs/viewfinder--v-film.svg"
     },
     "x": {
       "codepoint": 61702,

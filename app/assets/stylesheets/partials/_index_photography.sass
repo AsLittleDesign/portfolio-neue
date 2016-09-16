@@ -1,0 +1,293 @@
+.photography
+  height: 100vh
+  border-top: 1px solid $color--light-gray
+  // background-color: $color--off-white
+  // background-image: radial-gradient($color--off-white 50%, darken($color--off-white, 15%))
+  position: relative
+  color: $color--white
+  display: flex
+  flex-direction: column
+  justify-content: center
+  align-items: center
+
+  &--container
+    position: relative
+    height: calc(100vw/16 * 4)
+    width: calc(100vw/9 * 4)
+    overflow: hidden
+
+  &--title
+    @extend %section-title
+    color: $color--dark-gray
+
+  &--cta
+    // margin-bottom: 3rem
+
+  &--image-layer
+    position:   absolute
+    top:    -10%
+    bottom: -10%
+    left:   -10%
+    right:  -10%
+    width: 120%
+
+  &--body
+    @extend %section-body
+
+.viewfinder
+  color: $color--white
+  position: relative
+  width: calc(100vw/9 * 4)
+  margin-bottom: 3rem
+
+  &:before
+    content: ""
+    position: absolute
+    top: 0
+    bottom: 0
+    left: 0
+    right: 0
+    background-color: $color--black
+    filter: blur(15px)
+    transform: scale(0.95) translateY(10px)
+    opacity: 0.7
+    z-index: 0
+
+  &:after
+    content: ""
+    position: absolute
+    top: 0
+    bottom: 0
+    left: 0
+    right: 0
+    background-image: linear-gradient(125deg, rgba(white, 0.03) 25%, transparent 30%, transparent 65%, rgba(white, 0.05) 65%,  transparent 85%)
+    z-index: 2
+
+  &--top,
+  &--bottom
+    background-color: black
+    height: 1.5rem
+    position: relative
+    z-index: 1
+
+  &--top
+    padding-left: 50%
+    text-align: left
+
+  &--top-icon
+    display: inline-block
+    font-size: 1.2rem
+
+    &.icon--viewfinder--n
+      transform: translateX(-0.35rem)
+
+  &--chip
+    display: inline-block
+    height: 1rem
+    width: 1rem
+    transform: translateY(0.25rem)
+    text-align: center
+
+    > .icon--viewfinder--chip-1,
+    > .icon--viewfinder--chip-2
+      font-size: 0.8rem
+      line-height: 0.8rem
+      height: 0.8rem
+      display: block
+
+    > .icon--viewfinder--chip-2
+      transform: translateX(-0.35rem) translateY(-10px)
+
+    > .icon--viewfinder--arrow-up
+      font-size: 0.5rem
+      transform: translateY(-0.1rem)
+
+  &--top-time
+    display: inline-block
+    letter-spacing: -1px
+    margin-right: 2rem
+    font-weight: lighter
+    font-size: 1.3rem
+
+    > small
+      font-size: 0.75em
+      display: inline-block
+      letter-spacing: -3px
+      transform: translateX(-2px) translateY(-1px)
+
+  &--overlay
+    position: absolute
+    top: 0
+    bottom: 0
+    left: 0
+    right: 0
+
+  &--overlay-grid
+    position: absolute
+    top: 0
+    bottom: 0
+    left: 0
+    right: 0
+    display: flex
+
+    &.m-vertical > .viewfinder--overlay-line
+      height: 100%
+      width: calc(100% / 6)
+
+      + .viewfinder--overlay-line
+        border-left: 1px solid black
+
+    &.m-horizontal
+      flex-direction: column
+
+      > .viewfinder--overlay-line
+        height: 25%
+        width: 100%
+
+        + .viewfinder--overlay-line
+          border-top: 1px solid black
+
+  &--overlay-line.m-green
+    border-color: #00ff00 !important
+
+  &--center
+    position: absolute
+    top: 0
+    bottom: 0
+    left: 0
+    right: 0
+    margin: auto
+    height: 3vw
+    width: 3vw
+    border: 2px solid $color--white
+
+  &--exposure
+    position: absolute
+    top: 0
+    bottom: 0
+    left: 2rem
+    width: 3px
+    height: 100px
+    margin: auto
+    display: flex
+    flex-direction: column
+    justify-content: space-between
+    align-items: flex-end
+    color: $color--white
+
+  &--exposure-icon
+    $size: 0.8rem
+    font-size: $size
+    height: $size
+    width: $size
+    line-height: $size
+    position: absolute
+    bottom: calc(100% + 8px)
+    right: 0
+    transform: translateX(2px)
+    margin: auto
+
+  &--select-notch-icon
+    $size: 0.6rem
+    font-size: $size
+    height: $size
+    width: $size
+    line-height: $size
+    position: absolute
+    top: calc(33% - #{$size / 2})
+    left: calc(100% + 2px)
+
+  &--frames-icon
+    $size: 1.2rem
+    font-size: $size
+    height: $size
+    width: $size
+    line-height: $size
+    position: absolute
+    top: calc(100% + 1rem)
+    right: calc(-#{$size / 2} - 4px)
+    left: calc(-#{$size / 2} - 4px)
+
+  &--exposure-notch
+    background-color: $color--white
+    height: 1px
+    width: 3px
+    position: relative
+    margin-right: 1px
+
+    &.m-labeled
+      width: 6px
+      margin-right: 0
+
+  &--exposure-notch-label
+    font-size: 0.6rem
+    position: absolute
+    height: 0.45rem
+    line-height: 0.45rem
+    top: 0
+    bottom: 0
+    right: calc(100% + 4px)
+    margin: auto
+
+  &--right
+    $size: 1rem
+    font-size: $size
+    width: $size
+    height: $size * 2.5
+    position: absolute
+    right: 2rem
+    top: 0
+    bottom: 0
+    margin: auto
+    display: flex
+    flex-direction: column
+    justify-content: space-between
+    align-items: center
+    color: $color--white
+
+  &--focus
+    position: absolute
+    bottom: 0
+    width: 400px
+    height: 2rem
+    left: 0
+    right: 0
+    bottom: 0.5rem
+    margin: auto
+    overflow: hidden
+
+  &--focus-labels
+    margin-bottom: 0.1rem
+    display: flex
+    justify-content: space-between
+
+  &--focus-label
+    font-size: 0.7rem
+    flex-grow: 1
+    text-align: center
+
+    &.m-small
+      width: 30px
+      flex-grow: 0
+
+    &.m-medium
+      width: 10px
+
+    &:first-child
+      text-align: left
+
+    &:last-child
+      text-align: right
+    
+    > .m-subscript,
+    > .m-infinity
+      letter-spacing: -2px
+      position: relative
+      bottom: 2px
+      right: 2px
+
+    > .m-infinity
+      font-size: 1rem
+
+    > .m-subscript
+      vertical-align: sub

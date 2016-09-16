@@ -1,7 +1,6 @@
 
 var menus = [
-  { id: "connect",
-    format: "context",
+  { id: "follow",
     options: [
       { id: "facebook",
         text: "Like on Facebook",
@@ -15,6 +14,12 @@ var menus = [
         symbol: "twitter"
       },
 
+      { id: "instagram",
+        text: "Follow on Instagram",
+        href: "https://www.instagram.com/aslittledesign",
+        symbol: "instagram"
+      },
+
       { id: "linkedin",
         text: "Connect on LinkedIn",
         href: "https://www.linkedin.com/in/davesmccarthy",
@@ -24,12 +29,11 @@ var menus = [
   },
 
   { id: "share",
-    format: "context",
     options: [
       { id: "facebook",
         text: "Share on Facebook",
         action: function () {
-          alert("follow:facebook");
+          alert("share:facebook");
         },
         symbol: "facebook"
       },
@@ -37,7 +41,7 @@ var menus = [
       { id: "twitter",
         text: "Share on Twitter",
         action: function () {
-          alert("follow:twitter");
+          alert("share:twitter");
         },
         symbol: "twitter"
       },
@@ -45,9 +49,25 @@ var menus = [
       { id: "linkedin",
         text: "Share on LinkedIn",
         action: function () {
-          alert("follow:linkedin");
+          alert("share:linkedin");
         },
         symbol: "linkedin"
+      }
+    ]
+  },
+
+  { id: "contact",
+    options: [
+      { id: "facebook",
+        text: "Facebook Messenger",
+        href: "http://m.me/aslittledesign",
+        symbol: "facebook"
+      },
+
+      { id: "email",
+        text: "Email",
+        href: "mailto:dave@aslittledesign.com",
+        symbol: "mail"
       }
     ]
   }
@@ -58,7 +78,7 @@ var menus = [
 // type: Event type (e.g. click, scroll).
 // handler: Function to call, passed the event
 function delegateEvent (type, selector, handler) {
-  document.addEventListener(type, function (e) {
+  var listener = document.addEventListener(type, function (e) {
     e = e || window.event;
 
     var target   = e.target || e.srcElement,
@@ -71,6 +91,8 @@ function delegateEvent (type, selector, handler) {
       }
     }
   });
+
+  return listener;
 }
 
 
@@ -93,7 +115,7 @@ ActionMenu.prototype = {
 
     var selector = "[js-pop--toggle=" + this.data.id +"]";
     delegateEvent("click", selector, function (e) {
-      this.activateMenu(e);
+      this.toggleMenu(e);
     }.bind(this));
   },
 
@@ -102,11 +124,15 @@ ActionMenu.prototype = {
   toggleScrolling: function (state) {
     var body = $("body")[0];
 
-    if (state) {
-      body.style.overflowY = state;
-    
+    // If scrolling is enabled
+    //   -> do stuff
+    if (body.style.overflowY != "hidden") {
+      body.style.overflowY = "hidden";
+      document.ontouchmove = function (e) { e.preventDefault(); }
+
     } else {
-      body.style.overflowY = body.style.overflowY == "hidden" ? "scroll" : "hidden";
+      body.style.overflowY = "scroll";
+      document.ontouchmove = function (e) { return true; }
     }
   },
 
@@ -117,7 +143,7 @@ ActionMenu.prototype = {
   },
 
 
-  activateMenu: function (e) {
+  toggleMenu: function (e) {
     var menu = $("[js-pop--menu='" + this.data.id + "']")[0],
         active;
     
@@ -148,6 +174,9 @@ ActionMenu.prototype = {
     var menuHeight = parseFloat(window.getComputedStyle(menu).getPropertyValue("height"), 10);
 
     if (!active) {
+      // Set background to toggle menu
+      $("[js-pop--background]")[0].setAttribute("js-pop--toggle", this.data.id);
+
       // Clone the toggle, and set specific style information
       var clone      = toggle.cloneNode(true),
           cloneStyle = "\
@@ -214,6 +243,9 @@ ActionMenu.prototype = {
 
     // Remove cloned toggle if the menu is currently active
     } else {
+      // Remove background toggling the menu
+      $("[js-pop--background]")[0].removeAttribute("js-pop--toggle");
+
       menu.style.transform = "";
       setTimeout(function () {
         toggleClass(menu, "s-active");
@@ -237,7 +269,7 @@ ActionMenu.prototype = {
         setTimeout(function () {
           $("[js-pop--wrapper]")[0].removeChild(this.clone);
         }.bind(this), 150);
-      }.bind(this), 150);
+      }.bind(this), 100);
     }
 
     this.active = !active;
@@ -259,7 +291,7 @@ ActionMenu.prototype = {
       var optionEl = [
         "<" + elType +" class='menu--option' js-pop--option='" + option.id + "' " + attributes + ">",
           "<span class='menu--symbol icon--" + option.symbol + "'></span>",
-          option.text,
+          "<span>" + option.text + "</span>",
         "</" + elType + ">"
       ].join("\n");
 
@@ -268,7 +300,7 @@ ActionMenu.prototype = {
 
     // Create menu HTML
     var element = [
-      "<div class='menu m-" + this.data.format + "' js-pop--menu='" + this.data.id + "'>",
+      "<div class='menu' js-pop--menu='" + this.data.id + "'>",
         options,
         "<div class='menu--close' js-pop--toggle='" + this.data.id + "'>Cancel</div>",
       "</div>"
@@ -278,7 +310,12 @@ ActionMenu.prototype = {
     element = [].concat.apply([], element).join("\n");
     this.html = element;
 
-    // TODO: Set event listeners for all options.
+    
+    this.data.options.forEach(function (option) {
+      if (option.action) {
+        delegateEvent("click", "[js-pop--option='" + option.id + "']", option.action);
+      }
+    });
   },
 
 

@@ -7,7 +7,42 @@ document.addEventListener('DOMContentLoaded', function(){
 
   mousemoveHandler();
 
-  // ScrollBias.init();
+  // Initialize a new plugin instance for element or array of elements.
+  var focusSlider = $("[js-slider='focus']")[0];
+  //     exposureSlider = $("[js-slider='exposure']")[0];
+
+  // rangeSlider.create(exposureSlider, {
+  //   rangeClass: "rangeSlider viewfinder--exposure-input",
+  //   onSlide: function (position, value) {
+  //     console.log(value);
+  //   }
+  // });
+
+  // Create focus slider
+  rangeSlider.create(focusSlider, {
+    rangeClass: "rangeSlider viewfinder--focus-input",
+    onSlide: function (position, value) {
+      $("[js-parallax]").forEach(function (image, index) {
+        var blurAmount = Math.abs(value - 0.8),
+            focusDepth = value - 0.8 >= 0 ? "far" : "near",
+            distanceMod;
+
+        switch (index) {
+          case 0:
+            distanceMod = focusDepth == "far" ? 10 : 30;
+            break;
+          case 1:
+            distanceMod = 12;
+            break;
+          case 2:
+            distanceMod = focusDepth == "far" ? 30 : 10;
+            break;
+        }
+
+        image.style.filter = "blur(" + blurAmount * distanceMod + "px)";
+      });
+    }
+  });
 });
 
 
@@ -75,7 +110,7 @@ function photographyParallax(event, props) {
       event.pageY - (props.position.bottom - props.position.height / 2) ) / 100
   };
 
-  props.styles.front.transform = "translate3d(" + -distance.x * 5 + "px, " + -distance.y * 5 + "px, 0)";
+  props.styles.front.transform = "translate3d(" + -distance.x * 4 + "px, " + -distance.y * 4 + "px, 0)";
 
   props.styles.mid.transform = "matrix3d(" + ((distance.y / 10000) + 1) + ", 0, 1, 0, " + (-distance.x / 200) + ", " + ((-distance.y / 200) + 1) + ", 1, 0, 1, " + (distance.x / 1000) + ", " + ((-distance.x / 100) + 1) + ", 0, 0, 0, 100, 1) translate3d(" + -distance.x / 6 + "px, " + -distance.y / 2 + "px, 0)";
 

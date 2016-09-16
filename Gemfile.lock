@@ -62,6 +62,7 @@ GEM
     debug_inspector (0.0.2)
     erubis (2.7.0)
     execjs (2.7.0)
+    fastclick-rails (1.0.1)
     ffi (1.9.14)
     fontcustom (1.3.8)
       json (~> 1.4)
@@ -191,6 +192,7 @@ DEPENDENCIES
   better_errors
   byebug
   coffee-script
+  fastclick-rails
   fontcustom
   foreman
   haml-rails

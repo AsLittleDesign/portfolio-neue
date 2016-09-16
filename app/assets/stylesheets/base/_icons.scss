@@ -6,12 +6,26 @@
 .icon--arrow-circle--left:before,
 .icon--arrow-circle--right:before,
 .icon--arrow-circle--up:before,
+.icon--connect:before,
+.icon--contact:before,
 .icon--facebook:before,
 .icon--instagram:before,
 .icon--linkedin:before,
+.icon--mail:before,
 .icon--photo:before,
 .icon--share:before,
 .icon--twitter:before,
+.icon--viewfinder--arrow-up:before,
+.icon--viewfinder--chip-1:before,
+.icon--viewfinder--chip-2:before,
+.icon--viewfinder--dr-200:before,
+.icon--viewfinder--exposure:before,
+.icon--viewfinder--fhd-60:before,
+.icon--viewfinder--frames:before,
+.icon--viewfinder--l:before,
+.icon--viewfinder--n:before,
+.icon--viewfinder--select-notch:before,
+.icon--viewfinder--v-film:before,
 .icon--x:before {
   display: inline-block;
   font-family: "icons";
@@ -35,10 +49,24 @@
 .icon--arrow-circle--left:before { content: "\f10c"; }
 .icon--arrow-circle--right:before { content: "\f10d"; }
 .icon--arrow-circle--up:before { content: "\f10e"; }
+.icon--connect:before { content: "\f10f"; }
+.icon--contact:before { content: "\f111"; }
 .icon--facebook:before { content: "\f100"; }
 .icon--instagram:before { content: "\f101"; }
 .icon--linkedin:before { content: "\f102"; }
+.icon--mail:before { content: "\f110"; }
 .icon--photo:before { content: "\f103"; }
 .icon--share:before { content: "\f105"; }
 .icon--twitter:before { content: "\f104"; }
+.icon--viewfinder--arrow-up:before { content: "\f117"; }
+.icon--viewfinder--chip-1:before { content: "\f118"; }
+.icon--viewfinder--chip-2:before { content: "\f119"; }
+.icon--viewfinder--dr-200:before { content: "\f115"; }
+.icon--viewfinder--exposure:before { content: "\f112"; }
+.icon--viewfinder--fhd-60:before { content: "\f11a"; }
+.icon--viewfinder--frames:before { content: "\f113"; }
+.icon--viewfinder--l:before { content: "\f11b"; }
+.icon--viewfinder--n:before { content: "\f11c"; }
+.icon--viewfinder--select-notch:before { content: "\f114"; }
+.icon--viewfinder--v-film:before { content: "\f116"; }
 .icon--x:before { content: "\f106"; }

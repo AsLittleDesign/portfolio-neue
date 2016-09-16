@@ -18,33 +18,35 @@
 $box-shadow: 0 0 10px rgba($color--black, 0.08)
 
 .toggle-clone
-  +transition(box-shadow 0.1s ease-in-out)
+  +transition(box-shadow 0.1s ease-in-out, color 0.15s ease-in-out)
   box-shadow: 0 0 0 rgba($color--black, 0)
+  color: $color--gray
 
   &.s-active
     box-shadow: $box-shadow
+    color: $color--blue
 
 .menu
-  +transition(transform 0.20s ease-in-out, opacity 0.35s ease-in-out)
+  +transition(box-shadow 0.1s ease-in-out, transform 0.20s ease-in-out, opacity 0.35s ease-in-out)
   background-color: rgba($color--white, 0.85)
   border-radius: 8pt
-  box-shadow: $box-shadow
+  box-shadow: none
   opacity: 0
   position: absolute
   color: $color--dark-gray
   overflow: hidden
   pointer-events: none
   transform: translateY(0) scale(0.1)
-
-  &.m-context
-    width: 250px
+  width: 250px
 
   &.s-active
     opacity: 1
     pointer-events: initial
+    box-shadow: $box-shadow
 
   &--option,
   &--close
+    @extend %no-select
     +transition(background-color 0.15s ease-out)
     border-top: 1px solid rgba($color--black, 0.1)
     white-space: nowrap
@@ -63,20 +65,21 @@ $box-shadow: 0 0 10px rgba($color--black, 0.08)
   &--option
     display: block
     text-decoration: none
-    padding: 1rem 0.5rem
+    padding: 1rem
     opacity: 0
+    color: $color--dark-gray
 
-    &:active, &:visited, &:link
-      color: inherit
+    &:active,
+    &:visited,
+    &:link
+      color: $color--dark-gray
 
     .s-active &
       opacity: 1
 
   &--symbol
     color: $color--gray
-    margin:
-      left: 0.5rem
-      right: 0.5rem
+    margin-right: 0.5rem
 
   &--close
     padding: 1rem 0.5rem
