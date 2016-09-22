@@ -7,19 +7,24 @@
     %span.icon--arrow--left
     Photography
 
-:sass
-  body
-    background:
-      color: #{@colors.to_hex.first}
-      image: linear-gradient(45deg, #{@colors.to_hex.first}, #{@colors.to_hex.last})
-      size: cover
-      position: center
-      repeat: no-repeat
+-# :sass
+  -# body
+    -# background:
+      -# color: #{@colors.to_hex.first}
+      -# image: linear-gradient(45deg, #{@colors.to_hex.first}, #{@colors.to_hex.last})
+      -# size: cover
+      -# position: center
+      -# repeat: no-repeat
 
-.container.photo-body
-  .photo-body--image-container
-    = image_tag @photo["url"], :class => "photo-body--image"
+.container
+  = image_tag @photo["url"], :class => "photo--image"
 
-  .photo-body--description
-    %h4= @photo["title"]
-    %p= @photo["description"]
+  .photo--meta
+    .photo--description
+      %h4= @photo["title"]
+      %p= @photo["description"]
+
+    .social
+      .social--option(js-pop--toggle="share")
+        .icon--share.social--option-content.m-icon
+        .social--option-content Share

@@ -1,12 +1,10 @@
 
-//= require turbolinks
 //= require fastclick
 //= require helpers/utils
 //= require helpers/dom
 //= require helpers/pop
 //= require helpers/nouislider
 //= require ./webfont
-
 
 WebFont.load({
   custom: {
@@ -18,123 +16,52 @@ WebFont.load({
 });
 
 
-ready(function() {
-  // shareHandler();
-  buttonHandler();
-  modalHandler();
+// Button Handler
+delegateEvent("click", ".button", function (e, button) {
+  e.preventDefault();
 
-  new FastClick(document.body);
+  var inkSize = 500,
+      css = "\
+        left: " + (e.offsetX - inkSize / 2) + "px;\
+        top: " + (e.offsetY - inkSize / 2) + "px;"
 
-  ready(function () {
-    menus.forEach(function (data) {
-      var actionMenu = new ActionMenu(data);
-      actionMenu.init();
-    });
-  });
+  var el = [
+    "<div class='button--ink-container' style='" + css + "'>",
+      "<div class='button--ink'></div>",
+    "</div>"
+  ].join("\n");
+
+  button.insertAdjacentHTML('beforeend', el);
+
+  var href = button.href;
+  if (href) {
+    setTimeout(function () {
+      window.location = href;
+    }, 300);
+  }
 });
 
 
-function buttonHandler() {
-  var buttons = $(".button");
-  if (!buttons.length) {
-    return false;
-  }
+// Modal Handler
+delegateEvent("click", "[js-modal-toggle]", function (e, toggle) {
+  e.stopPropagation();
 
-  for (var i = 0; i < buttons.length; i++) {
-    var button = buttons[i];
-    var inkSize = 300;
+  // Toggle page-wide changes for modal behavior.
+  toggleScroll();
+  toggleBlur();
 
-    button.addEventListener("click", function(e){
-      e.preventDefault();
-
-      var inkContainer = document.createElement("div");
-      inkContainer.className += " button--ink-container";
-      inkContainer.style.left = e.offsetX - inkSize / 2 + "px";
-      inkContainer.style.top = e.offsetY - inkSize / 2 + "px";
-
-      var ink = document.createElement("div");
-      ink.className += " button--ink";
-
-      inkContainer.appendChild(ink);
-      button.appendChild(inkContainer, button.firstChild);
-
-      if (button.href) {
-        setTimeout(function() {
-          window.location = button.href;
-        }, 600);
-      }
-    });
-  };
-}
+  var modal = $("[js-modal='" + attr(toggle, "js-modal-toggle") + "']")[0];
+  toggleClass($(".modal")[0], "s-active");
+  toggleClass(modal, "s-active");
+});
 
 
-function modalHandler() {
-  var modalToggles = $("[js-modal-toggle]"),
-      modals = $("[js-modal]");
+ready(function () {
+  // Removes 300ms delay on mobile whe clicking
+  new FastClick(document.body);
 
-  if (!modalToggles) {
-    return false;
-  }
+  menus.forEach(function (data) {
+    new ActionMenu(data).init();
+  });
+});
 
-  for (var i = 0; i < modalToggles.length; i++) {
-    var toggle = modalToggles[i];
-
-    // prevent propagation of click events from elements
-    // within a toggle element.
-    if (toggle.children.length) {
-      for (var i = 0; i <= toggle.children.length - 1; i++) {
-        toggle.children[i].addEventListener("click", function(e) {
-          e.stopPropagation();
-        });
-      }
-    }
-
-    toggle.addEventListener("click", function(e){
-      e.stopPropagation();
-      var modalId = toggle.getAttribute("js-modal-toggle"),
-          modal = $("[js-modal=" + modalId + "]")[0];
-
-      modal.classList.toggle("s-active");
-    });
-  };
-}
-
-
-function debounce(func, wait, immediate) {
-	var timeout;
-	return function() {
-		var context = this, args = arguments;
-		var later = function() {
-			timeout = null;
-			if (!immediate) func.apply(context, args);
-		};
-		var callNow = immediate && !timeout;
-		clearTimeout(timeout);
-		timeout = setTimeout(later, wait);
-		if (callNow) func.apply(context, args);
-	};
-}
-
-
-function throttle(fn, threshhold, scope) {
-  threshhold || (threshhold = 250);
-  var last,
-      deferTimer;
-  return function () {
-    var context = scope || this;
-
-    var now = +new Date,
-        args = arguments;
-    if (last && now < last + threshhold) {
-      // hold on to it
-      clearTimeout(deferTimer);
-      deferTimer = setTimeout(function () {
-        last = now;
-        fn.apply(context, args);
-      }, threshhold);
-    } else {
-      last = now;
-      fn.apply(context, args);
-    }
-  };
-}

@@ -1,7 +1,7 @@
 {
   "checksum": {
-    "previous": "0075907c856054ac863e85b44a51a583c80e33af7b423031b9e4f51300f9c802",
-    "current": "0075907c856054ac863e85b44a51a583c80e33af7b423031b9e4f51300f9c802"
+    "previous": "429cdcd326a17f6301289a422bb328f45cd618b3867ff94f75427629d746dcb7",
+    "current": "429cdcd326a17f6301289a422bb328f45cd618b3867ff94f75427629d746dcb7"
   },
   "fonts": [
     "app/assets/fonts/icons/font/icons.ttf",
@@ -82,6 +82,14 @@
       "codepoint": 61719,
       "source": "app/assets/fonts/icons/glyphs/viewfinder--arrow-up.svg"
     },
+    "viewfinder--battery": {
+      "codepoint": 61729,
+      "source": "app/assets/fonts/icons/glyphs/viewfinder--battery.svg"
+    },
+    "viewfinder--brackets": {
+      "codepoint": 61725,
+      "source": "app/assets/fonts/icons/glyphs/viewfinder--brackets.svg"
+    },
     "viewfinder--chip-1": {
       "codepoint": 61720,
       "source": "app/assets/fonts/icons/glyphs/viewfinder--chip-1.svg"
@@ -110,6 +118,14 @@
       "codepoint": 61723,
       "source": "app/assets/fonts/icons/glyphs/viewfinder--l.svg"
     },
+    "viewfinder--m": {
+      "codepoint": 61726,
+      "source": "app/assets/fonts/icons/glyphs/viewfinder--m.svg"
+    },
+    "viewfinder--manual-focus": {
+      "codepoint": 61727,
+      "source": "app/assets/fonts/icons/glyphs/viewfinder--manual-focus.svg"
+    },
     "viewfinder--n": {
       "codepoint": 61724,
       "source": "app/assets/fonts/icons/glyphs/viewfinder--n.svg"
@@ -117,6 +133,10 @@
     "viewfinder--select-notch": {
       "codepoint": 61716,
       "source": "app/assets/fonts/icons/glyphs/viewfinder--select-notch.svg"
+    },
+    "viewfinder--shutter-speed": {
+      "codepoint": 61728,
+      "source": "app/assets/fonts/icons/glyphs/viewfinder--shutter-speed.svg"
     },
     "viewfinder--v-film": {
       "codepoint": 61718,

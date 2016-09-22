@@ -22,4 +22,7 @@ class ApplicationController < ActionController::Base
     @photo = photos[page]
     @colors = Miro::DominantColors.new @photo["url"]
   end
+
+  def table
+  end
 end

@@ -1,27 +1,38 @@
-.photography
-  height: 100vh
-  border-top: 1px solid $color--light-gray
-  // background-color: $color--off-white
-  // background-image: radial-gradient($color--off-white 50%, darken($color--off-white, 15%))
-  position: relative
-  color: $color--white
-  display: flex
-  flex-direction: column
-  justify-content: center
-  align-items: center
 
-  &--container
+.camera
+  background:
+    color: silver
+    image: linear-gradient(90deg, #323232, #BCBCBC 8%, #CDCDCD 92%, #323232)
+  padding: 100px
+  width: 100%
+
+.viewfinder
+  +box-shadow(0 30px 30px -30px rgba($color--black, 1), 0 0 10px rgba($color--black, 0.5))
+  color: $color--white
+  position: relative
+  text-align: center
+  overflow: hidden
+  transform: translateX(0) translateY(0)
+
+  &--image-container
     position: relative
-    height: calc(100vw/16 * 4)
-    width: calc(100vw/9 * 4)
     overflow: hidden
 
-  &--title
-    @extend %section-title
-    color: $color--dark-gray
+    @media #{$device--small}
+      height: calc((100vw - 1rem) * 9/16)
+      width: calc(100vw - 1rem)
 
-  &--cta
-    // margin-bottom: 3rem
+    @media #{$device--medium}
+      height: 768px * 9/16
+      width: 768px
+      
+    @media #{$device--large}
+      height: 992px * 9/16
+      width: 992px
+
+    @media #{$device--xlarge}
+      height: 1170px * 9/16
+      width: 1170px
 
   &--image-layer
     position:   absolute
@@ -30,38 +41,19 @@
     left:   -10%
     right:  -10%
     width: 120%
+    transform: translateY(0)
+    -webkit-transform: translateY(0)
 
-  &--body
-    @extend %section-body
-
-.viewfinder
-  color: $color--white
-  position: relative
-  width: calc(100vw/9 * 4)
-  margin-bottom: 3rem
-
-  &:before
+  &--reflection
     content: ""
     position: absolute
     top: 0
     bottom: 0
     left: 0
     right: 0
-    background-color: $color--black
-    filter: blur(15px)
-    transform: scale(0.95) translateY(10px)
-    opacity: 0.7
-    z-index: 0
-
-  &:after
-    content: ""
-    position: absolute
-    top: 0
-    bottom: 0
-    left: 0
-    right: 0
-    background-image: linear-gradient(125deg, rgba(white, 0.03) 25%, transparent 30%, transparent 65%, rgba(white, 0.05) 65%,  transparent 85%)
+    background-image: linear-gradient(115deg, transparent, rgba(white, 0.40) 30%, transparent 30%, transparent 70%)
     z-index: 2
+    opacity: 0.3
 
   &--top,
   &--bottom
@@ -69,10 +61,68 @@
     height: 1.5rem
     position: relative
     z-index: 1
+    width: 100%
+
+  &--bottom
+    display: flex
+    align-items: center
+    justify-content: center
+
+  &--bottom-icon,
+  &--bottom-text
+    display: inline-block
+
+  &--bottom-icon
+    &.m-m
+      margin-right: 3px
+      opacity: 0.7
+
+    &.m-shutter-speed
+      margin-left: 1rem
+      color: $color--blue
+      font-size: 1.05rem
+
+    &.m-exposure
+      font-size: 0.6rem
+      margin:
+        left: 10px
+        right: 3px
+
+    &.m-large
+      font-size: 1.3rem
+
+  &--bottom-text
+    &.m-large
+      letter-spacing: -1px
+      margin-right: 10px
+      font-weight: lighter
+      font-size: 1.3rem
+
+    &.m-small
+      font:
+        size: 0.5rem
+        weight: bold
+      align-self: flex-end
+      margin:
+        bottom: 4px
+        right: 3px
+        left: 10px
+
+    &.m-plus
+      font:
+        size: 0.8rem
+        weight: bold
+
+    &.m-blue
+      color: $color--blue
 
   &--top
     padding-left: 50%
     text-align: left
+
+    @media #{$device--small}
+      padding-left: 0
+      text-align: center
 
   &--top-icon
     display: inline-block
@@ -128,6 +178,7 @@
     bottom: 0
     left: 0
     right: 0
+    z-index: 3
     display: flex
 
     &.m-vertical > .viewfinder--overlay-line
@@ -156,16 +207,22 @@
     bottom: 0
     left: 0
     right: 0
+    z-index: 3
     margin: auto
     height: 3vw
     width: 3vw
     border: 2px solid $color--white
 
+    @media #{$device--small}
+      height: 10vw
+      width: 10vw
+
   &--exposure
     position: absolute
     top: 0
     bottom: 0
-    left: 2rem
+    left: 1.5rem
+    z-index: 3
     width: 3px
     height: 100px
     margin: auto
@@ -186,16 +243,6 @@
     right: 0
     transform: translateX(2px)
     margin: auto
-
-  &--select-notch-icon
-    $size: 0.6rem
-    font-size: $size
-    height: $size
-    width: $size
-    line-height: $size
-    position: absolute
-    top: calc(33% - #{$size / 2})
-    left: calc(100% + 2px)
 
   &--frames-icon
     $size: 1.2rem
@@ -235,9 +282,10 @@
     width: $size
     height: $size * 2.5
     position: absolute
-    right: 2rem
+    right: 1rem
     top: 0
     bottom: 0
+    z-index: 3
     margin: auto
     display: flex
     flex-direction: column
@@ -252,9 +300,13 @@
     height: 2rem
     left: 0
     right: 0
-    bottom: 0.5rem
+    bottom: 0
+    z-index: 3
     margin: auto
     overflow: hidden
+
+    @media #{$device--small}
+      width: 70%
 
   &--focus-labels
     margin-bottom: 0.1rem
@@ -291,3 +343,29 @@
 
     > .m-subscript
       vertical-align: sub
+
+  &--icon-manual-focus
+    position: absolute
+    right: calc(200px + 50% + 2rem)
+    bottom: 0.5rem
+    font-size: 1.2rem
+
+  &--icon-battery
+    position: absolute
+    left: calc(180px + 50%)
+    bottom: 0
+    top: 0
+    margin: auto
+    height: 1rem
+    line-height: 1rem
+    font-size: 1rem
+
+  &--exposure-overlay
+    position: absolute
+    top: 0
+    bottom: 0
+    left: 0
+    right: 0
+    background-color: rgba($color--black, 0.5)
+    opacity: 0
+    z-index: 1

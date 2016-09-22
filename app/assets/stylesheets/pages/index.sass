@@ -3,10 +3,6 @@
 @import "../base/mixins"
 @import "../partials/index_photography"
 
-%section-title
-  @extend %no-select
-  text-shadow: 1px 1px 8px rgba($color--black, 0.1)
-
 %section-body
   background-color: rgba($color--white, 0.95)
   padding: 1rem 2rem
@@ -17,7 +13,7 @@
   border-radius: 3pt
 
 body
-  background-color: $color--off-white
+  background-color: $color--black
 
 section
   width: 100%
@@ -29,17 +25,31 @@ section
   align-items: center
   justify-content: center
   flex-direction: column
+  background:
+    color: $color--black
+    // image: image-url("lines-background.svg")
+    size: fill
+    position: center
+    repeat: no-repeat
   padding:
     left: 1rem
     right: 1rem
 
+  @media #{$device--iphone}
+    height: calc(100vh - 60px)
+
+  @media #{$device--ipad}
+    height: calc(100vh - 60px)
+
 .name
   @extend %no-select
   position: relative
-  color: $color--dark-gray
-  text-transform: uppercase
-  text-align: center
-  text-shadow: 1px 1px 2px rgba(0,0,0,0.2)
+  color: $color--off-white
+  text:
+    transform: uppercase
+    align: center
+    shadow: 1px 1px 2px rgba(0,0,0,0.2)
+  letter-spacing: 0.35em
 
   &.m-red,
   &.m-blue
@@ -57,58 +67,24 @@ section
     text-shadow: 1px 1px 8px rgba($color--blue, 0.5)
 
 .title
-  color: $color--gray
-
-.social
+  color: $color--off-white
   position: absolute
   bottom: 5rem
   left: 0
   right: 0
+  text-align: center
+  font-family: $serif
+
+.social
+  position: absolute
+  bottom: 2rem
+  left: 0
+  right: 0
   margin: auto
-  display: flex
-  align-items: center
-  justify-content: center
-
-  > .social--option
-    border-color: $color--light-gray
-    background-color: $color--off-white
-
-    &:active
-      border-color: $color--light-gray
-
+  
   &--option
-    @extend %no-select
-    width: 150px
-    height: 3rem
-    flex-shrink: 0
-    text-align: center
-    color: $color--gray
-    background-color: $color--white
-    cursor: pointer
-    line-height: 1rem
-    border-radius: 8pt
-    border: 1px solid $color--white
-    display: flex
-    align-items: center
-    justify-content: center
-
-    &:active
-      background-color: darken($color--off-white, 2%)
-      border-color: darken($color--off-white, 2%)
-    
-    + .social--option
-      margin-left: 1rem
-
-  &--option-content
-    pointer-events: none
-    display: inline-block
-
-    > div
-      display: inline-block
-      height: 0
-
-  &--option-icon
-    margin-right: 0.2rem
+    color: $color--light-gray
+    border-color: $color--light-gray
 
 .table
   display: flex
@@ -116,11 +92,54 @@ section
   align-items: center
   justify-content: center
   color: $color--white
-  background:
-    image:  linear-gradient(135deg, rgba($color--white, 0.85) 15%, transparent), linear-gradient(19deg, #FDFFBF 0%, #a6e2d7 27%, #60BEEC 66%, #8C6DAF 100%)
-
-  &--title
-    @extend %section-title
+  background-image:  linear-gradient(135deg, rgba($color--white, 0.85) 15%, transparent), linear-gradient(19deg, #FDFFBF 0%, #a6e2d7 27%, #60BEEC 66%, #8C6DAF 100%)
 
   &--body
     @extend %section-body
+
+.photography
+  // background-image: image-url("photo-blur-background.jpg") !important
+  background-size: cover
+  // background-repeat: repeat
+
+.section
+  position: relative
+  display: flex
+  flex-direction: column
+  justify-content: center
+  align-items: center
+  padding:
+    top: 5rem
+    bottom: 5rem
+  background:
+    color: $color--off-white
+    image: image-url("glaze.png")
+    image: image-url("glaze.png"), linear-gradient(180deg, $color--off-white, $color--white)
+    repeat: repeat
+
+  &--title-bar
+    display: flex
+    align-items: center
+    justify-content: space-between
+    width: 100%
+      
+  &--title
+    flex-grow: 1
+    color: $color--dark-gray
+    // text-align: center
+    // font-family: $serif !important
+
+  &--cta
+    &.m-before
+      display: inherit
+
+      @media #{$device--small}
+        display: none
+
+    &.m-after
+      display: none
+      width: 100%
+      margin-top: 1rem
+
+      @media #{$device--small}
+        display: inherit

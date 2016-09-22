@@ -8,26 +8,32 @@ document.addEventListener('DOMContentLoaded', function(){
   mousemoveHandler();
 
   // Initialize a new plugin instance for element or array of elements.
-  var focusSlider = $("[js-slider='focus']")[0];
-  //     exposureSlider = $("[js-slider='exposure']")[0];
+  var focusSlider = $("[js-slider='focus']")[0],
+      exposureSlider = $("[js-slider='exposure']")[0];
 
-  // rangeSlider.create(exposureSlider, {
-  //   rangeClass: "rangeSlider viewfinder--exposure-input",
-  //   onSlide: function (position, value) {
-  //     console.log(value);
-  //   }
-  // });
+  rangeSlider.create(exposureSlider, {
+    orientation: "vertical",
+    steps: 16,
+    rangeClass: "rangeSlider viewfinder--exposure-input",
+    onSlide: function (position, value) {
+      $("[js-viewfinder-exposure]")[0].style.opacity = value;
+      $("[js-viewfinder-reflection]")[0].style.opacity = value / 20 + 0.1;
+    }
+  });
 
   // Create focus slider
   rangeSlider.create(focusSlider, {
+    orientation: "horizontal",
     rangeClass: "rangeSlider viewfinder--focus-input",
     onSlide: function (position, value) {
-      $("[js-parallax]").forEach(function (image, index) {
-        var blurAmount = Math.abs(value - 0.8),
+      var images = $("[js-parallax]")
+      for (var i = 0; i < images.length; i++) {
+        var image = images[i],
+            blurAmount = Math.abs(value - 0.8),
             focusDepth = value - 0.8 >= 0 ? "far" : "near",
             distanceMod;
 
-        switch (index) {
+        switch (i) {
           case 0:
             distanceMod = focusDepth == "far" ? 10 : 30;
             break;
@@ -38,49 +44,57 @@ document.addEventListener('DOMContentLoaded', function(){
             distanceMod = focusDepth == "far" ? 30 : 10;
             break;
         }
+        
+        var blur = blurAmount * distanceMod;
 
-        image.style.filter = "blur(" + blurAmount * distanceMod + "px)";
-      });
+        image.style.filter = "blur(" + blur + "px)";
+        image.style.webkitFilter = "blur(" + blur + "px)";
+      };
     }
   });
 });
 
 
 function mousemoveHandler() {
-  var baseFringeElement = $("[js-fringe='base']")[0];
-  var fringe = {
-    styles: {
-      red: $("[js-fringe='red']")[0].style,
-      blue: $("[js-fringe='blue']")[0].style
-    }
-  };
-  fringe.position = getPosition(baseFringeElement);
+  var baseFringeElement = $("[js-fringe='base']")[0],
+      fringe = {
+        styles: {
+          red: $("[js-fringe='red']")[0].style,
+          blue: $("[js-fringe='blue']")[0].style
+        },
+        position: getPosition(baseFringeElement)
+      };
 
-  var parallaxBaseElement = $("[js-parallax='background']")[0];
+  var parallaxBaseElement = $("[js-parallax='background']")[0],
+      parallax = {
+        styles: {
+          back: parallaxBaseElement.style,
+          mid: $("[js-parallax='midground']")[0].style,
+          front: $("[js-parallax='foreground']")[0].style
+        },
+        position: getPosition(parallaxBaseElement)
+      };
 
-  var parallax = {
-    styles: {
-      back: parallaxBaseElement.style,
-      mid: $("[js-parallax='midground']")[0].style,
-      front: $("[js-parallax='foreground']")[0].style
-    }
-  };
-  parallax.position = getPosition(parallaxBaseElement);
-
-  window.addEventListener("resize", function() {
+  window.addEventListener("resize", function () {
     calculatePosition();
+  }, true);
+
+  window.addEventListener("scroll", function () {
+    calculatePosition();;
+  }, true);
+
+  window.addEventListener("mousemove", function (e) {
+    updateEvent(e);
+    textFringing(e, fringe);
+    photographyParallax(e, parallax);
   });
 
-  window.addEventListener("scroll", function() {
-    calculatePosition();
-  });
-
-  document.addEventListener("mousemove", function(event) {
-    updateEvent(event);
-
-    textFringing(event, fringe);
-    photographyParallax(event, parallax);
-  }, 100);
+  if (window.DeviceOrientationEvent) {
+    window.addEventListener("deviceorientation", function (e) {
+      textFringing(e, fringe);
+      photographyParallax(e, parallax);
+    }, true);
+  }
 
   var calculatePosition = debounce(function() {
       fringe.position = getPosition(baseFringeElement);
@@ -90,117 +104,52 @@ function mousemoveHandler() {
 
 
 function textFringing(event, props) {
-  var distance = {
-    x: Math.min(event.pageX - props.position.right / 2,
-      event.pageX - (props.position.right - props.position.width / 2) ) / 200,
-    y: Math.min(event.pageY - props.position.bottom / 2,
-      event.pageY - (props.position.bottom - props.position.height / 2) ) / 200
-  };
+  var distanceX, distanceY;
 
-  props.styles.red.transform = "translate3d(" + distance.x + "px, " + distance.y + "px, 0)";
-  props.styles.blue.transform = "translate3d(" + -distance.x + "px, " + -distance.y + "px, 0)";
+  if (event.type == "deviceorientation") {
+    if (window.innerWidth > window.innerHeight) {
+      distanceX = -event.beta / 15,
+      distanceY = -event.gamma / 15;
+
+    } else {
+      distanceX = -event.gamma / 10,
+      distanceY = -(event.beta - 90) / 10;
+    }
+
+  } else {
+    distanceX = Math.min(event.pageX - props.position.right / 2, event.pageX - (props.position.right - props.position.width / 2) ) / 200,
+    distanceY = Math.min(event.pageY - props.position.bottom / 2, event.pageY - (props.position.bottom - props.position.height / 2) ) / 200;
+  }
+
+  props.styles.red.transform = "translate3d(" + distanceX + "px, " + distanceY + "px, 0)";
+  props.styles.blue.transform = "translate3d(" + -distanceX + "px, " + -distanceY + "px, 0)";
 }
 
 
 function photographyParallax(event, props) {
-  var distance = {
-    x: Math.min(event.pageX - props.position.right / 2,
-      event.pageX - (props.position.right - props.position.width / 2) ) / 100,
-    y: Math.min(event.pageY - props.position.bottom / 2,
-      event.pageY - (props.position.bottom - props.position.height / 2) ) / 100
-  };
+  var distanceX, distanceY;
 
-  props.styles.front.transform = "translate3d(" + -distance.x * 4 + "px, " + -distance.y * 4 + "px, 0)";
+  if (event.type == "deviceorientation") {
+    if (window.innerWidth > window.innerHeight) {
+      distanceX = event.beta / 10,
+      distanceY = -event.gamma / 10;
 
-  props.styles.mid.transform = "matrix3d(" + ((distance.y / 10000) + 1) + ", 0, 1, 0, " + (-distance.x / 200) + ", " + ((-distance.y / 200) + 1) + ", 1, 0, 1, " + (distance.x / 1000) + ", " + ((-distance.x / 100) + 1) + ", 0, 0, 0, 100, 1) translate3d(" + -distance.x / 6 + "px, " + -distance.y / 2 + "px, 0)";
-
-  props.styles.back.transform = "translate3d(" + distance.x / 5 + "px, " + distance.y / 4 + "px, 0)";
-}
-
-
-var ScrollBias = {
-  init: function() {
-    this.record.current = getScrollTop();
-    this.snapPoints = this.getSnapPoints();
-
-    window.addEventListener("scroll", throttle(this.scrollHandler.bind(this), 100));
-  },
-
-  threshold : 150,
-  snapPoints : [],
-  record : {
-    current: null,
-    last: null
-  },
-
-
-  scrollHandler: function(event) {
-    this.updateRecord();
-    updateEvent(event, this.record);
-
-    var velocity = this.calcVelocity();
-    if (Math.abs(velocity) < 20) {
-      this.snapPoints.forEach(function(point) {
-        if (Math.abs(this.record.current - point) < this.threshold) {
-          this.scrollTo($("body")[0], point, Math.abs(velocity));
-        }
-      }.bind(this));
+    } else {
+      distanceX = -event.gamma / 20,
+      distanceY = -event.beta / 20;
     }
-  },
 
-
-  getSnapPoints: function() {
-    var snapPoints = [];
-    $("[snap-point]").forEach(function(el){
-      var boundingRect = el.getBoundingClientRect();
-      snapPoints.push(boundingRect.top + getScrollTop());
-    });
-    return snapPoints;
-  },
-
-
-  updateRecord: function() {
-    var newRecord = {
-      current: getScrollTop(),
-      last: this.record.current
-    };
-
-    this.record = newRecord;
-  },
-
-
-  calcVelocity: function() {
-    var timer, delta, delay = 5; // in "ms" (higher means lower fidelity )
-
-    newPos = this.record.current;
-    lastPos = this.record.last;
-
-    if ( lastPos != null ) { // && newPos < maxScroll
-      delta = newPos - lastPos;
-    }
-    lastPos = newPos;
-
-    return delta;
-  },
-
-
-  scrollTo: function(element, to, duration) {
-    var start = element.scrollTop,
-        change = to - start,
-        currentTime = 0,
-        increment = 20;
-
-    var animateScroll = function(){
-        currentTime += increment;
-        var val = easeInOutQuad(currentTime, start, change, duration);
-        element.scrollTop = val;
-        if(currentTime < duration) {
-            setTimeout(animateScroll, increment);
-        }
-    };
-    animateScroll();
+  } else {
+    distanceX = Math.min(event.pageX - props.position.right / 2, event.pageX - (props.position.right - props.position.width / 2) ) / 100,
+    distanceY = Math.min(event.pageY - props.position.bottom / 2, event.pageY - (props.position.bottom - props.position.height / 2) ) / 100;
   }
-};
+
+  props.styles.front.transform = "translate3d(" + -distanceX * 4 + "px, " + -distanceY * 4 + "px, 0)";
+
+  props.styles.mid.transform = "matrix3d(" + ((distanceY / 10000) + 1) + ", 0, 1, 0, " + (-distanceX / 200) + ", " + ((-distanceY / 200) + 1) + ", 1, 0, 1, " + (distanceX / 1000) + ", " + ((-distanceX / 100) + 1) + ", 0, 0, 0, 100, 1) translate3d(" + -distanceX / 6 + "px, " + -distanceY / 2 + "px, 0)";
+
+  props.styles.back.transform = "translate3d(" + distanceX / 5 + "px, " + distanceY / 4 + "px, 0)";
+}
 
 
 function updateEvent(event, data) {
@@ -223,7 +172,7 @@ function updateEvent(event, data) {
 
     case "mousemove":
       // Add pageX, and pageY properties to event object
-      if ( event.pageX == null && event.clientX != null ) {
+      if (event.pageX == null && event.clientX != null) {
         var doc = document.documentElement,
             body = document.body;
         event.pageX = event.calientX + (doc && doc.scrollLeft || body && body.scrollLeft || 0) - (doc && doc.clientLeft || body && body.clientLeft || 0);

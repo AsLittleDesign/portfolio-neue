@@ -1,26 +1,39 @@
 
 .rangeSlider,
 .rangeSlider__fill
-  background-color: $color--white
   display: block
   height: 1px
   width: 100%
 
+  &.viewfinder--focus-input
+    background-color: $color--white
+
 .rangeSlider
   position: relative
 
-  &.viewfinder--exposure-input
-    position: absolute
+.viewfinder--exposure-input--original
+  writing-mode: bt-lr
+  -webkit-appearance: slider-vertical
 
 .viewfinder--exposure-input
-  height: 100px
+  position: absolute
+  top: 0
+  bottom: 0
+  margin: auto
+  height: calc(100% + 10px)
+  width: 1px
   background-color: transparent
 
   .rangeSlider__handle
-    // Remove
-    background-color: $color--white
-    width: 5px
-    height: 5px
+    @extend .icon--viewfinder--select-notch
+    $size: 0.6rem
+    font-size: $size
+    height: $size
+    width: $size
+    line-height: $size
+    position: absolute
+    top: calc(33% - #{$size / 2})
+    left: calc(100% + 2px)
 
 .rangeSlider__handle
   cursor: pointer

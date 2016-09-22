@@ -10,7 +10,7 @@ var menus = [
 
       { id: "twitter",
         text: "Follow on Twitter",
-        href: "https://twitter.com/AsLittleDesign",
+        href: "https://twitter.com/intent/follow?user_id=1605103807",
         symbol: "twitter"
       },
 
@@ -33,23 +33,25 @@ var menus = [
       { id: "facebook",
         text: "Share on Facebook",
         action: function () {
-          alert("share:facebook");
+          FB.ui({
+            method: 'share',
+            href: window.location.href,
+            hashtag: "#AsLittleDesign"
+          }, function(response){});
         },
         symbol: "facebook"
       },
 
       { id: "twitter",
         text: "Share on Twitter",
-        action: function () {
-          alert("share:twitter");
-        },
+        href: "https://twitter.com/intent/tweet?url=" + URLEncode(window.location.href)  + "&via=AsLittleDesign",
         symbol: "twitter"
       },
 
       { id: "linkedin",
         text: "Share on LinkedIn",
         action: function () {
-          alert("share:linkedin");
+          window.open("https://www.linkedin.com/shareArticle?url=" + URLEncode(window.location.href)  + "&source=" + URLEncode("http://davesmccarthy.com/"), "newwindow", "width=520, height=570");
         },
         symbol: "linkedin"
       }
@@ -74,33 +76,12 @@ var menus = [
 ];
 
 
-// el: element to associate the handler with.
-// type: Event type (e.g. click, scroll).
-// handler: Function to call, passed the event
-function delegateEvent (type, selector, handler) {
-  var listener = document.addEventListener(type, function (e) {
-    e = e || window.event;
-
-    var target   = e.target || e.srcElement,
-        nodeList = $(selector);
-
-    for (var i = 0; i < nodeList.length; i++) {
-      var node = nodeList[i];
-      if (target == node) {
-        handler(e);
-      }
-    }
-  });
-
-  return listener;
-}
-
-
 function startActionMenu () {
   menus.forEach(function (menu) {
     var toggle = $("[js-menu=" + menu.id +"]");
   });
 }
+
 
 // ActionMenu Constructor
 function ActionMenu (data) {
@@ -120,36 +101,17 @@ ActionMenu.prototype = {
   },
 
 
-  // Toggles page scrolling on and off
-  toggleScrolling: function (state) {
-    var body = $("body")[0];
-
-    // If scrolling is enabled
-    //   -> do stuff
-    if (body.style.overflowY != "hidden") {
-      body.style.overflowY = "hidden";
-      document.ontouchmove = function (e) { e.preventDefault(); }
-
-    } else {
-      body.style.overflowY = "scroll";
-      document.ontouchmove = function (e) { return true; }
-    }
-  },
-
-
-  toggleBlur: function () {
-    toggleClass($("[js-pop--background]")[0], "s-active");
-    toggleAttr($("[js-blur]")[0], "js-blur");
-  },
-
-
   toggleMenu: function (e) {
     var menu = $("[js-pop--menu='" + this.data.id + "']")[0],
         active;
     
     // Toggle page-wide changes for modal behavior.
-    this.toggleScrolling();
-    this.toggleBlur();
+    toggleScroll();
+    toggleBlur();
+
+    toggleClass($("[js-pop--background]")[0], "s-active");
+
+    menu.style.display = "";
 
     // Determine if menu is active.
     if (this.active != undefined) {
@@ -233,9 +195,13 @@ ActionMenu.prototype = {
 
       menu.setAttribute("style", menuStyle);
 
+      if (originX === "right") {
+        toggleClass(menu, "m-right", true);
+      }
+
       // Set into motion the animation
       toggleClass(menu, "s-active");
-      if (originY == "top") {
+      if (originY === "top") {
         menu.style.transform = "translateY(" + (togglePos.height + 10) + "px) scale(1)";
       } else {
         menu.style.transform = "translateY(" + -(togglePos.height - 10) + "px) scale(1)";
@@ -250,6 +216,7 @@ ActionMenu.prototype = {
       setTimeout(function () {
         toggleClass(menu, "s-active");
         toggleClass(this.clone, "s-active");
+        toggleClass(menu, "m-right", false);
 
         // Show original toggle
         toggle.style.opacity    = "1";
@@ -281,26 +248,26 @@ ActionMenu.prototype = {
     var options = [];
     this.data.options.forEach(function(option) {
       var attributes,
-          elType = "div";
+          elType = "a";
       
       if (option.href) {
         attributes = "href='" + option.href + "' target='_blank'";
-        elType = "a";
       }
 
+      // debugger
       var optionEl = [
-        "<" + elType +" class='menu--option' js-pop--option='" + option.id + "' " + attributes + ">",
+        "<" + elType +" class='menu--option' js-pop--option='" + this.data.id + "-" + option.id + "' " + attributes + ">",
           "<span class='menu--symbol icon--" + option.symbol + "'></span>",
-          "<span>" + option.text + "</span>",
+          "<span class='menu--option-text'>" + option.text + "</span>",
         "</" + elType + ">"
       ].join("\n");
 
       options.push(optionEl);
-    });
+    }.bind(this));
 
     // Create menu HTML
     var element = [
-      "<div class='menu' js-pop--menu='" + this.data.id + "'>",
+      "<div class='menu' style='display: none;' js-pop--menu='" + this.data.id + "'>",
         options,
         "<div class='menu--close' js-pop--toggle='" + this.data.id + "'>Cancel</div>",
       "</div>"
@@ -310,12 +277,11 @@ ActionMenu.prototype = {
     element = [].concat.apply([], element).join("\n");
     this.html = element;
 
-    
     this.data.options.forEach(function (option) {
       if (option.action) {
-        delegateEvent("click", "[js-pop--option='" + option.id + "']", option.action);
+        delegateEvent("click", "[js-pop--option='" + this.data.id + "-" + option.id + "']", option.action);
       }
-    });
+    }.bind(this));
   },
 
 

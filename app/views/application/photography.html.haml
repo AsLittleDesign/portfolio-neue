@@ -1,8 +1,16 @@
 - content_for :head do
-  = stylesheet_link_tag "pages/photography", media: "all", "data-turbolinks-track" => true
+  = stylesheet_link_tag "pages/photography", media: "all"
 
 - content_for :scripts do
-  = javascript_include_tag "pages/photography", "data-turbolinks-track" => true
+  = javascript_include_tag "pages/photography"
+
+- content_for :modals do
+  .modal--container(js-modal="about" js-modal-toggle="about")
+    .modal--window
+      .modal--content
+        %h3 About This Page
+        %p The layout of this page is procedurally generated, giving a different experience each time the page is loaded.
+      .modal--close(js-modal-toggle="about") Close
 
 .invisible(js-photo-info)
   - @photos.each do |key, value|
@@ -13,19 +21,17 @@
       - if value["orientation"]
         %div(js-info="orientation")= value["orientation"]
 
-.container.photography-intro
-  .photography-intro--top
-    = link_to root_path, :class => "button m-blue photography-intro--back" do
+.container.gallery-intro
+  .gallery-intro--top
+    = link_to root_path, :class => "button m-blue gallery-intro--back" do
       %span.icon--arrow--left
-      Home
-    .button.m-transparent.photography-intro--about(js-modal-toggle="about") About this page
-  %h1.photography-intro--title Photography
-  %p.photography-intro--body Photography is a personal art that enables one to see things from a different perspective. One of the greatest things for one's psyche is being in the moment, just you and your camera. Dave uses photography not only as an exercise in the arts, but also as an escape; a way to connect with and understand himself better.
+      %span Home
 
-.modal(js-modal="about")
-  .modal--container(js-modal-toggle="about")
-    .modal--content
-      %h3 About This Page
-      %p The layout of this page is procedurally generated, giving a different experience each time the page is loaded.
+    .button.m-transparent.gallery-intro--about(js-modal-toggle="about") About this page
 
-.photos.container#photos
+  %h1.gallery-intro--title Photography
+  %p.gallery-intro--body Photography is a personal art that enables one to see things from a different perspective. One of the greatest things for one's psyche is being in the moment, just you and your camera. Dave uses photography not only as an exercise in the arts, but also as an escape; a way to connect with and understand himself better.
+  .divider.m-bottom
+
+.photos
+  .container.photos--layout#photos

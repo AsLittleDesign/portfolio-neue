@@ -80,7 +80,7 @@ PositionImages = {
 
   // Spacing == 1rem
   getSpacing: function() {
-    return parseFloat(getComputedStyle($("body")[0]).fontSize);
+    return parseFloat(getComputedStyle($("body")[0]).fontSize) / 2;
   },
 
   // Information on the window size, and the container
@@ -695,16 +695,16 @@ PositionImages = {
         container = null;
 
     if (width > 1170) {
-      container = 1170 - this.getSpacing();
+      container = 1170 - this.getSpacing() * 2;
 
     } else if (width > 992) {
-      container = 992 - this.getSpacing();
+      container = 992 - this.getSpacing() * 2;
 
     } else if (width > 768) {
-      container = 768 - this.getSpacing();
+      container = 768 - this.getSpacing() * 2;
 
     } else {
-      container = width - this.getSpacing();
+      container = width - this.getSpacing() * 2;
     }
 
     return {

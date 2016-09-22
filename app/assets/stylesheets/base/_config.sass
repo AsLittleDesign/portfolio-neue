@@ -11,9 +11,18 @@ $color--blue:       #35B6EF
 $color--yellow:     #EFC050
 
 $device--small:    "screen and (max-width: 768px)"
-$device--medium:   "screen and (max-width: 992px)"
-$device--medium:   "screen and (max-width: 1170px)"
+$device--medium:   "screen and (min-width: 769px) and (max-width: 992px)"
+$device--large:    "screen and (min-width: 992px) and (max-width: 1170px)"
+$device--xlarge:   "screen and (min-width: 1171px)"
+$device--iphone:   "only screen and (max-device-width: 480px)"
+$device--ipad:     "only screen and (min-device-width: 768px) and (max-device-width: 1024px)"
+
+$container-width--medium: 768px
+$container-width--large: 992px
+$container-width--xlarge: 1170px
 
 $sans-serif: Helvetica, Arial, sans-serif
 $sans-serif--title: "Museo Sans", Helvetica, Arial, sans-serif
 $serif: "Lora", Garamond, serif
+
+$box-shadow: 0 0 10px rgba($color--black, 0.08)

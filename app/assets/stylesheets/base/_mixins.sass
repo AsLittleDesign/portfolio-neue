@@ -14,6 +14,21 @@
   -ms-user-select: none
   user-select: none
 
+=box-shadow($args...)
+  -moz-box-shadow: $args
+  -webkit-box-shadow: $args
+  box-shadow: $args
+
+=border-radius()
+  -moz-border-radius: 4pt
+  -webkit-border-radius: 4pt
+  border-radius: 4pt
+
+  @media #{$device--small}
+    -moz-border-radius: 8pt
+    -webkit-border-radius: 8pt
+    border-radius: 8pt
+
 =keyframes($name)
   @-webkit-keyframes #{$name}
     @content

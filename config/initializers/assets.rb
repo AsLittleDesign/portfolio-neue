@@ -17,3 +17,5 @@ Rails.application.config.assets.precompile += %w( pages/photography.css )
 Rails.application.config.assets.precompile += %w( pages/photography.js )
 
 Rails.application.config.assets.precompile += %w( pages/photo_page.css )
+
+Rails.application.config.assets.precompile += %w( pages/table.css )

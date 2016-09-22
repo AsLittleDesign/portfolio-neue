@@ -1,8 +1,8 @@
 - content_for :head do
-  = stylesheet_link_tag "pages/index", media: "all", "data-turbolinks-track" => true
+  = stylesheet_link_tag "pages/index", media: "all"
 
 - content_for :scripts do
-  = javascript_include_tag "pages/index", "data-turbolinks-track" => true
+  = javascript_include_tag "pages/index"
 
 %section.fringe
   %h1
@@ -13,18 +13,19 @@
   %h3.title Designer & Developer
   .social
     .social--option(js-pop--toggle="follow")
-      .social--option-content
-        .social--option-icon.icon--connect
-        %div Follow
+      .social--option-content.m-icon.icon--connect
+      .social--option-content Follow
       
     .social--option(js-pop--toggle="contact")
-      .social--option-content
-        .social--option-icon.icon--contact
-        %div Contact
+      .social--option-content.m-icon.icon--contact
+      .social--option-content Contact
 
 = render "partials/index_photography"
+= render "partials/index_table"
 
-%section.table
-  %h1.table--title TABLE.co
-  .table--body
-    %p Non quis reprehenderit est cillum quis et enim aute amet veniam excepteur ea exercitation magna. Minim sint ad proident dolore. Quis amet adipisicing labore consectetur ea cillum aliquip ea laborum. Labore pariatur cillum quis esse commodo magna et enim id excepteur deserunt aliquip.
+-# = link_to "Follow @AsLittleDesign", "https://twitter.com/AsLittleDesign", :class => "twitter-follow-button", :"data-show-count" => "false"
+
+-# %section.table
+-#   %h1.table--title TABLE.co
+-#   .table--body
+-#     %p Non quis reprehenderit est cillum quis et enim aute amet veniam excepteur ea exercitation magna. Minim sint ad proident dolore. Quis amet adipisicing labore consectetur ea cillum aliquip ea laborum. Labore pariatur cillum quis esse commodo magna et enim id excepteur deserunt aliquip.

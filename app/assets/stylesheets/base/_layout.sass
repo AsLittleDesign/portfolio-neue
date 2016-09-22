@@ -2,24 +2,23 @@
 .container
   display: block
   box-sizing: border-box
-  padding:
-    left: 0.5rem
-    right: 0.5rem
 
-@media (min-width: 768px)
-  .container
+  @media #{$device--small}
     padding:
-      left: calc( (100% - 768px - 1rem) / 2 )
-      right: calc( (100% - 768px - 1rem) / 2 )
+      left: 0.5rem
+      right: 0.5rem
 
-@media (min-width: 992px)
-  .container
+  @media #{$device--medium}
     padding:
-      left: calc( (100% - 992px - 1rem) / 2 )
-      right: calc( (100% - 992px - 1rem) / 2 )
+      left: calc( (100vw - #{$container-width--medium}) / 2 )
+      right: calc( (100vw - #{$container-width--medium}) / 2 )
 
-@media (min-width: 1170px)
-  .container
+  @media #{$device--large}
     padding:
-      left: calc( (100% - 1170px - 1rem) / 2 )
-      right: calc( (100% - 1170px - 1rem) / 2 )
+      left: calc( (100vw - #{$container-width--large}) / 2 )
+      right: calc( (100vw - #{$container-width--large}) / 2 )
+
+  @media #{$device--xlarge}
+    padding:
+      left: calc( (100vw - #{$container-width--xlarge}) / 2 )
+      right: calc( (100vw - #{$container-width--xlarge}) / 2 )

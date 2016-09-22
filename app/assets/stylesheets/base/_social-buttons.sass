@@ -1,0 +1,48 @@
+
+.social
+  display: flex
+  align-items: center
+  justify-content: center
+
+  > .social--option
+    border-color: $color--light-gray
+    background-color: transparent
+
+    &:active
+      border-color: $color--light-gray
+
+  &--option
+    @extend %no-select
+    +border-radius
+    width: 150px
+    height: 2.5rem
+    display: flex
+    align-items: center
+    justify-content: center
+    flex-shrink: 0
+    line-height: 1rem
+    color: $color--gray
+    background-color: $color--white
+    cursor: pointer
+    border:
+      width: 1px
+      style: solid
+      color: $color--white
+
+    @media #{$device--small}
+      height: 3rem
+
+    &:active
+      background-color: darken($color--off-white, 2%)
+      border-color: darken($color--off-white, 2%)
+    
+    + .social--option
+      margin-left: 0.5rem
+
+  &--option-content
+    pointer-events: none
+    display: inline-block
+    height: 1rem
+
+    &.m-icon
+      margin-right: 0.3rem

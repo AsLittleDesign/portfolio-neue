@@ -4,48 +4,30 @@
 
 $image-spacing: 1rem
 
-body
-  background-color: $color--white
-
 .invisible
   display: none
   visibility: hidden
   opacity: 0
 
-.photography-intro
-  border-bottom: 1px solid $color--light-gray
-  padding:
-    top: 1rem
-    bottom: 1rem
-
-  &--title
-    text-transform: uppercase
-    text-align: center
-    margin-top: 3rem
-    color: $color--dark-gray
-
-  &--body
-    color: $color--dark-gray
-
-  &--top
-    display: flex
-    justify-content: space-between
-    align-items: center
-
-  &--about, &--back
-    @media #{$device--small}
-      display: none
-
 .photos
-  position: relative
-  margin:
+  padding:
     top: 2rem
     bottom: 2rem
+  background:
+    color: $color--off-white
+    image: image-url("glaze.png")
+    image: image-url("glaze.png"), linear-gradient(180deg, $color--off-white, $color--white)
+    repeat: repeat
+
+  &--layout
+    position: relative
+    width: 100%
+
 
 .photo
   +transition(all 0.15s ease-in-out)
+  +border-radius
   position: absolute
-  border-radius: 3pt
   display: block
   background:
     size: 100%
@@ -56,6 +38,7 @@ body
     position: relative
     width: 100%
     margin-bottom: 3rem
+    border-radius: 8pt
 
   &--hover
     +transition(opacity 0.3s ease-in-out)
@@ -73,6 +56,9 @@ body
     justify-content: center
     font-size: 2rem
     border-radius: 3pt
+
+    @media #{$device--small}
+      border-radius: 8pt
 
   &:hover
     .photo--hover

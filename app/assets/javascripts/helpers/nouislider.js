@@ -37,22 +37,23 @@
             pluginIdentifier = 0,
             inputrange = supportsRange(),
             defaults = {
-                polyfill: true,
-                rangeClass: 'rangeSlider',
-                disabledClass: 'rangeSlider--disabled',
-                fillClass: 'rangeSlider__fill',
-                bufferClass: 'rangeSlider__buffer',
-                handleClass: 'rangeSlider__handle',
-                startEvent: ['mousedown', 'touchstart', 'pointerdown'],
-                moveEvent: ['mousemove', 'touchmove', 'pointermove'],
-                endEvent: ['mouseup', 'touchend', 'pointerup'],
-                min: null,
-                max: null,
-                step: null,
-                value: null,
-                buffer: null,
-                stick: null,
-                borderRadius: 10
+              polyfill: true,
+              rangeClass: 'rangeSlider',
+              disabledClass: 'rangeSlider--disabled',
+              fillClass: 'rangeSlider__fill',
+              bufferClass: 'rangeSlider__buffer',
+              handleClass: 'rangeSlider__handle',
+              startEvent: ['mousedown', 'touchstart', 'pointerdown'],
+              moveEvent: ['mousemove', 'touchmove', 'pointermove'],
+              endEvent: ['mouseup', 'touchend', 'pointerup'],
+              min: null,
+              max: null,
+              step: null,
+              value: null,
+              buffer: null,
+              stick: null,
+              borderRadius: 10,
+              orientation: "horizontal"
             };
 
         /**
@@ -148,7 +149,12 @@
                     displayProperty[i] = hiddenParentNodes[i].style.display;
 
                     hiddenParentNodes[i].style.display = 'block';
-                    hiddenParentNodes[i].style.height = '0';
+                    if (this.orientation == "horizontal") {
+                      hiddenParentNodes[i].style.height = '0';
+
+                    } else if (this.orientation == "vertical") {
+                      hiddenParentNodes[i].style.width = '0';
+                    }
                     hiddenParentNodes[i].style.overflow = 'hidden';
                     hiddenParentNodes[i].style.visibility = 'hidden';
                     toggleOpenProperty(hiddenParentNodes[i]);
@@ -159,7 +165,12 @@
                 for (var j = 0; j < hiddenParentNodesLength; j++) {
                     toggleOpenProperty(hiddenParentNodes[j]);
                     hiddenParentNodes[j].style.display = displayProperty[j];
-                    hiddenParentNodes[j].style.height = '';
+                    if (this.orientation == "horizontal") {
+                      hiddenParentNodes[j].style.height = '';
+                      
+                    } else if (this.orientation == "vertical") {
+                      hiddenParentNodes[j].style.width = '';
+                    }
                     hiddenParentNodes[j].style.overflow = '';
                     hiddenParentNodes[j].style.visibility = '';
                 }
@@ -400,6 +411,7 @@
             this.onSlideEventsCount = -1;
             this.isInteractsNow = false;
             this.needTriggerEvents = false;
+            this.orientation = this.options.orientation;
 
             // Plugin should only be used as a polyfill
             if (!this.polyfill) {
@@ -540,37 +552,45 @@
             }
         };
 
+        
+        // SAFE
         Plugin.prototype._changeEventListener = function (ev, data) {
-            if (data && data.origin === this.identifier) {
-                return;
-            }
+          if (data && data.origin === this.identifier) {
+              return;
+          }
 
-            var value = ev.target.value,
-                pos = this._getPositionFromValue(value);
-            this._setPosition(pos);
+          var value = ev.target.value,
+              pos = this._getPositionFromValue(value);
+
+          this._setPosition(pos);
         };
+        // SAFE
 
+        // SAFE
         Plugin.prototype._update = function () {
-            this.handleWidth = getDimension(this.handle, 'offsetWidth');
-            this.rangeWidth = getDimension(this.range, 'offsetWidth');
-            this.maxHandleX = this.rangeWidth - this.handleWidth;
-            this.grabX = this.handleWidth / 2;
-            this.position = this._getPositionFromValue(this.value);
+          this.handleWidth = getDimension(this.handle, 'offsetWidth');
+          this.handleHeight = getDimension(this.handle, 'offsetHeight');
+          this.rangeWidth = getDimension(this.range, 'offsetWidth');
+          this.rangeHeight = getDimension(this.range, 'offsetHeight');
+          this.maxHandle = this.orientation == "horizontal" ? this.rangeWidth - this.handleWidth : this.rangeHeight - this.handleHeight;
+          this.grabPos = this.orientation == "horizontal" ? this.handleWidth / 2 : this.handleHeight / 2;
+          this.position = this._getPositionFromValue(this.value);
 
-            // Consider disabled state
-            if (this.element.disabled) {
-                addClass(this.range, this.options.disabledClass);
-            } else {
-                removeClass(this.range, this.options.disabledClass);
-            }
+          // Consider disabled state
+          if (this.element.disabled) {
+              addClass(this.range, this.options.disabledClass);
+          } else {
+              removeClass(this.range, this.options.disabledClass);
+          }
 
-            this._setPosition(this.position);
-            if (this.options.bufferClass && this.options.buffer) {
-                this._setBufferPosition(this.options.buffer);
-            }
-            this._updatePercentFromValue();
-            triggerEvent(this.element, 'change', {origin: this.identifier});
+          this._setPosition(this.position);
+          if (this.options.bufferClass && this.options.buffer) {
+              this._setBufferPosition(this.options.buffer);
+          }
+          this._updatePercentFromValue();
+          triggerEvent(this.element, 'change', {origin: this.identifier});
         };
+        // SAFE
 
 
         Plugin.prototype._handleResize = function () {
@@ -594,14 +614,22 @@
                 return;
             }
 
-            var posX = this._getRelativePosition(e),
-                rangeX = this.range.getBoundingClientRect().left,
-                handleX = this._getPositionFromNode(this.handle) - rangeX;
+            var pos, range, handle;
+            if (this.orientation == "horizontal") {
+              pos = this._getRelativePosition(e);
+              range = this.range.getBoundingClientRect().left;
+              handle = this._getPositionFromNode(this.handle) - range;
 
-            this._setPosition(posX - this.grabX);
+            } else if (this.orientation == "vertical") {
+              pos = this._getRelativePosition(e);
+              range = this.range.getBoundingClientRect().top;
+              handle = this._getPositionFromNode(this.handle) - range;
+            }
 
-            if (posX >= handleX && posX < handleX + this.handleWidth) {
-                this.grabX = posX - handleX;
+            this._setPosition(pos - this.grabPos);
+
+            if (pos >= handle && pos < handle + (this.orientation == "horizontal" ? this.handleWidth : this.handleHeight)) {
+                this.grabPos = pos - handle;
             }
             this._updatePercentFromValue();
         };
@@ -609,9 +637,8 @@
         Plugin.prototype._handleMove = function (e) {
             this.isInteractsNow = true;
             e.preventDefault();
-            var posX = this._getRelativePosition(e);
-            this._setPosition(posX - this.grabX);
-            //this.isInteractsNow = false;
+            var pos = this._getRelativePosition(e);
+            this._setPosition(pos - this.grabPos);
         };
 
         Plugin.prototype._handleEnd = function (e) {
@@ -641,13 +668,14 @@
             return pos;
         };
 
+
         Plugin.prototype._setPosition = function (pos) {
-            var value, left,
+            var value, posX, posY,
                 stickTo, stickRadius,
                 restFromValue;
 
             // Snapping steps
-            value = this._getValueFromPosition(this._cap(pos, 0, this.maxHandleX));
+            value = this._getValueFromPosition(this._cap(pos, 0, this.maxHandle));
 
             // Stick to stick[0] in radius stick[1]
             if (this.stick) {
@@ -660,16 +688,30 @@
                     value = value - restFromValue + stickTo;
                 }
             }
-            left = this._getPositionFromValue(value);
+            
+
+            if (this.orientation == "horizontal") {
+              posX = this._getPositionFromValue(value);
+              this.handle.style.left = posX + 'px';
+              this.position = posX;
+
+            } else if (this.orientation == "vertical") {
+              posY = this._getPositionFromValue(value);
+              this.handle.style.top = posY + 'px';
+              this.position = posY;
+            }
 
             // Update ui
-            this.fill.style.width = (left + this.grabX) + 'px';
-            this.handle.style.left = left + 'px';
+            if (this.orientation == "horizontal") {
+              this.fill.style.width = (pos + this.grabPos) + 'px';
+              
+            } else if (this.orientation == "vertical") {
+              this.fill.style.height = (pos + this.grabPos) + 'px';
+            }
+            
             this._setValue(value);
 
             // Update globals
-            this.position = left;
-            this.value = value;
             this._updatePercentFromValue();
 
             if (this.isInteractsNow || this.needTriggerEventss) {
@@ -685,11 +727,14 @@
             this.onSlideEventsCount++;
         };
 
+
         Plugin.prototype._setBufferPosition = function (pos) {
+          if (this.orientation == "horizontal") {
             var isPercent = true,
                 bufferWidth,
                 paddingWidth,
                 bufferWidthWithPadding;
+
             if (isFinite(pos)) {
                 pos = parseFloat(pos);
             } else if (isString(pos)) {
@@ -728,15 +773,62 @@
             this.buffer.style.width = bufferWidthWithPadding + '%';
             this.buffer.style.left = paddingWidth * 0.5 + '%';
             this.element.setAttribute('data-buffer', bufferWidth);
+          
+          } else if (this.orientation == "vertical") {
+            var isPercent = true,
+                bufferHeight,
+                paddingHeight,
+                bufferHeightWithPadding;
+
+            if (isFinite(pos)) {
+                pos = parseFloat(pos);
+            } else if (isString(pos)) {
+                if (pos.indexOf('px') > 0) {
+                    isPercent = false;
+                }
+                pos = parseFloat(pos);
+            } else {
+                console.warn('New position must be XXpx or XX%');
+                return;
+            }
+
+            if (isNaN(pos)) {
+                console.warn('New position is NaN');
+                return;
+            }
+            if (!this.options.bufferClass) {
+                console.warn('You disabled buffer, it\'s className is empty');
+                return;
+            }
+            bufferHeight = isPercent ? pos : (pos / this.rangeHeight * 100);
+            if (bufferHeight < 0) {
+                bufferHeight = 0;
+            }
+            if (bufferHeight > 100) {
+                bufferHeight = 100;
+            }
+            this.options.buffer = bufferHeight;
+
+            paddingHeight = this.options.borderRadius / this.rangeHeight * 100;
+            bufferHeightWithPadding = bufferHeight - paddingHeight;
+            if (bufferHeightWithPadding < 0) {
+                bufferHeightWithPadding = 0;
+            }
+
+            this.buffer.style.height = bufferHeightWithPadding + '%';
+            this.buffer.style.top = paddingHeight * 0.5 + '%';
+            this.element.setAttribute('data-buffer', bufferHeight);
+          }
         };
 
         // Returns element position relative to the parent
         Plugin.prototype._getPositionFromNode = function (node) {
             var i = 0;
             while (node !== null) {
-                i += node.offsetLeft;
-                node = node.offsetParent;
+              this.orientation == "horizontal" ? i += node.offsetLeft : i += node.offsetTop;
+              node = node.offsetParent;
             }
+
             return i;
         };
 
@@ -746,6 +838,7 @@
          * @returns {number}
          */
         Plugin.prototype._getRelativePosition = function (e) {
+          if (this.orientation == "horizontal") {
             // Get the offset left relative to the viewport
             var rangeX = this.range.getBoundingClientRect().left,
                 pageX = 0;
@@ -769,31 +862,58 @@
             }
 
             return pageX - rangeX;
+
+          } else if (this.orientation == "vertical") {
+            // Get the offset top relative to the viewport
+            var rangeY = this.range.getBoundingClientRect().top,
+                pageY = 0;
+
+            if (typeof e.pageY !== 'undefined') {
+                var scrollOffset = pageYOffset;
+                pageY = parseInt(e.touches && e.touches.length) ? e.touches[0].pageY : e.pageY - scrollOffset;
+            }
+            else if (typeof e.originalEvent !== 'undefined') {
+                if (typeof e.originalEvent.clientY !== 'undefined') {
+                    pageY = e.originalEvent.clientY;
+                }
+                else if (e.originalEvent.touches && e.originalEvent.touches[0] && typeof e.originalEvent.touches[0].clientY !== 'undefined') {
+                    pageY = e.originalEvent.touches[0].clientY;
+                }
+            }
+            else if (e.touches && e.touches[0] && typeof e.touches[0].clientY !== 'undefined') {
+                pageY = e.touches[0].clientY;
+            }
+            else if (e.currentPoint && typeof e.currentPoint.y !== 'undefined') {
+                pageY = e.currentPoint.y;
+            }
+
+            return pageY - rangeY;
+          }
         };
 
         Plugin.prototype._getPositionFromValue = function (value) {
-            var percentage, pos;
-            percentage = (value - this.min) / (this.max - this.min);
-            pos = percentage * this.maxHandleX;
+            var percentage = (value - this.min) / (this.max - this.min),
+                pos = percentage * this.maxHandle;
+
             return pos;
         };
 
         Plugin.prototype._getValueFromPosition = function (pos) {
             var percentage, value;
-            percentage = ((pos) / (this.maxHandleX || 1));
+            percentage = ((pos) / (this.maxHandle || 1));
             value = this.step * Math.round(percentage * (this.max - this.min) / this.step) + this.min;
             return Number((value).toFixed(this.toFixed));
         };
 
         Plugin.prototype._setValue = function (value, force) {
-            if (value === this.value && !force) {
-                return;
-            }
+          if (value === this.value && !force) {
+              return;
+          }
 
-            // Set the new value and fire the `input` event
-            this.element.value = value;
-            this.value = value;
-            triggerEvent(this.element, 'input', {origin: this.identifier});
+          // Set the new value and fire the `input` event
+          this.element.value = value;
+          this.value = value;
+          triggerEvent(this.element, 'input', {origin: this.identifier});
         };
 
 

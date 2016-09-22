@@ -1,32 +1,46 @@
 
 @import "../base/config"
-
-body
-  background-color: $color--off-white
-  min-height: 100vh
+@import "../base/mixins"
 
 .photo-header
-  padding-top: 1rem
+  padding-top: 0.5rem
 
-.photo-body
-  margin:
-    top: 1rem
-    bottom: 1rem
+.photo
   display: flex
   height: 100%
   align-items: center
 
-  &--image-container
-    flex-grow: 1
-
   &--image
+    +border-radius
+    margin:
+      bottom: 0.5rem
+      top: 0.5rem
     width: 100%
-    border-radius: 3pt
+    display: block
+
+  &--meta
+    flex-shrink: 0
+    display: flex
+    padding-bottom: 1rem
+
+    @media #{$device--small}
+      flex-direction: column
 
   &--description
-    background-color: $color--white
-    border-radius: 3pt
+    +border-radius
     padding: 1rem
-    width: 300px
-    flex-shrink: 0
-    margin-left: 1rem
+    background-color: $color--white
+    box-shadow: $box-shadow
+    margin-right: 0.5rem
+    flex-grow: 1
+
+    @media #{$device--small}
+      margin:
+        right: 0
+        bottom: 0.5rem
+
+.social
+  +border-radius
+  padding: 1rem
+  background-color: $color--white
+  box-shadow: $box-shadow

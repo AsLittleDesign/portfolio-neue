@@ -1,0 +1,29 @@
+
+.gallery-intro
+  position: relative
+  padding:
+    top: 0.5rem
+    bottom: 1rem
+
+  &--title
+    margin-top: 1rem
+    color: $color--dark-gray
+
+    @media #{$device--small}
+      margin-top: 2rem
+
+  &--body
+    color: $color--dark-gray
+
+  &--top
+    display: flex
+    justify-content: space-between
+    align-items: center
+
+  &--back
+    @media #{$device--small}
+      width: 100%
+
+  &--about
+    @media #{$device--small}
+      display: none

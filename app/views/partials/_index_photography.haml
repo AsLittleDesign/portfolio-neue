@@ -1,4 +1,12 @@
-%section.photography
+%section.container.section.photography
+  .divider
+  .section--title-bar
+    %h1.section--title Photography
+    = link_to photography_path, :class => "button m-blue section--cta m-before" do
+      View Gallery
+
+  -# .camera
+
   .viewfinder
     .viewfinder--top
       .viewfinder--top-icon.icon--viewfinder--fhd-60
@@ -14,11 +22,14 @@
         .icon--viewfinder--chip-2
       .viewfinder--top-icon.icon--viewfinder--l
       .viewfinder--top-icon.icon--viewfinder--n
-    .photography--container
-      = image_tag "parallax/photography/background", class: "photography--image-layer", :"js-parallax" => "background"
-      = image_tag "parallax/photography/midground", class: "photography--image-layer", :"js-parallax" => "midground"
-      = image_tag "parallax/photography/foreground", class: "photography--image-layer m-foreground", :"js-parallax" => "foreground"
-      
+
+    .viewfinder--image-container
+      = image_tag "parallax/photography/background", class: "viewfinder--image-layer", :"js-parallax" => "background"
+      = image_tag "parallax/photography/midground", class: "viewfinder--image-layer", :"js-parallax" => "midground"
+      = image_tag "parallax/photography/foreground", class: "viewfinder--image-layer m-foreground", :"js-parallax" => "foreground"
+
+      .viewfinder--exposure-overlay(js-viewfinder-exposure)
+
       .viewfinder--overlay(js-viewfinder-overlay)
         .viewfinder--overlay-grid.m-vertical
           .viewfinder--overlay-line
@@ -38,8 +49,6 @@
 
         .viewfinder--exposure
           .viewfinder--exposure-icon.icon--viewfinder--exposure
-
-          .viewfinder--select-notch-icon.icon--viewfinder--select-notch
           
           .viewfinder--frames-icon.icon--viewfinder--frames
 
@@ -69,7 +78,8 @@
           .viewfinder--exposure-notch
           .viewfinder--exposure-notch.m-labeled
             .viewfinder--exposure-notch-label -3
-          -# %input(type="range" min="0" max="100" value="100" js-slider="exposure")
+
+          %input(type="range" min="0" max="16" value="0" js-slider="exposure" orient="vertical" class="viewfinder--exposure-input--original")
 
         .viewfinder--right
           .icon--viewfinder--v-film
@@ -88,12 +98,26 @@
             .viewfinder--focus-label.m-small
               %span.m-infinity ∞
               %span.m-subscript m
-          %input(type="range" min="0" max="100" value="80" js-slider="focus" data-orientation="vertical")
+          %input(type="range" min="0" max="100" value="80" js-slider="focus")
 
+        .viewfinder--icon-manual-focus.icon--viewfinder--manual-focus
+
+        
     .viewfinder--bottom
-      test
+      .viewfinder--bottom-icon.m-m.m-large.icon--viewfinder--m
+      .viewfinder--bottom-icon.m-large.icon--viewfinder--brackets
+      .viewfinder--bottom-icon.m-shutter-speed.icon--viewfinder--shutter-speed
+      .viewfinder--bottom-text.m-large.m-blue 1000
+      .viewfinder--bottom-text.m-small.m-blue F
+      .viewfinder--bottom-text.m-large.m-blue 5.6
+      .viewfinder--bottom-icon.m-exposure.icon--viewfinder--exposure
+      .viewfinder--bottom-text.m-plus +
+      .viewfinder--bottom-text.m-large 1.0
+      .viewfinder--bottom-text.m-small ISO
+      .viewfinder--bottom-text.m-large 400
+      .viewfinder--icon-battery.icon--viewfinder--battery
 
-  
-  %h1.photography--title PHOTOGRAPHY
-  = link_to photography_path, :class => "button m-blue photography--cta" do
-    Explore
+    .viewfinder--reflection(js-viewfinder-reflection)
+
+  = link_to photography_path, :class => "button m-blue section--cta m-after" do
+    View Gallery
