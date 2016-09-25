@@ -1,10 +1,6 @@
 
 %section.container.section
-  .divider
-  .section--title-bar
-    %h1.section--title Table.co
-    = link_to table_path, :class => "button m-blue section--cta m-before" do
-      View Gallery
-
-  = link_to table_path, :class => "button m-blue section--cta m-after" do
-    View Gallery
+  .table-image--container
+    = image_tag "table.png", :width => "100%"
+    = image_tag "table-animation.gif", :class => "table-image--animation"
+  = link_to "Table.co", table_path, :class => "button m-black m-wide section--cta"

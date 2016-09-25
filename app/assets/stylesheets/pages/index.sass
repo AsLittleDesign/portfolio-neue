@@ -1,7 +1,6 @@
 
 @import "../base/config"
 @import "../base/mixins"
-@import "../partials/index_photography"
 
 %section-body
   background-color: rgba($color--white, 0.95)
@@ -74,6 +73,8 @@ section
   right: 0
   text-align: center
   font-family: $serif
+  border-bottom: 0
+  font-weight: normal
 
 .social
   position: absolute
@@ -81,26 +82,50 @@ section
   left: 0
   right: 0
   margin: auto
+
+  @media #{$device--small}
+    justify-content: center
   
   &--option
-    color: $color--light-gray
-    border-color: $color--light-gray
+    color: $color--black
+    background-color: $color--white
+    border: 0
 
-.table
-  display: flex
-  flex-direction: column
-  align-items: center
-  justify-content: center
-  color: $color--white
-  background-image:  linear-gradient(135deg, rgba($color--white, 0.85) 15%, transparent), linear-gradient(19deg, #FDFFBF 0%, #a6e2d7 27%, #60BEEC 66%, #8C6DAF 100%)
+    @media #{$device--small}
+      width: calc(50% - 0.75rem)
 
-  &--body
-    @extend %section-body
+      + .social--option
+        margin-left: 0.5rem
 
-.photography
-  // background-image: image-url("photo-blur-background.jpg") !important
-  background-size: cover
-  // background-repeat: repeat
+.table-image
+  &--container
+    position: relative
+    width: 100%
+
+  &--animation
+    position: absolute
+    top: 0
+    bottom: 0
+    left: 0
+    right: 0
+    margin: auto
+
+    @media #{$device--xlarge}
+      height: 160px
+      bottom: 30px
+
+    @media #{$device--large}
+      height: 130px
+      bottom: 20px
+
+    @media #{$device--medium}
+      height: 100px
+      bottom: 20px
+
+    @media #{$device--small}
+      height: 12vw
+      bottom: 10px
+
 
 .section
   position: relative
@@ -117,29 +142,44 @@ section
     image: image-url("glaze.png"), linear-gradient(180deg, $color--off-white, $color--white)
     repeat: repeat
 
+  @media #{$device--small}
+    padding:
+      top: 2rem
+      bottom: 2rem
+
   &--title-bar
     display: flex
     align-items: center
     justify-content: space-between
     width: 100%
+    display: none
       
   &--title
     flex-grow: 1
     color: $color--dark-gray
-    // text-align: center
-    // font-family: $serif !important
 
   &--cta
-    &.m-before
-      display: inherit
+    margin-top: 0.5rem
 
-      @media #{$device--small}
-        display: none
-
-    &.m-after
-      display: none
+    @media #{$device--small}
       width: 100%
-      margin-top: 1rem
+      margin:
+        left: 0.5rem
+        right: 0.5rem
 
-      @media #{$device--small}
-        display: inherit
+.section
+  height: 100vh
+  display: flex
+  align-items: center
+  justify-content: center
+  flex-direction: column
+
+  @media #{$device--small}
+    height: auto
+    
+
+.social--option
+  color: $color--black
+  background-color: $color--white
+
+@import "../partials/index_photography"

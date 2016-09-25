@@ -26,7 +26,6 @@
 
 .menu
   +transition(box-shadow 0.1s ease-in-out, transform 0.20s ease-in-out, opacity 0.35s ease-in-out)
-  +border-radius
   background-color: rgba($color--white, 0.95)
   box-shadow: none
   opacity: 0
@@ -69,7 +68,7 @@
   &--option
     text-decoration: none
     opacity: 0
-    color: $color--dark-gray
+    color: $color--black
     justify-content: left
 
     .m-right &
@@ -78,13 +77,13 @@
     &:active,
     &:visited,
     &:link
-      color: $color--dark-gray
+      color: $color--black
 
     .s-active &
       opacity: 1
 
   &--symbol
-    color: $color--gray
+    color: $color--black
     margin-right: 0.8rem
 
     .m-right &

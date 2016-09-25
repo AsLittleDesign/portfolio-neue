@@ -1,12 +1,4 @@
 %section.container.section.photography
-  .divider
-  .section--title-bar
-    %h1.section--title Photography
-    = link_to photography_path, :class => "button m-blue section--cta m-before" do
-      View Gallery
-
-  -# .camera
-
   .viewfinder
     .viewfinder--top
       .viewfinder--top-icon.icon--viewfinder--fhd-60
@@ -119,5 +111,4 @@
 
     .viewfinder--reflection(js-viewfinder-reflection)
 
-  = link_to photography_path, :class => "button m-blue section--cta m-after" do
-    View Gallery
+  = link_to "Photography", photography_path, :class => "button m-black m-wide section--cta"

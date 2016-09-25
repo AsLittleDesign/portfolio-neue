@@ -2,45 +2,63 @@
 @import "../base/config"
 @import "../base/mixins"
 
-.photo-header
-  padding-top: 0.5rem
-
 .photo
   display: flex
   height: 100%
   align-items: center
 
-  &--image
-    +border-radius
-    margin:
-      bottom: 0.5rem
+  &--top
+    padding:
       top: 0.5rem
+      bottom: 0.5rem
+
+  &--container
+    @media #{$device--small}
+      padding: 0
+
+  &--image
+    margin-bottom: 0.5rem
     width: 100%
     display: block
+
+    @media #{$device--small}
+      margin-bottom: 0
 
   &--meta
     flex-shrink: 0
     display: flex
-    padding-bottom: 1rem
+    padding:
+      top: 1rem
+      bottom: 1rem
+
+    > h3
+      margin-bottom: 0
 
     @media #{$device--small}
       flex-direction: column
 
   &--description
-    +border-radius
-    padding: 1rem
-    background-color: $color--white
-    box-shadow: $box-shadow
     margin-right: 0.5rem
     flex-grow: 1
+    color: $color--black
+
+    > h3
+      border-color: $color--black
+
+    > p
+      color: $color--dark-gray
 
     @media #{$device--small}
       margin:
         right: 0
-        bottom: 0.5rem
+        bottom: 2px
 
-.social
-  +border-radius
-  padding: 1rem
-  background-color: $color--white
-  box-shadow: $box-shadow
+.social > .social--option
+  background-color: $color--black
+  color: $color--white
+
+.social--option.s-active
+  background-color: $color--black
+
+  @media #{$device--small}
+    width: 100%

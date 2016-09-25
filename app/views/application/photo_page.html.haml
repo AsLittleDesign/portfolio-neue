@@ -2,8 +2,8 @@
 - content_for :head do
   = stylesheet_link_tag "pages/photo_page", media: "all"
 
-.container.photo-header
-  = link_to photography_path, :class => "button m-blue" do
+.container.photo--top
+  = link_to photography_path, :class => "button m-black photo--back-navigation" do
     %span.icon--arrow--left
     Photography
 
@@ -16,15 +16,14 @@
       -# position: center
       -# repeat: no-repeat
 
-.container
-  = image_tag @photo["url"], :class => "photo--image"
+.container.photo--container= image_tag @photo["url"], :class => "photo--image"
 
-  .photo--meta
-    .photo--description
-      %h4= @photo["title"]
-      %p= @photo["description"]
+.container.photo--meta
+  .photo--description
+    %h3= @photo["title"]
+    %p= @photo["description"]
 
-    .social
-      .social--option(js-pop--toggle="share")
-        .icon--share.social--option-content.m-icon
-        .social--option-content Share
+  .social
+    .social--option(js-pop--toggle="share")
+      .icon--share.social--option-content.m-icon
+      .social--option-content Share

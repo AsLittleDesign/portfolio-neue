@@ -80,6 +80,10 @@ PositionImages = {
 
   // Spacing == 1rem
   getSpacing: function() {
+    if (isMobile() || (this.windowInfo && this.windowInfo.width < 768) || window.innerWidth < 768) {
+      return 0;
+    }
+    
     return parseFloat(getComputedStyle($("body")[0]).fontSize) / 2;
   },
 
@@ -616,7 +620,7 @@ PositionImages = {
       slotCount = 6;
     }
 
-    el.style.width = this.windowInfo.container / 6 * slotCount + "px";
+    el.style.maxWidth = this.windowInfo.container / 6 * slotCount + "px";
 
     return el;
   },
@@ -631,7 +635,7 @@ PositionImages = {
     el.setAttribute("href", "/photography/" + img.identifier);
     el = this.setImagePosition(img, el, index);
 
-    hoverEl.setAttribute("class", "photo--hover icon--arrow-circle--right")
+    hoverEl.setAttribute("class", "photo--hover")
 
     var title = this.setTitlePosition(document.createElement("div"), index),
         text = document.createTextNode(img.title);

@@ -14,6 +14,8 @@ Rails.application.routes.draw do
   end
 
   get 'table' => 'application#table'
+  get 'illustration' => 'application#illustration'
+  get 'osx' => 'application#osx'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

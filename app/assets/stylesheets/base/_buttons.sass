@@ -4,23 +4,20 @@ $ink--size: 500px
 .button
   $button--font-size: 1rem
   +transition(all 0.3s ease-in-out)
-  +border-radius
   font:
     family: $sans-serif--title
-    weight: bold
     size: $button--font-size
   text:
     transform: uppercase
     decoration: none
-    shadow: 0 1px 1px rgba(darken($color--blue, 10%), 0.5)
-  letter-spacing: 0.05em
+  letter-spacing: 0.2em
   line-height: $button--font-size
   overflow: hidden
   position: relative
   display: flex
   align-items: center
   justify-content: center
-  height: 2rem
+  height: 2.5rem
   padding:
     left: $button--font-size * 2
     right: $button--font-size *  2
@@ -35,6 +32,19 @@ $ink--size: 500px
     padding:
       left: $button--font-size * 2
       right: $button--font-size * 2
+
+  &.m-black
+    color: $color--white
+    background-color: $color--black
+
+    &:visited, &:active
+      color: $color--white
+
+    .button--ink
+      animation:
+        name: ink-drop--black
+        duration: 0.75s
+      background-color: $color--white
 
   &.m-blue
     color: $color--white
@@ -57,8 +67,8 @@ $ink--size: 500px
       background-color: adjust-hue($color--blue, -15deg)
 
   &.m-transparent
-    color: $color--blue
-    border: 1px solid rgba($color--blue, 0.3)
+    color: $color--black
+    border: 3px solid $color--black
     background-color: transparent
     text-shadow: none
     box-sizing: border-box
@@ -67,7 +77,7 @@ $ink--size: 500px
       color: $color--blue
 
     &:hover
-      background-color: rgba($color--gray, 0.05)
+      background-color: rgba($color--black, 0.1)
 
     &:active
       background-color: rgba($color--gray, 0.15)
@@ -78,6 +88,9 @@ $ink--size: 500px
         duration: 0.75s
       background-color: adjust-hue($color--blue, -15deg)
 
+  &.m-wide
+    width: 100%
+
   &--ink-container
     position: absolute
     display: flex
@@ -86,6 +99,7 @@ $ink--size: 500px
     width: $ink--size
     height: $ink--size
     pointer-events: none
+    z-index: 1
 
   &--ink
     border-radius: 100%
@@ -108,3 +122,15 @@ $ink--size: 500px
     width: $ink--size
     height: $ink--size
     opacity: 0
+
++ink-animation(black)
+  0%
+    width: 1px
+    height: 1px
+    opacity: 1
+
+  100%
+    width: $ink--size
+    height: $ink--size
+    opacity: 0
+
