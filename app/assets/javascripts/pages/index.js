@@ -17,7 +17,6 @@ document.addEventListener('DOMContentLoaded', function(){
     rangeClass: "rangeSlider viewfinder--exposure-input",
     onSlide: function (position, value) {
       $("[js-viewfinder-exposure]")[0].style.opacity = value;
-      $("[js-viewfinder-reflection]")[0].style.opacity = value / 20 + 0.1;
     }
   });
 

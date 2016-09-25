@@ -8,37 +8,19 @@
     background-color: $color--white
 
   &--option
-    @extend %no-select
+    @extend %no-select, .button
     width: 200px
-    height: 2.5rem
-    display: flex
-    align-items: center
-    justify-content: center
-    flex-shrink: 0
-    line-height: 1rem
-    cursor: pointer
-    font:
-      family: $sans-serif--title
-      size: 0.9rem
-    text:
-      transform: uppercase
-      decoration: none
-    letter-spacing: 0.2em
-    line-height: 1rem
-
-    @media #{$device--small}
-      height: 3rem
 
     &:active
       background-color: darken($color--white, 2%)
     
     + .social--option
-      margin-left: 0.5rem
+      margin-left: $horizontal-spacing--small
 
   &--option-content
     pointer-events: none
     display: inline-block
-    height: 0.9rem
+    height: $font-size--small
 
     &.m-icon
-      margin-right: 0.3rem
+      margin-right: $horizontal-spacing--small

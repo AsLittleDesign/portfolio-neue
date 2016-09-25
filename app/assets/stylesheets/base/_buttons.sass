@@ -2,36 +2,36 @@
 $ink--size: 500px
 
 .button
-  $button--font-size: 1rem
   +transition(all 0.3s ease-in-out)
   font:
     family: $sans-serif--title
-    size: $button--font-size
+    size: $font-size--normal
   text:
     transform: uppercase
     decoration: none
   letter-spacing: 0.2em
-  line-height: $button--font-size
+  line-height: 1em
   overflow: hidden
   position: relative
   display: flex
   align-items: center
   justify-content: center
-  height: 2.5rem
+  flex-shrink: 0
+  height: $button-height
   padding:
-    left: $button--font-size * 2
-    right: $button--font-size *  2
+    left: $font-size--normal * 2
+    right: $font-size--normal * 2
   background-color: rgba($color--white, 0.3)
   cursor: pointer
 
   @media #{$device--small}
     $button--font-size: 1rem
-    height: 3rem
-    font-size: $button--font-size
-    line-height: $button--font-size
+    height: $button-height--mobile
+    font-size: $font-size--normal
+    line-height: 1em
     padding:
-      left: $button--font-size * 2
-      right: $button--font-size * 2
+      left: $font-size--small * 2
+      right: $font-size--small * 2
 
   &.m-black
     color: $color--white

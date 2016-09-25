@@ -1,15 +1,7 @@
 
 @import "../base/config"
 @import "../base/mixins"
-
-%section-body
-  background-color: rgba($color--white, 0.95)
-  padding: 1rem 2rem
-  position: relative
-  max-width: 60vw
-  text-align: justify
-  color: $color--black
-  border-radius: 3pt
+@import "../base/range-slider"
 
 body
   background-color: $color--black
@@ -26,13 +18,12 @@ section
   flex-direction: column
   background:
     color: $color--black
-    // image: image-url("lines-background.svg")
     size: fill
     position: center
     repeat: no-repeat
   padding:
-    left: 1rem
-    right: 1rem
+    left: $horizontal-spacing--normal
+    right: $horizontal-spacing--normal
 
   @media #{$device--iphone}
     height: calc(100vh - 60px)
@@ -48,7 +39,7 @@ section
     transform: uppercase
     align: center
     shadow: 1px 1px 2px rgba(0,0,0,0.2)
-  letter-spacing: 0.35em
+  letter-spacing: 0.3em
 
   &.m-red,
   &.m-blue
@@ -68,17 +59,23 @@ section
 .title
   color: $color--off-white
   position: absolute
-  bottom: 5rem
+  bottom: $vertical-spacing--large * 2 + $button-height / 2
   left: 0
   right: 0
+  margin-bottom: 0
   text-align: center
-  font-family: $serif
+  line-height: $font-size--normal
+  font:
+    family: $serif
+    weight: normal
   border-bottom: 0
-  font-weight: normal
+
+  @media #{$device--small}
+    bottom: $vertical-spacing--large * 2 + $button-height--mobile / 2
 
 .social
   position: absolute
-  bottom: 2rem
+  bottom: $vertical-spacing--large
   left: 0
   right: 0
   margin: auto
@@ -95,7 +92,7 @@ section
       width: calc(50% - 0.75rem)
 
       + .social--option
-        margin-left: 0.5rem
+        margin-left: $horizontal-spacing--small
 
 .table-image
   &--container
@@ -134,18 +131,19 @@ section
   justify-content: center
   align-items: center
   padding:
-    top: 5rem
-    bottom: 5rem
+    top: $vertical-spacing--large * 3
+    bottom: $vertical-spacing--large * 3
   background:
-    color: $color--off-white
+    color: $color--white
     image: image-url("glaze.png")
-    image: image-url("glaze.png"), linear-gradient(180deg, $color--off-white, $color--white)
     repeat: repeat
 
   @media #{$device--small}
     padding:
-      top: 2rem
-      bottom: 2rem
+      top: $vertical-spacing--large
+      bottom: $vertical-spacing--large
+      left: 0
+      right: 0
 
   &--title-bar
     display: flex
@@ -159,24 +157,14 @@ section
     color: $color--dark-gray
 
   &--cta
-    margin-top: 0.5rem
+    margin-top: $vertical-spacing--small
+    width: 100%
 
     @media #{$device--small}
-      width: 100%
+      width: calc(100% - 1rem)
       margin:
-        left: 0.5rem
-        right: 0.5rem
-
-.section
-  height: 100vh
-  display: flex
-  align-items: center
-  justify-content: center
-  flex-direction: column
-
-  @media #{$device--small}
-    height: auto
-    
+        left: $horizontal-spacing--small
+        right: $horizontal-spacing--small
 
 .social--option
   color: $color--black

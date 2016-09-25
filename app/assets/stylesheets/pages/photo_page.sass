@@ -9,15 +9,15 @@
 
   &--top
     padding:
-      top: 0.5rem
-      bottom: 0.5rem
+      top: $vertical-spacing--small
+      bottom: $vertical-spacing--small
 
   &--container
     @media #{$device--small}
       padding: 0
 
   &--image
-    margin-bottom: 0.5rem
+    margin-bottom: $vertical-spacing--small
     width: 100%
     display: block
 
@@ -28,8 +28,8 @@
     flex-shrink: 0
     display: flex
     padding:
-      top: 1rem
-      bottom: 1rem
+      top: $vertical-spacing--normal
+      bottom: $vertical-spacing--normal
 
     > h3
       margin-bottom: 0
@@ -38,7 +38,7 @@
       flex-direction: column
 
   &--description
-    margin-right: 0.5rem
+    margin-right: $horizontal-spacing--small
     flex-grow: 1
     color: $color--black
 
@@ -51,7 +51,7 @@
     @media #{$device--small}
       margin:
         right: 0
-        bottom: 2px
+        bottom: $vertical-spacing--xsmall
 
 .social > .social--option
   background-color: $color--black

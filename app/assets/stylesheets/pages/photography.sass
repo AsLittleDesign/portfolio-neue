@@ -2,15 +2,13 @@
 @import "../base/config"
 @import "../base/mixins"
 
-$image-spacing: 1rem
-
 .invisible
   display: none
   visibility: hidden
   opacity: 0
 
 .photos
-  padding-bottom: 2rem
+  padding-bottom: $vertical-spacing--medium
 
   @media #{$device--small}
     padding:
@@ -33,20 +31,20 @@ $image-spacing: 1rem
   @media #{$device--small}
     position: relative
     width: 100%
-    margin-bottom: 2px
+    margin-bottom: $vertical-spacing--xsmall
 
 .title
   +transition(all 0.3s ease-in-out)
   pointer-events: none
   font-family: $serif
-  font-size: 0.9rem
+  font-size: $font-size--small
   letter-spacing: 0.25em
   text-transform: uppercase
   color: $color--white
   position: absolute
-  bottom: 0.5rem
-  padding: 0.5rem 0.5rem
-  min-height: 2rem
+  bottom: $vertical-spacing--small
+  padding: $vertical-spacing--small $horizontal-spacing--small
+  min-height: $vertical-spacing--medium + $font-size--small
   display: flex
   align-items: center
   opacity: 0
@@ -57,7 +55,7 @@ $image-spacing: 1rem
     bottom: 0
     left: 0
     right: 0
-    padding: 0.25rem 0.5rem
+    padding: $vertical-spacing--small $horizontal-spacing--small
     min-height: 1.5rem
 
   .photo:hover & 
@@ -65,16 +63,16 @@ $image-spacing: 1rem
     transform: translateX(0)
 
   &.m-left
-    left: -0.5rem
+    left: -$horizontal-spacing--small
     justify-content: flex-end
     text-align: right
-    transform: translateX(-0.25rem)
-    margin-right: 0.5rem
+    transform: translateX(-$horizontal-spacing--small)
+    margin-right: $horizontal-spacing--small
 
   &.m-right
-    right: -0.5rem
-    transform: translateX(0.25rem)
-    margin-left: 0.5rem
+    right: -$horizontal-spacing--small
+    transform: translateX($horizontal-spacing--small)
+    margin-left: $horizontal-spacing--small
 
   &.m-bottom
     opacity: 1
