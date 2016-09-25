@@ -187,6 +187,7 @@ PLATFORMS
 
 DEPENDENCIES
   better_errors
+  binding_of_caller
   byebug
   coffee-script
   fastclick-rails

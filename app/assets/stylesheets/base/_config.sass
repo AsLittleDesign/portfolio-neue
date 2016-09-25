@@ -10,16 +10,17 @@ $color--red:        #EF4C43
 $color--blue:       #35B6EF
 $color--yellow:     #EFC050
 
-$device--small:    "screen and (max-width: 768px)"
-$device--medium:   "screen and (min-width: 769px) and (max-width: 992px)"
-$device--large:    "screen and (min-width: 992px) and (max-width: 1170px)"
-$device--xlarge:   "screen and (min-width: 1171px)"
-$device--iphone:   "only screen and (max-device-width: 480px)"
-$device--ipad:     "only screen and (min-device-width: 768px) and (max-device-width: 1024px)"
-
 $container-width--medium: 768px
 $container-width--large:  992px
 $container-width--xlarge: 1170px
+
+$device--small:    "screen and (max-width: #{$container-width--medium})"
+$device--medium:   "screen and (min-width: #{$container-width--medium + 1px}) and (max-width: #{$container-width--large})"
+$device--large:    "screen and (min-width: #{$container-width--large + 1px}) and (max-width: #{$container-width--xlarge})"
+$device--xlarge:   "screen and (min-width: #{$container-width--xlarge + 1px})"
+
+$device--iphone:   "only screen and (max-device-width: 480px)"
+$device--ipad:     "only screen and (min-device-width: 768px) and (max-device-width: 1024px)"
 
 $sans-serif:        Helvetica, Arial, sans-serif
 $sans-serif--title: "Museo Sans", Helvetica, Arial, sans-serif
@@ -39,7 +40,6 @@ $vertical-spacing--normal: 16px
 $vertical-spacing--small:  8px
 $vertical-spacing--xsmall: 2px
 
-$horizontal-spacing--large:  40px
 $horizontal-spacing--medium: 24px
 $horizontal-spacing--normal: 16px
 $horizontal-spacing--small:  8px
