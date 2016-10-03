@@ -1,20 +1,7 @@
 
-// MAIN TODOS
-// Simplify algorithm
-// - Most methods should only need one parameter.
-// - Eliminate redundancy
-// - Ensure a common language when referring to types of data. E.g. Slots == a value in a position array.
-// Don't display vertical images at a large size.
-
-var documentInitialized = false;
-document.addEventListener('DOMContentLoaded', function(){
-  // quit if this function has already been called
-  if (documentInitialized) return;
-  documentInitialized = true;
-
+ready(function () {
   PositionImages.init();
 });
-
 
 PositionImages = {
   // An array of basic metadata for each image.

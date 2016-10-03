@@ -1,0 +1,44 @@
+
+@import "../base/config"
+@import "../base/mixins"
+
+.jobs
+  &--progress
+    flex-grow: 1
+    margin-right: $horizontal-spacing--xsmall
+    background:
+      size: cover
+      position: center
+      repeat: no-repeat
+
+    &.m-first
+      background-image: image-url("illustration/jobs1.jpg")
+      opacity: 0.3
+
+    &.m-second
+      background-image: image-url("illustration/jobs2.jpg")
+      opacity: 0.5
+
+    &.m-last
+      background-image: image-url("illustration/jobs3.jpg")
+      opacity: 0.7
+
+  &--final
+    width: 50%
+  
+
+.gallery-section
+  &.m-faraway
+    +gallery-section--sizing(600 / 1000)
+
+  &.m-steve_jobs
+    +gallery-section--sizing(1000 / 1333)
+
+  &.m-yoda
+    +gallery-section--sizing(1375 / 1000)
+
+  &.m-war
+    +gallery-section--sizing(401 / 1000)
+
+  &.m-missile
+    +gallery-section--sizing(596 / 1000)

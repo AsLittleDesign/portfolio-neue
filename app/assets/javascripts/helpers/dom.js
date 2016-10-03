@@ -225,14 +225,29 @@ function isMobile () {
   return false;
 }
 
-var isAndroid = function() {
+function isAndroid () {
   return navigator.userAgent.match('Android');
 }
 
-var isIOS = function() {
+function isIOS () {
   if (/iPad|iPhone|iPod/i.test(navigator.userAgent)) {
     return true;
   }
   return false;
+}
+
+function parseHTML (HTMLString) {
+  var frame = document.createElement('iframe');
+
+  frame.style.display = 'none';
+  document.body.appendChild(frame);             
+  frame.contentDocument.open();
+  frame.contentDocument.write(HTMLString);
+  frame.contentDocument.close();
+  
+  var el = frame.contentDocument.body.firstChild;
+  document.body.removeChild(frame);
+
+  return el;
 }
 

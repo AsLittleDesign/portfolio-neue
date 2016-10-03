@@ -15,7 +15,28 @@ Rails.application.routes.draw do
 
   get 'table' => 'application#table'
   get 'illustration' => 'application#illustration'
+  scope "/illustration" do
+    photos = YAML.load_file("#{Rails.root}/config/illustration.yml")
+    photos.each do |name, data|
+      get name => 'application#photo_page'
+    end
+  end
+
   get 'osx' => 'application#osx'
+  scope "/osx" do
+    photos = YAML.load_file("#{Rails.root}/config/osx.yml")
+    photos.each do |name, data|
+      get name => 'application#photo_page'
+    end
+  end
+
+  get 'graphic_design' => 'application#graphic_design'
+  scope "/graphic_design" do
+    photos = YAML.load_file("#{Rails.root}/config/graphic_design.yml")
+    photos.each do |name, data|
+      get name => 'application#photo_page'
+    end
+  end
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

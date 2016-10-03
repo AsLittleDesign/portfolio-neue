@@ -1,0 +1,32 @@
+
+.container.gallery-intro
+  .gallery-intro--top
+    = link_to root_path, :class => "button m-black gallery-intro--back" do
+      %span.icon--arrow--left
+      Home
+
+  %h1.gallery-intro--title= locals[:title]
+  %p.gallery-intro--body= locals[:description]
+
+- collection.each_with_index do |(key, value), index|
+  .container.gallery-section(class="m-#{key}")
+    - if key == "steve_jobs"
+      .gallery-section--image
+        .jobs--progress.m-first
+        .jobs--progress.m-second
+        .jobs--progress.m-last
+        = image_tag value["url"], :class => "jobs--final"
+
+    - else
+      - image_class =
+        - if value["transparent"] then "gallery-section--image m-transparent" else "gallery-section--image"
+
+      = image_tag value["url"], :class => image_class
+
+    .gallery-section--description
+      %h2.gallery-section--title
+        = value["title"]
+      %p.gallery-section--body
+        = truncate value["description"], :length => 100, :separator => " "
+
+      = link_to value["cta"] || value["title"], (eval "#{key}_path"), :class => "button gallery-section--cta"

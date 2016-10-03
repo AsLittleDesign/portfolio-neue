@@ -1,9 +1,7 @@
 
-.container.page-intro
-  .page-intro--top
-    = link_to root_path, :class => "button m-black page-intro--back" do
-      %span.icon--arrow--left
-      Home
+- content_for :head do
+  = stylesheet_link_tag "pages/illustration", media: "all"
 
-  %h1.page-intro--title Illustration
-  %p.page-intro--body My original major in college, Illustration remains a great way to both hone my creative skills, as well as to relax. 
+- description = "My original major in college, Illustration remains a great way to both hone my creative skills, as well as to relax."
+
+= render "partials/gallery", :collection => @illustrations, :locals => { :title => "Illustration", :description => description }

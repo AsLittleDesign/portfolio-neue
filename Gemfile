@@ -7,8 +7,10 @@ gem 'rails', '4.2.3'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
 
-# Use SCSS for stylesheets
+# Stylesheets
 gem 'sass-rails'
+
+gem "autoprefixer-rails"
 
 # Miro for extracting dominant colors in an image.
 gem 'miro'
@@ -16,12 +18,11 @@ gem 'miro'
 # Use HAML for precompiled HTML
 gem 'haml-rails'
 
-# Use Uglifier as compressor for JavaScript assets
+# JavaScript
 gem 'uglifier', '>= 1.3.0'
 
 gem 'coffee-script'
 
-# Remove the 300ms click delay on mobile.
 gem 'fastclick-rails'
 
 # Foreman for initializing app
@@ -34,7 +35,6 @@ gem 'unicorn'
 gem 'fontcustom'
 
 group :development, :test do
-  gem 'better_errors'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
 

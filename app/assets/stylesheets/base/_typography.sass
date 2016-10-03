@@ -9,6 +9,7 @@ html
 
 h1
   font-size: $font-size--large
+  font-weight: normal
   position: relative
   line-height: 1.33em
   text-align: left
@@ -23,7 +24,16 @@ h1
     font-size: 2.2rem
 
 h2
-  font-size: $font-size--medium
+  font:
+    size: $font-size--medium
+    weight: normal
+  margin-bottom: $vertical-spacing--normal
+
+  .wf-active &
+    font-family: $sans-serif--title
+
+  + p
+    margin-top: 0
 
 h3
   border-bottom: 1px solid $color--white
@@ -33,9 +43,15 @@ h3
     weight: bold
     size: $font-size--normal
   text-transform: uppercase
+  margin:
+    top: $vertical-spacing--normal
+    bottom: $vertical-spacing--normal
+
+  + p
+    margin-top: 0
 
 h4
-  font-size: $vertical-spacing--normal
+  font-size: $font-size--small
   letter-spacing: 0.5em
   right: -0.25em
   line-height: 1.33em
@@ -47,8 +63,8 @@ h4
     bottom: $vertical-spacing--normal
 
 p
-  letter-spacing: 0.03em
-  line-height: 1.5em
+  letter-spacing: 0.02em
+  line-height: 1.4em
   font:
     family: $serif
     weight: normal

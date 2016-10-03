@@ -1,0 +1,38 @@
+
+osx_intro:
+  title: Introducing OS X 10.10 'Everest'.
+  cta: "Explore Everest"
+  description: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum voluptatum voluptates laboriosam quibusdam impedit beatae suscipit aperiam vero nostrum sunt sequi libero natus, deserunt mollitia, officia repellendus pariatur, nulla a.
+  url: https://d2vez5w0ugqe83.cloudfront.net/osx/desktop.jpg
+  tags:
+    - OS X
+    - Desktop
+
+control_center:
+  title: Control Center, now on your Mac.
+  cta: Control Center
+  description: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum voluptatum voluptates laboriosam quibusdam impedit beatae suscipit aperiam vero nostrum sunt sequi libero natus, deserunt mollitia, officia repellendus pariatur, nulla a.
+  transparent: true
+  url: https://d2vez5w0ugqe83.cloudfront.net/osx/control-center--mockup.png
+  tags:
+    - Branding
+    - Logo
+
+itunes:
+  title: iTunes gets a brand new look.
+  cta: iTunes
+  description: Adipisicing elit. Earum voluptatum voluptates laboriosam quibusdam impedit beatae suscipit aperiam vero nostrum sunt sequi libero natus, deserunt mollitia, officia repellendus pariatur, nulla a.
+  transparent: true
+  url: https://d2vez5w0ugqe83.cloudfront.net/osx/itunes--mockup.png
+  tags:
+    - Practice
+    - Album Cover
+
+notification_center:
+  title: Notification Center
+  description: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum voluptatum voluptates laboriosam quibusdam impedit beatae suscipit aperiam vero nostrum sunt sequi libero natus, deserunt mollitia, officia repellendus pariatur, nulla a.
+  transparent: true
+  url: https://d2vez5w0ugqe83.cloudfront.net/osx/notification-center--mockup.png
+  tags:
+    - Branding
+    - Logo

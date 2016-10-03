@@ -1,6 +1,6 @@
 
 $color--black:      #000000
-$color--dark-gray:  #333333
+$color--dark-gray:  #222222
 $color--gray:       #ABB1B7
 $color--light-gray: #eaeaea
 $color--off-white:  #F5F5F5
@@ -10,17 +10,6 @@ $color--red:        #EF4C43
 $color--blue:       #35B6EF
 $color--yellow:     #EFC050
 
-$container-width--medium: 768px
-$container-width--large:  992px
-$container-width--xlarge: 1170px
-
-$device--small:    "screen and (max-width: #{$container-width--medium})"
-$device--medium:   "screen and (min-width: #{$container-width--medium + 1px}) and (max-width: #{$container-width--large})"
-$device--large:    "screen and (min-width: #{$container-width--large + 1px}) and (max-width: #{$container-width--xlarge})"
-$device--xlarge:   "screen and (min-width: #{$container-width--xlarge + 1px})"
-
-$device--iphone:   "only screen and (max-device-width: 480px)"
-$device--ipad:     "only screen and (min-device-width: 768px) and (max-device-width: 1024px)"
 
 $sans-serif:        Helvetica, Arial, sans-serif
 $sans-serif--title: "Museo Sans", Helvetica, Arial, sans-serif
@@ -40,9 +29,23 @@ $vertical-spacing--normal: 16px
 $vertical-spacing--small:  8px
 $vertical-spacing--xsmall: 2px
 
-$horizontal-spacing--medium: 24px
-$horizontal-spacing--normal: 16px
-$horizontal-spacing--small:  8px
+$horizontal-spacing--medium:  30px
+$horizontal-spacing--normal:  20px
+$horizontal-spacing--small:   10px
+$horizontal-spacing--xsmall:  2px
 
 $button-height:         $font-size--normal + $vertical-spacing--medium
 $button-height--mobile: $font-size--normal + $vertical-spacing--medium + $vertical-spacing--small
+
+$container-width--small: calc(100vw - #{$horizontal-spacing--small} * 2)
+$container-width--medium: 768px
+$container-width--large:  992px
+$container-width--xlarge: 1170px
+
+$device--small:    "screen and (max-width: #{$container-width--medium})"
+$device--medium:   "screen and (min-width: #{$container-width--medium + 1px}) and (max-width: #{$container-width--large})"
+$device--large:    "screen and (min-width: #{$container-width--large + 1px}) and (max-width: #{$container-width--xlarge})"
+$device--xlarge:   "screen and (min-width: #{$container-width--xlarge + 1px})"
+
+$device--iphone:   "only screen and (max-device-width: 480px)"
+$device--ipad:     "only screen and (min-device-width: 768px) and (max-device-width: 1024px)"

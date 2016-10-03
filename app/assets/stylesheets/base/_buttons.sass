@@ -2,10 +2,11 @@
 $ink--size: 500px
 
 .button
-  +transition(all 0.3s ease-in-out)
+  transition: all 0.3s ease-in-out
   font:
-    family: $sans-serif--title
+    family: $sans-serif
     size: $font-size--normal
+    weight: normal
   text:
     transform: uppercase
     decoration: none
@@ -21,8 +22,10 @@ $ink--size: 500px
   padding:
     left: $font-size--normal * 2
     right: $font-size--normal * 2
-  background-color: rgba($color--white, 0.3)
   cursor: pointer
+
+  .wf-active &
+    font-family: $sans-serif--title
 
   @media #{$device--small}
     $button--font-size: 1rem
@@ -37,21 +40,37 @@ $ink--size: 500px
     color: $color--white
     background-color: $color--black
 
-    &:visited, &:active
+    &:visited
+      color: lighten($color--gray, 10%)
+      background-color: lighten($color--black, 5%)
+
+    &:active
       color: $color--white
 
     .button--ink
-      animation:
-        name: ink-drop--black
-        duration: 0.75s
       background-color: $color--white
+
+  &.m-white
+    color: $color--black
+    background-color: $color--white
+
+    &:visited
+      color: $color--dark-gray
+      background-color: darken($color--white, 5%)
+
+    &:active
+      color: $color--black
+
+    .button--ink
+      background-color: $color--black
+
 
   &.m-blue
     color: $color--white
     background-color: $color--blue
-    +box-shadow(0 0 10px rgba($color--blue, 0.3))
+    box-shadow: 0 0 10px rgba($color--blue, 0.3)
 
-    &:visited, &:active
+    &:active
       color: $color--white
 
     &:hover
@@ -61,9 +80,6 @@ $ink--size: 500px
       background-color: darken($color--blue, 8%)
 
     .button--ink
-      animation:
-        name: ink-drop--blue
-        duration: 0.75s
       background-color: adjust-hue($color--blue, -15deg)
 
   &.m-transparent
@@ -73,7 +89,7 @@ $ink--size: 500px
     text-shadow: none
     box-sizing: border-box
 
-    &:visited, &:active
+    &:active
       color: $color--blue
 
     &:hover
@@ -83,9 +99,6 @@ $ink--size: 500px
       background-color: rgba($color--gray, 0.15)
 
     .button--ink
-      animation:
-        name: ink-drop--blue
-        duration: 0.75s
       background-color: adjust-hue($color--blue, -15deg)
 
   &.m-wide
@@ -102,17 +115,12 @@ $ink--size: 500px
     z-index: 1
 
   &--ink
+    animation:
+      name: ink-drop
+      duration: 0.75s
     border-radius: 100%
 
-
-// Ink effect
-=ink-animation($suffix)
-  $animation-name: ink-drop--#{$suffix}
-  +keyframes($animation-name)
-    @content
-
-// Blue
-+ink-animation(blue)
+@keyframes ink-drop
   0%
     width: 1px
     height: 1px
@@ -122,15 +130,3 @@ $ink--size: 500px
     width: $ink--size
     height: $ink--size
     opacity: 0
-
-+ink-animation(black)
-  0%
-    width: 1px
-    height: 1px
-    opacity: 1
-
-  100%
-    width: $ink--size
-    height: $ink--size
-    opacity: 0
-

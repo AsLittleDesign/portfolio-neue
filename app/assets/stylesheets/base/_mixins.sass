@@ -1,40 +1,38 @@
 
-=transition($args...)
-  -webkit-transition: $args
-  -moz-transition: $args
-  -ms-transition: $args
-  -o-transition: $args
-  transition: $args
-
 %no-select
   -webkit-touch-callout: none
-  -webkit-user-select: none
-  -khtml-user-select: none
-  -moz-user-select: none
-  -ms-user-select: none
   user-select: none
 
-=box-shadow($args...)
-  -moz-box-shadow: $args
-  -webkit-box-shadow: $args
-  box-shadow: $args
+=gallery-section--sizing($aspect, $width-modifier: 0.66)
+  .gallery-section--image
+    @media #{$device--small}
+      width: 100vw
+      height: calc(#{100vw * $aspect} - #{$vertical-spacing--medium})
 
-=border-radius()
-  -moz-border-radius: 4pt
-  -webkit-border-radius: 4pt
-  border-radius: 4pt
+    @media #{$device--medium}
+      width: $container-width--medium * $width-modifier - $horizontal-spacing--small * 2
+      height: $container-width--medium * $width-modifier * $aspect - $vertical-spacing--medium * 2
 
-  @media #{$device--small}
-    -moz-border-radius: 8pt
-    -webkit-border-radius: 8pt
-    border-radius: 8pt
+    @media #{$device--large}
+      width: $container-width--large * $width-modifier - $horizontal-spacing--small * 2
+      height: $container-width--large * $width-modifier * $aspect - $vertical-spacing--medium * 2
 
-=keyframes($name)
-  @-webkit-keyframes #{$name}
-    @content
-  @-moz-keyframes #{$name}
-    @content
-  @-ms-keyframes #{$name}
-    @content
-  @keyframes #{$name}
-    @content
+    @media #{$device--xlarge}
+      width: $container-width--xlarge * $width-modifier - $horizontal-spacing--small * 2
+      height: $container-width--xlarge * $width-modifier * $aspect - $vertical-spacing--medium * 2
+
+  .gallery-section--description
+    @media #{$device--small}
+      width: $container-width--small
+
+    @media #{$device--medium}
+      margin-left: -$horizontal-spacing--normal
+      width: $container-width--medium * (1 - $width-modifier) + $horizontal-spacing--normal
+
+    @media #{$device--large}
+      margin-left: -$horizontal-spacing--normal
+      width: $container-width--large * (1 - $width-modifier) + $horizontal-spacing--normal
+
+    @media #{$device--xlarge}
+      margin-left: -$horizontal-spacing--normal
+      width: $container-width--xlarge * (1 - $width-modifier) + $horizontal-spacing--normal

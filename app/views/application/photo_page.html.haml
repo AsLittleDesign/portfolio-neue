@@ -3,24 +3,19 @@
   = stylesheet_link_tag "pages/photo_page", media: "all"
 
 .container.photo--top
-  = link_to photography_path, :class => "button m-black photo--back-navigation" do
+  = link_to (eval "#{@type}_path"), :class => "button m-black photo--back-navigation" do
     %span.icon--arrow--left
-    Photography
+    = @type.titleize
 
--# :sass
-  -# body
-    -# background:
-      -# color: #{@colors.to_hex.first}
-      -# image: linear-gradient(45deg, #{@colors.to_hex.first}, #{@colors.to_hex.last})
-      -# size: cover
-      -# position: center
-      -# repeat: no-repeat
+.container.photo--container
+  - image_class =
+    - if @photo["transparent"] then "photo--image m-transparent" else "photo--image"
 
-.container.photo--container= image_tag @photo["url"], :class => "photo--image"
+  = image_tag @photo["url"], :class => image_class
 
 .container.photo--meta
   .photo--description
-    %h3= @photo["title"]
+    %h2= @photo["title"]
     %p= @photo["description"]
 
   .social

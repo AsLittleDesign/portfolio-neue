@@ -1,0 +1,12 @@
+
+iOS: ">= 8"
+Android: ">= 4.1"
+Samsung: ">= 4"
+Explorer: ">= 10"
+ExplorerMobile: ">= 11"
+Firefox: ">= 47"
+Edge: "last 3 versions"
+Chrome: ">= 45"
+ChromeAndroid: "last 2 versions"
+Opera: ">= 39"
+OperaMini: "last 2 versions"

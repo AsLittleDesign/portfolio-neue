@@ -1,0 +1,35 @@
+
+moto_360:
+  title: Moto 360 Design Face-Off
+  cta: Watch This
+  description: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum voluptatum voluptates laboriosam quibusdam impedit beatae suscipit aperiam vero nostrum sunt sequi libero natus, deserunt mollitia, officia repellendus pariatur, nulla a.
+  url: https://d2vez5w0ugqe83.cloudfront.net/graphic_design/watch.gif
+  tags:
+    - Wearables
+    - Watch
+
+rescue_tech:
+  title: Rescue Tech
+  description: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum voluptatum voluptates laboriosam quibusdam impedit beatae suscipit aperiam vero nostrum sunt sequi libero natus, deserunt mollitia, officia repellendus pariatur, nulla a.
+  transparent: true
+  url: https://d2vez5w0ugqe83.cloudfront.net/graphic_design/rescue-tech.svg
+  tags:
+    - Branding
+    - Logo
+
+skrillex:
+  title: Skrillex
+  description: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum voluptatum voluptates laboriosam quibusdam impedit beatae suscipit aperiam vero nostrum sunt sequi libero natus, deserunt mollitia, officia repellendus pariatur, nulla a.
+  url: https://d2vez5w0ugqe83.cloudfront.net/graphic_design/skrillex.jpg
+  tags:
+    - Practice
+    - Album Cover
+
+teichert:
+  title: Teichert ERT
+  description: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum voluptatum voluptates laboriosam quibusdam impedit beatae suscipit aperiam vero nostrum sunt sequi libero natus, deserunt mollitia, officia repellendus pariatur, nulla a.
+  transparent: true
+  url: https://d2vez5w0ugqe83.cloudfront.net/graphic_design/teichert-ert.svg
+  tags:
+    - Branding
+    - Logo

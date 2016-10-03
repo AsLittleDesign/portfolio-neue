@@ -1,0 +1,126 @@
+
+.gallery-intro
+  position: relative
+  padding:
+    top: $vertical-spacing--small
+    bottom: $vertical-spacing--medium
+
+  &--title
+    margin-top: $vertical-spacing--normal
+    color: $color--dark-gray
+
+    @media #{$device--small}
+      margin-top: $vertical-spacing--medium
+
+  &--body
+    color: $color--dark-gray
+
+  &--top
+    display: flex
+    justify-content: space-between
+    align-items: center
+
+  &--back
+    @media #{$device--small}
+      width: 100%
+
+  &--about
+    @media #{$device--small}
+      display: none
+
+.gallery-section
+  $even: ".gallery-section:nth-child(even) &"
+  $odd: ".gallery-section:nth-child(odd) &"
+  display: flex
+  align-items: center
+  min-height: 500px
+  padding:
+    top: $vertical-spacing--large
+    bottom: $vertical-spacing--large
+
+  &:nth-child(even)
+    background-color: $color--black
+
+  @media #{$device--small}
+    flex-direction: column
+    padding-top: 0
+    padding-bottom: $vertical-spacing--medium
+    min-height: 0
+
+  &--image
+    display: flex
+    flex-shrink: 0
+
+    #{$even}
+      order: 1
+
+    #{$odd}
+      order: 2
+
+    &.m-transparent
+      @media #{$device--small}
+        margin:
+          top: $vertical-spacing--large
+          bottom: $vertical-spacing--large
+
+  &--description
+    display: flex
+    flex-direction: column
+    flex-grow: 1
+    align-items: center
+    justify-content: center
+    position: relative
+    z-index: 1
+    padding: $vertical-spacing--normal $horizontal-spacing--normal
+
+    #{$odd}
+      order: 1
+      right: -$horizontal-spacing--normal
+      box-shadow: 0 0 50px rgba($color--black, 0.35)
+      background:
+        color: $color--dark-gray
+        image: linear-gradient(35deg, $color--black, $color--dark-gray)
+
+    #{$even}
+      order: 2
+      box-shadow: 0 0 50px rgba($color--black, 0.07)
+      background:
+        color: $color--off-white
+        image: linear-gradient(-95deg, $color--light-gray, $color--white)
+
+    @media #{$device--small}
+      margin-top: -$vertical-spacing--normal
+      position: static
+      padding: $vertical-spacing--small $horizontal-spacing--small $vertical-spacing--normal
+
+      #{$odd}
+        order: 2
+        box-shadow: 0 0 50px rgba($color--black, 0.65)
+        background-image: linear-gradient(35deg, $color--dark-gray, $color--black)
+
+      #{$even}
+        box-shadow: 0 0 50px rgba($color--black, 0.1)
+
+  &--title
+    text-align: left
+    width: 100%
+    margin-top: $vertical-spacing--small
+
+    #{$odd}
+      color: $color--white
+
+    #{$even}
+      border-color: $color--black
+
+  &--body
+    #{$odd}
+      color: $color--off-white
+
+  &--cta
+    width: 100%
+
+    #{$even}
+      @extend .button.m-black
+
+    #{$odd}
+      @extend .button.m-white

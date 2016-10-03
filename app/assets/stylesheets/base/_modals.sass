@@ -1,6 +1,6 @@
 
 .modal
-  +transition(opacity 0.15s ease-out)
+  transition: opacity 0.15s ease-out
   position: fixed
   z-index: 1
   top: 0
@@ -24,7 +24,7 @@
     background-color: rgba($color--black, 0.05)
 
   &--container
-    +transition(opacity 0.15s ease-out, transform 0.15s ease-in-out)
+    transition: opacity 0.15s ease-out, transform 0.15s ease-in-out
     height: 100%
     width: 100%
     position: relative
@@ -38,7 +38,6 @@
       transform: translateY(0)
 
   &--window
-    +border-radius
     background-color: rgba($color--white, 0.95)
     overflow: hidden
     box-shadow: $box-shadow
@@ -51,7 +50,7 @@
     padding: $vertical-spacing--normal $horizontal-spacing--small
 
   &--close
-    +transition(background-color 0.15s ease-out)
+    transition: background-color 0.15s ease-out
     border-top: 1px solid rgba($color--black, 0.1)
     white-space: nowrap
     font-family: $sans-serif

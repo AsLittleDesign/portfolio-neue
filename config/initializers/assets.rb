@@ -21,3 +21,8 @@ Rails.application.config.assets.precompile += %w( pages/photo_page.css )
 Rails.application.config.assets.precompile += %w( pages/table.css )
 
 Rails.application.config.assets.precompile += %w( pages/illustration.css )
+
+Rails.application.config.assets.precompile += %w( pages/graphic_design.css )
+Rails.application.config.assets.precompile += %w( pages/graphic_design.js )
+
+Rails.application.config.assets.precompile += %w( pages/osx.css )
