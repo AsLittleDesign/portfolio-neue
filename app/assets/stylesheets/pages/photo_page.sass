@@ -57,12 +57,14 @@
         right: 0
         bottom: $vertical-spacing--xsmall
 
-.social > .social--option
+.social.m-black > .social--option
   background-color: $color--black
   color: $color--white
 
-.social--option.s-active
-  background-color: $color--black
+.social.m-white > .social--option
+  background-color: $color--white
+  color: $color--black
 
+.social--option
   @media #{$device--small}
-    width: 100%
+    width: 50%

@@ -147,7 +147,15 @@ function toggleScroll () {
 
 
 function toggleBlur () {
-  toggleAttr($("[js-blur]")[0], "js-blur");
+  var el = $("[js-blur]")[0];
+  if (el.style.willChange) {
+    el.style.willChange = "";
+
+  } else {
+    el.style.willChange = "filter";
+  }
+
+  toggleAttr(el, "js-blur");
 }
 
 

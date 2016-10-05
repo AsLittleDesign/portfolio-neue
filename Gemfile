@@ -7,6 +7,9 @@ gem 'rails', '4.2.3'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
 
+# Rack implementation of the CORS protocol
+gem "rack-cors"
+
 # Stylesheets
 gem 'sass-rails'
 
@@ -14,6 +17,9 @@ gem "autoprefixer-rails"
 
 # Miro for extracting dominant colors in an image.
 gem 'miro'
+
+# Get mime types
+gem 'mime-types'
 
 # Use HAML for precompiled HTML
 gem 'haml-rails'

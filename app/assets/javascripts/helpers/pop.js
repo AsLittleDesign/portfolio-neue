@@ -96,7 +96,9 @@ ActionMenu.prototype = {
 
     var selector = "[js-pop--toggle=" + this.data.id +"]";
     delegateEvent("click", selector, function (e) {
-      this.toggleMenu(e);
+      if (!window.clickDisabled) {
+        this.toggleMenu(e);
+      }
     }.bind(this));
   },
 
@@ -157,10 +159,23 @@ ActionMenu.prototype = {
       toggleClass(clone, "toggle-clone");
       toggleClass(clone, "s-active");
 
+      var cloneList = $(".toggle-clone");
+      if (cloneList[0]) {
+        forEachNode(cloneList, function (node) {
+          node.remove();
+        });
+      }
       // Finish up with the clone by appending it to the 
       // DOM and adding  it as a property on this prototype.
       $("[js-pop--wrapper]")[0].appendChild(clone);
-      this.clone = clone;
+
+      if (this.removeClone) {
+        setTimeout(function () {
+          this.clone = clone;
+        }.bind(this), 350);
+      } else {
+        this.clone = clone;
+      }
 
       // Hide original toggle
       toggle.style.opacity    = "0";
@@ -185,6 +200,7 @@ ActionMenu.prototype = {
       // Set menu styles to position and set origin points
       // for the animation.
       var menuStyle = "\
+        will-change: transform;\
         left: " + posLeft + "px;\
         top: " + posTop + "px;\
         transform-origin: " + originX + " " + originY + ";\
@@ -215,7 +231,6 @@ ActionMenu.prototype = {
       menu.style.transform = "";
       setTimeout(function () {
         toggleClass(menu, "s-active");
-        toggleClass(this.clone, "s-active");
         toggleClass(menu, "m-right", false);
 
         // Show original toggle
@@ -223,6 +238,7 @@ ActionMenu.prototype = {
         toggle.style.visibility = "visible";
 
         var menuStyle = "\
+          will-change: null;\
           left: null;\
           top: null;\
           transform-origin: null;\
@@ -233,10 +249,15 @@ ActionMenu.prototype = {
 
         menu.setAttribute("style", menuStyle);
 
-        setTimeout(function () {
-          $("[js-pop--wrapper]")[0].removeChild(this.clone);
-        }.bind(this), 150);
-      }.bind(this), 100);
+        toggleClass(this.clone, "s-active");
+        this.removeClone = setTimeout(function () {
+          if (this.clone) {
+            this.clone.remove(true);
+            // $("[js-pop--wrapper]")[0].removeChild(this.clone);
+            this.removeClone = "";
+          }
+        }.bind(this), 350);
+      }.bind(this), 200);
     }
 
     this.active = !active;
@@ -248,18 +269,17 @@ ActionMenu.prototype = {
     var options = [];
     this.data.options.forEach(function(option) {
       var attributes,
-          elType = "a";
+          rel = option.id === "twitter" ? "rel='me'" : "";
       
       if (option.href) {
         attributes = "href='" + option.href + "' target='_blank'";
       }
 
-      // debugger
       var optionEl = [
-        "<" + elType +" class='menu--option' js-pop--option='" + this.data.id + "-" + option.id + "' " + attributes + ">",
+        "<a " + rel + " class='menu--option' js-pop--option='" + this.data.id + "-" + option.id + "' " + attributes + ">",
           "<span class='menu--symbol icon--" + option.symbol + "'></span>",
           "<span class='menu--option-text'>" + option.text + "</span>",
-        "</" + elType + ">"
+        "</a>"
       ].join("\n");
 
       options.push(optionEl);

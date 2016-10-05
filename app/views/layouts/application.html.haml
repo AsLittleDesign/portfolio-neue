@@ -15,6 +15,12 @@
 
     = yield :head
 
+    -# Inline page-specific styles
+    - styles = Rails.application.assets.find_asset("pages/#{yield :page_style }.sass").to_s
+    - if styles
+      :css
+        #{styles}
+
   %body
     .wrapper(js-blur="false")
       = yield

@@ -1,56 +1,53 @@
 
-var documentInitialized = false;
-document.addEventListener('DOMContentLoaded', function(){
-  // quit if this function has already been called
-  if (documentInitialized) return;
-  documentInitialized = true;
-
+ready(function () {
   mousemoveHandler();
 
-  // Initialize a new plugin instance for element or array of elements.
-  var focusSlider = $("[js-slider='focus']")[0],
-      exposureSlider = $("[js-slider='exposure']")[0];
+  if (!isMobile()) {
+    // Initialize a new plugin instance for element or array of elements.
+    var focusSlider = $("[js-slider='focus']")[0],
+        exposureSlider = $("[js-slider='exposure']")[0];
 
-  rangeSlider.create(exposureSlider, {
-    orientation: "vertical",
-    steps: 16,
-    rangeClass: "rangeSlider viewfinder--exposure-input",
-    onSlide: function (position, value) {
-      $("[js-viewfinder-exposure]")[0].style.opacity = value;
-    }
-  });
+    rangeSlider.create(exposureSlider, {
+      orientation: "vertical",
+      steps: 16,
+      rangeClass: "rangeSlider viewfinder--exposure-input",
+      onSlide: function (position, value) {
+        $("[js-viewfinder-exposure]")[0].style.opacity = value;
+      }
+    });
 
-  // Create focus slider
-  rangeSlider.create(focusSlider, {
-    orientation: "horizontal",
-    rangeClass: "rangeSlider viewfinder--focus-input",
-    onSlide: function (position, value) {
-      var images = $("[js-parallax]")
-      for (var i = 0; i < images.length; i++) {
-        var image = images[i],
-            blurAmount = Math.abs(value - 0.8),
-            focusDepth = value - 0.8 >= 0 ? "far" : "near",
-            distanceMod;
+    // Create focus slider
+    rangeSlider.create(focusSlider, {
+      orientation: "horizontal",
+      rangeClass: "rangeSlider viewfinder--focus-input",
+      onSlide: function (position, value) {
+        var images = $("[js-parallax]")
+        for (var i = 0; i < images.length; i++) {
+          var image = images[i],
+              blurAmount = Math.abs(value - 0.8),
+              focusDepth = value - 0.8 >= 0 ? "far" : "near",
+              distanceMod;
 
-        switch (i) {
-          case 0:
-            distanceMod = focusDepth == "far" ? 10 : 30;
-            break;
-          case 1:
-            distanceMod = 12;
-            break;
-          case 2:
-            distanceMod = focusDepth == "far" ? 30 : 10;
-            break;
-        }
-        
-        var blur = blurAmount * distanceMod;
+          switch (i) {
+            case 0:
+              distanceMod = focusDepth == "far" ? 10 : 30;
+              break;
+            case 1:
+              distanceMod = 12;
+              break;
+            case 2:
+              distanceMod = focusDepth == "far" ? 30 : 10;
+              break;
+          }
+          
+          var blur = blurAmount * distanceMod;
 
-        image.style.filter = "blur(" + blur + "px)";
-        image.style.webkitFilter = "blur(" + blur + "px)";
-      };
-    }
-  });
+          image.style.filter = "blur(" + blur + "px)";
+          image.style.webkitFilter = "blur(" + blur + "px)";
+        };
+      }
+    });
+  }
 });
 
 
@@ -78,9 +75,9 @@ function mousemoveHandler() {
     calculatePosition();
   }, true);
 
-  window.addEventListener("scroll", function () {
+  window.addEventListener("scroll", throttle(function () {
     calculatePosition();;
-  }, true);
+  }, 150), true);
 
   window.addEventListener("mousemove", function (e) {
     updateEvent(e);
@@ -116,8 +113,11 @@ function textFringing(event, props) {
     }
 
   } else {
-    distanceX = Math.min(event.pageX - props.position.right / 2, event.pageX - (props.position.right - props.position.width / 2) ) / 200,
-    distanceY = Math.min(event.pageY - props.position.bottom / 2, event.pageY - (props.position.bottom - props.position.height / 2) ) / 200;
+    var pageX = event.pageX,
+        pageY = event.pageY;
+
+    distanceX = Math.min(pageX - props.position.right / 2, pageX - (props.position.right - props.position.width / 2) ) / 200,
+    distanceY = Math.min(pageY - props.position.bottom / 2, pageY - (props.position.bottom - props.position.height / 2) ) / 200;
   }
 
   props.styles.red.transform = "translate3d(" + distanceX + "px, " + distanceY + "px, 0)";
@@ -139,8 +139,13 @@ function photographyParallax(event, props) {
     }
 
   } else {
-    distanceX = Math.min(event.pageX - props.position.right / 2, event.pageX - (props.position.right - props.position.width / 2) ) / 100,
-    distanceY = Math.min(event.pageY - props.position.bottom / 2, event.pageY - (props.position.bottom - props.position.height / 2) ) / 100;
+    var pageX = event.pageX,
+        pageY = event.pageY,
+        positionBottom = props.position.bottom,
+        positionRight = props.position.right;
+
+    distanceX = Math.min(pageX - positionRight / 2, pageX - (positionRight - props.position.width / 2) ) / 100,
+    distanceY = Math.min(pageY - positionBottom / 2, pageY - (positionBottom - props.position.height / 2) ) / 100;
   }
 
   props.styles.front.transform = "translate3d(" + -distanceX * 4 + "px, " + -distanceY * 4 + "px, 0)";

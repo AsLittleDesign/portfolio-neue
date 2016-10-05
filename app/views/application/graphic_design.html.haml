@@ -1,7 +1,5 @@
 
-- content_for :head do
-  = stylesheet_link_tag "pages/graphic_design", media: "all"
-
+- content_for :page_style do "graphic_design" end
 - content_for :scripts do
   = javascript_include_tag "pages/graphic_design"
 

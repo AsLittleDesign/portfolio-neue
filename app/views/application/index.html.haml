@@ -1,8 +1,25 @@
-- content_for :head do
-  = stylesheet_link_tag "pages/index", media: "all"
+- content_for :page_style do "index" end
 
 - content_for :scripts do
   = javascript_include_tag "pages/index"
+
+- content_for :meta do
+
+  -#
+    Meta Structure
+      :Hash => Define metadata content for the page
+        :title => Page title
+        :description => Page description
+        :url => Page canonical URL
+        :type => Page type (e.g. "photo", or "site")
+        :card => Card type for Twitter (e.g. "photo" or "summary")
+        :last_updated => The date a page was last last_updated
+        :image => OG Image
+          :type => MIME type for the image
+          :url => URL to image
+          :alt => Alt text for OG image for the page
+          :width => Image width
+          :height => Image height
 
 %section.fringe
   %h1
@@ -25,10 +42,3 @@
 = render "partials/index_illustration"
 = render "partials/index_osx"
 = render "partials/index_graphic_design"
-
--# = link_to "Follow @AsLittleDesign", "https://twitter.com/AsLittleDesign", :class => "twitter-follow-button", :"data-show-count" => "false"
-
--# %section.table
--#   %h1.table--title TABLE.co
--#   .table--body
--#     %p Non quis reprehenderit est cillum quis et enim aute amet veniam excepteur ea exercitation magna. Minim sint ad proident dolore. Quis amet adipisicing labore consectetur ea cillum aliquip ea laborum. Labore pariatur cillum quis esse commodo magna et enim id excepteur deserunt aliquip.

@@ -149,10 +149,10 @@
                     displayProperty[i] = hiddenParentNodes[i].style.display;
 
                     hiddenParentNodes[i].style.display = 'block';
-                    if (this.orientation == "horizontal") {
+                    if (this.orientation === "horizontal") {
                       hiddenParentNodes[i].style.height = '0';
 
-                    } else if (this.orientation == "vertical") {
+                    } else if (this.orientation === "vertical") {
                       hiddenParentNodes[i].style.width = '0';
                     }
                     hiddenParentNodes[i].style.overflow = 'hidden';

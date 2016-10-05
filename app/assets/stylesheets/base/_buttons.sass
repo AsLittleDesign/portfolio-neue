@@ -10,7 +10,7 @@ $ink--size: 500px
   text:
     transform: uppercase
     decoration: none
-  letter-spacing: 0.2em
+  letter-spacing: 0.18em
   line-height: 1em
   overflow: hidden
   position: relative
@@ -25,7 +25,7 @@ $ink--size: 500px
   cursor: pointer
 
   .wf-active &
-    font-family: $sans-serif--title
+    font-family: $sans-serif
 
   @media #{$device--small}
     $button--font-size: 1rem
@@ -41,8 +41,8 @@ $ink--size: 500px
     background-color: $color--black
 
     &:visited
-      color: lighten($color--gray, 10%)
-      background-color: lighten($color--black, 5%)
+      color: $color--white
+      background-color: $color--black
 
     &:active
       color: $color--white
@@ -55,8 +55,8 @@ $ink--size: 500px
     background-color: $color--white
 
     &:visited
-      color: $color--dark-gray
-      background-color: darken($color--white, 5%)
+      color: $color--black
+      background-color: $color--white
 
     &:active
       color: $color--black

@@ -26,83 +26,14 @@ body
 
 .wrapper
   transition: transform 0.15s ease-out, filter 0.15s ease-out
+  backface-visibility: hidden
   filter: blur(0)
   min-height: 100vh
   overflow-x: hidden
   background:
     color: $color--white
-    image: image-url("glaze.png")
+    image: url("#{$cloudfront}/application/glaze.png")
     repeat: repeat
 
   &[js-blur="true"]
     filter: blur(20px)
-
-.divider
-  $height: 20px
-  position: absolute
-  top: 0
-  left: 0
-  right: 0
-  height: $height
-  overflow: hidden
-  transform: translateX(0)
-  
-  &.m-bottom
-    top: 100%
-
-  &:before,
-  &:after
-    content: ""
-    position: absolute
-    bottom: 100%
-    left: 0
-    right: 0
-    height: $height / 2
-    box-shadow: 0 0 ($height / 2) rgba($color--black, 0.20)
-    border-radius: 100%
-
-  &:after
-    height: $height
-    box-shadow: 0 0 $height rgba($color--black, 0.1)
-
-.visited-checker
-  display: none
-  
-  &--container
-    position: relative
-    width: 100%
-
-    > img
-      display: block
-
-  &:visited
-    + .visited-checker--container:after
-      content: ""
-      top: 0
-      bottom: 0
-      left: 0
-      right: 0
-      background-color: $color--white
-      opacity: 0.5
-      position: absolute
-      z-index: 1
-      pointer-events: none
-
-.visited-label
-  position: absolute
-  padding:
-    top: $vertical-spacing--small / 2
-    bottom: $vertical-spacing--small / 2
-  background-color: $color--yellow
-  top: $vertical-spacing--small
-  left: $horizontal-spacing--small
-  font:
-    family: $sans-serif--title
-    size: $font-size--small
-  color: $color--white
-  letter-spacing: 0.1em
-  text-transform: uppercase
-  width: 100px
-  text-align: center
-  z-index: 3
-  pointer-events: none

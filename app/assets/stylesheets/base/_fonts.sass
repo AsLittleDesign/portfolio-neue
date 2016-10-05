@@ -1,12 +1,32 @@
-=font-face($font-family, $file-path, $font-weight, $font-style)
+// =font-face($font-family, $file-path, $font-weight, $font-style)
+//   @font-face
+//     font-family: $font-family
+//     src: $file-path format(truetype)
+//     font-weight: $font-weight
+//     font-style: $font-style
+
+=declare-font-face($font-family, $font-path, $font-weight: normal, $font-style: normal, $font-stretch: normal)
   @font-face
-    font-family: $font-family
-    src: font-url($file-path)
+    font-family: '#{$font-family}'
+    src: url('#{$font-path}.eot')
+    src: url('#{$font-path}.eot?#iefix') format('embedded-opentype'), url('#{$font-path}.woff') format('woff'), url('#{$font-path}.ttf') format('application/octet-stream'), url('#{$font-path}.svg##{$font-family}') format('svg')
     font-weight: $font-weight
     font-style: $font-style
+    font-stretch: $font-stretch
 
-+font-face("Museo Sans", "museo_sans/500.ttf", normal, normal)
-+font-face("Museo Sans", "museo_sans/900.ttf", bold, normal)
+$font-path: "#{$cloudfront}/fonts/museo_sans"
++declare-font-face("Museo Sans", "#{$font-path}/500", normal, normal)
++declare-font-face("Museo Sans", "#{$font-path}/900", bold, normal)
 
 // Icon font
-+font-face("icons", "icons/font/icons.ttf", normal, normal)
++declare-font-face("icons", "icons/font/icons", normal, normal)
+
+
+@font-face
+  $font-path: "icons/font/icons"
+  font-family: "icons"
+  src: font-url("#{$font-path}.eot")
+  src: font-url('#{$font-path}.eot?#iefix') format('embedded-opentype'), font-url('#{$font-path}.woff') format('woff'), font-url('#{$font-path}.ttf') format('application/octet-stream'), font-url('#{$font-path}.svg') format('svg')
+  font-weight: normal
+  font-style: normal
+  font-stretch: normal

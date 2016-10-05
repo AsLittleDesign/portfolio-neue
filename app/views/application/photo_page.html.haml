@@ -1,6 +1,8 @@
 
-- content_for :head do
-  = stylesheet_link_tag "pages/photo_page", media: "all"
+- content_for :scripts do
+  = javascript_include_tag "pages/photo_page"
+
+- content_for :page_style do "photo_page" end
 
 .container.photo--top
   = link_to (eval "#{@type}_path"), :class => "button m-black photo--back-navigation" do
@@ -11,7 +13,7 @@
   - image_class =
     - if @photo["transparent"] then "photo--image m-transparent" else "photo--image"
 
-  = image_tag @photo["url"], :class => image_class
+  = image_tag @photo["url"], :class => image_class, :"js-photo" => true
 
 .container.photo--meta
   .photo--description
@@ -19,6 +21,6 @@
     %p= @photo["description"]
 
   .social
-    .social--option(js-pop--toggle="share")
+    .social--option.m-black(js-pop--toggle="share")
       .icon--share.social--option-content.m-icon
       .social--option-content Share

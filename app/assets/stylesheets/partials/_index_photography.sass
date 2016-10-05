@@ -1,10 +1,12 @@
 
+@import "../base/config"
+
 .viewfinder
   color: $color--white
   position: relative
   text-align: center
   overflow: hidden
-  // transform: translateX(0) translateY(0)
+  font-family: $sans-serif--default
 
   &--image-container
     position: relative
@@ -33,8 +35,7 @@
     left:   -10%
     right:  -10%
     width: 120%
-    transform: translateY(0)
-    -webkit-transform: translateY(0)
+    transform: translateZ(0)
 
   &--top,
   &--bottom
@@ -43,6 +44,9 @@
     position: relative
     z-index: 1
     width: 100%
+
+    @media #{$device--small}
+      display: none !important
 
   &--bottom
     display: flex
@@ -101,10 +105,6 @@
     padding-left: 50%
     text-align: left
 
-    @media #{$device--small}
-      padding-left: 0
-      text-align: center
-
   &--top-icon
     display: inline-block
     font-size: 1.2rem
@@ -152,6 +152,9 @@
     bottom: 0
     left: 0
     right: 0
+
+    @media #{$device--small}
+      display: none
 
   &--overlay-grid
     position: absolute
@@ -350,3 +353,6 @@
     background-color: rgba($color--black, 0.5)
     opacity: 0
     z-index: 1
+
+    @media #{$device--small}
+      display: none

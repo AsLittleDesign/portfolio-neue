@@ -4,15 +4,25 @@
   align-items: center
   justify-content: center
 
-  > .social--option
-    background-color: $color--white
+  &.m-white
+    > .social--option
+      background-color: $color--white
+
+  &.m-black
+    > .social--option
+      background-color: $color--black
 
   &--option
     @extend %no-select, .button
     width: 180px
 
-    &:active
-      background-color: darken($color--white, 2%)
+    .m-white &
+      &:active
+        background-color: darken($color--white, 2%)
+
+    .m-black &
+      &:active
+        background-color: lighten($color--black, 2%)
     
     + .social--option
       margin-left: $horizontal-spacing--small
@@ -23,5 +33,8 @@
     height: $font-size--small
 
     &.m-icon
-      margin-right: $horizontal-spacing--small
+      margin-right: $horizontal-spacing--small / 2
       transform: translateY(-1px)
+
+      @media #{$device--retina}
+        transform: translateY(0)

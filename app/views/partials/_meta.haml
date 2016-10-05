@@ -1,5 +1,100 @@
 
--# Open Graph
-%meta(charset="UTF-8")
+-#
+  Meta Structure
+    :Hash => Define metadata content for the page
+      :title => Page title
+      :description => Page description
+      :url => Page canonical URL
+      :type => Page type (e.g. "photo", or "site")
+      :card => Card type for Twitter (e.g. "photo" or "summary")
+      :last_updated => The date a page was last last_updated
+      :image => OG Image
+        :type => MIME type for the image
+        :url => URL to image
+        :alt => Alt text for OG image for the page
+        :width => Image width
+        :height => Image height
+
+- page_data = @metadata || Hash.new
+
+-# Defaults
+- page_data["title"] = "Dave Scott McCarthy | #{page_data["title"] || "Designer & Developer"}"
+- page_data["description"] = page_data["description"] || "This is the default description."
+- page_data["url"] = page_data["url"] || request.original_url
+- page_data["type"] = page_data["type"] || "website"
+- page_data["card"] = page_data["card"] || "summary"
+- page_data["last_updated"] = page_data["last_updated"] || "10/2/2016"
+- page_data["image"] = page_data["image"] || Hash.new
+- page_data["image"]["url"] = page_data["image"]["url"] || "https://default.image/"
+- page_data["image"]["type"] = page_data["image"]["type"] || "image/png"
+- page_data["image"]["width"] = page_data["image"]["width"] || ""
+- page_data["image"]["height"] = page_data["image"]["height"] || ""
+- page_data["image"]["alt"] = page_data["image"]["alt"] || "Dave Scott McCarthy's Work"
+- twitter_username = "@aslittledesign"
+- site_name = "Dave Scott McCarthy"
+- site_basename = "davesmccarthy"
+
+-# Base
+%meta(http-equiv="Content-Type" charset="UTF-8")
 %meta(name="viewport" content="width=device-width,height=device-height initial-scale=1,maximum-scale=1")
--# %meta(name="description" content="#{ description }")
+%meta(name="author" content="Dave Scott McCarthy")
+
+-# Favicon
+%link(rel="icon" sizes="192x192" href="niceicon.png")
+
+-#
+  Icon Sizes:
+    ICO: 16x16, 32x32, 224x24, 48x48, 64x64
+    PNG: favicon-32 32x32, favicon-57 57x57, favicon-76 76x76, favicon-96 96x96, favicon-120 120x120, favicon-128 128x128, smalltile 128x128, favicon-144 144x144, favicon-152 152x152, favicon-180 180x180, favicon-195 195x195, favicon-196 196x196, favicon-228 228x228, mediumtile 270x270, widetile 558x270
+
+-# SEO / Open Graph
+%title= page_data["title"]
+%meta(name="description" content="#{ page_data["description"] }")
+%link(rel="canonical"                href="#{ page_data["url"] }")
+%meta(name="robots"                  content="index, follow")
+
+%meta(property="og:title"            content="#{ page_data["title"] }")
+%meta(property="og:description"      content="#{ page_data["description"] }")
+%meta(property="og:url"              content="#{ page_data["url"] }")
+%meta(property="og:website"          content="#{ site_basename }")
+%meta(property="og:site_name"        content="#{ site_name }")
+%meta(property="og:type"             content="#{ page_data["type"] }")
+%meta(property="og:card"             content="#{ page_data["card"] }")
+%meta(property="og:updated_time"     content="#{ page_data["last_updated"] }")
+%meta(property="og:locale"           content="en_US")
+%meta(property="og:image:url"        content="#{ page_data["image"]["url"] }")
+%meta(property="og:image:secure_url" content="#{ page_data["image"]["url"] }")
+%meta(property="og:image:type"       content="#{ page_data["image"]["type"] }")
+%meta(property="og:image:width"      content="#{ page_data["image"]["width"] }")
+%meta(property="og:image:height"     content="#{ page_data["image"]["height"] }")
+
+%link(rel="me" href="https://twitter.com/AsLittleDesign")
+%meta(property="twitter:title"       content="#{ page_data["title"] }")
+%meta(property="twitter:description" content="#{ page_data["description"] }")
+%meta(property="twitter:url"         content="#{ page_data["url"] }")
+%meta(property="twitter:image"       content="#{ page_data["image"]["url"] }")
+%meta(property="twitter:image:alt"   content="#{ page_data["image"]["alt"] }")
+%meta(name="twitter:site"            content="#{ twitter_username }")
+%meta(name="twitter:creator"         content="#{ twitter_username }")
+
+-# Apple
+%meta(name="apple-mobile-web-app-capable" content="yes")
+%meta(name="apple-mobile-web-app-status-bar-style" content="black")
+%meta(rel="apple-touch-icon" href="apple-touch-icon-iphone.png")
+%meta(rel="apple-touch-icon" sizes="76x76" href="touch-icon-ipad.png")
+%meta(rel="apple-touch-icon" sizes="120x120" href="touch-icon-iphone-retina.png")
+%meta(rel="apple-touch-icon" sizes="152x152" href="touch-icon-ipad-retina.png")
+%link(rel="mask-icon" href="icon.svg" color="#000000")
+
+-# Android
+%meta(name="mobile-web-app-capable"        content="yes")
+%link(rel="manifest"                       href="manifest.json")
+ 
+-# Windows
+%meta(name="msapplication-navbutton-color" content="#000000")
+%meta(name="misapplication-tap-highlight"  content="no")
+%meta(name="msapplication-TileColor"       content="#000000")
+%meta(name="msapplication-TileImage"       content="/path/to/favicon-144.png")
+%meta(name="application-name"              content="#{ site_name }")
+%meta(name="msapplication-tooltip"         content="Tooltip")
+%meta(name="msapplication-config"          content="/path/to/ieconfig.xml")

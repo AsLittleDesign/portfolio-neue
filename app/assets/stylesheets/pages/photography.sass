@@ -60,18 +60,18 @@
 
   .photo:hover & 
     opacity: 1
-    transform: translateX(0)
+    transform: translate3d(0, 0, 0)
 
   &.m-left
     left: -$horizontal-spacing--small
     justify-content: flex-end
     text-align: right
-    transform: translateX(-$horizontal-spacing--small)
+    transform: translate3d(-$horizontal-spacing--small, 0, 0)
     margin-right: $horizontal-spacing--small
 
   &.m-right
     right: -$horizontal-spacing--small
-    transform: translateX($horizontal-spacing--small)
+    transform: translate3d($horizontal-spacing--small, 0, 0)
     margin-left: $horizontal-spacing--small
 
   &.m-bottom

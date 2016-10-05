@@ -8,36 +8,67 @@
 
 WebFont.load({
   custom: {
-    families: ["Museo Sans"]
+    families: ["Museo Sans"],
+    urls: ["https://d2vez5w0ugqe83.cloudfront.net/fonts/museo_sans/500.ttf",
+           "https://d2vez5w0ugqe83.cloudfront.net/fonts/museo_sans/900.ttf"]
   },
   google: {
     families: ['Lora:400,700']
   }
 });
 
+// Prevent long presses from opening links on mobile
+var hasTouchStartEvent = 'ontouchstart' in document.createElement( 'div' ),
+    pressTimer;
+
+if (hasTouchStartEvent) {
+  window.pressDisabled = false;
+  delegateEvent('touchend', "a, [js-pop--toggle]", function (e) {
+    clearTimeout(pressTimer);
+  });
+
+  delegateEvent("click", "a, [js-pop--toggle]", function (e) {
+    if (window.pressDisabled) {
+      e.stopPropagation();  
+      e.preventDefault();
+      
+      setTimeout(function () {
+        window.pressDisabled = false;
+      }, 50);
+    }
+  });
+
+  delegateEvent('touchstart', "a, [js-pop--toggle]", function (e, link) {
+    pressTimer = window.setTimeout(function () {
+      window.pressDisabled = true;
+    }, 500);
+  });
+}
 
 // Button Handler
 delegateEvent("click", ".button", function (e, button) {
-  e.preventDefault();
+  if (!window.pressDisabled) {
+    e.preventDefault();
 
-  var inkSize = 500,
-      css = "\
-        left: " + (e.offsetX - inkSize / 2) + "px;\
-        top: " + (e.offsetY - inkSize / 2) + "px;"
+    var inkSize = 500,
+        css = "\
+          left: " + (e.offsetX - inkSize / 2) + "px;\
+          top: " + (e.offsetY - inkSize / 2) + "px;"
 
-  var el = [
-    "<div class='button--ink-container' style='" + css + "'>",
-      "<div class='button--ink'></div>",
-    "</div>"
-  ].join("\n");
+    var el = [
+      "<div class='button--ink-container' style='" + css + "'>",
+        "<div class='button--ink'></div>",
+      "</div>"
+    ].join("\n");
 
-  button.insertAdjacentHTML('beforeend', el);
+    button.insertAdjacentHTML('beforeend', el);
 
-  var href = button.href;
-  if (href) {
-    setTimeout(function () {
-      window.location = href;
-    }, 300);
+    var href = button.href;
+    if (href) {
+      setTimeout(function () {
+        window.location = href;
+      }, 300);
+    }
   }
 });
 
