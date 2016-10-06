@@ -23,7 +23,7 @@ ENV APP_HOME /portfolio-neue
 RUN mkdir $APP_HOME
 WORKDIR $APP_HOME
 
-COPY Gemfile Gemfile.lock Rakefile .
+COPY Gemfile Gemfile.lock Rakefile ./
 
 RUN gem install bundler && bundle install --jobs 20 --retry 5
 
