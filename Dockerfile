@@ -23,12 +23,14 @@ ENV APP_HOME /portfolio-neue
 RUN mkdir $APP_HOME
 WORKDIR $APP_HOME
 
-ADD Gemfile $APP_HOME/
-ADD Rakefile $APP_HOME/
+COPY Gemfile Gemfile.lock Rakefile .
 
-RUN bundle install
+RUN gem install bundler && bundle install --jobs 20 --retry 5
+
+COPY . ./
+
 RUN bundle exec rake assets:precompile
 
-ADD . $APP_HOME
+EXPOSE 5000
 
 CMD ["unicorn","--port","5000"]
