@@ -24,6 +24,7 @@ RUN mkdir $APP_HOME
 WORKDIR $APP_HOME
 
 ADD Gemfile $APP_HOME/
+ADD Rakefile $APP_HOME/
 
 RUN bundle install
 RUN bundle exec rake assets:precompile
