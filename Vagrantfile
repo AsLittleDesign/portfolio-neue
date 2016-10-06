@@ -15,6 +15,10 @@ Vagrant.configure("2") do |config|
   config.vm.box = "coreos"
   config.vm.box_url = "http://storage.core-os.net/coreos/amd64-generic/dev-channel/coreos_production_vagrant.box"
   config.vm.network "private_network", ip: "172.12.8.150"
+  config.vm.provider "docker" do |d|
+    d.image = "aslittledesign/portfolio-neue"
+    d.build_dir = "."
+  end
 
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs

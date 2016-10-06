@@ -7,7 +7,7 @@
 # Inspect: docker inspect <container>
 # List Containers: docker ps
 # Vagrant:
-  # Put together vm: vagrant up
+  # Put together vm: --provider=docker
   # Enter vm: vagrant ssh
   # Terminate: Vagrant destroy
 
@@ -20,9 +20,10 @@ MAINTAINER "Dave Scott McCarthy <dave@aslittledesign.com>"
 ADD Gemfile /app/Gemfile
 ADD Gemfile.lock /app/Gemfile.lock
 
+RUN bundle exec rake assets:precompile
+
 WORKDIR /app
 RUN bundle install
-RUN bundle exec rake assets:precompile
 
 ADD . /app
 
