@@ -14,6 +14,9 @@ gem "rack-cors"
 gem 'sass-rails'
 
 gem "autoprefixer-rails"
+# Dependencies
+gem 'execjs'
+gem 'therubyracer', :platforms => :ruby
 
 # Miro for extracting dominant colors in an image.
 gem 'miro'
