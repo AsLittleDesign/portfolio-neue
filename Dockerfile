@@ -17,14 +17,17 @@ FROM ruby:2.3
 
 MAINTAINER "Dave Scott McCarthy <dave@aslittledesign.com>"
 
-ADD Gemfile /app/Gemfile
-ADD Gemfile.lock /app/Gemfile.lock
+RUN apt-get update -qq && apt-get install -y build-essential
 
+ENV APP_HOME /portfolio-neue
+RUN mkdir $APP_HOME
+WORKDIR $APP_HOME
+
+ADD Gemfile $APP_HOME/
+
+RUN bundle install
 RUN bundle exec rake assets:precompile
 
-WORKDIR /app
-RUN bundle install
-
-ADD . /app
+ADD . $APP_HOME
 
 CMD ["unicorn","--port","5000"]
