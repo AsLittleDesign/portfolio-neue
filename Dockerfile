@@ -6,6 +6,11 @@
 # Stop: docker stop portfolio
 # Inspect: docker inspect <container>
 # List Containers: docker ps
+# Vagrant:
+  # Put together vm: vagrant up
+  # Enter vm: vagrant ssh
+  # Terminate: Vagrant destroy
+
 
 # Available vers here https://registry.hub.docker.com/_/ruby
 FROM ruby:2.3
@@ -16,7 +21,8 @@ ADD Gemfile /app/Gemfile
 ADD Gemfile.lock /app/Gemfile.lock
 
 WORKDIR /app
-RUN bundle install && bundle exec rake assets:precompile
+RUN bundle install
+RUN bundle exec rake assets:precompile
 
 ADD . /app
 
