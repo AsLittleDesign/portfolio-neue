@@ -21,3 +21,6 @@
 
 # Ignore public compiled assets
 /public/assets
+
+# Ignore vagrant machine
+.vagrant/
