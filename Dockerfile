@@ -19,6 +19,10 @@ MAINTAINER "Dave Scott McCarthy <dave@aslittledesign.com>"
 
 RUN apt-get update -qq && apt-get install -y apt-utils build-essential patch curl git ssh imagemagick libmagickwand-dev libcurl4-openssl-dev
 
+RUN dd if=/dev/zero of=/swapfile bs=1024 count=256k
+RUN mkswap /swapfile
+RUN swapon /swapfile
+
 WORKDIR /tmp
 ADD Gemfile Gemfile
 ADD Gemfile.lock Gemfile.lock
