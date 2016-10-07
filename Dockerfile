@@ -6,6 +6,7 @@
 # Stop: docker stop portfolio
 # Inspect: docker inspect <container>
 # List Containers: docker ps
+# Terminal in container: docker exec -it <container_id> bash
 # Vagrant:
   # Put together vm: vagrant up --provider=docker
   # Enter vm: vagrant ssh
