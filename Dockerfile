@@ -2,7 +2,7 @@
 # New Docker Machine: docker-machine create --driver virtualbox default
 # List Docker Machines: docker-machine ls
 # Build: docker build --privileged -t aslittledesign/portfolio-neue .
-# Run: docker run --privileged -p 127.0.0.1:80:80 -a stderr -a stdout aslittledesign/portfolio-neue foreman start
+# Run: docker run -p 127.0.0.1:80:80 -a stderr -a stdout aslittledesign/portfolio-neue foreman start
 # Stop: docker stop portfolio
 # Inspect: docker inspect <container>
 # List Containers: docker ps
@@ -26,6 +26,7 @@ ADD Gemfile.lock Gemfile.lock
 RUN gem install bundler && bundle install --jobs 20 --retry 5
 
 RUN apt-get install -y nginx
+RUN mkdir -p /run/nginx
 RUN rm -rf /etc/nginx/sites-available/default
 ADD container/nginx.conf /etc/nginx/nginx.conf
 
