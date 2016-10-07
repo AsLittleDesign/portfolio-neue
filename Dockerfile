@@ -1,8 +1,8 @@
 
 # New Docker Machine: docker-machine create --driver virtualbox default
 # List Docker Machines: docker-machine ls
-# Build: docker build -t aslittledesign/portfolio-neue .
-# Run: docker run -p 127.0.0.1:80:80 -a stderr -a stdout aslittledesign/portfolio-neue foreman start
+# Build: docker build --privileged -t aslittledesign/portfolio-neue .
+# Run: docker run --privileged -p 127.0.0.1:80:80 -a stderr -a stdout aslittledesign/portfolio-neue foreman start
 # Stop: docker stop portfolio
 # Inspect: docker inspect <container>
 # List Containers: docker ps
@@ -18,12 +18,6 @@ FROM ruby:2.3
 MAINTAINER "Dave Scott McCarthy <dave@aslittledesign.com>"
 
 RUN apt-get update -qq && apt-get install -y apt-utils build-essential patch curl git ssh imagemagick libmagickwand-dev libcurl4-openssl-dev
-
-RUN dd if=/dev/zero of=/swapfile bs=1024 count=256k
-RUN mkswap /swapfile
-RUN swapon /swapfile
-RUN chown root:root /swapfile
-RUN chmod 0600 /swapfile
 
 WORKDIR /tmp
 ADD Gemfile Gemfile
