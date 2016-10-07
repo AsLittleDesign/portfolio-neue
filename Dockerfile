@@ -22,6 +22,8 @@ RUN apt-get update -qq && apt-get install -y apt-utils build-essential patch cur
 RUN dd if=/dev/zero of=/swapfile bs=1024 count=256k
 RUN mkswap /swapfile
 RUN swapon /swapfile
+RUN chown root:root /swapfile
+RUN chmod 0600 /swapfile
 
 WORKDIR /tmp
 ADD Gemfile Gemfile
