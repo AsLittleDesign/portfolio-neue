@@ -1,1 +1,2 @@
-web: unicorn --port 5000
+app: bundle exec unicorn -c config/unicorn.rb
+nginx: /usr/sbin/nginx -g 'daemon off'
