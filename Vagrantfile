@@ -4,24 +4,17 @@
 VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
-  # The most common configuration options are documented and commented below.
-  # For a complete reference, please see the online documentation at
-  # https://docs.vagrantup.com.
-
-  # Every Vagrant development environment requires a box. You can search for
-  # boxes at https://atlas.hashicorp.com/search.
-  # config.vm.box = "coreos"
-  # config.vm.box_url = "http://storage.core-os.net/coreos/amd64-generic/dev-channel/coreos_production_vagrant.box"
-  # config.vm.network "private_network", ip: "172.12.8.150"
   config.ssh.username = 'docker'
   config.ssh.password = 'tcuser'
-  config.ssh.insert_key = false
+  # config.ssh.insert_key = false
+  config.ssh.port = 22
+  config.vm.boot_timeout = 500
   config.vm.network "forwarded_port", guest: 80, host: 8080
   config.vm.provider "docker" do |d|
     d.name = "portfolio-neue"
     d.has_ssh = true
     d.image = "aslittledesign/portfolio-neue"
-    d.ports = ["5000:5000"]
+    d.ports = ["80:80"]
     # d.build_image = "./portfolio-neue/"
     # d.build_dir = "."
   end

@@ -17,7 +17,7 @@ FROM ruby:2.3
 
 MAINTAINER "Dave Scott McCarthy <dave@aslittledesign.com>"
 
-RUN apt-get update -qq && apt-get install -y build-essential curl git imagemagick libmagickwand-dev libcurl4-openssl-dev
+RUN apt-get update -qq && apt-get install -y build-essential curl git ssh imagemagick libmagickwand-dev libcurl4-openssl-dev
 
 WORKDIR /tmp
 ADD Gemfile Gemfile
