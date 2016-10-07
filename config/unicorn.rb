@@ -1,4 +1,4 @@
-app_dir = File.expand_path("../..", __file__)
+app_dir = File.expand_path("../..", __FILE__)
 working_directory app_dir
 
 pid "#{app_dir}/tmp/unicorn.pid"
