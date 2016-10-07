@@ -36,4 +36,6 @@ WORKDIR $APP_HOME
 
 RUN RAILS_ENV=production bundle exec rake assets:precompile --trace
 
+EXPOSE 80
+
 CMD ["foreman","start"]

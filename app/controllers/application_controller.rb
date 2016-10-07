@@ -17,7 +17,7 @@ class ApplicationController < ActionController::Base
       "card" => "summary_large_image",
       "image" => {
         "url" => "https://d2vez5w0ugqe83.cloudfront.net/open_graph/photography.png",
-        "type" => "image/jpeg",
+        "type" => "image/png",
         "alt" => "Dave Scott McCarthy's Photography"
       }
     }
@@ -35,7 +35,7 @@ class ApplicationController < ActionController::Base
       "card" => "summary_large_image",
       "image" => {
         "url" => "https://d2vez5w0ugqe83.cloudfront.net/open_graph/photography.png",
-        "type" => "image/jpeg",
+        "type" => "image/png",
         "alt" => "Dave Scott McCarthy's Photography"
       }
     }
@@ -52,8 +52,25 @@ class ApplicationController < ActionController::Base
       "card" => "summary_large_image",
       "image" => {
         "url" => "https://d2vez5w0ugqe83.cloudfront.net/open_graph/illustration.png",
-        "type" => "image/jpeg",
+        "type" => "image/png",
         "alt" => "Dave Scott McCarthy's Illustrations"
+      }
+    }
+  end
+
+  def table
+    @examples = YAML.load_file("#{Rails.root}/config/table.yml")
+
+    @metadata = {
+      "title" => "Table.co",
+      "description" => "Explore Dave's best graphic design work, from logos to watchfaces.",
+      "url" => "http://davesmccarthy.com/graphic_design",
+      "type" => "website",
+      "card" => "summary_large_image",
+      "image" => {
+        "url" => "https://d2vez5w0ugqe83.cloudfront.net/open_graph/table.png",
+        "type" => "image/png",
+        "alt" => "Dave Scott McCarthy's Graphic Design"
       }
     }
   end
@@ -69,7 +86,7 @@ class ApplicationController < ActionController::Base
       "card" => "summary_large_image",
       "image" => {
         "url" => "https://d2vez5w0ugqe83.cloudfront.net/open_graph/graphic-design.png",
-        "type" => "image/jpeg",
+        "type" => "image/png",
         "alt" => "Dave Scott McCarthy's Graphic Design"
       }
     }
@@ -86,7 +103,7 @@ class ApplicationController < ActionController::Base
       "card" => "summary_large_image",
       "image" => {
         "url" => "https://d2vez5w0ugqe83.cloudfront.net/open_graph/osx.png",
-        "type" => "image/jpeg",
+        "type" => "image/png",
         "alt" => "OS X 10.10 'Everest' Concept"
       }
     }
@@ -102,7 +119,7 @@ class ApplicationController < ActionController::Base
 
     @metadata = {
       "title" => @photo["title"],
-      "description" => @photo["description"].truncate(155, ". "),
+      "description" => @photo["description"].truncate(155),
       "url" => "http://davesmccarthy.com/#{@type}/#{page}",
       "type" => "website",
       "card" => "summary_large_image",

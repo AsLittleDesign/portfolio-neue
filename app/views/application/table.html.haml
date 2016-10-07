@@ -1,26 +1,14 @@
 
 - content_for :page_style do "table" end
 
-.container.page-intro
-  .page-intro--top
-    = link_to root_path, :class => "button m-black page-intro--back" do
-      %span.icon--arrow--left
-      Home
+- description = "Table is a product designed to connect people with mentors through it's communication platform. As the lead designer, I worked with the team to bring consistency, and usability to our product and our brand. I worked on the design, direction, and development of the product, as well as started to build the design team."
 
-  %h1.page-intro--title Table.co
-  %p.page-intro--body Table is a product designed to connect people with mentors through it's communication platform. As the lead designer, I worked with the team to bring consistency, and usability to our product and our brand. I worked on the design, direction, and development of the product, as well as started to build the design team.
+= render "partials/gallery", :collection => @examples, :locals => { :title => "Table.co", :description => description }
 
-
-.container.icons
-  = image_tag "table/icons.svg", :class => "icons--image"
-  .icons--description
-    %h3.icons--title Iconographic Unity
-    %p One of the goals I set while working at Table was to make the product, and its functionality clear. I saw that one way we could build towards this goal was to create a unified language of symbols that were understandable and representative of the brand, as the current icons used were often vague and lacked consistency. My team and I developed a system for creating a brand-unique set of icons that could be used across our apps, and website.
-
-.container
-  %div Public Tables Sidebar
-  %div New Homepage
-  %div Media Viewer w/ Comments
-  %div Dashboard
+-# .container
+-#   %div Public Tables Sidebar
+-#   %div New Homepage
+-#   %div Media Viewer w/ Comments
+-#   %div Dashboard
 
 

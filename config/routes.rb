@@ -14,6 +14,13 @@ Rails.application.routes.draw do
   end
 
   get 'table' => 'application#table'
+  scope "/table" do
+    photos = YAML.load_file("#{Rails.root}/config/table.yml")
+    photos.each do |name, data|
+      get name => 'application#photo_page'
+    end
+  end
+
   get 'illustration' => 'application#illustration'
   scope "/illustration" do
     photos = YAML.load_file("#{Rails.root}/config/illustration.yml")

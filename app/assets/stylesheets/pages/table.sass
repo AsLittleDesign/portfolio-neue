@@ -2,34 +2,6 @@
 @import "../base/config"
 @import "../base/mixins"
 
-.icons
-  display: flex
-  align-items: center
-  justify-content: center
-  padding:
-    top: $vertical-spacing--medium
-    bottom: $vertical-spacing--medium
-  background-color: $color--black
-  color: $color--white
-
-  @media #{$device--small}
-    flex-direction: column
-
-  &--image
-    width: 250px
-    max-width: 450px
-    flex-shrink: 0
-
-    @media #{$device--small}
-      width: 100%
-
-  &--description
-    flex-grow: 1
-    margin-left: $horizontal-spacing--medium
-
-    @media #{$device--small}
-      margin-left: 0
-      margin-top: $vertical-spacing--normal
-
-  &--title
-    text-align: left
+.gallery-section
+  &.m-iconography
+    +gallery-section--sizing(1 / 1)
