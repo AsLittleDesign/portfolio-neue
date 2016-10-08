@@ -16,7 +16,7 @@ class ApplicationController < ActionController::Base
       "type" => "website",
       "card" => "summary_large_image",
       "image" => {
-        "url" => "https://d2vez5w0ugqe83.cloudfront.net/open_graph/photography.png",
+        "url" => "https://d2vez5w0ugqe83.cloudfront.net/open_graph/index.png",
         "type" => "image/png",
         "alt" => "Dave Scott McCarthy's Photography"
       }

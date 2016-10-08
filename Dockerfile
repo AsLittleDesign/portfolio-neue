@@ -1,17 +1,16 @@
 
 # New Docker Machine: docker-machine create --driver virtualbox default
 # List Docker Machines: docker-machine ls
-# Build: docker build --privileged -t aslittledesign/portfolio-neue .
-# Run: docker run -p 127.0.0.1:80:80 -a stderr -a stdout aslittledesign/portfolio-neue
-# Stop: docker stop portfolio
-# Inspect: docker inspect <container>
-# List Containers: docker ps
+# Build: docker build -t aslittledesign/portfolio-neue .
+# Run:
+#   docker run -d -p 0.0.0.0:80:80 -p 0.0.0.0:443:443 aslittledesign/portfolio-neue
+#   docker run -d -p 80:80 -p 443:443 --name=proxy --restart=always -v /var/local/nginx/certs:/etc/nginx/certs -v /etc/letsencrypt:/etc/letsencrypt -v /var/local/proxy-confs:/etc/nginx/vhost.d:ro -v /var/run/docker.sock:/tmp/docker.sock:ro jwilder/nginx-proxy
+
 # Terminal in container: docker exec -it <container_id> bash
 # Vagrant:
   # Put together vm: vagrant up --provider=docker
   # Enter vm: vagrant ssh
   # Terminate: Vagrant destroy
-
 
 # Available vers here https://registry.hub.docker.com/_/ruby
 FROM ruby:2.3
@@ -39,5 +38,6 @@ WORKDIR $APP_HOME
 RUN RAILS_ENV=production bundle exec rake assets:precompile --trace
 
 EXPOSE 80
+EXPOSE 443
 
 CMD ["foreman","start"]
