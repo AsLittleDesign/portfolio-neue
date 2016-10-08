@@ -2,9 +2,7 @@
 # New Docker Machine: docker-machine create --driver virtualbox default
 # List Docker Machines: docker-machine ls
 # Build: docker build -t aslittledesign/portfolio-neue .
-# Run:
-#   docker run -d -p 0.0.0.0:80:80 -p 0.0.0.0:443:443 aslittledesign/portfolio-neue
-#   docker run -d -p 80:80 -p 443:443 --name=proxy --restart=always -v /var/local/nginx/certs:/etc/nginx/certs -v /etc/letsencrypt:/etc/letsencrypt -v /var/local/proxy-confs:/etc/nginx/vhost.d:ro -v /var/run/docker.sock:/tmp/docker.sock:ro jwilder/nginx-proxy
+# Run: docker run -d -p 0.0.0.0:80:80 -p 0.0.0.0:443:443 --restart=always -v /var/local/nginx/certs:/etc/nginx/certs -v /etc/letsencrypt:/etc/letsencrypt aslittledesign/portfolio-neue
 
 # Terminal in container: docker exec -it <container_id> bash
 # Vagrant:
