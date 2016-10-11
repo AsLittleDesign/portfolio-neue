@@ -45,7 +45,7 @@
 -#
   Icon Sizes:
     ICO: 16x16, 32x32, 224x24, 48x48, 64x64
-    PNG: favicon-32 32x32, favicon-57 57x57, favicon-76 76x76, favicon-96 96x96, favicon-120 120x120, favicon-128 128x128, smalltile 128x128, favicon-144 144x144, favicon-152 152x152, favicon-180 180x180, favicon-195 195x195, favicon-196 196x196, favicon-228 228x228, mediumtile 270x270, widetile 558x270
+    PNG: favicon-32 32x32, favicon-57 57x57, favicon-76 76x76, favicon-96 96x96, favicon-120 120x120, favicon-128 128x128, smalltile 128x128, favicon-144 144x144, favicon-152 152x152, favicon-180 180x180, favicon-192 192x192, favicon-195 195x195, favicon-196 196x196, favicon-228 228x228, mediumtile 270x270, widetile 558x270
 
 -# SEO / Open Graph
 %title= page_data["title"]
@@ -80,21 +80,21 @@
 -# Apple
 %meta(name="apple-mobile-web-app-capable" content="yes")
 %meta(name="apple-mobile-web-app-status-bar-style" content="black")
-%meta(rel="apple-touch-icon" href="apple-touch-icon-iphone.png")
-%meta(rel="apple-touch-icon" sizes="76x76" href="touch-icon-ipad.png")
-%meta(rel="apple-touch-icon" sizes="120x120" href="touch-icon-iphone-retina.png")
-%meta(rel="apple-touch-icon" sizes="152x152" href="touch-icon-ipad-retina.png")
-%link(rel="mask-icon" href="icon.svg" color="#000000")
+%meta(rel="apple-touch-icon" sizes="128x128" href="favicon-128.png")
+%meta(rel="apple-touch-icon" sizes="76x76" href="favicon-76.png")
+%meta(rel="apple-touch-icon" sizes="120x120" href="favicon-120.png")
+%meta(rel="apple-touch-icon" sizes="152x152" href="favicon-152.png")
+%link(rel="mask-icon" href="icon.svg" color="#ffffff")
 
 -# Android
 %meta(name="mobile-web-app-capable"        content="yes")
 %link(rel="manifest"                       href="manifest.json")
  
 -# Windows
-%meta(name="msapplication-navbutton-color" content="#000000")
+%meta(name="msapplication-navbutton-color" content="#ffffff")
 %meta(name="misapplication-tap-highlight"  content="no")
-%meta(name="msapplication-TileColor"       content="#000000")
-%meta(name="msapplication-TileImage"       content="/path/to/favicon-144.png")
+%meta(name="msapplication-TileColor"       content="#ffffff")
+%meta(name="msapplication-TileImage"       content="favicon-144.png")
 %meta(name="application-name"              content="#{ site_name }")
 %meta(name="msapplication-tooltip"         content="Tooltip")
-%meta(name="msapplication-config"          content="/path/to/ieconfig.xml")
+%meta(name="msapplication-config"          content="ieconfig.xml")
