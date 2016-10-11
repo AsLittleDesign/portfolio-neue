@@ -21,6 +21,7 @@ ADD Gemfile.lock Gemfile.lock
 
 RUN gem install bundler && bundle install --jobs 20 --retry 5
 
+# Set up NGINX
 RUN apt-get install -y nginx
 RUN mkdir -p /run/nginx
 RUN rm -rf /etc/nginx/sites-available/default
@@ -30,6 +31,11 @@ ENV APP_HOME /portfolio-neue
 RUN mkdir -p $APP_HOME
 ADD . $APP_HOME
 WORKDIR $APP_HOME
+
+# Set up ENV variables
+RUN touch .env
+RUN echo "SECRET_KEY_BASE=$(bundle exec rake secret)" >> .env
+RUN echo "SECRET_TOKEN=$(bundle exec rake secret)" >> .env
 
 RUN RAILS_ENV=production bundle exec rake assets:precompile --trace
 
