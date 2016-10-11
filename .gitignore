@@ -24,3 +24,6 @@
 
 # Ignore vagrant machine
 .vagrant/
+
+# Ignore secrets
+.env
