@@ -1,0 +1,77 @@
+!!! XML
+%urlset(xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd")
+  %url
+    %loc #{@base_url}/
+    %priority 1.0
+    %lastmod 2016-10-15
+    %changefreq monthly
+
+  %url
+    %loc #{@base_url}/photography
+    %priority 0.7
+    %lastmod 2016-10-15
+    %changefreq monthly
+
+  %url
+    %loc #{@base_url}/illustration
+    %priority 0.9
+    %lastmod 2016-10-15
+    %changefreq monthly
+
+  %url
+    %loc #{@base_url}/table
+    %priority 0.7
+    %lastmod 2016-10-15
+    %changefreq monthly
+
+  %url
+    %loc #{@base_url}/graphic-design
+    %priority 0.9
+    %lastmod 2016-10-15
+    %changefreq monthly
+
+  %url
+    %loc #{@base_url}/osx
+    %priority 0.5
+    %lastmod 2016-10-15
+    %changefreq monthly
+
+  - @photos.each do |name, data|
+    - formatted_name = name.gsub("_", "-")
+    %url
+      %loc #{@base_url}/photography/#{formatted_name}
+      %priority 0.4
+      %lastmod= data["last_modified"] || 2016-10-12
+      %changefreq monthly
+
+  - @illustrations.each do |name, data|
+    - formatted_name = name.gsub("_", "-")
+    %url
+      %loc #{@base_url}/illustration/#{formatted_name}
+      %priority 0.4
+      %lastmod= data["last_modified"] || 2016-10-12
+      %changefreq monthly
+
+  - @table_examples.each do |name, data|
+    - formatted_name = name.gsub("_", "-")
+    %url
+      %loc #{@base_url}/table/#{formatted_name}
+      %priority 0.4
+      %lastmod= data["last_modified"] || 2016-10-12
+      %changefreq monthly
+
+  - @graphics.each do |name, data|
+    - formatted_name = name.gsub("_", "-")
+    %url
+      %loc #{@base_url}/graphic-design/#{formatted_name}
+      %priority 0.4
+      %lastmod= data["last_modified"] || 2016-10-12
+      %changefreq monthly
+
+  - @osx_mockups.each do |name, data|
+    - formatted_name = name.gsub("_", "-")
+    %url
+      %loc #{@base_url}/osx/#{formatted_name}
+      %priority 0.4
+      %lastmod= data["last_modified"] || 2016-10-12
+      %changefreq monthly

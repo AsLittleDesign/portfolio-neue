@@ -1,6 +1,7 @@
 
 homepage:
   title: Homepage Redesign
+  last_modified: 2016-10-15
   cta: New Homepage
   description: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum voluptatum voluptates laboriosam quibusdam impedit beatae suscipit aperiam vero nostrum sunt sequi libero natus, deserunt mollitia, officia repellendus pariatur, nulla a.
   url: https://d2vez5w0ugqe83.cloudfront.net/table/homepage.png
@@ -11,6 +12,7 @@ homepage:
 
 table_layout:
   title: Improving Interface Clarity
+  last_modified: 2016-10-15
   cta: Interface Clarity
   description: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum voluptatum voluptates laboriosam quibusdam impedit beatae suscipit aperiam vero nostrum sunt sequi libero natus, deserunt mollitia, officia repellendus pariatur, nulla a.
   url: https://d2vez5w0ugqe83.cloudfront.net/table/table-layout.png
@@ -21,6 +23,7 @@ table_layout:
 
 iconography:
   title: Iconographic Unity
+  last_modified: 2016-10-15
   cta: Table Iconography
   description: One of the goals I set while working at Table was to make the product, and its functionality clear. I saw that one way we could build towards this goal was to create a unified language of symbols that were understandable and representative of the brand, as the current icons used were often vague and lacked consistency. My team and I developed a system for creating a brand-unique set of icons that could be used across our apps, and website.
   url: https://d2vez5w0ugqe83.cloudfront.net/table/icons.svg
@@ -30,6 +33,7 @@ iconography:
 
 media_viewer:
   title: Adding Functionality
+  last_modified: 2016-10-15
   cta: Adding Functionality
   description: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum voluptatum voluptates laboriosam quibusdam impedit beatae suscipit aperiam vero nostrum sunt sequi libero natus, deserunt mollitia, officia repellendus pariatur, nulla a.
   url: https://d2vez5w0ugqe83.cloudfront.net/table/media-viewer.png

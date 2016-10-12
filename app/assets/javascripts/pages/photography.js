@@ -619,7 +619,7 @@ PositionImages = {
         hoverEl = document.createElement("div");
     el.style.backgroundImage  = "url(" + img.url + ")";
     el.setAttribute("class", "photo");
-    el.setAttribute("href", "/photography/" + img.identifier);
+    el.setAttribute("href", "/photography/" + img.identifier.split("_").join("-"));
     el = this.setImagePosition(img, el, index);
 
     hoverEl.setAttribute("class", "photo--hover")

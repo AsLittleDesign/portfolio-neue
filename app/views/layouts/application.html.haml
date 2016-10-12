@@ -1,5 +1,5 @@
 !!!
-%html
+%html(lang="en")
   %head
     - description = yield :description
     - canonical_url = yield :canonical_url
@@ -10,13 +10,16 @@
 
     =render "partials/meta"
 
-    = stylesheet_link_tag 'application', media: 'all'
-
     = yield :head
 
-    = stylesheet_link_tag "pages/#{ yield :page_style }", media: 'all'
-
   %body
+    %noscript
+      .noscript.container
+        This website
+        %b will not
+        work as intended without Javascript enabled. Here are  
+        = link_to "instructions on how to enable Javascript in your web browser.", "http://www.enable-javascript.com/", :target => "_blank"
+
     .wrapper(js-blur="false")
       = yield
 
@@ -27,4 +30,6 @@
     .pop(js-pop--wrapper)
       .pop--background(js-pop--background)
 
+    = stylesheet_link_tag 'application', media: 'all'
+    = stylesheet_link_tag "pages/#{ yield :page_style }", media: 'all'
     =render "partials/scripts"    

@@ -40,13 +40,16 @@ gem 'foreman'
 # Use Unicorn as the app server
 gem 'unicorn'
 
-# Fontcustom for icon font generation
-gem 'fontcustom'
-
 # For secrets
 gem 'dotenv-rails'
 
 group :development, :test do
+  # Fontcustom for icon font generation
+  gem 'fontcustom'
+
+  # Debugger
+  gem 'pry'
+
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
 

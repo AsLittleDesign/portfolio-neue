@@ -37,3 +37,19 @@ body
 
   &[js-blur="true"]
     filter: blur(20px)
+
+.noscript
+  background-color: $color--red
+  color: rgba($color--white, 0.8)
+  text-align: center
+  padding:
+    top: $vertical-spacing--medium
+    bottom: $vertical-spacing--medium
+
+  > a,
+  > b
+    color: $color--white
+    font-weight: bold
+
+    &:visited
+      color: $color--white

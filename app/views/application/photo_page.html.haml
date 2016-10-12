@@ -5,7 +5,7 @@
 - content_for :page_style do "photo_page" end
 
 .container.photo--top
-  = link_to (eval "#{@type}_path"), :class => "button m-black photo--back-navigation" do
+  = link_to (eval "#{@type}_path".gsub("-", "_")), :class => "button m-black photo--back-navigation" do
     %span.icon--arrow--left
     = @type.titleize
 

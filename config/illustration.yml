@@ -1,5 +1,7 @@
+
 steve_jobs:
   title: Steve Jobs Portrait
+  last_modified: 2016-10-15
   description: Based on the book cover of the 2011 biography written by Walter Isaacson, this charcoal portrait was illustrated in 2012 on 24x36 charcoal paper in honor of the late Steve Jobs. Completed over the course of 40 hours, it was a new experience for me working on this level of detail, and also one of my first ventures into portraiture.
   url: https://d2vez5w0ugqe83.cloudfront.net/illustration/jobs.jpg
   tags:
@@ -9,6 +11,7 @@ steve_jobs:
 
 faraway:
   title: Far Away
+  last_modified: 2016-10-15
   description: Based on the book cover of the 2011 biography written by Walter Isaacson, this charcoal portrait was illustrated in 2012 on 24x36 charcoal paper in honor of the late Steve Jobs. Completed over the course of 40 hours, it was a new experience for me working on this level of detail, and also one of my first ventures into portraiture.
   url: https://d2vez5w0ugqe83.cloudfront.net/illustration/faraway.jpg
   tags:
@@ -18,6 +21,7 @@ faraway:
 
 yoda:
   title: Yoda
+  last_modified: 2016-10-15
   description: Based on the book cover of the 2011 biography written by Walter Isaacson, this charcoal portrait was illustrated in 2012 on 24x36 charcoal paper in honor of the late Steve Jobs. Completed over the course of 40 hours, it was a new experience for me working on this level of detail, and also one of my first ventures into portraiture.
   url: https://d2vez5w0ugqe83.cloudfront.net/illustration/yoda.jpg
   tags:
@@ -28,6 +32,7 @@ yoda:
 
 war:
   title: War
+  last_modified: 2016-10-15
   description: Based on the book cover of the 2011 biography written by Walter Isaacson, this charcoal portrait was illustrated in 2012 on 24x36 charcoal paper in honor of the late Steve Jobs. Completed over the course of 40 hours, it was a new experience for me working on this level of detail, and also one of my first ventures into portraiture.
   url: https://d2vez5w0ugqe83.cloudfront.net/illustration/war.png
   tags:
@@ -38,6 +43,7 @@ war:
 
 missile:
   title: Missile
+  last_modified: 2016-10-15
   description: Based on the book cover of the 2011 biography written by Walter Isaacson, this charcoal portrait was illustrated in 2012 on 24x36 charcoal paper in honor of the late Steve Jobs. Completed over the course of 40 hours, it was a new experience for me working on this level of detail, and also one of my first ventures into portraiture.
   url: https://d2vez5w0ugqe83.cloudfront.net/illustration/missile.png
   tags:

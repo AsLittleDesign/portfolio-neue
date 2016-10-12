@@ -1,15 +1,17 @@
 Rails.application.routes.draw do
+  require 'pry'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
   root :to => 'application#index'
+  get 'sitemap' => 'sitemap#index'
 
   get 'photography' => 'application#photography'
   scope "/photography" do
     photos = YAML.load_file("#{Rails.root}/config/photography.yml")
     photos.each do |name, data|
-      get name => 'application#photo_page'
+      get name.gsub("_", "-") => 'application#photo_page'
     end
   end
 
@@ -17,7 +19,7 @@ Rails.application.routes.draw do
   scope "/table" do
     photos = YAML.load_file("#{Rails.root}/config/table.yml")
     photos.each do |name, data|
-      get name => 'application#photo_page'
+      get name.gsub("_", "-") => 'application#photo_page'
     end
   end
 
@@ -25,7 +27,7 @@ Rails.application.routes.draw do
   scope "/illustration" do
     photos = YAML.load_file("#{Rails.root}/config/illustration.yml")
     photos.each do |name, data|
-      get name => 'application#photo_page'
+      get name.gsub("_", "-") => 'application#photo_page'
     end
   end
 
@@ -33,15 +35,15 @@ Rails.application.routes.draw do
   scope "/osx" do
     photos = YAML.load_file("#{Rails.root}/config/osx.yml")
     photos.each do |name, data|
-      get name => 'application#photo_page'
+      get name.gsub("_", "-") => 'application#photo_page'
     end
   end
 
-  get 'graphic_design' => 'application#graphic_design'
-  scope "/graphic_design" do
-    photos = YAML.load_file("#{Rails.root}/config/graphic_design.yml")
+  get 'graphic-design' => 'application#graphic_design'
+  scope "/graphic-design" do
+    photos = YAML.load_file("#{Rails.root}/config/graphic-design.yml")
     photos.each do |name, data|
-      get name => 'application#photo_page'
+      get name.gsub("_", "-") => 'application#photo_page'
     end
   end
 

@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
     @metadata = {
       "title" => "Portfolio",
       "description" => "Explore Daves best design and artwork across many mediums and practices.",
-      "url" => "http://davesmccarthy.com",
+      "url" => "http://aslittledesign.com",
       "type" => "website",
       "card" => "summary_large_image",
       "image" => {
@@ -30,7 +30,7 @@ class ApplicationController < ActionController::Base
     @metadata = {
       "title" => "Photography",
       "description" => "Explore Dave's best photography work, from portraiture to landscape photos.",
-      "url" => "http://davesmccarthy.com/photography",
+      "url" => "http://aslittledesign.com/photography",
       "type" => "website",
       "card" => "summary_large_image",
       "image" => {
@@ -47,7 +47,7 @@ class ApplicationController < ActionController::Base
     @metadata = {
       "title" => "Illustration",
       "description" => "Explore Dave's best illustration work, from charcoal renderings to digital paintings.",
-      "url" => "http://davesmccarthy.com/illustration",
+      "url" => "http://aslittledesign.com/illustration",
       "type" => "website",
       "card" => "summary_large_image",
       "image" => {
@@ -64,7 +64,7 @@ class ApplicationController < ActionController::Base
     @metadata = {
       "title" => "Table.co",
       "description" => "Explore Dave's best graphic design work, from logos to watchfaces.",
-      "url" => "http://davesmccarthy.com/graphic_design",
+      "url" => "http://aslittledesign.com/graphic_design",
       "type" => "website",
       "card" => "summary_large_image",
       "image" => {
@@ -76,12 +76,12 @@ class ApplicationController < ActionController::Base
   end
 
   def graphic_design
-    @graphics = YAML.load_file("#{Rails.root}/config/graphic_design.yml")
+    @graphics = YAML.load_file("#{Rails.root}/config/graphic-design.yml")
 
     @metadata = {
       "title" => "Graphic Design",
       "description" => "Explore Dave's best graphic design work, from logos to watchfaces.",
-      "url" => "http://davesmccarthy.com/graphic_design",
+      "url" => "http://aslittledesign.com/graphic_design",
       "type" => "website",
       "card" => "summary_large_image",
       "image" => {
@@ -98,7 +98,7 @@ class ApplicationController < ActionController::Base
     @metadata = {
       "title" => "OS X 'Everest'",
       "description" => "Explore Dave's concept for a new version of OS X, created before the reveal of OS X 10.10 'Yosemite'.",
-      "url" => "http://davesmccarthy.com/osx",
+      "url" => "http://aslittledesign.com/osx",
       "type" => "website",
       "card" => "summary_large_image",
       "image" => {
@@ -112,7 +112,7 @@ class ApplicationController < ActionController::Base
   def photo_page
     uri = URI(request.original_url).path.split('/')
     @type = uri[-2]
-    page = uri.last
+    page = uri.last.gsub("-", "_")
     photos = YAML.load_file("#{Rails.root}/config/#{@type}.yml")
 
     @photo = photos[page]
@@ -120,7 +120,7 @@ class ApplicationController < ActionController::Base
     @metadata = {
       "title" => @photo["title"],
       "description" => @photo["description"].truncate(155),
-      "url" => "http://davesmccarthy.com/#{@type}/#{page}",
+      "url" => "http://aslittledesign.com/#{@type}/#{page}",
       "type" => "website",
       "card" => "summary_large_image",
       "image" => {

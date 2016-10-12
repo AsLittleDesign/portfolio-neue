@@ -1,6 +1,7 @@
 
 osx_intro:
   title: Introducing OS X 10.10 'Everest'.
+  last_modified: 2016-10-15
   cta: "Explore Everest"
   description: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum voluptatum voluptates laboriosam quibusdam impedit beatae suscipit aperiam vero nostrum sunt sequi libero natus, deserunt mollitia, officia repellendus pariatur, nulla a.
   url: https://d2vez5w0ugqe83.cloudfront.net/osx/desktop.jpg
@@ -10,6 +11,7 @@ osx_intro:
 
 control_center:
   title: Control Center, now on your Mac.
+  last_modified: 2016-10-15
   cta: Control Center
   description: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum voluptatum voluptates laboriosam quibusdam impedit beatae suscipit aperiam vero nostrum sunt sequi libero natus, deserunt mollitia, officia repellendus pariatur, nulla a.
   transparent: true
@@ -20,6 +22,7 @@ control_center:
 
 itunes:
   title: iTunes gets a brand new look.
+  last_modified: 2016-10-15
   cta: iTunes
   description: Adipisicing elit. Earum voluptatum voluptates laboriosam quibusdam impedit beatae suscipit aperiam vero nostrum sunt sequi libero natus, deserunt mollitia, officia repellendus pariatur, nulla a.
   transparent: true
@@ -30,6 +33,7 @@ itunes:
 
 notification_center:
   title: Notification Center
+  last_modified: 2016-10-15
   description: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum voluptatum voluptates laboriosam quibusdam impedit beatae suscipit aperiam vero nostrum sunt sequi libero natus, deserunt mollitia, officia repellendus pariatur, nulla a.
   transparent: true
   url: https://d2vez5w0ugqe83.cloudfront.net/osx/notification-center--mockup.png
