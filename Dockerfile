@@ -17,8 +17,8 @@ RUN bundle install --jobs 20 --retry 5
 # Set up NGINX
 ADD container/nginx_signing.key /var/www/nginx_signing.key
 RUN apt-key add /var/www/nginx_signing.key
-RUN echo "deb http://nginx.org/packages/mainline/ubuntu/ precise nginx" >> /etc/apt/sources.list
-RUN echo "deb-src http://nginx.org/packages/mainline/ubuntu/ precise nginx" >> /etc/apt/sources.list
+RUN echo "deb http://nginx.org/packages/mainline/ubuntu/ xenial nginx" >> /etc/apt/sources.list
+RUN echo "deb-src http://nginx.org/packages/mainline/ubuntu/ xenial nginx" >> /etc/apt/sources.list
 RUN apt-get update && apt-get install -y nginx
 
 RUN mkdir -p /run/nginx
