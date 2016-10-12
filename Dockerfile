@@ -13,7 +13,7 @@ FROM ruby:2.3
 
 MAINTAINER "Dave Scott McCarthy <dave@aslittledesign.com>"
 
-RUN apt-get update -qq && apt-get dist-upgrade && apt-get install -y apt-utils build-essential patch curl git ssh vim imagemagick libmagickwand-dev libcurl4-openssl-dev nginx
+RUN apt-get update -qq && apt-get dist-upgrade -y && apt-get install -y apt-utils build-essential patch curl git ssh vim imagemagick libmagickwand-dev libcurl4-openssl-dev nginx
 
 WORKDIR /tmp
 ADD Gemfile Gemfile
