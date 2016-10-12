@@ -13,6 +13,7 @@ FROM ruby:2.3
 
 MAINTAINER "Dave Scott McCarthy <dave@aslittledesign.com>"
 
+RUN apt-get update -qq && apt-get install -y software-properties-common
 # Get latest stable nginx build
 RUN add-apt-repository ppa:nginx/2.9.5
 RUN apt-get update -qq && apt-get install -y apt-utils build-essential patch curl git ssh vim imagemagick libmagickwand-dev libcurl4-openssl-dev nginx
