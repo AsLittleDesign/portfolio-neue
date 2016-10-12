@@ -27,7 +27,7 @@ WORKDIR /tmp
 ADD Gemfile Gemfile
 ADD Gemfile.lock Gemfile.lock
 
-RUN gem install bundler && bundle install --jobs 20 --retry 5
+RUN gem install bundler && rbenv rehash && bundle install --jobs 20 --retry 5
 
 # Set up NGINX
 ADD container/nginx_signing.key /var/www/nginx_signing.key
