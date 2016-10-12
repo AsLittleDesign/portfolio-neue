@@ -22,8 +22,10 @@ ADD Gemfile.lock Gemfile.lock
 RUN gem install bundler && bundle install --jobs 20 --retry 5
 
 # Set up NGINX
-RUN apt-get install -y python-software-properties software-properties-common
-RUN add-apt-repository ppa:nginx/1.9.5 && apt-get update && apt-get install -y nginx
+RUN apt-key add container/nginx_signing.key
+RUN echo "deb http://nginx.org/packages/mainline/ubuntu/ precise nginx" >> /etc/apt/sources.list
+RUN echo "deb-src http://nginx.org/packages/mainline/ubuntu/ precise nginx" >> /etc/apt/sources.list
+RUN apt-get update && apt-get install -y nginx
 
 RUN mkdir -p /run/nginx
 RUN rm -rf /etc/nginx/sites-available/default
