@@ -15,11 +15,10 @@
     = yield :head
 
     -# Inline page-specific styles
-    - styles =
-      - if Rails.env.production?
-        - Rails.application.assets_manifest.files.values.map{|v| v['logical_path']}.include?("#{ yield :page_style }.css").to_s
-      - else
-        - Rails.application.assets.find_asset("pages/#{ yield :page_style }.sass").to_s
+    - if Rails.env.production?
+      - styles = Rails.application.assets_manifest.files.values.map{|v| v['logical_path']}.include?("#{ yield :page_style }.css").to_s
+    - else
+      - styles = Rails.application.assets.find_asset("pages/#{ yield :page_style }.sass").to_s
 
     - if styles
       :css
