@@ -16,7 +16,7 @@
 
     -# Inline page-specific styles
     - if Rails.env.production?
-      - styles = Rails.application.assets_manifest.files.values.map{|v| v['logical_path']}.include?("#{ yield :page_style }.css").to_s
+      - styles = Rails.application.assets_manifest.files.values.map{|v| v['logical_path']}.include?("#{ yield :page_style }.sass").to_s
     - else
       - styles = Rails.application.assets.find_asset("pages/#{ yield :page_style }.sass").to_s
 
