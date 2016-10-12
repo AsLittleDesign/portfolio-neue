@@ -14,6 +14,13 @@ ADD Gemfile.lock Gemfile.lock
 
 RUN bundle install --jobs 20 --retry 5
 
+# Set up NGINX
+ADD container/nginx_signing.key /var/www/nginx_signing.key
+RUN apt-key add /var/www/nginx_signing.key
+RUN echo "deb http://nginx.org/packages/mainline/ubuntu/ precise nginx" >> /etc/apt/sources.list
+RUN echo "deb-src http://nginx.org/packages/mainline/ubuntu/ precise nginx" >> /etc/apt/sources.list
+RUN apt-get update && apt-get install -y nginx
+
 RUN mkdir -p /run/nginx
 RUN rm -rf /etc/nginx/sites-available/default
 ADD container/nginx.conf /etc/nginx/nginx.conf
