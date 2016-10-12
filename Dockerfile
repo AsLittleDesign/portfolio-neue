@@ -4,30 +4,40 @@
 # Run: docker run -d -p 0.0.0.0:80:80 -p 0.0.0.0:443:443 --restart=always -v /var/local/nginx/certs:/etc/nginx/certs -v /etc/letsencrypt:/etc/letsencrypt aslittledesign/portfolio-neue
 # Terminal in container: docker exec -it <container_id> bash
 
-# Available vers here https://registry.hub.docker.com/_/ruby
 FROM ubuntu:16.04
-
 MAINTAINER "Dave Scott McCarthy <dave@aslittledesign.com>"
 
-RUN apt-get update -qq && apt-get install -y apt-utils build-essential patch curl git ssh vim imagemagick libmagickwand-dev libcurl4-openssl-dev
+# Ignore TTY warnings on install
+ENV DEBIAN_FRONTEND noninteractive
 
-# Install Ruby 2.3
-RUN git clone https://github.com/rbenv/rbenv.git ~/.rbenv
-RUN echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
-RUN echo 'eval "$(rbenv init -)"' >> ~/.bashrc
-RUN exec $SHELL
+RUN apt-get update -qq && \
+            apt-get install -y -qq \
+            apt-utils \
+            build-essential \
+            patch \
+            curl \
+            git \
+            ssh \
+            vim \
+            imagemagick \
+            libmagickwand-dev \
+            libcurl4-openssl-dev
 
-RUN git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
-RUN echo 'export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"' >> ~/.bashrc
-RUN exec $SHELL
+ENV RUBY_VERSION 2.3.0
 
-RUN rbenv install 2.3 && rbenv global 2.3 && ruby -v
+RUN echo 'gem: --no-document' >> /usr/local/etc/gemrc &&\
+    mkdir /src && cd /src && git clone https://github.com/sstephenson/ruby-build.git &&\
+    cd /src/ruby-build && ./install.sh &&\
+    cd / && rm -rf /src/ruby-build && ruby-build $RUBY_VERSION /usr/local
+
+RUN gem update --system &&\
+    gem install bundler
 
 WORKDIR /tmp
 ADD Gemfile Gemfile
 ADD Gemfile.lock Gemfile.lock
 
-RUN gem install bundler && rbenv rehash && bundle install --jobs 20 --retry 5
+RUN bundle install --jobs 20 --retry 5
 
 # Set up NGINX
 ADD container/nginx_signing.key /var/www/nginx_signing.key
