@@ -1,19 +1,27 @@
 
 # SSL Setup Details: https://zettabyte.me/lets-encrypt-with-docker-nginx-proxy/
-
 # Build: docker build -t aslittledesign/portfolio-neue .
-
 # Run: docker run -d -p 0.0.0.0:80:80 -p 0.0.0.0:443:443 --restart=always -v /var/local/nginx/certs:/etc/nginx/certs -v /etc/letsencrypt:/etc/letsencrypt aslittledesign/portfolio-neue
-
 # Terminal in container: docker exec -it <container_id> bash
 
-
 # Available vers here https://registry.hub.docker.com/_/ruby
-FROM ruby:2.3
+FROM ubuntu:16.04
 
 MAINTAINER "Dave Scott McCarthy <dave@aslittledesign.com>"
 
 RUN apt-get update -qq && apt-get install -y apt-utils build-essential patch curl git ssh vim imagemagick libmagickwand-dev libcurl4-openssl-dev
+
+# Install Ruby 2.3
+RUN git clone https://github.com/rbenv/rbenv.git ~/.rbenv
+RUN echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
+RUN echo 'eval "$(rbenv init -)"' >> ~/.bashrc
+RUN exec $SHELL
+
+RUN git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
+RUN echo 'export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"' >> ~/.bashrc
+RUN exec $SHELL
+
+RUN rbenv install 2.3 && rbenv global 2.3 && ruby -v
 
 WORKDIR /tmp
 ADD Gemfile Gemfile
