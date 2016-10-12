@@ -13,7 +13,9 @@ FROM ruby:2.3
 
 MAINTAINER "Dave Scott McCarthy <dave@aslittledesign.com>"
 
-RUN apt-get update -qq && apt-get install -y apt-utils build-essential patch curl git ssh vim imagemagick libmagickwand-dev libcurl4-openssl-dev
+# Get latest stable nginx build
+RUN add-apt-repository ppa:nginx/2.9.5
+RUN apt-get update -qq && apt-get install -y apt-utils build-essential patch curl git ssh vim imagemagick libmagickwand-dev libcurl4-openssl-dev nginx
 
 WORKDIR /tmp
 ADD Gemfile Gemfile
@@ -22,7 +24,6 @@ ADD Gemfile.lock Gemfile.lock
 RUN gem install bundler && bundle install --jobs 20 --retry 5
 
 # Set up NGINX
-RUN apt-get install -y nginx
 RUN mkdir -p /run/nginx
 RUN rm -rf /etc/nginx/sites-available/default
 ADD container/nginx.conf /etc/nginx/nginx.conf
