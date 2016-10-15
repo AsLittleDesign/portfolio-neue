@@ -1,5 +1,5 @@
 
-$ink--size: 500px
+$ink--size: 300px
 
 .button
   transition: all 0.3s ease-in-out
@@ -109,24 +109,26 @@ $ink--size: 500px
     display: flex
     align-items: center
     justify-content: center
+    transform: scale(1)
     width: $ink--size
     height: $ink--size
     pointer-events: none
     z-index: 1
 
   &--ink
+    opacity: 0
+    width: $ink--size
+    height: $ink--size
     animation:
       name: ink-drop
-      duration: 0.75s
+      duration: 0.5s
     border-radius: 100%
 
 @keyframes ink-drop
   0%
-    width: 1px
-    height: 1px
+    transform: scale(0.05)
     opacity: 1
 
   100%
-    width: $ink--size
-    height: $ink--size
+    transform: scale(1)
     opacity: 0

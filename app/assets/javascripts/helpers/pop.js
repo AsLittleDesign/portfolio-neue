@@ -1,5 +1,5 @@
 
-var menus = [
+var menuData = [
   { id: "follow",
     options: [
       { id: "facebook",
@@ -76,241 +76,283 @@ var menus = [
 ];
 
 
-function startActionMenu () {
-  menus.forEach(function (menu) {
-    var toggle = $("[js-menu=" + menu.id +"]");
-  });
-}
-
-
-// ActionMenu Constructor
 function ActionMenu (data) {
   this.data = data;
+  this.name = data.id;
 }
 
+
 ActionMenu.prototype = {
-  // Initialize the menu;
+  animationLength: 200,
+  menuSpacing: 8,
+  state: {
+    active: false
+  },
+
+
+  // Initialize menus
   init: function () {
+    this.createOptions();
     this.createMenu();
-    this.appendMenu();
-
-    var selector = "[js-pop--toggle=" + this.data.id +"]";
-    delegateEvent("click", selector, function (e) {
-      if (!window.clickDisabled) {
-        this.toggleMenu(e);
-      }
-    }.bind(this));
+    this.append();
+    this.start();
   },
 
 
-  toggleMenu: function (e) {
-    var menu = $("[js-pop--menu='" + this.data.id + "']")[0],
-        active;
-    
-    // Toggle page-wide changes for modal behavior.
-    toggleScroll();
-    toggleBlur();
-
-    toggleClass($("[js-pop--background]")[0], "s-active");
-
-    menu.style.display = "";
-
-    // Determine if menu is active.
-    if (this.active != undefined) {
-      active = this.active;
-
-    } else {
-      active = menu.classList.contains("s-active") ? true : false;
-    }
-
-    // Get information on the element, position, and size of the toggle
-    var toggle = $("[js-pop--toggle='" + this.data.id + "']")[0],
-        togglePos = {
-          top: getOffsetTop(toggle),
-          bottom: getOffsetTop(toggle) + toggle.offsetHeight,
-          left: getOffsetLeft(toggle),
-          right: getOffsetLeft(toggle) + toggle.offsetWidth,
-          width: toggle.offsetWidth,
-          height: toggle.offsetHeight
-        };
-
-    var menuWidth = parseFloat(window.getComputedStyle(menu).getPropertyValue("width"), 10);
-    var menuHeight = parseFloat(window.getComputedStyle(menu).getPropertyValue("height"), 10);
-
-    if (!active) {
-      // Set background to toggle menu
-      $("[js-pop--background]")[0].setAttribute("js-pop--toggle", this.data.id);
-
-      // Clone the toggle, and set specific style information
-      var clone      = toggle.cloneNode(true),
-          cloneStyle = "\
-            left: " + togglePos.left + "px;\
-            top: " + togglePos.top + "px;\
-            height: " + togglePos.height + "px;\
-            width: " + togglePos.width + "px;\
-            position: absolute;\
-            z-index: 2;";
-
-      clone.setAttribute("style", cloneStyle);
-
-      // Add classes to the clone.
-      // NOTE: Must be separate due to the toggle-clone
-      // class having a transition property set on it.
-      toggleClass(clone, "toggle-clone");
-      toggleClass(clone, "s-active");
-
-      var cloneList = $(".toggle-clone");
-      if (cloneList[0]) {
-        forEachNode(cloneList, function (node) {
-          node.remove();
-        });
-      }
-      // Finish up with the clone by appending it to the 
-      // DOM and adding  it as a property on this prototype.
-      $("[js-pop--wrapper]")[0].appendChild(clone);
-
-      if (this.removeClone) {
-        setTimeout(function () {
-          this.clone = clone;
-        }.bind(this), 350);
-      } else {
-        this.clone = clone;
-      }
-
-      // Hide original toggle
-      toggle.style.opacity    = "0";
-      toggle.style.visibility = "hidden";
-
-      // Get positioning, and origin points for the menu.
-      var originX = "right",
-          originY = "top",
-          posLeft = (togglePos.right - menuWidth),
-          posTop  = togglePos.top;
-
-      if (togglePos.bottom + menuHeight - window.scrollY + 10 >= window.innerHeight) {
-        originY = "bottom";
-        posTop  = togglePos.top - menuHeight - 20 + togglePos.height;
-      }
-
-      if (togglePos.right <= menuWidth + 10) {
-        originX = "left";
-        posLeft = togglePos.left;
-      }
-
-      // Set menu styles to position and set origin points
-      // for the animation.
-      var menuStyle = "\
-        will-change: transform;\
-        left: " + posLeft + "px;\
-        top: " + posTop + "px;\
-        transform-origin: " + originX + " " + originY + ";\
-        -ms-transform-origin: " + originX + " " + originY + ";\
-        -webkit-transform-origin: " + originX + " " + originY + ";\
-        -moz-transform-origin: " + originX + " " + originY + ";\
-        " + menu.getAttribute("style");
-
-      menu.setAttribute("style", menuStyle);
-
-      if (originX === "right") {
-        toggleClass(menu, "m-right", true);
-      }
-
-      // Set into motion the animation
-      toggleClass(menu, "s-active");
-      if (originY === "top") {
-        menu.style.transform = "translateY(" + (togglePos.height + 10) + "px) scale(1)";
-      } else {
-        menu.style.transform = "translateY(" + -(togglePos.height - 10) + "px) scale(1)";
-      }
-
-    // Remove cloned toggle if the menu is currently active
-    } else {
-      // Remove background toggling the menu
-      $("[js-pop--background]")[0].removeAttribute("js-pop--toggle");
-
-      menu.style.transform = "";
-      setTimeout(function () {
-        toggleClass(menu, "s-active");
-        toggleClass(menu, "m-right", false);
-
-        // Show original toggle
-        toggle.style.opacity    = "1";
-        toggle.style.visibility = "visible";
-
-        var menuStyle = "\
-          will-change: null;\
-          left: null;\
-          top: null;\
-          transform-origin: null;\
-          -ms-transform-origin: null;\
-          -webkit-transform-origin: null;\
-          -moz-transform-origin: null;\
-          ";
-
-        menu.setAttribute("style", menuStyle);
-
-        toggleClass(this.clone, "s-active");
-        this.removeClone = setTimeout(function () {
-          if (this.clone) {
-            this.clone.remove(true);
-            // $("[js-pop--wrapper]")[0].removeChild(this.clone);
-            this.removeClone = "";
-          }
-        }.bind(this), 350);
-      }.bind(this), 200);
-    }
-
-    this.active = !active;
-  },
-
-
+  // Create the menu element
   createMenu: function () {
-    // Create options HTML
-    var options = [];
-    this.data.options.forEach(function(option) {
-      var attributes,
-          rel = option.id === "twitter" ? "rel='me'" : "";
-      
-      if (option.href) {
-        attributes = "href='" + option.href + "' target='_blank'";
-      }
+    var menu = document.createElement("div");
+    menu.setAttribute("class", "menu");
+    menu.innerHTML = "<div class='menu--close' data-menu-toggle='" + this.name + "'>Cancel</div>";
 
-      var optionEl = [
-        "<a " + rel + " class='menu--option' js-pop--option='" + this.data.id + "-" + option.id + "' " + attributes + ">",
-          "<span class='menu--symbol icon--" + option.symbol + "'></span>",
-          "<span class='menu--option-text'>" + option.text + "</span>",
-        "</a>"
-      ].join("\n");
+    // Append options to menu.
+    // Calling reverse() is due to insertBefore reversing the array.
+    this.options.reverse().forEach(function (option) {
+      menu.insertBefore(option, menu.firstChild);
+    });
 
-      options.push(optionEl);
-    }.bind(this));
+    this.menu = menu;
+  },
 
-    // Create menu HTML
-    var element = [
-      "<div class='menu' style='display: none;' js-pop--menu='" + this.data.id + "'>",
-        options,
-        "<div class='menu--close' js-pop--toggle='" + this.data.id + "'>Cancel</div>",
-      "</div>"
-    ];
 
-    // Flatten array
-    element = [].concat.apply([], element).join("\n");
-    this.html = element;
-
-    this.data.options.forEach(function (option) {
-      if (option.action) {
-        delegateEvent("click", "[js-pop--option='" + this.data.id + "-" + option.id + "']", option.action);
-      }
+  createOptions: function () {
+    this.options = [];
+    this.data.options.forEach(function (optionData, index) {
+      var option = this.createOption(optionData);
+      this.options.push(option);
     }.bind(this));
   },
 
 
-  appendMenu: function () {
-    if (this.html) {
-      $("[js-pop--wrapper]")[0].insertAdjacentHTML('beforeend', this.html);
+  createOption: function (optionData) {
+    // Create link element to be our option.
+    var option = document.createElement('a');
+    option.setAttribute("class", "menu--option")
+    
+    // Set rel if it's a Twitter button
+    if (optionData.id === "twitter") {
+      option.setAttribute("rel", "me")
+    };
+
+    // Set href and target if it's a link
+    if (optionData.href) {
+      option.setAttribute("href", optionData.href);
+      option.setAttribute("target", "_blank");
+    }
+
+    // Append option content
+    option.innerHTML = [
+      "<span class='menu--symbol icon--" + optionData.symbol + "'></span>",
+      "<span class='menu--option-text'>" + optionData.text + "</span>",
+    ].join("\n");
+
+    // Add event listener if there is an action
+    if (optionData.action) {
+      option.addEventListener("click", optionData.action);
+    }
+
+    return option;
+  },
+
+
+  append: function () {
+    $("[data-menu-wrapper]")[0].appendChild(this.menu);
+  },
+
+
+  getScrollOffsets: function () {
+    var doc = document, w = window;
+    var x, y, docEl;
+    
+    if ( typeof w.pageYOffset === 'number' ) {
+        x = w.pageXOffset;
+        y = w.pageYOffset;
+    } else {
+        docEl = (doc.compatMode && doc.compatMode === 'CSS1Compat')?
+                doc.documentElement: doc.body;
+        x = docEl.scrollLeft;
+        y = docEl.scrollTop;
+    }
+    return {x:x, y:y};
+  },
+
+
+  getPosition: function (element) {
+    var scrollOffset = this.getScrollOffsets(),
+        left = 0,
+        top = 0,
+        props;
+    
+    if (element.getBoundingClientRect) {
+      props = element.getBoundingClientRect();
+      left = props.left + scrollOffset.x;
+      top = props.top + scrollOffset.y;
+
+    } else { // for older browsers
+      do {
+        left += element.offsetLeft;
+        top += element.offsetTop;
+      } while ( (el = el.offsetParent) );
+    }
+
+    return {
+      top: top,
+      bottom: top + element.offsetHeight,
+      left: left,
+      right: left + element.offsetWidth,
+      width: element.offsetWidth,
+      height: element.offsetHeight
+    };
+  },
+
+
+  checkPosition: function (toggle) {
+    var menuSize = {
+          width: this.menu.offsetWidth,
+          height: this.menu.offsetHeight
+        },
+        togglePos = this.getPosition(toggle),
+        posX, posY;
+
+    if (togglePos.right - menuSize.width - this.menuSpacing < 0) {
+      posX = "right";
+    
+    } else {
+      posX = "left";
+    }
+
+    if (togglePos.bottom + menuSize.height + this.menuSpacing > window.innerHeight + window.scrollY) {
+      posY = "top";
+    
+    } else {
+      posY = "bottom";
+    }
+
+    return {
+      x: posX,
+      y: posY
+    };
+  },
+  
+
+  setStyle: function (toggle) {
+    var togglePos = this.getPosition(toggle),
+        menuPos = this.checkPosition(toggle),
+        originX, originY, top, left, translateDist;
+
+    if (menuPos.x === "left") {
+      originX = "right";
+      left = togglePos.right - this.menu.offsetWidth;
+    
+    } else {
+      originX = "left";
+      left = togglePos.left;
+    }
+
+    if (menuPos.y === "bottom") {
+      originY = "top";
+      top = togglePos.top;
+      translateDist = togglePos.height + this.menuSpacing;
 
     } else {
-      console.error("this.html is undefined. Be sure to call this.createMenu() before calling this.appendMenu().");
+      originY = "bottom";
+      top = togglePos.bottom - this.menu.offsetHeight; 
+      translateDist = -this.menuSpacing - togglePos.height;
     }
+
+    menuStyle = "\
+      top: " + top + "px;\
+      left: " + left + "px;\
+      opacity: 1;\
+      pointer-events: initial;\
+      transform: translate3d(0," + translateDist + "px, 0) scale(1);\
+      transform-origin: " + originX + " " + originY + ";\
+      -ms-transform-origin: " + originX + " " + originY + ";\
+      -webkit-transform-origin: " + originX + " " + originY + ";\
+      -moz-transform-origin: " + originX + " " + originY + ";"
+
+    this.menu.setAttribute("style", menuStyle);
+  },
+
+
+  cloneToggle: function (toggle) {
+    this.clone = toggle.cloneNode(true);
+    var togglePos = this.getPosition(toggle),
+        cloneStyle = "\
+        top: " + togglePos.top + "px;\
+        left: " + togglePos.left + "px;\
+        position: absolute;\
+        width: " + togglePos.width + "px;\
+        height: " + togglePos.height + "px;"
+
+    this.clone.setAttribute("style", cloneStyle);
+    $("[data-menu-wrapper]")[0].appendChild(this.clone);
+    
+    this.clone.classList.add("menu-toggle-clone");
+
+    toggle.style.opacity = 0;
+  },
+
+
+  // Return menu to fully hidden state
+  reset: function () {
+    this.menu.setAttribute("style", "");
+    if (this.clone) {
+      this.clone.remove();
+    }
+  },
+
+
+  open: function (toggle) {
+    this.reset();
+    toggleClass($("[data-menu-background]")[0], "s-active");
+    $("[data-menu-background]")[0].setAttribute("data-menu-toggle", this.name);
+
+    this.toggle = toggle;
+    this.cloneToggle(toggle);
+    this.setStyle(toggle);
+    toggleScroll(false);
+    toggleBlur(true);
+
+  },
+
+
+  close: function () {
+    toggleClass($("[data-menu-background]")[0], "s-active")
+    $("[data-menu-background]")[0].removeEventListener("click", this.backgroundClose)
+
+    if (!this.state.active) {
+      this.clone.classList.remove("menu-toggle-clone");
+    }
+
+    toggleScroll(true);
+    toggleBlur(false);
+
+    this.menu.style.transform = "translate3d(0, 0, 0) scale(0.1)";
+    this.menu.style.opacity = 0;
+
+    setTimeout(function () {
+      this.toggle.style.opacity = ""
+      this.toggle = null;
+
+      this.clone.remove();
+      this.clone = null;
+
+      this.reset();
+    }.bind(this), this.animationLength)
+  },
+
+
+  start: function () {
+    delegateEvent("click", "[data-menu-toggle=" + this.name + "]", function (e, toggle) {
+      this.state.active = !this.state.active;
+
+      if (this.state.active) {
+        this.open(toggle);
+      
+      } else {
+        this.close();
+      }
+    }.bind(this));
   }
-};
+}

@@ -126,36 +126,51 @@ function getScrollTop() {
 
 
 // Toggles page scrolling on and off
-function toggleScroll () {
+function toggleScroll (value) {
   var body = $("body")[0];
 
-  // If scrolling is enabled
-  //   -> do stuff
-  if (body.style.overflowY != "hidden") {
+  if (value === true) {
+    body.style.overflowY = "auto";
+    document.ontouchmove = function (e) { return true; }
+
+  } else if (value === false) {
     body.style.overflowY = "hidden";
-    
-    // Mobile Safari
-    document.ontouchmove = function (e) { e.preventDefault(); }
+    document.ontouchmove = function (e) { return true; }
 
   } else {
-    body.style.overflowY = "scroll";
+    // If scrolling is enabled
+    //   -> do stuff
+    if (body.style.overflowY != "hidden") {
+      body.style.overflowY = "hidden";
+      
+      // Mobile Safari
+      document.ontouchmove = function (e) { e.preventDefault(); }
 
-    // Mobile Safari
-    document.ontouchmove = function (e) { return true; }
+    } else {
+      body.style.overflowY = "auto";
+
+      // Mobile Safari
+      document.ontouchmove = function (e) { return true; }
+    }
   }
 }
 
 
-function toggleBlur () {
+function toggleBlur (value) {
   var el = $("[js-blur]")[0];
-  if (el.style.willChange) {
-    el.style.willChange = "";
+  if (value) {
+    el.setAttribute("js-blur", value)
 
   } else {
-    el.style.willChange = "filter";
-  }
+    if (el.style.willChange) {
+      el.style.willChange = "";
 
-  toggleAttr(el, "js-blur");
+    } else {
+      el.style.willChange = "filter";
+    }
+
+    toggleAttr(el, "js-blur");
+  }
 }
 
 

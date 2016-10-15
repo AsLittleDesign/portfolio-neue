@@ -14,7 +14,11 @@
 
   &--option
     @extend %no-select, .button
+    transition: color 0.15s ease-out
     width: 180px
+
+    &.menu-toggle-clone
+      color: $color--blue
 
     .m-white &
       &:active

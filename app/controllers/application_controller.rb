@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
   def index
     @metadata = {
       "title" => "Portfolio",
-      "description" => "Explore Daves best design and artwork across many mediums and practices.",
+      "description" => "Explore Dave's best design and artwork across many mediums and practices.",
       "url" => "http://aslittledesign.com",
       "type" => "website",
       "card" => "summary_large_image",

@@ -50,7 +50,7 @@ delegateEvent("click", ".button", function (e, button) {
   if (!window.pressDisabled) {
     e.preventDefault();
 
-    var inkSize = 500,
+    var inkSize = 300,
         css = "\
           left: " + (e.offsetX - inkSize / 2) + "px;\
           top: " + (e.offsetY - inkSize / 2) + "px;"
@@ -91,7 +91,7 @@ ready(function () {
   // Removes 300ms delay on mobile whe clicking
   new FastClick(document.body);
 
-  menus.forEach(function (data) {
+  menuData.forEach(function (data) {
     new ActionMenu(data).init();
   });
 });

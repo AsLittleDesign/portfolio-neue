@@ -22,14 +22,16 @@
 
     .wrapper(js-blur="false")
       = yield
+      = render "partials/footer"
 
     .modal
       .modal--background(js-modal--background)
       = yield :modals
 
-    .pop(js-pop--wrapper)
-      .pop--background(js-pop--background)
+    .pop(data-menu-wrapper)
+      .pop--background(data-menu-background)
+  
 
     = stylesheet_link_tag 'application', media: 'all'
     = stylesheet_link_tag "pages/#{ yield :page_style }", media: 'all'
-    =render "partials/scripts"    
+    = render "partials/scripts"    
