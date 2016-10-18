@@ -1,7 +1,14 @@
 
-%section.container.section
-  .table-image--container
-    = image_tag "https://d2vez5w0ugqe83.cloudfront.net/index/table.png", :class => "table-image--background"
+%section.section.table
+  .section--copy
+    %h1.section--copy-number 02
+    %h1.section--copy-title Table.co
+    %p.section--copy-body Table is a product designed to connect people with mentors through it's communication platform. As the lead designer, I worked with the team to bring consistency, and usability to our product and our brand. I worked on the design, direction, and development of the product, as well as started to build the design team.
+    = link_to "Table.co", table_path, :class => "button m-black section--cta"
+
+  .section--image
+    = image_tag "https://d2vez5w0ugqe83.cloudfront.net/index/table.png", :class => "table-image"
     = image_tag "https://d2vez5w0ugqe83.cloudfront.net/index/table-animation.gif", :class => "table-image--animation"
   
-  = link_to "Table.co", table_path, :class => "button m-black section--cta"
+  = link_to "Table.co", table_path, :class => "button m-black m-mobile section--cta"
+  

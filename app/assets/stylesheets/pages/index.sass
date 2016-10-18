@@ -31,6 +31,15 @@ section
   @media #{$device--ipad}
     height: calc(100vh - 60px)
 
+  &--scroll
+    position: absolute
+    bottom: $vertical-spacing--normal
+    left: 0
+    right: 0
+    text-align: center
+    color: $color--gray
+    font-size: 1.5rem
+
 .name
   @extend %no-select
   position: relative
@@ -75,11 +84,11 @@ section
     bottom: $vertical-spacing--large * 2 + $button-height--mobile / 2
 
 .social
-  position: absolute
-  bottom: $vertical-spacing--large
-  left: 0
-  right: 0
-  margin: auto
+  // position: absolute
+  // bottom: $vertical-spacing--large
+  // left: 0
+  // right: 0
+  // margin: auto
 
   @media #{$device--small}
     justify-content: center
@@ -95,7 +104,39 @@ section
       + .social--option
         margin-left: $horizontal-spacing--small
 
+.biography
+  display: flex
+  flex-direction: initial !important
+  padding: $vertical-spacing--large $horizontal-spacing--normal
+
+  &--slices
+    display: flex
+    flex-shrink: 0
+    justify-content: space-between
+    align-items: center
+    width: 60%
+
+  &--slice
+    margin-right: $horizontal-spacing--xsmall
+    width: 60vw * 1/5
+    height: 60vw * 1/5
+    background:
+      position: center
+      size: cover
+      color: $color--black
+
+  &--copy
+    display: flex
+    justify-content: center
+    flex-direction: column
+    // color: $color--white
+    // background-color: $color--black
+    padding: $vertical-spacing--normal $horizontal-spacing--medium
+    width: 100%
+
 .table-image
+  width: 100%
+
   &--container
     position: relative
     width: 100%
@@ -132,40 +173,82 @@ section
 .section
   position: relative
   display: flex
-  flex-direction: column
   justify-content: center
   align-items: center
+  min-height: 100vh
   padding:
     top: $vertical-spacing--large * 3
     bottom: $vertical-spacing--large * 3
 
   @media #{$device--small}
+    flex-direction: column
     padding:
       top: $vertical-spacing--large
       bottom: $vertical-spacing--large
       left: 0
       right: 0
 
-  &--title-bar
+  &--copy
+    position: relative
+    z-index: 5
+    padding: $vertical-spacing--normal * 6 $horizontal-spacing--normal $vertical-spacing--normal
+    max-width: 33%
+    background-color: $color--white
+
+    @media #{$device--small}
+      max-width: initial
+
+    &-number
+      position: absolute
+      top: 0
+      left: $horizontal-spacing--normal
+      font-size: 8rem
+      color: $color--light-gray
+
+    &-title
+      color: $color--black
+      margin-left: $horizontal-spacing--medium
+
+    &-body
+      color: $color--black
+      opacity: 0.9
+
+  &--image
+    position: relative
     display: flex
-    align-items: center
-    justify-content: space-between
-    width: 100%
-    display: none
+
+    @media #{$device--small}
+      height: 100vw * 9/16
+      width: 100vw
+
+    @media #{$device--medium}
+      height: $container-width--medium * 9/16
+      width: $container-width--medium
       
-  &--title
-    flex-grow: 1
-    color: $color--dark-gray
+    @media #{$device--large}
+      height: $container-width--large * 9/16
+      width: $container-width--large
+
+    @media #{$device--xlarge}
+      height: $container-width--xlarge * 9/16
+      width: $container-width--xlarge
 
   &--cta
     margin-top: $vertical-spacing--small
     width: 100%
+
+    &.m-mobile
+      display: none
 
     @media #{$device--small}
       width: calc(100% - 1rem)
       margin:
         left: $horizontal-spacing--small
         right: $horizontal-spacing--small
+      display: none
+
+      &.m-mobile
+        display: flex
 
 .social--option
   color: $color--black

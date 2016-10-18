@@ -17,12 +17,19 @@
 
   &--top
     display: flex
-    justify-content: space-between
+    justify-content: flex-start
     align-items: center
 
+    @media #{$device--small}
+      flex-direction: column
+
   &--back
+    width: 180px
+    margin-right: $horizontal-spacing--normal
+
     @media #{$device--small}
       width: 100%
+      margin-right: 0
 
   &--about
     @media #{$device--small}
@@ -33,19 +40,13 @@
   $odd: ".gallery-section:nth-child(odd) &"
   display: flex
   align-items: center
-  min-height: 500px
   padding:
     top: $vertical-spacing--large
     bottom: $vertical-spacing--large
 
-  &:nth-child(even)
-    background-color: $color--black
-
   @media #{$device--small}
     flex-direction: column
-    padding-top: 0
-    padding-bottom: $vertical-spacing--medium
-    min-height: 0
+    justify-content: flex-start
 
   &--image
     display: flex
@@ -75,46 +76,28 @@
 
     #{$odd}
       order: 1
-      right: -$horizontal-spacing--normal
-      background:
-        color: $color--dark-gray
-        image: linear-gradient(35deg, $color--black, $color--dark-gray)
+      padding-left: 0
 
     #{$even}
       order: 2
-      background:
-        color: $color--off-white
-        image: linear-gradient(-95deg, $color--light-gray, $color--white)
+      padding-right: 0
 
     @media #{$device--small}
-      margin-top: -$vertical-spacing--normal
       position: static
-      padding: $vertical-spacing--small $horizontal-spacing--small $vertical-spacing--normal
+      flex-grow: 0
+      
+      #{$even}, #{$odd}
+        padding:
+          left: 0
+          right: 0
 
       #{$odd}
         order: 2
-        background-image: linear-gradient(35deg, $color--dark-gray, $color--black)
 
   &--title
     text-align: left
     width: 100%
     margin-top: $vertical-spacing--small
 
-    #{$odd}
-      color: $color--white
-
-    #{$even}
-      border-color: $color--black
-
-  &--body
-    #{$odd}
-      color: $color--off-white
-
   &--cta
     width: 100%
-
-    #{$even}
-      @extend .button.m-black
-
-    #{$odd}
-      @extend .button.m-white

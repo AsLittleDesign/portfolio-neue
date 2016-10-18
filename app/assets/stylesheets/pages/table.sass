@@ -3,5 +3,14 @@
 @import "../base/mixins"
 
 .gallery-section
+  &.m-homepage
+    +gallery-section--sizing(771 / 1000)
+
+  &.m-table_layout
+    +gallery-section--sizing(560 / 1000)
+
   &.m-iconography
     +gallery-section--sizing(1 / 1)
+
+  &.m-media_viewer
+    +gallery-section--sizing(629 / 1000)

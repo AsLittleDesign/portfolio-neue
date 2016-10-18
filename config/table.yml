@@ -3,9 +3,8 @@ homepage:
   title: Homepage Redesign
   last_modified: 2016-10-15
   cta: New Homepage
-  description: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum voluptatum voluptates laboriosam quibusdam impedit beatae suscipit aperiam vero nostrum sunt sequi libero natus, deserunt mollitia, officia repellendus pariatur, nulla a.
+  description: As we were participating in <a href="http://gsvlabs.com/pioneer-accelerator/" title="Global Silicon Valley Labs Pioneer Accelerator" target="_blank">GSV Labs Pioneer Accelerator</a>, we took some time to focus on what the core of the product should be, and the centerpiece of that was the homepage. Originally, we had a static landing page that explained the product, but the team and I had a better idea. We decided to let people browse the product without signing up, so we could keep marketing copy light, and let the product explain itself.
   url: https://d2vez5w0ugqe83.cloudfront.net/table/homepage.png
-  # before: https://d2vez5w0ugqe83.cloudfront.net/table/table-layout--before.png
   tags:
     - Interface Design
     - User Experience Design
@@ -14,7 +13,7 @@ table_layout:
   title: Improving Interface Clarity
   last_modified: 2016-10-15
   cta: Interface Clarity
-  description: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum voluptatum voluptates laboriosam quibusdam impedit beatae suscipit aperiam vero nostrum sunt sequi libero natus, deserunt mollitia, officia repellendus pariatur, nulla a.
+  description: One element to Table is its' communication platform. What I had found when I joined the team was that the interface was difficult to navigate, and used space in an inefficient manner. I designed a layout utilizing a sidebar that would not only use space in a more efficient way, but also expose critical functions within the chat, display the description for the Table, and make it easier to find files and media that was sent within the platform.
   url: https://d2vez5w0ugqe83.cloudfront.net/table/table-layout.png
   before: https://d2vez5w0ugqe83.cloudfront.net/table/table-layout--before.png
   tags:
@@ -35,7 +34,7 @@ media_viewer:
   title: Adding Functionality
   last_modified: 2016-10-15
   cta: Adding Functionality
-  description: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum voluptatum voluptates laboriosam quibusdam impedit beatae suscipit aperiam vero nostrum sunt sequi libero natus, deserunt mollitia, officia repellendus pariatur, nulla a.
+  description: When I began working at Table, a large focus of the company was on its communication platform. When we decided that it was time to revamp the media-viewer with comments, social sharing, and likes, I worked on a way to do all of this in a clear, and usable way.
   url: https://d2vez5w0ugqe83.cloudfront.net/table/media-viewer.png
   before: https://d2vez5w0ugqe83.cloudfront.net/table/media-viewer--before.png
   tags:

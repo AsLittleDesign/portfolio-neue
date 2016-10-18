@@ -27,15 +27,28 @@
     .name.m-blue(js-fringe="blue") Dave Scott McCarthy
     .name(js-fringe="base") Dave Scott McCarthy
 
-  %h3.title Designer & Developer
-  .social
-    .social--option(data-menu-toggle="follow")
-      .social--option-content.m-icon.icon--connect
-      .social--option-content Follow
-      
-    .social--option(data-menu-toggle="contact")
-      .social--option-content.m-icon.icon--contact
-      .social--option-content Contact
+  .fringe--scroll.icon--arrow--down
+  
+%section.section.biography
+  .biography--slices
+    .biography--slice(style="background-image: url('https://d2vez5w0ugqe83.cloudfront.net/photography/DSCF8042.jpg');")
+    .biography--slice(style="background-image: url('https://d2vez5w0ugqe83.cloudfront.net/illustration/jobs.jpg');")
+    .biography--slice(style="background-image: url('https://d2vez5w0ugqe83.cloudfront.net/photography/DSCF5442.jpg');")
+    .biography--slice(style="background-image: url('https://d2vez5w0ugqe83.cloudfront.net/graphic_design/watch.gif');")
+    .biography--slice(style="background-image: url('https://d2vez5w0ugqe83.cloudfront.net/illustration/faraway.jpg');")
+
+  .biography--copy
+    %h1 Hi, I'm Dave
+    %p I'm a full-stack designer living in San Francisco. As long as I can remember, I've been drawing, playing instruments, taking pictures... I even started learning Photoshop before I entered high school. With an eclectic artistic background, interface design was instantly intuitive, just like the interfaces I strive to create.
+
+    .social
+      .button.m-black.social--option(data-menu-toggle="follow")
+        .social--option-content.m-icon.icon--connect
+        .social--option-content Follow
+        
+      .button.m-black.social--option(data-menu-toggle="contact")
+        .social--option-content.m-icon.icon--contact
+        .social--option-content Contact
 
 = render "partials/index_photography"
 = render "partials/index_table"

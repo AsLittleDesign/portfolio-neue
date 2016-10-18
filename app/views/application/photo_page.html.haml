@@ -10,17 +10,28 @@
     = @type.titleize
 
 .container.photo--container
-  - image_class =
-    - if @photo["transparent"] then "photo--image m-transparent" else "photo--image"
+  - image_class = "photo--image"
+  - if @photo["transparent"]
+    - image_class += " m-transparent"
 
-  = image_tag @photo["url"], :class => image_class, :"js-photo" => true
+  - if @photo["before"]
+    = image_tag @photo["before"], :class => image_class, :"js-comparison" => "before"
+    = image_tag @photo["url"], :class => image_class + " s-active", :"js-comparison" => "after"
+
+  - else
+    = image_tag @photo["url"], :class => image_class + " s-active"
+
+- if @photo["before"]
+  .container.toggle-comparison
+    .button.m-white.toggle-comparison--toggle(js-toggle-comparison="before") Before
+    .button.m-white.toggle-comparison--toggle.s-active(js-toggle-comparison="after") After
 
 .container.photo--meta
   .photo--description
-    %h2= @photo["title"]
-    %p= @photo["description"]
+    %h1= @photo["title"]
+    %p= @photo["description"].html_safe
 
   .social
-    .social--option.m-black(data-menu-toggle="share")
+    .button.m-black.social--option(data-menu-toggle="share")
       .icon--share.social--option-content.m-icon
       .social--option-content Share

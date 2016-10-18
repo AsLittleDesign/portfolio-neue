@@ -63,6 +63,12 @@ delegateEvent("click", ".button", function (e, button) {
 
     button.insertAdjacentHTML('beforeend', el);
 
+    setTimeout(function () {
+      forEachNode($(".button--ink-container"), function (node) {
+        node.parentNode.removeChild(node);
+      });
+    }, 500);
+
     var href = button.href;
     if (href) {
       setTimeout(function () {

@@ -5,7 +5,8 @@
       %span.icon--arrow--left
       Home
 
-  %h1.gallery-intro--title= locals[:title]
+    %h1.gallery-intro--title= locals[:title]
+
   %p.gallery-intro--body= locals[:description]
 
 - collection.each_with_index do |(key, value), index|
@@ -27,6 +28,6 @@
       %h2.gallery-section--title
         = value["title"]
       %p.gallery-section--body
-        = truncate value["description"], :length => 100, :separator => " "
+        = truncate strip_tags(value["description"]), :length => 144, :separator => " "
 
-      = link_to value["cta"] || value["title"], (eval "#{key}_path"), :class => "button gallery-section--cta"
+      = link_to value["cta"] || value["title"], (eval "#{key}_path"), :class => "button m-black gallery-section--cta"

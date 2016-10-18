@@ -1,4 +1,11 @@
 
-%section.container.section
-  = image_tag "https://d2vez5w0ugqe83.cloudfront.net/index/graphic-design.svg", :width => "100%"
-  = link_to "Graphic Design", graphic_design_path, :class => "button m-black section--cta"
+%section.section
+  .section--copy
+    %h1.section--copy-number 05
+    %h1.section--copy-title Graphic Design
+    %p.section--copy-body Knowledge of Graphic Design is valuable in all facets of design, as it teaches a designer how to create order, balance, and beauty in a design.
+    = link_to "Graphic Design", graphic_design_path, :class => "button m-black section--cta"
+  
+  = image_tag "https://d2vez5w0ugqe83.cloudfront.net/index/graphic-design.svg", :class => "section--image"
+  
+  = link_to "Graphic Design", graphic_design_path, :class => "button m-black m-mobile section--cta"

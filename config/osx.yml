@@ -3,7 +3,7 @@ osx_intro:
   title: Introducing OS X 10.10 'Everest'.
   last_modified: 2016-10-15
   cta: "Explore Everest"
-  description: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum voluptatum voluptates laboriosam quibusdam impedit beatae suscipit aperiam vero nostrum sunt sequi libero natus, deserunt mollitia, officia repellendus pariatur, nulla a.
+  description: "I completely redesigned the entire dock from scratch. Dropping the skeuomorphic design of it’s predecessor, I created bright, new icons to complement the airy feel of the new dock. <br><br> The status bar also got an upgrade. In addition to simplifying the right side, moving the daemon icons to the <a href='/osx/control-center' title='OS X Control Center'>Control Center</a>, I added something that I call “Adaptive Status”. What it does is contextually display information of interest to you. Whether it’s the song that you’re listening to, or a change to your stock portfolio, it displays quick information that you can look at any time - which is the point of a status bar."
   url: https://d2vez5w0ugqe83.cloudfront.net/osx/desktop.jpg
   tags:
     - OS X
@@ -13,7 +13,7 @@ control_center:
   title: Control Center, now on your Mac.
   last_modified: 2016-10-15
   cta: Control Center
-  description: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum voluptatum voluptates laboriosam quibusdam impedit beatae suscipit aperiam vero nostrum sunt sequi libero natus, deserunt mollitia, officia repellendus pariatur, nulla a.
+  description: One feature that OS X desperately needs is Control Center. I added it in the same style as the Notification Center, except coming in from the left. The Apple menu is incorporated into it, as well as the daemon icons. And last but not least, music controls are integrated with it, making its awkward integration into Notification Center obsolete.
   transparent: true
   url: https://d2vez5w0ugqe83.cloudfront.net/osx/control-center--mockup.png
   tags:
@@ -24,7 +24,7 @@ itunes:
   title: iTunes gets a brand new look.
   last_modified: 2016-10-15
   cta: iTunes
-  description: Adipisicing elit. Earum voluptatum voluptates laboriosam quibusdam impedit beatae suscipit aperiam vero nostrum sunt sequi libero natus, deserunt mollitia, officia repellendus pariatur, nulla a.
+  description: A long-neglected app in OS X, iTunes gets a new look, and feel. The song currently playing now has prominent placement at the top, and the controls are less crowded.
   transparent: true
   url: https://d2vez5w0ugqe83.cloudfront.net/osx/itunes--mockup.png
   tags:
@@ -34,7 +34,7 @@ itunes:
 notification_center:
   title: Notification Center
   last_modified: 2016-10-15
-  description: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum voluptatum voluptates laboriosam quibusdam impedit beatae suscipit aperiam vero nostrum sunt sequi libero natus, deserunt mollitia, officia repellendus pariatur, nulla a.
+  description: I changed Notification Center to more closely resemble the iOS Notification Center. I also changed the Notification Center to utilize two tabs instead of three, something Apple did in fact do in OS X 10.10.
   transparent: true
   url: https://d2vez5w0ugqe83.cloudfront.net/osx/notification-center--mockup.png
   tags:

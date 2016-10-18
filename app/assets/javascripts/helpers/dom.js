@@ -42,7 +42,7 @@ function toggleClass (el, className, value) {
     el.classList += " " + className;
     
   } else if (!value && value != null) {
-    var regEx = new RegExp("/\b" + className + "\b/", "g");
+    var regEx = new RegExp("/\b" + className + "\b", "g");
     el.className = el.className.replace(regEx, '');
   
   } else {

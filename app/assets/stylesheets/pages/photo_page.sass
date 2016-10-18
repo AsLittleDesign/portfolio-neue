@@ -19,7 +19,10 @@
   &--image
     margin-bottom: $vertical-spacing--small
     width: 100%
-    display: block
+    display: none
+
+    &.s-active
+      display: block
 
     @media #{$device--small}
       margin-bottom: 0
@@ -68,3 +71,17 @@
 .social--option
   @media #{$device--small}
     width: 50%
+
+.toggle-comparison
+  display: flex
+  justify-content: center
+
+  &--toggle
+    width: 200px
+
+    &.s-active
+      color: $color--black
+      background-color: $color--light-gray
+      pointer-events: none
+      cursor: not-allowed
+
