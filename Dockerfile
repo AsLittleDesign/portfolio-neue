@@ -1,9 +1,4 @@
 
-# SSL Setup Details: https://zettabyte.me/lets-encrypt-with-docker-nginx-proxy/
-# Build: docker build -t aslittledesign/portfolio-neue .
-# Run: docker run -d -p 0.0.0.0:80:80 -p 0.0.0.0:443:443 --restart=always -v /var/local/nginx/certs:/etc/nginx/certs -v /etc/letsencrypt:/etc/letsencrypt aslittledesign/portfolio-neue
-# Terminal in container: docker exec -it <container_id> bash
-
 FROM aslittledesign/portfolio-base-image
 MAINTAINER "Dave Scott McCarthy <dave@aslittledesign.com>"
 
