@@ -4,7 +4,7 @@
 
 # Deploy the app
 1. `ssh root@aslittledesign.com`
-2. **Enter Password**
+2. *Enter Password*
 3. `cd /var/www/portfolio-neue`
 4. `docker kill $(docker ps -q)`
 5. `docker build -t aslittledesign/portfolio-neue .`
