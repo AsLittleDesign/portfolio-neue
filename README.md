@@ -3,12 +3,12 @@
 `$ unicorn --port=5000`
 
 # Deploy the app
-1. `ssh root@aslittledesign.com`
+1. `$ ssh root@aslittledesign.com`
 2. *Enter Password*
-3. `cd /var/www/portfolio-neue`
-4. `docker kill $(docker ps -q)`
-5. `docker build -t aslittledesign/portfolio-neue .`
-6. `docker run -d -p 0.0.0.0:80:80 -p 0.0.0.0:443:443 --restart=always -v /var/local/nginx/certs:/etc/nginx/certs -v /etc/letsencrypt:/etc/letsencrypt aslittledesign/portfolio-neue`
+3. `$ cd /var/www/portfolio-neue`
+4. `$ docker kill $(docker ps -q)`
+5. `$ docker build -t aslittledesign/portfolio-neue .`
+6. `$ docker run -d -p 0.0.0.0:80:80 -p 0.0.0.0:443:443 --restart=always -v /var/local/nginx/certs:/etc/nginx/certs -v /etc/letsencrypt:/etc/letsencrypt aslittledesign/portfolio-neue`
 
 # Debugging container
 Enter container with bash shell: `docker exec -it <container_id> bash`
