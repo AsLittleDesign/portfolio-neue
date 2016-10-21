@@ -4,7 +4,7 @@ ready(function () {
     var toggleName = toggle.getAttribute("js-toggle-comparison");
     
     forEachNode($("[js-toggle-comparison]"), function (node) {
-      node.setAttribute("class", "button m-white toggle-comparison--toggle");
+      node.setAttribute("class", "button m-black toggle-comparison--toggle");
     });
 
     forEachNode($("[js-comparison]"), function (node) {

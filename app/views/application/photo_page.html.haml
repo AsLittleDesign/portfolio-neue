@@ -9,6 +9,8 @@
     %span.icon--arrow--left
     = @type.titleize
 
+  %h1.photo--title= @photo["title"]  
+
 .container.photo--container
   - image_class = "photo--image"
   - if @photo["transparent"]
@@ -23,13 +25,13 @@
 
 - if @photo["before"]
   .container.toggle-comparison
-    .button.m-white.toggle-comparison--toggle(js-toggle-comparison="before") Before
-    .button.m-white.toggle-comparison--toggle.s-active(js-toggle-comparison="after") After
+    .button.m-black.toggle-comparison--toggle(js-toggle-comparison="before") Before
+    .button.m-black.toggle-comparison--toggle.s-active(js-toggle-comparison="after") After
 
 .container.photo--meta
   .photo--description
-    %h1= @photo["title"]
-    %p= @photo["description"].html_safe
+    %h1.photo--title.m-mobile= @photo["title"]
+    %p.photo--description-body= @photo["description"].html_safe
 
   .social
     .button.m-black.social--option(data-menu-toggle="share")

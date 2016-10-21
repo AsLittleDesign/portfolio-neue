@@ -8,28 +8,25 @@
   align-items: center
 
   &--top
+    display: flex
+    align-items: center
     padding:
       top: $vertical-spacing--small
       bottom: $vertical-spacing--small
 
-  &--container
-    @media #{$device--small}
-      padding: 0
+  &--back-navigation
+    width: 180px
 
   &--image
-    margin-bottom: $vertical-spacing--small
+    max-height: 80vh
     width: 100%
+    object-fit: contain
+    object-position: center
+    margin-bottom: $vertical-spacing--small
     display: none
 
     &.s-active
       display: block
-
-    @media #{$device--small}
-      margin-bottom: 0
-
-      &.m-transparent
-        width: calc(100% - #{$horizontal-spacing--small * 2})
-        margin: $vertical-spacing--normal $horizontal-spacing--small
 
   &--meta
     flex-shrink: 0
@@ -38,39 +35,23 @@
       top: $vertical-spacing--normal
       bottom: $vertical-spacing--normal
 
-    h2
-      margin-top: 0
-
-    @media #{$device--small}
-      flex-direction: column
-
   &--description
     margin-right: $horizontal-spacing--small
     flex-grow: 1
     color: $color--black
 
-    > h3
-      border-color: $color--black
+  &--description-body
+    color: $color--dark-gray
 
-    > p
-      color: $color--dark-gray
+  &--title
+    margin:
+      left: $horizontal-spacing--normal
+      bottom: 0
 
-    @media #{$device--small}
-      margin:
-        right: 0
-        bottom: $vertical-spacing--xsmall
+    &.m-mobile
+      display: none
+      margin-left: 0
 
-.social.m-black > .social--option
-  background-color: $color--black
-  color: $color--white
-
-.social.m-white > .social--option
-  background-color: $color--white
-  color: $color--black
-
-.social--option
-  @media #{$device--small}
-    width: 50%
 
 .toggle-comparison
   display: flex
@@ -80,8 +61,49 @@
     width: 200px
 
     &.s-active
-      color: $color--black
-      background-color: $color--light-gray
+      color: $color--gray
+      background-color: transparent
       pointer-events: none
       cursor: not-allowed
 
+    + .toggle-comparison--toggle
+      margin-left: $horizontal-spacing--small
+
+@media #{$device--small}
+  .photo
+    &--back-navigation
+      width: 100%
+
+    &--container
+      padding: 0
+
+    &--image
+      margin-bottom: 0
+      max-height: initial
+
+      &.m-transparent
+        width: calc(100% - #{$horizontal-spacing--small * 2})
+        margin: 0 $horizontal-spacing--small
+
+    &--meta
+      flex-direction: column
+
+    &--description
+      margin:
+        right: 0
+        bottom: $vertical-spacing--xsmall
+
+    &--title
+      display: none
+
+      &.m-mobile
+        display: initial
+  
+  .toggle-comparison
+    padding: $vertical-spacing--small $horizontal-spacing--small
+
+    &--toggle
+      width: 50%
+
+  .social--option
+    width: 50%

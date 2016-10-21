@@ -1,6 +1,8 @@
 
 %footer.footer.container
-  .footer--logo.icon--logo
+  =link_to root_path, :class => "footer--logo" do
+    .icon--logo
+
   .footer--navigation
     %label Work
     = link_to "Photography", photography_path, :class => "footer--link"

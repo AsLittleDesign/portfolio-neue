@@ -84,55 +84,41 @@ section
     bottom: $vertical-spacing--large * 2 + $button-height--mobile / 2
 
 .social
-  // position: absolute
-  // bottom: $vertical-spacing--large
-  // left: 0
-  // right: 0
-  // margin: auto
-
   @media #{$device--small}
     justify-content: center
   
   &--option
-    color: $color--black
-    background-color: $color--white
-    border: 0
-
     @media #{$device--small}
       width: calc(50% - 0.75rem)
 
-      + .social--option
-        margin-left: $horizontal-spacing--small
-
 .biography
-  display: flex
-  flex-direction: initial !important
-  padding: $vertical-spacing--large $horizontal-spacing--normal
+  padding:
+    top: $vertical-spacing--large * 2
 
   &--slices
     display: flex
     flex-shrink: 0
     justify-content: space-between
     align-items: center
-    width: 60%
+    width: 100%
+    margin-bottom: $vertical-spacing--medium
 
   &--slice
     margin-right: $horizontal-spacing--xsmall
-    width: 60vw * 1/5
-    height: 60vw * 1/5
+    width: 200px
+    height: 200px
     background:
       position: center
       size: cover
       color: $color--black
 
-  &--copy
-    display: flex
-    justify-content: center
-    flex-direction: column
-    // color: $color--white
-    // background-color: $color--black
-    padding: $vertical-spacing--normal $horizontal-spacing--medium
-    width: 100%
+    @media #{$device--medium}
+      width: 150px
+      height: 150px
+
+    @media #{$device--small}
+      width: 18vw
+      height: 18vw
 
 .table-image
   width: 100%
@@ -188,6 +174,9 @@ section
       left: 0
       right: 0
 
+  @media #{$device--medium}
+    min-height: 80vh
+
   &--copy
     position: relative
     z-index: 5
@@ -212,6 +201,7 @@ section
     &-body
       color: $color--black
       opacity: 0.9
+      text-align: justify
 
   &--image
     position: relative
@@ -253,5 +243,9 @@ section
 .social--option
   color: $color--black
   background-color: $color--white
+
+
+@media #{$device--small}
+
 
 @import "../partials/index_photography"

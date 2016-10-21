@@ -6,11 +6,10 @@
     bottom: $vertical-spacing--medium
 
   &--title
-    margin-top: $vertical-spacing--normal
+    margin:
+      top: 0
+      bottom: 0
     color: $color--dark-gray
-
-    @media #{$device--small}
-      margin-top: $vertical-spacing--medium
 
   &--body
     color: $color--dark-gray
@@ -20,33 +19,23 @@
     justify-content: flex-start
     align-items: center
 
-    @media #{$device--small}
-      flex-direction: column
-
   &--back
     width: 180px
     margin-right: $horizontal-spacing--normal
 
-    @media #{$device--small}
-      width: 100%
-      margin-right: 0
+  + .gallery-section
+    padding-top: 0
 
-  &--about
-    @media #{$device--small}
-      display: none
+
+$even: ".gallery-section:nth-child(even) &"
+$odd: ".gallery-section:nth-child(odd) &"
 
 .gallery-section
-  $even: ".gallery-section:nth-child(even) &"
-  $odd: ".gallery-section:nth-child(odd) &"
   display: flex
   align-items: center
   padding:
-    top: $vertical-spacing--large
-    bottom: $vertical-spacing--large
-
-  @media #{$device--small}
-    flex-direction: column
-    justify-content: flex-start
+    top: $vertical-spacing--large * 2
+    bottom: $vertical-spacing--large * 2
 
   &--image
     display: flex
@@ -58,16 +47,11 @@
     #{$odd}
       order: 2
 
-    &.m-transparent
-      @media #{$device--small}
-        margin:
-          top: $vertical-spacing--large
-          bottom: $vertical-spacing--large
-
   &--description
     display: flex
     flex-direction: column
     flex-grow: 1
+    flex-shrink: 0
     align-items: center
     justify-content: center
     position: relative
@@ -82,7 +66,44 @@
       order: 2
       padding-right: 0
 
-    @media #{$device--small}
+  &--title
+    text-align: left
+    width: 100%
+    margin-top: $vertical-spacing--small
+
+  &--cta
+    width: 100%
+
+
+@media #{$device--small}
+  .gallery-intro
+    &--title
+      text-align: left
+      width: 100%
+      margin:
+        top: $vertical-spacing--medium
+        bottom: 0
+
+    &--top
+      flex-direction: column
+
+    &--back
+      width: 100%
+      margin-right: 0
+    
+    &--about
+      display: none
+
+  .gallery-section
+    flex-direction: column
+    justify-content: flex-start
+
+    &.m-transparent
+      margin:
+        top: $vertical-spacing--large
+        bottom: $vertical-spacing--large
+
+    &--description
       position: static
       flex-grow: 0
       
@@ -93,11 +114,3 @@
 
       #{$odd}
         order: 2
-
-  &--title
-    text-align: left
-    width: 100%
-    margin-top: $vertical-spacing--small
-
-  &--cta
-    width: 100%
