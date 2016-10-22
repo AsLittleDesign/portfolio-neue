@@ -22,3 +22,57 @@
     padding:
       left: calc( (100vw - #{$container-width--xlarge}) / 2 )
       right: calc( (100vw - #{$container-width--xlarge}) / 2 )
+
+.page-intro
+  position: relative
+  padding-bottom: $vertical-spacing--large
+
+  @media #{$device--small}
+    padding-bottom: $vertical-spacing--normal
+
+  &--bar
+    display: flex
+    justify-content: flex-start
+    align-items: center
+    border-bottom: 1px solid $color--light-gray
+    padding:
+      top: $vertical-spacing--small
+      bottom: $vertical-spacing--small
+
+    @media #{$device--small}
+      flex-direction: column
+      border-bottom: 0
+      padding-bottom: 0
+
+  &--title
+    flex-grow: 2
+    text-align: right
+    margin:
+      top: 0
+      bottom: 0
+    color: $color--black
+
+    @media #{$device--small}
+      text-align: center
+      margin-top: $vertical-spacing--normal
+
+  &--body
+    color: $color--dark-gray
+    margin:
+      left: auto
+      right: auto
+
+    @media #{$device--small}
+      margin-top: 0
+
+  &--back
+    min-width: 180px
+    margin-right: $horizontal-spacing--normal
+
+    @media #{$device--small}
+      margin-right: inherit
+      width: 100%
+
+  + .gallery-section
+    padding-top: 0
+

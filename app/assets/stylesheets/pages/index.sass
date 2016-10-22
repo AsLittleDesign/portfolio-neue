@@ -6,9 +6,6 @@
 body
   background-color: $color--black
 
-section
-  width: 100%
-
 .fringe
   height: 100vh
   position: relative
@@ -25,10 +22,7 @@ section
     left: $horizontal-spacing--normal
     right: $horizontal-spacing--normal
 
-  @media #{$device--iphone}
-    height: calc(100vh - 60px)
-
-  @media #{$device--ipad}
+  @media #{$device--iphone}, #{$device--ipad}
     height: calc(100vh - 60px)
 
   &--scroll
@@ -39,6 +33,7 @@ section
     text-align: center
     color: $color--gray
     font-size: 1.5rem
+    cursor: pointer
 
 .name
   @extend %no-select
@@ -92,33 +87,57 @@ section
       width: calc(50% - 0.75rem)
 
 .biography
-  padding:
-    top: $vertical-spacing--large * 2
+  display: flex
+  align-items: center
+  justify-content: center
+  height: 80vh
 
-  &--slices
-    display: flex
+  @media #{$device--small}
+    flex-direction: column
+    min-height: 100vh
+    height: auto
+
+  &--photo
+    position: relative
     flex-shrink: 0
-    justify-content: space-between
-    align-items: center
-    width: 100%
-    margin-bottom: $vertical-spacing--medium
-
-  &--slice
-    margin-right: $horizontal-spacing--xsmall
-    width: 200px
-    height: 200px
+    margin-right: $horizontal-spacing--large
+    height: 250px
+    width: 250px
+    border-radius: 100%
     background:
-      position: center
+      image: url("https://d2vez5w0ugqe83.cloudfront.net/index/profile.jpg")
       size: cover
-      color: $color--black
-
-    @media #{$device--medium}
-      width: 150px
-      height: 150px
+      position: center
+      repeat: no-repeat
 
     @media #{$device--small}
-      width: 18vw
-      height: 18vw
+      height: 200px
+      width: 200px
+      margin-right: 0
+      margin-bottom: $vertical-spacing--normal
+
+  &--photo-ring
+    position: absolute
+    top: 0
+    bottom: 0
+    left: 0
+    right: 0
+    margin: auto
+    width: 100%
+    height: 100%
+    transform: scale(0.97)
+    border: 1px solid $color--white
+      radius: 100%
+  
+  &--copy
+    width: 50%
+
+    @media #{$device--small}
+      width: 100%
+
+  &--title
+    @media #{$device--small}
+      text-align: center
 
 .table-image
   width: 100%
@@ -175,17 +194,33 @@ section
       right: 0
 
   @media #{$device--medium}
+    flex-direction: column
+    padding:
+      top: $vertical-spacing--large
+      bottom: $vertical-spacing--large
+      left: 0
+      right: 0
     min-height: 80vh
 
   &--copy
     position: relative
     z-index: 5
-    padding: $vertical-spacing--normal * 6 $horizontal-spacing--normal $vertical-spacing--normal
+    padding:
+      top: $vertical-spacing--normal * 6
+      bottom: $vertical-spacing--normal
+      right: $horizontal-spacing--small
+    flex-shrink: 0
     max-width: 33%
     background-color: $color--white
 
-    @media #{$device--small}
+    @media #{$device--small}, #{$device--medium}
       max-width: initial
+
+    @media #{$device--small}
+      width: $container-width--small
+
+    @media #{$device--medium}
+      width: $container-width--medium
 
     &-number
       position: absolute
@@ -196,32 +231,34 @@ section
 
     &-title
       color: $color--black
-      margin-left: $horizontal-spacing--medium
+      margin-left: 0
 
     &-body
       color: $color--black
       opacity: 0.9
-      text-align: justify
+
+      @media #{$device--medium}
+        max-width: 100%
 
   &--image
     position: relative
     display: flex
 
-    @media #{$device--small}
+    @media #{$device--small}, #{$device--medium}
       height: 100vw * 9/16
       width: 100vw
-
-    @media #{$device--medium}
-      height: $container-width--medium * 9/16
-      width: $container-width--medium
       
     @media #{$device--large}
-      height: $container-width--large * 9/16
-      width: $container-width--large
+      $width: $container-width--large * 0.66
+
+      height: $width * 9/16
+      width: $width
 
     @media #{$device--xlarge}
-      height: $container-width--xlarge * 9/16
-      width: $container-width--xlarge
+      $width: $container-width--xlarge * 0.66
+      
+      height: $width * 9/16
+      width: $width
 
   &--cta
     margin-top: $vertical-spacing--small
@@ -230,22 +267,20 @@ section
     &.m-mobile
       display: none
 
-    @media #{$device--small}
-      width: calc(100% - 1rem)
-      margin:
-        left: $horizontal-spacing--small
-        right: $horizontal-spacing--small
+    @media #{$device--small}, #{$device--medium}
       display: none
 
       &.m-mobile
         display: flex
 
+    @media #{$device--small}
+      width: $container-width--small
+
+    @media #{$device--medium}
+      width: $container-width--medium
+
 .social--option
   color: $color--black
   background-color: $color--white
-
-
-@media #{$device--small}
-
 
 @import "../partials/index_photography"

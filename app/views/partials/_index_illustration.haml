@@ -1,11 +1,8 @@
 
-%section.section
-  .section--copy
-    %h1.section--copy-number 03
-    %h1.section--copy-title Illustration
-    %p.section--copy-body My original major in college, Illustration remains a great way to both hone my creative skills, as well as to relax.
+- description = "My original major in college, Illustration remains a great way to both hone my creative skills, as well as to relax."
 
-    = link_to "Illustration", illustration_path, :class => "button m-black section--cta"
+%section.section
+  = render "partials/index_section_copy", :locals => { :number => "03", :title => "Illustration", :description => description, :path => illustration_path }
   
   = image_tag "https://d2vez5w0ugqe83.cloudfront.net/index/illustration.png", :class => "section--image"
   

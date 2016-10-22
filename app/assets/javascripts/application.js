@@ -17,34 +17,6 @@ WebFont.load({
   }
 });
 
-// Prevent long presses from opening links on mobile
-var hasTouchStartEvent = 'ontouchstart' in document.createElement( 'div' ),
-    pressTimer;
-
-if (hasTouchStartEvent) {
-  window.pressDisabled = false;
-  delegateEvent('touchend', "a, [js-pop--toggle]", function (e) {
-    clearTimeout(pressTimer);
-  });
-
-  delegateEvent("click", "a, [js-pop--toggle]", function (e) {
-    if (window.pressDisabled) {
-      e.stopPropagation();  
-      e.preventDefault();
-      
-      setTimeout(function () {
-        window.pressDisabled = false;
-      }, 50);
-    }
-  });
-
-  delegateEvent('touchstart', "a, [js-pop--toggle]", function (e, link) {
-    pressTimer = window.setTimeout(function () {
-      window.pressDisabled = true;
-    }, 500);
-  });
-}
-
 // Button Handler
 delegateEvent("click", ".button", function (e, button) {
   if (!window.pressDisabled) {

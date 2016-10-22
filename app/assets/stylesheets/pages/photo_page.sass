@@ -7,16 +7,6 @@
   height: 100%
   align-items: center
 
-  &--top
-    display: flex
-    align-items: center
-    padding:
-      top: $vertical-spacing--small
-      bottom: $vertical-spacing--small
-
-  &--back-navigation
-    width: 180px
-
   &--image
     max-height: 80vh
     width: 100%
@@ -29,8 +19,6 @@
       display: block
 
   &--meta
-    flex-shrink: 0
-    display: flex
     padding:
       top: $vertical-spacing--normal
       bottom: $vertical-spacing--normal
@@ -42,15 +30,10 @@
 
   &--description-body
     color: $color--dark-gray
-
-  &--title
     margin:
-      left: $horizontal-spacing--normal
-      bottom: 0
-
-    &.m-mobile
-      display: none
-      margin-left: 0
+      left: auto
+      right: auto
+      top: 0
 
 
 .toggle-comparison
@@ -84,9 +67,6 @@
       &.m-transparent
         width: calc(100% - #{$horizontal-spacing--small * 2})
         margin: 0 $horizontal-spacing--small
-
-    &--meta
-      flex-direction: column
 
     &--description
       margin:

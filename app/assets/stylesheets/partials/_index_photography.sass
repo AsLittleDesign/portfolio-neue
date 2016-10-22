@@ -9,24 +9,7 @@
   font-family: $sans-serif--default
 
   &--image-container
-    position: relative
-    overflow: hidden
-
-    @media #{$device--small}
-      height: 100vw * 9/16
-      width: 100vw
-
-    @media #{$device--medium}
-      height: $container-width--medium * 9/16
-      width: $container-width--medium
-      
-    @media #{$device--large}
-      height: $container-width--large * 9/16
-      width: $container-width--large
-
-    @media #{$device--xlarge}
-      height: $container-width--xlarge * 9/16
-      width: $container-width--xlarge
+    @extend .section--image
 
   &--image-layer
     position:   absolute

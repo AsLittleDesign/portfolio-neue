@@ -1,0 +1,6 @@
+
+.section--copy
+  %h1.section--copy-number= locals[:number]
+  %h1.section--copy-title= locals[:title]
+  %p.section--copy-body= locals[:description]
+  = link_to locals[:title], locals[:path], :class => "button m-black section--cta"

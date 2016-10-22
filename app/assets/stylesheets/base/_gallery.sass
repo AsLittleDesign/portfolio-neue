@@ -1,32 +1,4 @@
 
-.gallery-intro
-  position: relative
-  padding:
-    top: $vertical-spacing--small
-    bottom: $vertical-spacing--medium
-
-  &--title
-    margin:
-      top: 0
-      bottom: 0
-    color: $color--dark-gray
-
-  &--body
-    color: $color--dark-gray
-
-  &--top
-    display: flex
-    justify-content: flex-start
-    align-items: center
-
-  &--back
-    width: 180px
-    margin-right: $horizontal-spacing--normal
-
-  + .gallery-section
-    padding-top: 0
-
-
 $even: ".gallery-section:nth-child(even) &"
 $odd: ".gallery-section:nth-child(odd) &"
 
@@ -38,8 +10,10 @@ $odd: ".gallery-section:nth-child(odd) &"
     bottom: $vertical-spacing--large * 2
 
   &--image
-    display: flex
     flex-shrink: 0
+
+    .m-steve_jobs &
+      display: flex
 
     #{$even}
       order: 1
@@ -57,6 +31,7 @@ $odd: ".gallery-section:nth-child(odd) &"
     position: relative
     z-index: 1
     padding: $vertical-spacing--normal $horizontal-spacing--normal
+    color: $color--dark-gray
 
     #{$odd}
       order: 1
@@ -70,6 +45,7 @@ $odd: ".gallery-section:nth-child(odd) &"
     text-align: left
     width: 100%
     margin-top: $vertical-spacing--small
+    color: $color--black
 
   &--cta
     width: 100%

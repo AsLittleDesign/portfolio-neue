@@ -1,13 +1,11 @@
 
-.container.gallery-intro
-  .gallery-intro--top
+.page-intro
+  .container.page-intro--bar
     = link_to root_path, :class => "button m-black gallery-intro--back" do
       %span.icon--arrow--left
       Home
 
-    %h1.gallery-intro--title= locals[:title]
-
-  %p.gallery-intro--body= locals[:description]
+    %h1.page-intro--title= locals[:title]
 
 - collection.each_with_index do |(key, value), index|
   .container.gallery-section(class="m-#{key}")
@@ -28,6 +26,6 @@
       %h2.gallery-section--title
         = value["title"]
       %p.gallery-section--body
-        = truncate strip_tags(value["description"]), :length => 144, :separator => " "
+        = truncate strip_tags(value["description"]), :length => 120, :separator => " "
 
       = link_to value["cta"] || value["title"], (eval "#{key}_path"), :class => "button m-black gallery-section--cta"

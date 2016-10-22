@@ -4,12 +4,13 @@
 
 - content_for :page_style do "photo_page" end
 
-.container.photo--top
-  = link_to (eval "#{@type}_path".gsub("-", "_")), :class => "button m-black photo--back-navigation" do
-    %span.icon--arrow--left
-    = @type.titleize
+.page-intro
+  .page-intro--bar.container
+    = link_to (eval "#{@type}_path".gsub("-", "_")), :class => "button m-black page-intro--back" do
+      %span.icon--arrow--left
+      = @type.titleize
 
-  %h1.photo--title= @photo["title"]  
+    %h1.page-intro--title= @photo["title"]  
 
 .container.photo--container
   - image_class = "photo--image"
@@ -30,7 +31,6 @@
 
 .container.photo--meta
   .photo--description
-    %h1.photo--title.m-mobile= @photo["title"]
     %p.photo--description-body= @photo["description"].html_safe
 
   .social
