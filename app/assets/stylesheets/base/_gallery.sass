@@ -30,7 +30,7 @@ $odd: ".gallery-section:nth-child(odd) &"
     justify-content: center
     position: relative
     z-index: 1
-    padding: $vertical-spacing--normal $horizontal-spacing--normal
+    padding: $vertical-spacing--normal $horizontal-spacing--small
     color: $color--dark-gray
 
     #{$odd}
@@ -52,24 +52,6 @@ $odd: ".gallery-section:nth-child(odd) &"
 
 
 @media #{$device--small}
-  .gallery-intro
-    &--title
-      text-align: left
-      width: 100%
-      margin:
-        top: $vertical-spacing--medium
-        bottom: 0
-
-    &--top
-      flex-direction: column
-
-    &--back
-      width: 100%
-      margin-right: 0
-    
-    &--about
-      display: none
-
   .gallery-section
     flex-direction: column
     justify-content: flex-start

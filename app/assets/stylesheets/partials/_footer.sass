@@ -5,8 +5,8 @@
   color: $color--white
   margin-top: 30px
   padding:
-    top: $vertical-spacing--large
-    bottom: $vertical-spacing--large
+    top: $vertical-spacing--xlarge
+    bottom: $vertical-spacing--normal
 
   &--logo
     color: $color--white
@@ -19,13 +19,61 @@
       color: $color--white
 
   &--navigation
+    display: flex
+    justify-content: center
+    text-align: center
     padding:
-      top: $vertical-spacing--normal
-      bottom: $vertical-spacing--normal
+      top: $vertical-spacing--large
+      bottom: $vertical-spacing--large
+
+    @media #{$device--small}, #{$device--medium}
+      flex-wrap: wrap
+
+    @media #{$device--small}
+      justify-content: flex-start
 
   &--link
-    display: block
+    display: inline-block
+    width: 20%
+    margin-bottom: $vertical-spacing--small
+    border-bottom: 0
+    color: $color--gray
+
+    @media #{$device--medium}
+      margin-bottom: $vertical-spacing--large
+
+    @media #{$device--small}
+      width: 50%
+      margin-bottom: $vertical-spacing--large
+
+    + .footer--link
+      margin-left: $horizontal-spacing--small
+
+      @media #{$device--small}, #{$device--medium}
+        margin-left: 0
+
+  &--link-icon
+    display: flex
+    align-items: center
+    justify-content: center
+    height: 55px
+    width: 55px
+    font-size: 1.5rem
+    border: 1px solid $color--gray
+    border-radius: 5px
+    margin: auto
+      bottom: $vertical-spacing--small
+    color: $color--white
 
   &--social
     display: flex
     justify-content: center
+
+.copyright
+  color: $color--gray
+  text-align: center
+  display: block
+  margin-top: $vertical-spacing--large
+
+  &--rights
+    color: rgba($color--gray, 0.5)

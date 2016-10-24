@@ -1,7 +1,7 @@
 
 .page-intro
   .container.page-intro--bar
-    = link_to root_path, :class => "button m-black gallery-intro--back" do
+    = link_to root_path, :class => "button m-black page-intro--back" do
       %span.icon--arrow--left
       Home
 
@@ -29,3 +29,8 @@
         = truncate strip_tags(value["description"]), :length => 120, :separator => " "
 
       = link_to value["cta"] || value["title"], (eval "#{key}_path"), :class => "button m-black gallery-section--cta"
+
+.social
+  .button.m-black.social--option(data-menu-toggle="share")
+    .social--option-content.m-icon.icon--share
+    .social--option-content Share

@@ -108,7 +108,8 @@ PositionImages = {
       }
 
       if (this.windowInfo.width > 768) {
-        this.updateTotalHeight(img.calculatedSize.height);
+        var newHeight = isMobile() ? img.calculatedSize.height + 2 : img.calculatedSize.height;
+        this.updateTotalHeight(newHeight);
       }
 
       this.images[index] = img;
@@ -491,7 +492,8 @@ PositionImages = {
     img.el = this.createImageElement(index);
     this.images[index] = img;
 
-    this.updateTotalHeight(size.height);
+    var newHeight = isMobile() ? size.height + 2 : size.height;
+    this.updateTotalHeight(newHeight);
 
     container.appendChild(img.el);
   },

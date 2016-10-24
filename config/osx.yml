@@ -1,6 +1,6 @@
 
 osx_intro:
-  title: Introducing OS X 10.10 'Everest'.
+  title: Introducing OS X 10.10 'Everest'
   last_modified: 2016-10-15
   cta: "Explore Everest"
   description: "I completely redesigned the entire dock from scratch. Dropping the skeuomorphic design of it’s predecessor, I created bright, new icons to complement the airy feel of the new dock. <br><br> The status bar also got an upgrade. In addition to simplifying the right side, moving the daemon icons to the <a href='/osx/control-center' title='OS X Control Center'>Control Center</a>, I added something that I call “Adaptive Status”. What it does is contextually display information of interest to you. Whether it’s the song that you’re listening to, or a change to your stock portfolio, it displays quick information that you can look at any time - which is the point of a status bar."

@@ -4,12 +4,25 @@
     .icon--logo
 
   .footer--navigation
-    %label Work
-    = link_to "Photography", photography_path, :class => "footer--link"
-    = link_to "Table.co", table_path, :class => "footer--link"
-    = link_to "Illustration", illustration_path, :class => "footer--link"
-    = link_to "OS X 'Everest'", osx_path, :class => "footer--link"
-    = link_to "Graphic Design", graphic_design_path, :class => "footer--link"
+    = link_to photography_path, :class => "footer--link" do
+      .footer--link-icon.icon--photography
+      %small Photography
+
+    = link_to table_path, :class => "footer--link" do
+      .footer--link-icon.icon--table
+      %small Table
+
+    = link_to illustration_path, :class => "footer--link" do
+      .footer--link-icon.icon--illustration
+      %small Illustration
+
+    = link_to osx_path, :class => "footer--link" do
+      .footer--link-icon.icon--osx
+      %small OS X
+
+    = link_to graphic_design_path, :class => "footer--link" do
+      .footer--link-icon.icon--graphic-design
+      %small Graphic Design
 
   .footer--social
     .button.m-white.social--option(data-menu-toggle="follow")
@@ -19,3 +32,9 @@
     .button.m-white.social--option(data-menu-toggle="contact")
       .social--option-content.m-icon.icon--contact
       .social--option-content Contact
+
+  %small.copyright
+    &copy;
+    = Time.now.year 
+    David Scott McCarthy
+    .copyright--rights All Rights Reserved

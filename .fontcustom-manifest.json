@@ -1,7 +1,7 @@
 {
   "checksum": {
-    "previous": "75001d2393ea2e4eeed6c428a29dd3cd88958fa200d0c015c823c39f154805c1",
-    "current": "75001d2393ea2e4eeed6c428a29dd3cd88958fa200d0c015c823c39f154805c1"
+    "previous": "b81b37ab72c6aeeaa1edd23fe5b9f8e49790142d85372dd7e96b25c4a57a6d69",
+    "current": "b81b37ab72c6aeeaa1edd23fe5b9f8e49790142d85372dd7e96b25c4a57a6d69"
   },
   "fonts": [
     "app/assets/fonts/icons/font/icons.ttf",
@@ -54,6 +54,14 @@
       "codepoint": 61696,
       "source": "app/assets/fonts/icons/glyphs/facebook.svg"
     },
+    "graphic-design": {
+      "codepoint": 61732,
+      "source": "app/assets/fonts/icons/glyphs/graphic-design.svg"
+    },
+    "illustration": {
+      "codepoint": 61733,
+      "source": "app/assets/fonts/icons/glyphs/illustration.svg"
+    },
     "instagram": {
       "codepoint": 61697,
       "source": "app/assets/fonts/icons/glyphs/instagram.svg"
@@ -74,13 +82,25 @@
       "codepoint": 61712,
       "source": "app/assets/fonts/icons/glyphs/mail.svg"
     },
+    "osx": {
+      "codepoint": 61734,
+      "source": "app/assets/fonts/icons/glyphs/osx.svg"
+    },
     "photo": {
       "codepoint": 61699,
       "source": "app/assets/fonts/icons/glyphs/photo.svg"
     },
+    "photography": {
+      "codepoint": 61735,
+      "source": "app/assets/fonts/icons/glyphs/photography.svg"
+    },
     "share": {
       "codepoint": 61701,
       "source": "app/assets/fonts/icons/glyphs/share.svg"
+    },
+    "table": {
+      "codepoint": 61736,
+      "source": "app/assets/fonts/icons/glyphs/table.svg"
     },
     "twitter": {
       "codepoint": 61700,
