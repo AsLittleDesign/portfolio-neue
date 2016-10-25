@@ -106,6 +106,21 @@ $ink--size: 300px
   &.m-wide
     width: 100%
 
+  &--content
+    pointer-events: none
+    display: inline-block
+    height: $font-size--small
+    position: relative
+    top: 1px
+
+    &.m-icon
+      position: static
+      margin-right: $horizontal-spacing--small / 2
+      transform: translateY(-1px)
+
+      @media #{$device--retina}
+        transform: translateY(0)
+
   &--ink-container
     position: absolute
     display: flex

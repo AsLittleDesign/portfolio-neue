@@ -102,7 +102,7 @@ ActionMenu.prototype = {
   // Create the menu element
   createMenu: function () {
     var menu = document.createElement("div");
-    menu.setAttribute("class", "menu");
+    addClass(menu, "menu")
     menu.innerHTML = "<div class='menu--close' data-menu-toggle='" + this.name + "'>Cancel</div>";
 
     // Append options to menu.
@@ -127,7 +127,7 @@ ActionMenu.prototype = {
   createOption: function (optionData) {
     // Create link element to be our option.
     var option = document.createElement('a');
-    option.setAttribute("class", "menu--option")
+    addClass(option, "menu--option");
     
     // Set rel if it's a Twitter button
     if (optionData.id === "twitter") {
@@ -272,6 +272,10 @@ ActionMenu.prototype = {
       -moz-transform-origin: " + originX + " " + originY + ";"
 
     this.menu.setAttribute("style", menuStyle);
+
+    if (originX === "right") {
+      addClass(this.menu, "m-right");
+    }
   },
 
 
@@ -288,7 +292,7 @@ ActionMenu.prototype = {
     this.clone.setAttribute("style", cloneStyle);
     $("[data-menu-wrapper]")[0].appendChild(this.clone);
     
-    this.clone.classList.add("menu-toggle-clone");
+    addClass(this.clone, "menu-toggle-clone");
 
     toggle.style.opacity = 0;
   },
@@ -297,6 +301,8 @@ ActionMenu.prototype = {
   // Return menu to fully hidden state
   reset: function () {
     this.menu.setAttribute("style", "");
+    removeClass(this.menu, "m-right")
+
     if (this.clone) {
       this.clone.remove();
     }
@@ -305,7 +311,7 @@ ActionMenu.prototype = {
 
   open: function (toggle) {
     this.reset();
-    toggleClass($("[data-menu-background]")[0], "s-active");
+    addClass($("[data-menu-background]")[0], "s-active");
     $("[data-menu-background]")[0].setAttribute("data-menu-toggle", this.name);
 
     this.toggle = toggle;
@@ -313,16 +319,15 @@ ActionMenu.prototype = {
     this.setStyle(toggle);
     toggleScroll(false);
     toggleBlur(true);
-
   },
 
 
   close: function () {
-    toggleClass($("[data-menu-background]")[0], "s-active")
-    $("[data-menu-background]")[0].removeEventListener("click", this.backgroundClose)
+    removeClass($("[data-menu-background]")[0], "s-active");
+    $("[data-menu-background]")[0].removeEventListener("click", this.backgroundClose);
 
     if (!this.state.active) {
-      this.clone.classList.remove("menu-toggle-clone");
+      removeClass(this.clone, "menu-toggle-clone");
     }
 
     toggleScroll(true);

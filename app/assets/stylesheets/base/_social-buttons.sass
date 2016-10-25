@@ -4,44 +4,13 @@
   align-items: center
   justify-content: center
 
-  &.m-white
-    > .social--option
-      background-color: $color--white
-
-  &.m-black
-    > .social--option
-      background-color: $color--black
-
   &--option
-    @extend %no-select, .button
+    @extend %no-select
     transition: color 0.15s ease-out
     width: 180px
 
     &.menu-toggle-clone
       color: $color--blue
-
-    .m-white &
-      &:active
-        background-color: darken($color--white, 2%)
-
-    .m-black &
-      &:active
-        background-color: lighten($color--black, 2%)
     
     + .social--option
       margin-left: $horizontal-spacing--small
-
-  &--option-content
-    pointer-events: none
-    display: inline-block
-    height: $font-size--small
-    position: relative
-    top: 1px
-
-    &.m-icon
-      position: static
-      margin-right: $horizontal-spacing--small / 2
-      transform: translateY(-1px)
-
-      @media #{$device--retina}
-        transform: translateY(0)

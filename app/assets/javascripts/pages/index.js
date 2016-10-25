@@ -128,8 +128,8 @@ function textFringing(event, props) {
     var pageX = event.pageX,
         pageY = event.pageY;
 
-    distanceX = Math.min(pageX - props.position.right / 2, pageX - (props.position.right - props.position.width / 2) ) / 200,
-    distanceY = Math.min(pageY - props.position.bottom / 2, pageY - (props.position.bottom - props.position.height / 2) ) / 200;
+    distanceX = Math.min(pageX - props.position.right / 2, pageX - (props.position.right - props.position.width / 2) ) / 150,
+    distanceY = Math.min(pageY - props.position.bottom / 2, pageY - (props.position.bottom - props.position.height / 2) ) / 150;
   }
 
   props.styles.red.transform = "translate3d(" + distanceX + "px, " + distanceY + "px, 0)";
@@ -160,7 +160,7 @@ function photographyParallax(event, props) {
     distanceY = Math.min(pageY - positionBottom / 2, pageY - (positionBottom - props.position.height / 2) ) / 100;
   }
 
-  props.styles.front.transform = "translate3d(" + -distanceX * 4 + "px, " + -distanceY * 4 + "px, 0)";
+  props.styles.front.transform = "translate3d(" + -distanceX * 4 + "px, " + -distanceY * 3 + "px, 0)";
 
   props.styles.mid.transform = "matrix3d(" + ((distanceY / 10000) + 1) + ", 0, 1, 0, " + (-distanceX / 200) + ", " + ((-distanceY / 200) + 1) + ", 1, 0, 1, " + (distanceX / 1000) + ", " + ((-distanceX / 100) + 1) + ", 0, 0, 0, 100, 1) translate3d(" + -distanceX / 6 + "px, " + -distanceY / 2 + "px, 0)";
 

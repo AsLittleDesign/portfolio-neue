@@ -208,7 +208,7 @@ body
     padding:
       top: $vertical-spacing--normal * 6
       bottom: $vertical-spacing--normal
-      right: $horizontal-spacing--small
+      right: $horizontal-spacing--medium
     flex-shrink: 0
     max-width: 33%
     background-color: $color--white
@@ -223,6 +223,7 @@ body
       width: $container-width--medium
 
     &-number
+      @extend %no-select
       position: absolute
       top: 0
       left: $horizontal-spacing--normal
