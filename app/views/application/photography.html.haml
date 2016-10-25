@@ -5,7 +5,7 @@
 
 .invisible(js-photo-info)
   - @photos.each do |key, value|
-    %div
+    %div(style="display: none")
       %div(js-info="identifier")= key
       %div(js-info="url")= value["thumb_url"]
       %div(js-info="title")= value["title"]

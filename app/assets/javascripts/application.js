@@ -41,10 +41,19 @@ delegateEvent("click", ".button", function (e, button) {
       });
     }, 500);
 
-    var href = button.href;
+    var href = button.href,
+        platform = navigator.platform,
+        ctrlModifier = platform === "Mac68K" ||
+                       platform === "MacPPC" ||
+                       platform === "MacIntel" ? e.metaKey : e.ctrlKey;
+
     if (href) {
       setTimeout(function () {
-        window.location = href;
+        if (ctrlModifier) {
+          window.open(href);
+        } else {
+          window.location = href;
+        }
       }, 300);
     }
   }
