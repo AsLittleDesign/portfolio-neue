@@ -178,8 +178,8 @@ body
   @media #{$device--medium}
     flex-direction: column
     padding:
-      top: $vertical-spacing--large
-      bottom: $vertical-spacing--large
+      top: $vertical-spacing--large * 2
+      bottom: $vertical-spacing--large * 2
       left: 0
       right: 0
     min-height: 80vh
@@ -187,10 +187,7 @@ body
   &--copy
     position: relative
     z-index: 5
-    padding:
-      top: $vertical-spacing--normal * 6
-      bottom: $vertical-spacing--normal
-      right: $horizontal-spacing--medium
+    padding-right: $horizontal-spacing--medium
     flex-shrink: 0
     max-width: 33%
     background-color: $color--white
@@ -207,7 +204,7 @@ body
     &-number
       @extend %no-select
       position: absolute
-      top: 0
+      top: -5rem
       left: $horizontal-spacing--normal
       font-size: 8rem
       color: $color--light-gray
