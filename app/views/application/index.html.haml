@@ -3,29 +3,11 @@
 - content_for :scripts do
   = javascript_include_tag "pages/index"
 
-- content_for :meta do
-
-  -#
-    Meta Structure
-      :Hash => Define metadata content for the page
-        :title => Page title
-        :description => Page description
-        :url => Page canonical URL
-        :type => Page type (e.g. "photo", or "site")
-        :card => Card type for Twitter (e.g. "photo" or "summary")
-        :last_updated => The date a page was last last_updated
-        :image => OG Image
-          :type => MIME type for the image
-          :url => URL to image
-          :alt => Alt text for OG image for the page
-          :width => Image width
-          :height => Image height
-
 %section.fringe
   %h1
-    .name.m-red(js-fringe="red") Dave Scott McCarthy
-    .name.m-blue(js-fringe="blue") Dave Scott McCarthy
-    .name(js-fringe="base") Dave Scott McCarthy
+    .fringe--name.m-red(js-fringe="red") Dave Scott McCarthy
+    .fringe--name.m-blue(js-fringe="blue") Dave Scott McCarthy
+    .fringe--name(js-fringe="base") Dave Scott McCarthy
 
   .fringe--scroll.icon--arrow--down(js-scroll-down)
   

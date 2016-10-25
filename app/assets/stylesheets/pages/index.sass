@@ -35,55 +35,37 @@ body
     font-size: 1.5rem
     cursor: pointer
 
-.name
-  @extend %no-select
-  position: relative
-  color: $color--off-white
-  font-weight: bold
-  text:
-    transform: uppercase
-    align: center
-    shadow: 1px 1px 2px rgba(0,0,0,0.2)
-  letter-spacing: 0.3em
+  &--name
+    @extend %no-select
+    position: relative
+    color: $color--off-white
+    font-weight: bold
+    text:
+      transform: uppercase
+      align: center
+      shadow: 1px 1px 2px rgba(0,0,0,0.2)
+    letter-spacing: 0.3em
 
-  &.m-red,
-  &.m-blue
-    position: absolute
-    left: 0
-    right: 0
-    text-shadow: 0
+    &.m-red,
+    &.m-blue
+      position: absolute
+      left: 0
+      right: 0
+      text-shadow: 0
 
-  &.m-red
-    color: $color--red
-    text-shadow: 1px 1px 8px rgba($color--red, 0.5)
+    &.m-red
+      color: $color--red
+      text-shadow: 1px 1px 8px rgba($color--red, 0.5)
 
-  &.m-blue
-    color: $color--blue
-    text-shadow: 1px 1px 8px rgba($color--blue, 0.5)
+    &.m-blue
+      color: $color--blue
+      text-shadow: 1px 1px 8px rgba($color--blue, 0.5)
 
-.title
-  color: $color--off-white
-  position: absolute
-  bottom: $vertical-spacing--large * 2 + $button-height / 2
-  left: 0
-  right: 0
-  margin-bottom: 0
-  text-align: center
-  line-height: $font-size--normal
-  font:
-    family: $serif
-    weight: normal
-  border-bottom: 0
-
-  @media #{$device--small}
-    bottom: $vertical-spacing--large * 2 + $button-height--mobile / 2
-
-.social
-  @media #{$device--small}
+@media #{$device--small}
+  .social
     justify-content: center
   
-  &--option
-    @media #{$device--small}
+    &--option
       width: calc(50% - 0.75rem)
 
 .biography

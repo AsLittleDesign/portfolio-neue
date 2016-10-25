@@ -26,9 +26,6 @@ $ink--size: 300px
   cursor: pointer
   border-radius: 3px
 
-  .wf-active &
-    font-family: $sans-serif
-
   @media #{$device--small}
     $button--font-size: 1rem
     height: $button-height--mobile
@@ -37,6 +34,9 @@ $ink--size: 300px
     padding:
       left: $font-size--small * 2
       right: $font-size--small * 2
+  
+  .wf-active &
+    font-family: $sans-serif
 
   &.m-black
     color: $color--white
