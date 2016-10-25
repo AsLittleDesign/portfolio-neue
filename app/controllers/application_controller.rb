@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
     @metadata = {
       "title" => "Portfolio",
       "description" => "Explore Dave's best design and artwork across many mediums and practices.",
-      "url" => "http://aslittledesign.com",
+      "url" => "https://aslittledesign.com",
       "type" => "website",
       "card" => "summary_large_image",
       "image" => {
@@ -30,7 +30,7 @@ class ApplicationController < ActionController::Base
     @metadata = {
       "title" => "Photography",
       "description" => "Explore Dave's best photography work, from portraiture to landscape photos.",
-      "url" => "http://aslittledesign.com/photography",
+      "url" => "https://aslittledesign.com/photography",
       "type" => "website",
       "card" => "summary_large_image",
       "image" => {
@@ -47,7 +47,7 @@ class ApplicationController < ActionController::Base
     @metadata = {
       "title" => "Illustration",
       "description" => "Explore Dave's best illustration work, from charcoal renderings to digital paintings.",
-      "url" => "http://aslittledesign.com/illustration",
+      "url" => "https://aslittledesign.com/illustration",
       "type" => "website",
       "card" => "summary_large_image",
       "image" => {
@@ -64,7 +64,7 @@ class ApplicationController < ActionController::Base
     @metadata = {
       "title" => "Table.co",
       "description" => "Explore Dave's best graphic design work, from logos to watchfaces.",
-      "url" => "http://aslittledesign.com/graphic_design",
+      "url" => "https://aslittledesign.com/graphic_design",
       "type" => "website",
       "card" => "summary_large_image",
       "image" => {
@@ -81,7 +81,7 @@ class ApplicationController < ActionController::Base
     @metadata = {
       "title" => "Graphic Design",
       "description" => "Explore Dave's best graphic design work, from logos to watchfaces.",
-      "url" => "http://aslittledesign.com/graphic_design",
+      "url" => "https://aslittledesign.com/graphic_design",
       "type" => "website",
       "card" => "summary_large_image",
       "image" => {
@@ -98,7 +98,7 @@ class ApplicationController < ActionController::Base
     @metadata = {
       "title" => "OS X 'Everest'",
       "description" => "Explore Dave's concept for a new version of OS X, created before the reveal of OS X 10.10 'Yosemite'.",
-      "url" => "http://aslittledesign.com/osx",
+      "url" => "https://aslittledesign.com/osx",
       "type" => "website",
       "card" => "summary_large_image",
       "image" => {
@@ -120,7 +120,7 @@ class ApplicationController < ActionController::Base
     @metadata = {
       "title" => @photo["title"],
       "description" => @photo["description"].truncate(155),
-      "url" => "http://aslittledesign.com/#{@type}/#{page}",
+      "url" => "https://aslittledesign.com/#{@type}/#{page}",
       "type" => "website",
       "card" => "summary_large_image",
       "image" => {
