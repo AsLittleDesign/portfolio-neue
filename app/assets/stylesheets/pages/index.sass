@@ -61,23 +61,12 @@ body
       color: $color--blue
       text-shadow: 1px 1px 8px rgba($color--blue, 0.5)
 
-@media #{$device--small}
-  .social
-    justify-content: center
-  
-    &--option
-      width: calc(50% - 0.75rem)
 
 .biography
   display: flex
   align-items: center
   justify-content: center
   height: 80vh
-
-  @media #{$device--small}
-    flex-direction: column
-    min-height: 100vh
-    height: auto
 
   &--photo
     position: relative
@@ -91,12 +80,6 @@ body
       size: cover
       position: center
       repeat: no-repeat
-
-    @media #{$device--small}
-      height: 200px
-      width: 200px
-      margin-right: 0
-      margin-bottom: $vertical-spacing--normal
 
   &--photo-ring
     position: absolute
@@ -114,12 +97,6 @@ body
   &--copy
     width: 50%
 
-    @media #{$device--small}
-      width: 100%
-
-  &--title
-    @media #{$device--small}
-      text-align: center
 
 .table-image
   width: 100%
@@ -167,23 +144,6 @@ body
     top: $vertical-spacing--large * 3
     bottom: $vertical-spacing--large * 3
 
-  @media #{$device--small}
-    flex-direction: column
-    padding:
-      top: $vertical-spacing--large
-      bottom: $vertical-spacing--large
-      left: 0
-      right: 0
-
-  @media #{$device--medium}
-    flex-direction: column
-    padding:
-      top: $vertical-spacing--large * 2
-      bottom: $vertical-spacing--large * 2
-      left: 0
-      right: 0
-    min-height: 80vh
-
   &--copy
     position: relative
     z-index: 5
@@ -192,33 +152,21 @@ body
     max-width: 33%
     background-color: $color--white
 
-    @media #{$device--small}, #{$device--medium}
-      max-width: initial
+  &--copy-number
+    @extend %no-select
+    position: absolute
+    top: -5rem
+    left: $horizontal-spacing--normal
+    font-size: 8rem
+    color: $color--light-gray
 
-    @media #{$device--small}
-      width: $container-width--small
+  &--copy-title
+    color: $color--black
+    margin-left: 0
 
-    @media #{$device--medium}
-      width: $container-width--medium
-
-    &-number
-      @extend %no-select
-      position: absolute
-      top: -5rem
-      left: $horizontal-spacing--normal
-      font-size: 8rem
-      color: $color--light-gray
-
-    &-title
-      color: $color--black
-      margin-left: 0
-
-    &-body
-      color: $color--black
-      opacity: 0.9
-
-      @media #{$device--medium}
-        max-width: 100%
+  &--copy-body
+    color: $color--black
+    opacity: 0.9
 
   &--image
     position: relative
@@ -246,21 +194,77 @@ body
 
     &.m-mobile
       display: none
+      
 
-    @media #{$device--small}, #{$device--medium}
+@media #{$device--small}
+  .social
+    justify-content: center
+  
+    &--option
+      width: calc(50% - 0.75rem)
+
+
+  .biography
+    flex-direction: column
+    min-height: 100vh
+    height: auto
+
+    &--photo
+      height: 200px
+      width: 200px
+      margin-right: 0
+      margin-bottom: $vertical-spacing--normal
+
+    &--copy
+      width: 100%
+
+    &--title
+      text-align: center
+
+
+  .section
+    flex-direction: column
+    padding:
+      top: $vertical-spacing--large
+      bottom: $vertical-spacing--large
+      left: 0
+      right: 0
+
+    &--copy
+      width: $container-width--small
+      max-width: initial
+
+    &--cta
       display: none
+      width: $container-width--small
 
       &.m-mobile
         display: flex
 
-    @media #{$device--small}
-      width: $container-width--small
 
-    @media #{$device--medium}
+@media #{$device--medium}
+  .section
+    flex-direction: column
+    padding:
+      top: $vertical-spacing--large * 2
+      bottom: $vertical-spacing--large * 2
+      left: 0
+      right: 0
+    min-height: 80vh
+
+    &--copy
+      max-width: initial
       width: $container-width--medium
 
-.social--option
-  color: $color--black
-  background-color: $color--white
+    &--copy-body
+      max-width: 100%
+
+    &--cta
+      display: none
+      width: $container-width--medium
+
+      &.m-mobile
+        display: flex
+
 
 @import "../partials/index_photography"
