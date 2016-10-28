@@ -172,6 +172,9 @@ body
     color: $color--black
     opacity: 0.9
 
+    &.m-mobile
+      display: none
+
   &--image
     position: relative
     display: flex
@@ -205,7 +208,7 @@ body
     justify-content: center
   
     &--option
-      width: calc(50% - 0.75rem)
+      flex-grow: 2
 
 
   .biography
@@ -241,6 +244,10 @@ body
 
     &--copy-body
       text-align: justify
+      display: none
+
+      &.m-mobile
+        display: inherit
 
     &--cta
       display: none

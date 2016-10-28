@@ -5,5 +5,7 @@
   = render "partials/index_section_copy", :locals => { :number => "04", :title => "OS X 'Everest' Concept", :description => description, :path => osx_path, :icon => "osx" }
 
   = image_tag "https://d2vez5w0ugqe83.cloudfront.net/index/osx.png", :class => "section--image"
+
+  %p.section--copy-body.container.m-mobile= description.html_safe
   
   = link_to "OS X 'Everest' Concept", osx_path, :class => "button m-black m-mobile section--cta"

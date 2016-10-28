@@ -7,6 +7,8 @@
   .section--image
     = image_tag "https://d2vez5w0ugqe83.cloudfront.net/index/table.png", :class => "table-image"
     = image_tag "https://d2vez5w0ugqe83.cloudfront.net/index/table-animation.gif", :class => "table-image--animation"
+
+  %p.section--copy-body.container.m-mobile= description.html_safe
   
   = link_to "Table.co", table_path, :class => "button m-black m-mobile section--cta"
   

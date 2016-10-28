@@ -48,8 +48,8 @@
     align-items: center
     height: 2.5rem
     padding:
-      left: 1rem
-      right: 1rem
+      left: $horizontal-spacing--normal
+      right: $horizontal-spacing--normal
 
     &:hover
       background-color: darken($color--white, 3%)
@@ -60,10 +60,16 @@
     &:first-child
       border-top: 0
 
+    @media #{$device--small}
+      height: 3rem
+
   &--option
     text-decoration: none
     color: $color--black
     justify-content: left
+
+    .s-active &
+      opacity: 1
 
     .m-right &
       justify-content: right
@@ -72,9 +78,6 @@
     &:visited,
     &:link
       color: $color--black
-
-    .s-active &
-      opacity: 1
 
   &--symbol
     color: $color--black

@@ -5,5 +5,7 @@
   = render "partials/index_section_copy", :locals => { :number => "05", :title => "Graphic Design", :description => description, :path => graphic_design_path, :icon => "graphic-design" }
   
   = image_tag "https://d2vez5w0ugqe83.cloudfront.net/index/graphic-design.svg", :class => "section--image"
+
+  %p.section--copy-body.container.m-mobile= description.html_safe
   
   = link_to "Graphic Design", graphic_design_path, :class => "button m-black m-mobile section--cta"
