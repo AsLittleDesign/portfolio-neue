@@ -66,7 +66,10 @@ body
   display: flex
   align-items: center
   justify-content: center
-  height: 80vh
+  min-height: 100vh
+  padding:
+    top: $vertical-spacing--large * 3
+    bottom: $vertical-spacing--large * 3
 
   &--photo
     position: relative
@@ -155,14 +158,15 @@ body
   &--copy-number
     @extend %no-select
     position: absolute
-    top: -5rem
-    left: $horizontal-spacing--normal
-    font-size: 8rem
+    top: -2.5rem
+    left: $horizontal-spacing--small
+    font-size: 6rem
     color: $color--light-gray
 
   &--copy-title
     color: $color--black
     margin-left: 0
+    position: relative
 
   &--copy-body
     color: $color--black
@@ -225,14 +229,18 @@ body
   .section
     flex-direction: column
     padding:
-      top: $vertical-spacing--large
-      bottom: $vertical-spacing--large
+      top: $vertical-spacing--large * 2
+      bottom: $vertical-spacing--large * 2
       left: 0
       right: 0
 
     &--copy
       width: $container-width--small
       max-width: initial
+      padding-right: 0
+
+    &--copy-body
+      text-align: justify
 
     &--cta
       display: none
@@ -255,6 +263,7 @@ body
     &--copy
       max-width: initial
       width: $container-width--medium
+      padding-right: 0
 
     &--copy-body
       max-width: 100%

@@ -12,13 +12,12 @@
       - if value["orientation"]
         %div(js-info="orientation")= value["orientation"]
 
-.page-intro
-  .container.page-intro--bar
-    = link_to root_path, :class => "button m-black m-back page-intro--back" do
-      %span.icon--arrow--left
-      %span Home
+.page-intro.container
+  = link_to root_path, :class => "button m-black m-back page-intro--back" do
+    %span.icon--arrow--left
+    %span Home
 
-    %h1.page-intro--title Photography
+  %h1.page-intro--title Photography
 
 .photos
   .photos--layout#photos

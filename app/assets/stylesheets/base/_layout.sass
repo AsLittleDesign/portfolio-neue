@@ -26,24 +26,14 @@
 
 .page-intro
   position: relative
-  padding-bottom: $vertical-spacing--medium
-
-  @media #{$device--small}
-    padding-bottom: $vertical-spacing--normal
-
-  &--bar
-    display: flex
-    justify-content: flex-start
-    align-items: center
-    border-bottom: 1px solid $color--light-gray
-    padding:
-      top: $vertical-spacing--small
-      bottom: $vertical-spacing--small
-
-    @media #{$device--small}
-      flex-direction: column
-      border-bottom: 0
-      padding-bottom: 0
+  margin-bottom: $vertical-spacing--medium
+  display: flex
+  justify-content: flex-start
+  align-items: center
+  border-bottom: 1px solid $color--light-gray
+  padding:
+    top: $vertical-spacing--small
+    bottom: $vertical-spacing--small
 
   &--title
     flex-grow: 2
@@ -53,27 +43,25 @@
       bottom: 0
     color: $color--black
 
-    @media #{$device--small}
-      text-align: center
-      margin-top: $vertical-spacing--normal
-
-  &--body
-    color: $color--dark-gray
-    margin:
-      left: auto
-      right: auto
-
-    @media #{$device--small}
-      margin-top: 0
-
   &--back
     min-width: 180px
     margin-right: $horizontal-spacing--normal
 
-    @media #{$device--small}
-      margin-right: inherit
-      width: 100%
-
   + .gallery-section
     padding-top: 0
 
+
+@media #{$device--small}
+  .page-intro
+    flex-direction: column
+    border-bottom: 0
+    padding-bottom: 0
+    margin-bottom: $vertical-spacing--normal
+    
+    &--title
+      text-align: center
+      margin-top: $vertical-spacing--normal
+
+    &--back
+      margin-right: inherit
+      width: 100%
