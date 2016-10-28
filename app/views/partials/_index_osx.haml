@@ -1,11 +1,6 @@
 
 - description = "With the then impending release of OS X 10.10 (codename 'Syrah') at WWDC, OS X was expected to adopt an aesthetic resembling what iOS 7 brought to the iPhone.<br/><br/>Early in 2014, I decided to take a stab at a conceptual redesign of the current Mac operating system."
 
-%section.section
-  = render "partials/index_section_copy", :locals => { :number => "04", :title => "OS X 'Everest' Concept", :description => description, :path => osx_path, :icon => "osx" }
+- image_el = image_tag "https://d2vez5w0ugqe83.cloudfront.net/index/osx.png", :class => "section--image"
 
-  = image_tag "https://d2vez5w0ugqe83.cloudfront.net/index/osx.png", :class => "section--image"
-
-  %p.section--copy-body.container.m-mobile= description.html_safe
-  
-  = link_to "OS X 'Everest' Concept", osx_path, :class => "button m-black m-mobile section--cta"
+= render "partials/index_section", :locals => { :number => "04", :title => "OS X 'Everest' Concept", :description => description, :path => osx_path, :icon => "osx", :image_el => image_el }

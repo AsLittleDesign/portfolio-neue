@@ -3,7 +3,7 @@ homepage:
   title: Homepage Redesign
   last_modified: 2016-10-15
   cta: New Homepage
-  description: As we were participating in <a href="http://gsvlabs.com/pioneer-accelerator/" title="Global Silicon Valley Labs Pioneer Accelerator" target="_blank">GSV Labs Pioneer Accelerator</a>, we took some time to focus on what the core of the product should be, and the centerpiece of that was the homepage. Originally, we had a static landing page that explained the product, but the team and I had a better idea. We decided to let people browse the product without signing up, so we could keep marketing copy light, and let the product explain itself.
+  description: As we were participating in <a href="http://gsvlabs.com/pioneer-accelerator/" title="Global Silicon Valley Labs Pioneer Accelerator" target="_blank">GSV Labs Pioneer Accelerator</a>, we took some time to focus on what the core of the product should be, and the centerpiece of that was the homepage.<br/><br/>Originally, we had a static landing page that explained the product, but the team and I had a better idea. We decided to let people browse the product without signing up, so we could keep marketing copy light, and let the product explain itself.
   url: https://d2vez5w0ugqe83.cloudfront.net/table/homepage.png
   tags:
     - Interface Design

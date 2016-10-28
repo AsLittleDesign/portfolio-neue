@@ -1,14 +1,9 @@
 
 - description = "As the Lead Designer, I helped bring greater usability and consistency to our platform by building a visual language and unifying the experience of using the product. <br/><br/> From art direction and interface design to graphic design and front-end development, I worked to establish a design team, create extraordinary experiences, and connect with people using Table."
 
-%section.section.table
-  = render "partials/index_section_copy", :locals => { :number => "01", :title => "Table.co", :description => description, :path => table_path, :icon => "table" }
-
+- image_el = capture_haml do
   .section--image
     = image_tag "https://d2vez5w0ugqe83.cloudfront.net/index/table.png", :class => "table-image"
     = image_tag "https://d2vez5w0ugqe83.cloudfront.net/index/table-animation.gif", :class => "table-image--animation"
 
-  %p.section--copy-body.container.m-mobile= description.html_safe
-  
-  = link_to "Table.co", table_path, :class => "button m-black m-mobile section--cta"
-  
+= render "partials/index_section", :locals => { :number => "01", :title => "Table.co", :description => description, :path => table_path, :icon => "table", :image_el => image_el }

@@ -1,11 +1,7 @@
 
 - description = "Graphic design can teach skills that reach far beyond just graphics. It teaches a designer how to create order, balance, and beauty in their designs.<br/><br/>Through it, I have continuously improved my ability to organize information, set type so it's both readable and aesthetically pleasing, and compose layouts in a way that's both beautiful and functional."
 
-%section.section
-  = render "partials/index_section_copy", :locals => { :number => "05", :title => "Graphic Design", :description => description, :path => graphic_design_path, :icon => "graphic-design" }
-  
+- image_el = capture_haml do
   = image_tag "https://d2vez5w0ugqe83.cloudfront.net/index/graphic-design.svg", :class => "section--image"
 
-  %p.section--copy-body.container.m-mobile= description.html_safe
-  
-  = link_to "Graphic Design", graphic_design_path, :class => "button m-black m-mobile section--cta"
+= render "partials/index_section", :locals => { :number => "05", :title => "Graphic Design", :description => description, :path => graphic_design_path, :icon => "graphic-design", :image_el => image_el }

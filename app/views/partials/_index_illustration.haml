@@ -1,11 +1,6 @@
 
 - description = "Illustration gives me the ability to communicate new ideas or invent new worlds purely from the imagination. Impossible situations, places, and ideas can be created at my will.<br/><br/>Illustration taught me to be detail-oriented, and through that, I discovered the incredible feeling of completing a piece after weeks of hard work."
 
-%section.section
-  = render "partials/index_section_copy", :locals => { :number => "03", :title => "Illustration", :description => description, :path => illustration_path, :icon => "illustration" }
-  
-  = image_tag "https://d2vez5w0ugqe83.cloudfront.net/index/illustration.png", :class => "section--image"
-  
-  %p.section--copy-body.container.m-mobile= description.html_safe
-  
-  = link_to "Illustration", illustration_path, :class => "button m-black m-mobile section--cta"
+- image_el = image_tag "https://d2vez5w0ugqe83.cloudfront.net/index/illustration.png", :class => "section--image"
+
+= render "partials/index_section", :locals => { :number => "03", :title => "Illustration", :description => description, :path => illustration_path, :icon => "illustration", :image_el => image_el }

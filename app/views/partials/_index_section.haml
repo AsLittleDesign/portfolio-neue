@@ -1,0 +1,13 @@
+
+%section.section.table
+  .section--copy
+    .section--copy-number= locals[:number]
+    %h2.section--copy-title= locals[:title]
+    %p.section--copy-body= locals[:description].html_safe
+    = link_to locals[:title], locals[:path], :class => "button m-black section--cta"
+
+  = locals[:image_el]
+
+  %p.section--copy-body.container.m-mobile= locals[:description].html_safe
+  
+  = link_to locals[:title], locals[:path], :class => "button m-black m-mobile section--cta"

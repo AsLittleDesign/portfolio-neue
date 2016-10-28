@@ -4,13 +4,12 @@
 
 - content_for :page_style do "photo_page" end
 
-.page-intro
-  .page-intro--bar.container
-    = link_to (eval "#{@type}_path".gsub("-", "_")), :class => "button m-black page-intro--back" do
-      %span.icon--arrow--left
-      = @type.titleize
+.container.page-intro
+  = link_to (eval "#{@type}_path".gsub("-", "_")), :class => "button m-black page-intro--back" do
+    %span.icon--arrow--left
+    = @type.titleize
 
-    %h1.page-intro--title= @photo["title"]  
+  %h1.page-intro--title= @photo["title"]  
 
 .container.photo--container
   - image_class = "photo--image"
@@ -30,8 +29,7 @@
     .button.m-black.toggle-comparison--toggle.s-active(js-toggle-comparison="after") After
 
 .container.photo--meta
-  .photo--description
-    %p.photo--description-body= @photo["description"].html_safe
+  %p.photo--description= @photo["description"].html_safe
 
   .social
     .button.m-black.social--option(data-menu-toggle="share")

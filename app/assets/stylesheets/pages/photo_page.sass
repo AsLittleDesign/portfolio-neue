@@ -24,17 +24,10 @@
       bottom: $vertical-spacing--normal
 
   &--description
-    margin-right: $horizontal-spacing--small
-    flex-grow: 1
-    color: $color--black
-
-  &--description-body
     color: $color--dark-gray
-    margin:
-      left: auto
-      right: auto
+    margin: auto
       top: 0
-
+      bottom: $vertical-spacing--normal
 
 .toggle-comparison
   display: flex
@@ -68,11 +61,6 @@
         width: calc(100% - #{$horizontal-spacing--small * 2})
         margin: 0 $horizontal-spacing--small
 
-    &--description
-      margin:
-        right: 0
-        bottom: $vertical-spacing--xsmall
-
     &--title
       display: none
 
@@ -80,7 +68,7 @@
         display: initial
   
   .toggle-comparison
-    padding: $vertical-spacing--small $horizontal-spacing--small
+    padding: $vertical-spacing--small $horizontal-spacing--normal
 
     &--toggle
       width: 50%
