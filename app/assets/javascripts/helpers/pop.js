@@ -287,7 +287,8 @@ ActionMenu.prototype = {
         left: " + togglePos.left + "px;\
         position: absolute;\
         width: " + togglePos.width + "px;\
-        height: " + togglePos.height + "px;"
+        height: " + togglePos.height + "px;\
+        margin-left: 0 !important;"
 
     this.clone.setAttribute("style", cloneStyle);
     $("[data-menu-wrapper]")[0].appendChild(this.clone);

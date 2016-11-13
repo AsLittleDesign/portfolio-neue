@@ -38,10 +38,12 @@ function toggleAttr (el, name) {
 
 
 function hasClass(el, className) {
-  if (el.classList)
+  if (el.classList) {
     return el.classList.contains(className)
-  else
+
+  } else {
     return !!el.className.match(new RegExp('(\\s|^)' + className + '(\\s|$)'))
+  }
 }
 
 
@@ -90,6 +92,7 @@ function getPosition (el) {
 
       xPos += (el.offsetLeft - xScroll + el.clientLeft);
       yPos += (el.offsetTop - yScroll + el.clientTop);
+
     } else {
       // for all other non-BODY elements
       xPos += (el.offsetLeft - el.scrollLeft + el.clientLeft);
@@ -283,6 +286,11 @@ function isIOS () {
   }
   return false;
 }
+
+function isIE () {
+  navigator.userAgent.indexOf("MSIE") != -1 ? true : false;
+}
+
 
 function parseHTML (HTMLString) {
   var frame = document.createElement('iframe');
