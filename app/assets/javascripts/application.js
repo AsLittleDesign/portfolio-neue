@@ -19,23 +19,9 @@ WebFont.load({
 });
 
 
-// function handleMouseLeave (e, button) {
-//   console.log("stop hover");
-//   button.removeEventListener("mouseleave", window.mouseLeave);
-// }
-
-
-// delegateEvent("mouseover", ".button", function (e, button) {
-//   console.log("hover");
-
-//   window.mouseLeave = button.addEventListener("mouseleave", function (e) {
-//     handleMouseLeave(e, button);
-//   });
-// });
-
-
 function Button (el) {
   this.el = el;
+  this.$el = $(el);
 }
 
 
@@ -81,7 +67,6 @@ Button.prototype = {
 
 
   init: function () {
-
     this.el.addEventListener("click", this.onClick.bind(this));
 
     if (!isMobile()) {
@@ -95,43 +80,47 @@ Button.prototype = {
       } else {
         this.stateChange = new CustomEvent("stateChange");
       }
-      this.el.addEventListener("stateChange", this.handleStateChange.bind(this));
 
+      this.el.addEventListener("stateChange", this.handleStateChange.bind(this));
       this.el.addEventListener("mouseover", this.onMouseover.bind(this));
       this.el.addEventListener("mouseleave", this.onMouseleave.bind(this));
+
+      // Prepare ghost again in canse position has changed.
+      var timing = window.location.pathname === "/photography" ? 5000 : 500
+      setTimeout(function () {
+        this.prepare()
+      }.bind(this), timing);
     }
   },
 
 
   prepare: function () {
-    var position = getPosition(this.el),
-        backgroundColor = window.getComputedStyle(this.el, null).getPropertyValue("background-color"),
-        top = position.top + window.scrollY,
-        css = "\
-          top: " + top + "px;\
-          left: " + position.left + "px;\
-          width: " + position.width + "px;\
-          height: " + position.height + "px;\
-          background-color: " + backgroundColor + ";";
-    
-    var ghost = document.createElement("div");
-    ghost.setAttribute("style", css);
-    addClass(ghost, "button--ghost");
+    var position = this.$el.getPosition(),
+        size = this.$el.size();
 
-    if (position.width > 300) {
-      addClass(ghost, "m-wide");
+    this.ghost = this.ghost || $("<div class='button--ghost'></div>");
+    this.ghost.css({
+      "top": position.top + "px",
+      "left": position.left + "px",
+      "width": size.width + "px",
+      "height": size.height + "px",
+      "background-color": $(this.el).css("background-color")
+    });
+
+    if (size.width > 300) {
+      this.ghost.addClass("m-wide");
     }
 
-    this.ghost = this.el.parentElement.insertBefore(ghost, this.el);
+    this.$el.before(this.ghost);
   },
 
 
   onHover: function () {
     if (this.state.hover) {
-      addClass(this.ghost, "s-hover");
+      this.ghost.addClass("s-hover");
 
     } else {
-      removeClass(this.ghost, "s-hover");
+      this.ghost.removeClass("s-hover");
     }
   },
 
@@ -153,9 +142,7 @@ Button.prototype = {
     this.el.insertAdjacentHTML('beforeend', ink);
 
     setTimeout(function () {
-      forEachNode($(".button--ink-container"), function (node) {
-        node.parentNode.removeChild(node);
-      });
+      $(".button--ink-container").remove();
     }, 500);
 
     var href = this.el.href,
@@ -187,18 +174,17 @@ Button.prototype = {
 }
 
 
-forEachNode($(".button"), function (node) {
-  var button = new Button(node);
-  button.init();
-});
-
-
 ready(function () {
   // Removes 300ms delay on mobile whe clicking
   new FastClick(document.body);
 
   menuData.forEach(function (data) {
     new ActionMenu(data).init();
+  });
+
+  $(".button").each(function (node) {
+    var button = new Button(node);
+    button.init();
   });
 });
 

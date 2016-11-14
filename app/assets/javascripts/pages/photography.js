@@ -120,19 +120,19 @@ PositionImages = {
   // Gets basic image metadata from the DOM and adds it to
   // the this.imageMetadata array.
   getImageMetadata: function() {
-    var infoElement = $("[js-photo-info]")[0];
-    var imageElements = Array.prototype.slice.call(infoElement.children);
+    var imageNodes = $($("[js-photo-info]").children());
 
-    imageElements.forEach(function(element) {
+    $("[js-photo-info]").children().each(function (node) {
       var metadata = {};
-      var elements = Array.prototype.slice.call(element.children);
+      
+      $(node).children().each(function (node) {
+        var node = $(node),
+            dataType = node.attr("js-info");
 
-      elements.forEach(function(element){
-        var dataType = element.getAttribute("js-info");
-        metadata[dataType] = element.textContent;
+        metadata[dataType] = node.text();
       });
 
-      this.imageMetadata.push(metadata);
+      this.imageMetadata.push(metadata)
     }.bind(this));
   },
 

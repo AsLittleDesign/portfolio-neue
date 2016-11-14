@@ -1,79 +1,10 @@
 
-function $(selector) {
-  return document.querySelectorAll(selector);
-}
-
-
 function ready(fn) {
   if (document.readyState != 'loading') {
     fn();
 
   } else {
     document.addEventListener('DOMContentLoaded', fn);
-  }
-}
-
-
-function forEachNode(nodeList, callback) {
-  var nodeListLength = nodeList.length;
-  for (var i = 0; i < nodeListLength; i++) {
-    callback(nodeList[i]);
-  }
-}
-
-
-function attr(el, name, val) {
-  if (val) {
-    el.setAttribute(name, val);
-
-  } else {
-    return el.getAttribute(name);
-  }
-}
-
-
-function toggleAttr (el, name) {
-  attr(el, name, attr(el, name) === "false" ? "true" : "false");
-}
-
-
-function hasClass(el, className) {
-  if (el.classList) {
-    return el.classList.contains(className)
-
-  } else {
-    return !!el.className.match(new RegExp('(\\s|^)' + className + '(\\s|$)'))
-  }
-}
-
-
-function addClass(el, className) {
-  if (el.classList) {
-    el.classList.add(className);
-  
-  } else if (!hasClass(el, className)) {
-    el.className += " " + className;
-  }
-}
-
-
-function removeClass(el, className) {
-  if (el.classList)
-    el.classList.remove(className)
-
-  else if (hasClass(el, className)) {
-    var reg = new RegExp('(\\s|^)' + className + '(\\s|$)')
-    el.className=el.className.replace(reg, ' ')
-  }
-}
-
-
-function toggleClass (el, className) {
-  if ( hasClass(el, className) ) {
-    removeClass(el, className);
-  
-  } else {
-    addClass(el, className);
   }
 }
 
@@ -113,69 +44,55 @@ function getPosition (el) {
 }
 
 
-function getOffsetLeft (elem) {
-  var offsetLeft = 0;
-  do {
-    if (!isNaN(elem.offsetLeft)) {
-      offsetLeft += elem.offsetLeft;
-    }
-  } while(elem = elem.offsetParent);
+function getScrollOffsets () {
+  var doc = document, w = window;
+  var x, y, docEl;
 
-  return offsetLeft;
-}
-
-
-function getOffsetTop (el) {
-  var offsetTop = 0;
-  do {
-    if (!isNaN(el.offsetTop)) {
-      offsetTop += el.offsetTop;
-    }
-  } while (el = el.offsetParent);
-
-  return offsetTop;
-}
-
-
-
-function getScrollTop() {
-  if (typeof pageYOffset != 'undefined') {
-    // Most browsers except IE before v9
-    return pageYOffset;
+  if (typeof w.scrollY != undefined) {
+    x = w.scrollX;
+    y = w.scrollY;
+  
+  } else if ( typeof w.pageYOffset === 'number' ) {
+    x = w.pageXOffset;
+    y = w.pageYOffset;
 
   } else {
-    var body = document.body, //IE 'quirks'
-        doc  = document.documentElement; //IE with doctype
-
-    doc = (doc.clientHeight) ? doc : b;
-    return doc.scrollTop;
+      docEl = (doc.compatMode && doc.compatMode === 'CSS1Compat')?
+              doc.documentElement: doc.body;
+      x = docEl.scrollLeft;
+      y = docEl.scrollTop;
   }
+
+  return {
+    x: x,
+    y: y
+  };
 }
 
 
 // Toggles page scrolling on and off
 function toggleScroll (value) {
-  var body = $("body")[0];
+  var body = $("body");
 
   if (value === true) {
-    body.style.overflowY = "auto";
+    body.css("overflow-y", "auto");
     document.ontouchmove = function (e) { return true; }
 
   } else if (value === false) {
-    body.style.overflowY = "hidden";
-    document.ontouchmove = function (e) { return true; }
+    body.css("overflow-y", "hidden");
+    document.ontouchmove = function (e) { e.preventDefault(); }
 
   } else {
     // If scrolling is enabled
     //   -> do stuff
-    if (body.style.overflowY != "hidden") {
-      body.style.overflowY = "hidden";
+    if (body.css("overflow-y") != "hidden") {
+      body.css("overflow-y", "hidden");
       
       // Mobile Safari
       document.ontouchmove = function (e) { e.preventDefault(); }
 
     } else {
-      body.style.overflowY = "auto";
+      body.css("overflow-y", "auto");
 
       // Mobile Safari
       document.ontouchmove = function (e) { return true; }
@@ -185,19 +102,20 @@ function toggleScroll (value) {
 
 
 function toggleBlur (value) {
-  var el = $("[js-blur]")[0];
+  var el = $("[js-blur]");
+
   if (value) {
-    el.setAttribute("js-blur", value)
+    el.attr("js-blur", value);
 
   } else {
-    if (el.style.willChange) {
-      el.style.willChange = "";
+    if (el[0].style.willChange) {
+      el[0].style.willChange = "";
 
     } else {
-      el.style.willChange = "filter";
+      el[0].style.willChange = "filter";
     }
 
-    toggleAttr(el, "js-blur");
+    el.toggleAttr("js-blur");
   }
 }
 
@@ -209,10 +127,9 @@ function delegateEvent (eventType, selector, handler) {
   document.addEventListener(eventType, function (e) {
     e = e || window.event;
 
-    var target   = e.target || e.srcElement,
-        nodeList = $(selector);
+    var target   = e.target || e.srcElement;
 
-    forEachNode (nodeList, function (node) {
+    $(selector).each(function (node) {
       if (target === node) {
         handler(e, node);
       }
@@ -269,6 +186,10 @@ function URLEncode (str) {
 }
 
 
+// ======
+// ======
+// User Agent Checking
+
 function isMobile () {
   if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
     return true;
@@ -292,18 +213,366 @@ function isIE () {
 }
 
 
-function parseHTML (HTMLString) {
-  var frame = document.createElement('iframe');
+// ======
+// ======
+// String methods
 
-  frame.style.display = 'none';
-  document.body.appendChild(frame);             
-  frame.contentDocument.open();
-  frame.contentDocument.write(HTMLString);
-  frame.contentDocument.close();
-  
-  var el = frame.contentDocument.body.firstChild;
-  document.body.removeChild(frame);
 
-  return el;
+String.prototype.replaceAt=function(index, character) {
+    return this.substr(0, index) + character + this.substr(index+character.length);
 }
 
+
+function camelize(str) {
+  // Remove preceding hyphen if one exists
+  if (str.charAt(0) === "-") {
+    str = str.replace(/-/, "");
+  }
+
+  // Remove hyphens and spaces
+  str = str.replace(/(?:^\w|[A-Z]|\b\w|\s+)/g, function(match, index) {
+    if (+match === 0) return ""; // or if (/\s+/.test(match)) for white spaces
+    return index == 0 ? match.toLowerCase() : match.toUpperCase();
+  }).replace(/-/g,"");
+
+  return str; 
+}
+
+
+function decamelize (string) {
+  return string.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase();
+}
+
+
+// ======
+// ======
+// DomJS (IntentJS?)
+
+
+// Instantiates new DomJS nodelist with string, selector, or node
+function $ (selector) {
+  if (typeof selector == "string") {
+    if (selector.charAt(0) === "<") {
+      var temp = document.createElement("div");
+      temp.innerHTML = selector;
+
+      return new DomJS(temp.childNodes);
+
+    } else {
+      var nodeList = document.querySelectorAll(selector);
+      return new DomJS(nodeList)
+    }
+  
+  } else if (selector instanceof DomJS) {
+    return selector;
+  
+  } else {
+    return new DomJS(selector);    
+  }
+}
+
+
+function DomJS (nodeList) {
+  if (nodeList.length) {
+    this.length = nodeList.length;
+
+    for (var i = 0; i < this.length; i++) {
+      this[i] = nodeList[i];
+    }
+  
+  } else {
+    this.length = 1;
+    this[0] = nodeList;
+  }
+}
+
+
+DomJS.prototype = {
+  // each( callback(node, i) )
+  each: function (callback) {
+    if (!callback) {
+      console.error("Callback missing. each() takes an anonymous function as an argument.")
+    }
+
+    for (var i = 0; i < this.length; i++) {
+      callback(this[i], i);
+    }
+  },
+
+
+  children: function () {
+    var children = [];
+
+    this.each(function (node) {
+      var nodeChildren = Array.prototype.slice.call(node.children);
+      nodeChildren.forEach(function (node) {
+        children.push(node);  
+      });
+    });
+
+    return $(children);
+  },
+
+
+  // hasClass( className )
+  // returns boolean
+  hasClass: function (name) {
+    var containsClass = false;
+
+    this.each(function (node) {
+      if (node.classList && node.classList.contains(name)) {
+        containsClass = true;
+
+      } else if (!!node.className.match(new RegExp('(\\s|^)' + name + '(\\s|$)'))) {
+        containsClass = true;
+      }
+    });
+
+    return containsClass;
+  },
+
+
+  // addClass( className )
+  // returns context
+  addClass: function (name) {
+    this.each(function (node) {
+      if (node.classList) {
+        node.classList.add(name);
+      
+      } else if (!this.hasClass(name)) {
+        node.className += " " + name;
+      }
+    });
+
+    return this;
+  },
+
+
+  // removeClass( className )
+  // returns context
+  removeClass: function (name) {
+    this.each(function (node) {
+      if (node.classList) {
+        node.classList.remove(name);
+      
+      } else if (this.hasClass(name)) {
+        var reg = new RegExp('(\\s|^)' + name + '(\\s|$)');
+        node.className = node.className.replace(reg, ' ');
+      }
+    });
+
+    return this;
+  },
+
+
+  // toggleClass( className )
+  // returns context
+  toggleClass: function (name) {
+    if (this.hasClass(name)) {
+      this.removeClass(name);
+    
+    } else {
+      this.addClass(name);
+    }
+
+    return this;
+  },
+
+
+  // text( textValue )
+  // returns context || value
+  text: function (value) {
+    if (value) {
+      this.each(function (node) {
+        node.textContent = value;
+      });
+
+      return this;
+    
+    } else {
+      return this[0].textContent;
+    }
+  },
+
+
+  // css( (obj || string), value )
+  // returns context || value
+  css: function (arg1, arg2) {
+    if (arg1 && !arg2) {
+      // arg1 is a property name
+      if (typeof arg1 === "string") {
+        return window.getComputedStyle(this[0], null).getPropertyValue(decamelize(arg1));
+      
+      // arg1 is object with CSS properties
+      } else if (typeof arg1 === "object" && !arg1.length) {
+        this.each(function (node) {
+          var style = node.style;
+
+          for (var property in arg1) {
+            style[camelize(property)] = arg1[property];
+          }
+
+        });
+
+        return this;
+        
+      } else {
+        console.error("The argument provided to css() is invalid.")
+      }
+    
+    } else if (arg1 && arg2) {
+      this.each(function (node) {
+        node.style[camelize(arg1)] = arg2;
+      });
+
+      return this;
+
+    } else {
+      return window.getComputedStyle(this[0], null);
+    }
+    
+  },
+
+
+  // attr( attributeName, value )
+  // returns context || value
+  attr: function (name, value) {
+    if (value || value === "") {
+      this.each(function (node) {
+        node.setAttribute(name, value);
+      });
+
+      return this;
+    
+    } else {
+      return this[0].getAttribute(name);
+    }
+  },
+
+  
+  // toggleAttr( attributeName )
+  // returns context
+  toggleAttr: function (name) {
+    var value = this.attr(name);
+
+    if (value == "true") {
+      this.attr(name, "false");
+    
+    } else if (value == "false") {
+      this.attr(name, "true");
+
+    } else {
+      console.error("toggleAttr() only works with boolean attribute values. Use attr() for a more flexible way to change an attribute.")
+    }
+
+    return this;
+  },
+
+
+  // append( node )
+  // returns context
+  append: function (selector) {
+    selector = $(selector);
+
+    this.each(function (node) {
+      node.appendChild(selector[0]);
+    });
+
+    return this;
+  },
+
+
+  // prepend( node )
+  // returns context
+  prepend: function (selector) {
+    selector = $(selector);
+
+    this.each(function (node) {
+      node.insertBefore(selector[0], node.firstChild);
+    });
+
+    return this;
+  },
+
+
+  // before( node )
+  // returns context
+  before: function (selector) {
+    selector = $(selector);
+
+    this.each(function (node) {
+      var parent = node.parentElement;
+      parent.insertBefore(selector[0], parent.firstChild);
+    });
+
+    return this;
+  },
+
+
+  // after( node )
+  // returns context
+  after: function (selector) {
+    selector = $(selector);
+
+    this.each(function (node) {
+      var parent = node.parentElement;
+      parent.insertBefore(selector[0], node.nextSibling);
+    });
+
+    return this;
+  },
+
+
+  getPosition: function () {
+    var scrollOffset = getScrollOffsets(),
+        element = this[0],
+        left = 0,
+        top = 0,
+        props;
+    
+    if (element.getBoundingClientRect) {
+      props = element.getBoundingClientRect();
+      left = Math.round(props.left) + Math.round(scrollOffset.x);
+      top = Math.round(props.top) + Math.round(scrollOffset.y);
+
+    } else { // for older browsers
+      do {
+        left += element.offsetLeft;
+        top += element.offsetTop;
+      } while ( (el = el.offsetParent) );
+    }
+
+    return {
+      top: top,
+      bottom: top + this.height(),
+      left: left,
+      right: left + this.width()
+    };
+  },
+
+
+  size: function () {
+    return {
+      width: this.width(),
+      height: this.height()
+    }
+  },
+
+
+  width: function () {
+    return this[0].offsetWidth;
+  },
+
+
+  height: function () {
+    return this[0].offsetHeight;
+  },
+
+
+  // remove()
+  remove: function () {
+    this.each(function (node) {
+      node.parentNode.removeChild(node);
+    });
+  }
+}

@@ -34,10 +34,8 @@ function slider() {
     orientation: "horizontal",
     rangeClass: "rangeSlider viewfinder--focus-input",
     onSlide: function (position, value) {
-      var images = $("[js-parallax]")
-      for (var i = 0; i < images.length; i++) {
-        var image = images[i],
-            blurAmount = Math.abs(value - 0.8),
+      $("[js-parallax]").each(function (image, i) {
+        var blurAmount = Math.abs(value - 0.8),
             focusDepth = value - 0.8 >= 0 ? "far" : "near",
             distanceMod;
 
@@ -57,7 +55,7 @@ function slider() {
 
         image.style.filter = "blur(" + blur + "px)";
         image.style.webkitFilter = "blur(" + blur + "px)";
-      };
+      });
     }
   });
 }
@@ -88,7 +86,7 @@ function mousemoveHandler() {
   }, true);
 
   window.addEventListener("scroll", throttle(function () {
-    calculatePosition();;
+    calculatePosition();
   }, 150), true);
 
   window.addEventListener("mousemove", function (e) {
@@ -175,7 +173,7 @@ function updateEvent(event, data) {
       // to event object
       event.data = {};
       event.data.lastScrollY = data.last || 0;
-      event.data.currentScrollY = data.current || getScrollTop();
+      event.data.currentScrollY = data.current || getScrollOffsets().y;
 
       if (data.current > data.last) {
         event.data.direction = "down";

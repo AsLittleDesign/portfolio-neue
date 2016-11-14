@@ -101,14 +101,14 @@ ActionMenu.prototype = {
 
   // Create the menu element
   createMenu: function () {
-    var menu = document.createElement("div");
-    addClass(menu, "menu")
-    menu.innerHTML = "<div class='menu--close' data-menu-toggle='" + this.name + "'>Cancel</div>";
+    var menu = $("<div class='menu'>\
+                    <div class='menu--close' data-menu-toggle='" + this.name + "'>Cancel</div>\
+                  </div>");
 
     // Append options to menu.
     // Calling reverse() is due to insertBefore reversing the array.
-    this.options.reverse().forEach(function (option) {
-      menu.insertBefore(option, menu.firstChild);
+    this.options.forEach(function (option) {
+      menu.prepend(option);
     });
 
     this.menu = menu;
@@ -117,38 +117,32 @@ ActionMenu.prototype = {
 
   createOptions: function () {
     this.options = [];
-    this.data.options.forEach(function (optionData, index) {
-      var option = this.createOption(optionData);
+    this.data.options.forEach(function (data, index) {
+      var option = this.createOption(data);
       this.options.push(option);
     }.bind(this));
   },
 
 
-  createOption: function (optionData) {
-    // Create link element to be our option.
-    var option = document.createElement('a');
-    addClass(option, "menu--option");
+  createOption: function (data) {
+    var attributes;
     
-    // Set rel if it's a Twitter button
-    if (optionData.id === "twitter") {
-      option.setAttribute("rel", "me")
+    if (data.id === "twitter") {
+      attributes += " " + "rel='me'";
     };
 
-    // Set href and target if it's a link
-    if (optionData.href) {
-      option.setAttribute("href", optionData.href);
-      option.setAttribute("target", "_blank");
+    if (data.href) {
+      attributes += " " + "href='" + data.href + "' target='_blank'"
     }
 
-    // Append option content
-    option.innerHTML = [
-      "<span class='menu--symbol icon--" + optionData.symbol + "'></span>",
-      "<span class='menu--option-text'>" + optionData.text + "</span>",
-    ].join("\n");
-
+    var option = $("<a class='menu--option'" + attributes + ">\
+                      <span class='menu--symbol icon--" + data.symbol + "'></span>\
+                      <span class='menu--option-text'>" + data.text + "</span>\
+                    </a>");
+    
     // Add event listener if there is an action
-    if (optionData.action) {
-      option.addEventListener("click", optionData.action);
+    if (data.action) {
+      option[0].addEventListener("click", data.action);
     }
 
     return option;
@@ -156,29 +150,12 @@ ActionMenu.prototype = {
 
 
   append: function () {
-    $("[data-menu-wrapper]")[0].appendChild(this.menu);
-  },
-
-
-  getScrollOffsets: function () {
-    var doc = document, w = window;
-    var x, y, docEl;
-    
-    if ( typeof w.pageYOffset === 'number' ) {
-        x = w.pageXOffset;
-        y = w.pageYOffset;
-    } else {
-        docEl = (doc.compatMode && doc.compatMode === 'CSS1Compat')?
-                doc.documentElement: doc.body;
-        x = docEl.scrollLeft;
-        y = docEl.scrollTop;
-    }
-    return {x:x, y:y};
+    $("[data-menu-wrapper]").append(this.menu);
   },
 
 
   getPosition: function (element) {
-    var scrollOffset = this.getScrollOffsets(),
+    var scrollOffset = getScrollOffsets(),
         left = 0,
         top = 0,
         props;
@@ -207,10 +184,7 @@ ActionMenu.prototype = {
 
 
   checkPosition: function (toggle) {
-    var menuSize = {
-          width: this.menu.offsetWidth,
-          height: this.menu.offsetHeight
-        },
+    var menuSize = this.menu.size(),
         togglePos = this.getPosition(toggle),
         posX, posY;
 
@@ -242,7 +216,7 @@ ActionMenu.prototype = {
 
     if (menuPos.x === "left") {
       originX = "right";
-      left = togglePos.right - this.menu.offsetWidth;
+      left = togglePos.right - this.menu[0].offsetWidth;
     
     } else {
       originX = "left";
@@ -256,44 +230,42 @@ ActionMenu.prototype = {
 
     } else {
       originY = "bottom";
-      top = togglePos.bottom - this.menu.offsetHeight; 
+      top = togglePos.bottom - this.menu[0].offsetHeight; 
       translateDist = -this.menuSpacing - togglePos.height;
     }
 
-    menuStyle = "\
-      top: " + top + "px;\
-      left: " + left + "px;\
-      opacity: 1;\
-      pointer-events: initial;\
-      transform: translate3d(0," + translateDist + "px, 0) scale(1);\
-      transform-origin: " + originX + " " + originY + ";\
-      -ms-transform-origin: " + originX + " " + originY + ";\
-      -webkit-transform-origin: " + originX + " " + originY + ";\
-      -moz-transform-origin: " + originX + " " + originY + ";"
-
-    this.menu.setAttribute("style", menuStyle);
+    this.menu.css({
+      "top": top + "px",
+      "left": left + "px",
+      "opacity": 1,
+      "pointer-events": "initial",
+      "transform": "translate3d(0," + translateDist + "px, 0) scale(1)",
+      "transform-origin": originX + " " + originY,
+      "-ms-transform-origin": originX + " " + originY,
+      "-webkit-transform-origin": originX + " " + originY,
+      "-moz-transform-origin": originX + " " + originY
+    });
 
     if (originX === "right") {
-      addClass(this.menu, "m-right");
+      this.menu.addClass("m-right");
     }
   },
 
 
   cloneToggle: function (toggle) {
     this.clone = toggle.cloneNode(true);
-    var togglePos = this.getPosition(toggle),
-        cloneStyle = "\
-        top: " + togglePos.top + "px;\
-        left: " + togglePos.left + "px;\
-        position: absolute;\
-        width: " + togglePos.width + "px;\
-        height: " + togglePos.height + "px;\
-        margin-left: 0 !important;"
+    var togglePos = this.getPosition(toggle);
 
-    this.clone.setAttribute("style", cloneStyle);
-    $("[data-menu-wrapper]")[0].appendChild(this.clone);
-    
-    addClass(this.clone, "menu-toggle-clone");
+    $(this.clone).css({
+      "top": togglePos.top + "px",
+      "left": togglePos.left + "px",
+      "position": "absolute",
+      "width": togglePos.width + "px",
+      "height": togglePos.height + "px",
+      "margin-left": 0
+    }).addClass("menu-toggle-clone");
+
+    $("[data-menu-wrapper]").append(this.clone);
 
     toggle.style.opacity = 0;
   },
@@ -301,8 +273,7 @@ ActionMenu.prototype = {
 
   // Return menu to fully hidden state
   reset: function () {
-    this.menu.setAttribute("style", "");
-    removeClass(this.menu, "m-right")
+    $(this.menu).attr("style", "").removeClass("m-right");
 
     if (this.clone) {
       this.clone.remove();
@@ -312,8 +283,8 @@ ActionMenu.prototype = {
 
   open: function (toggle) {
     this.reset();
-    addClass($("[data-menu-background]")[0], "s-active");
-    $("[data-menu-background]")[0].setAttribute("data-menu-toggle", this.name);
+
+    $("[data-menu-background]").addClass("s-active").attr("data-menu-toggle", this.name);
 
     this.toggle = toggle;
     this.cloneToggle(toggle);
@@ -324,18 +295,20 @@ ActionMenu.prototype = {
 
 
   close: function () {
-    removeClass($("[data-menu-background]")[0], "s-active");
+    $("[data-menu-background]").removeClass("s-active");
     $("[data-menu-background]")[0].removeEventListener("click", this.backgroundClose);
 
     if (!this.state.active) {
-      removeClass(this.clone, "menu-toggle-clone");
+      $(this.clone).removeClass("menu-toggle-clone");
     }
 
     toggleScroll(true);
     toggleBlur(false);
 
-    this.menu.style.transform = "translate3d(0, 0, 0) scale(0.1)";
-    this.menu.style.opacity = 0;
+    $(this.menu).css({
+      "transform": "translate3d(0, 0, 0) scale(0.1)",
+      "opacity": 0
+    });
 
     setTimeout(function () {
       this.toggle.style.opacity = ""

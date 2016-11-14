@@ -1,17 +1,17 @@
 
 ready(function () {
-  delegateEvent("click", "[js-toggle-comparison]", function (e, toggle) {    
-    forEachNode($("[js-toggle-comparison]"), function (node) {
-      removeClass(node, "s-active");
+  delegateEvent("click", "[js-toggle-comparison]", function (e, toggle) {
+    $("[js-toggle-comparison]").each(function (node) {
+      $(node).removeClass("s-active");
+    });
+    
+    $("[js-comparison]").each(function (node) {
+      $(node).removeClass("s-active");
     });
 
-    forEachNode($("[js-comparison]"), function (node) {
-      removeClass(node, "s-active");
-    });
-
-    addClass(toggle, "s-active");
-
-    var toggleName = toggle.getAttribute("js-toggle-comparison");
-    addClass($("[js-comparison=" + toggleName + "]")[0], "s-active");
+    $(toggle).addClass("s-active");
+    
+    var toggleName = $(toggle).attr("js-toggle-comparison");
+    $("[js-comparison=" + toggleName + "]").addClass("s-active");
   });
 });
