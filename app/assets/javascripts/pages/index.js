@@ -62,23 +62,25 @@ function slider() {
 
 
 function mousemoveHandler() {
-  var baseFringeElement = $("[js-fringe='base']")[0],
+  var baseFringeElement = $("[js-fringe='base']"),
       fringe = {
-        styles: {
-          red: $("[js-fringe='red']")[0].style,
-          blue: $("[js-fringe='blue']")[0].style
+        elements: {
+          red: $("[js-fringe='red']"),
+          blue: $("[js-fringe='blue']")
         },
-        position: getPosition(baseFringeElement)
+        position: baseFringeElement.getPosition(),
+        size: baseFringeElement.size()
       };
 
-  var parallaxBaseElement = $("[js-parallax='background']")[0],
+  var parallaxBaseElement = $("[js-parallax='background']"),
       parallax = {
-        styles: {
-          back: parallaxBaseElement.style,
-          mid: $("[js-parallax='midground']")[0].style,
-          front: $("[js-parallax='foreground']")[0].style
+        elements: {
+          back: parallaxBaseElement,
+          mid: $("[js-parallax='midground']"),
+          front: $("[js-parallax='foreground']")
         },
-        position: getPosition(parallaxBaseElement)
+        position: parallaxBaseElement.getPosition(),
+        size: parallaxBaseElement.size()
       };
 
   window.addEventListener("resize", function () {
@@ -103,8 +105,11 @@ function mousemoveHandler() {
   }
 
   var calculatePosition = debounce(function() {
-      fringe.position = getPosition(baseFringeElement);
-      parallax.position = getPosition(parallaxBaseElement);
+      fringe.position = baseFringeElement.getPosition();
+      fringe.size = baseFringeElement.size();
+      
+      parallax.position = parallaxBaseElement.getPosition();
+      parallax.size = parallaxBaseElement.size();
   }, 200);
 }
 
@@ -126,12 +131,12 @@ function textFringing(event, props) {
     var pageX = event.pageX,
         pageY = event.pageY;
 
-    distanceX = Math.min(pageX - props.position.right / 2, pageX - (props.position.right - props.position.width / 2) ) / 150,
-    distanceY = Math.min(pageY - props.position.bottom / 2, pageY - (props.position.bottom - props.position.height / 2) ) / 150;
+    distanceX = Math.min(pageX - props.position.right / 2, pageX - (props.position.right - props.size.width / 2) ) / 150,
+    distanceY = Math.min(pageY - props.position.bottom / 2, pageY - (props.position.bottom - props.size.height / 2) ) / 150;
   }
 
-  props.styles.red.transform = "translate3d(" + distanceX + "px, " + distanceY + "px, 0)";
-  props.styles.blue.transform = "translate3d(" + -distanceX + "px, " + -distanceY + "px, 0)";
+  props.elements.red.css("transform", "translate3d(" + distanceX + "px, " + distanceY + "px, 0)");
+  props.elements.blue.css("transform", "translate3d(" + -distanceX + "px, " + -distanceY + "px, 0)");
 }
 
 
@@ -154,15 +159,15 @@ function photographyParallax(event, props) {
         positionBottom = props.position.bottom,
         positionRight = props.position.right;
 
-    distanceX = Math.min(pageX - positionRight / 2, pageX - (positionRight - props.position.width / 2) ) / 100,
-    distanceY = Math.min(pageY - positionBottom / 2, pageY - (positionBottom - props.position.height / 2) ) / 100;
+    distanceX = Math.min(pageX - positionRight / 2, pageX - (positionRight - props.size.width / 2) ) / 100,
+    distanceY = Math.min(pageY - positionBottom / 2, pageY - (positionBottom - props.size.height / 2) ) / 100;
   }
 
-  props.styles.front.transform = "translate3d(" + -distanceX * 4 + "px, " + -distanceY * 3 + "px, 0)";
+  props.elements.front.css("transform", "translate3d(" + -distanceX * 4 + "px, " + -distanceY * 3 + "px, 0)");
 
-  props.styles.mid.transform = "matrix3d(" + ((distanceY / 10000) + 1) + ", 0, 1, 0, " + (-distanceX / 200) + ", " + ((-distanceY / 200) + 1) + ", 1, 0, 1, " + (distanceX / 1000) + ", " + ((-distanceX / 100) + 1) + ", 0, 0, 0, 100, 1) translate3d(" + -distanceX / 6 + "px, " + -distanceY / 2 + "px, 0)";
+  props.elements.mid.css("transform", "matrix3d(" + ((distanceY / 10000) + 1) + ", 0, 1, 0, " + (-distanceX / 200) + ", " + ((-distanceY / 200) + 1) + ", 1, 0, 1, " + (distanceX / 1000) + ", " + ((-distanceX / 100) + 1) + ", 0, 0, 0, 100, 1) translate3d(" + -distanceX / 6 + "px, " + -distanceY / 2 + "px, 0)");
 
-  props.styles.back.transform = "translate3d(" + distanceX / 5 + "px, " + distanceY / 4 + "px, 0)";
+  props.elements.back.css("transform", "translate3d(" + distanceX / 5 + "px, " + distanceY / 4 + "px, 0)");
 }
 
 

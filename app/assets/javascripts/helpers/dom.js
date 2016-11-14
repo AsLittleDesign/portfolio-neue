@@ -9,41 +9,6 @@ function ready(fn) {
 }
 
 
-function getPosition (el) {
-  var xPos = 0,
-      yPos = 0,
-      height = el.offsetHeight,
-      width = el.offsetWidth;
-
-  while (el) {
-    if (el.tagName === "BODY") {
-      // deal with browser quirks with body/window/document and page scroll
-      var xScroll = el.scrollLeft || document.documentElement.scrollLeft;
-      var yScroll = el.scrollTop || document.documentElement.scrollTop;
-
-      xPos += (el.offsetLeft - xScroll + el.clientLeft);
-      yPos += (el.offsetTop - yScroll + el.clientTop);
-
-    } else {
-      // for all other non-BODY elements
-      xPos += (el.offsetLeft - el.scrollLeft + el.clientLeft);
-      yPos += (el.offsetTop - el.scrollTop + el.clientTop);
-    }
-
-    el = el.offsetParent;
-  }
-
-  return {
-    left: xPos,
-    right: xPos + width,
-    top: yPos,
-    bottom: yPos + height,
-    height: height,
-    width: width
-  };
-}
-
-
 function getScrollOffsets () {
   var doc = document, w = window;
   var x, y, docEl;
