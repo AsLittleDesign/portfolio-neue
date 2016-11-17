@@ -142,7 +142,7 @@ ActionMenu.prototype = {
     
     // Add event listener if there is an action
     if (data.action) {
-      option[0].addEventListener("click", data.action);
+      option.click(data.action);
     }
 
     return option;
@@ -253,15 +253,16 @@ ActionMenu.prototype = {
 
 
   cloneToggle: function (toggle) {
-    this.clone = toggle.cloneNode(true);
-    var togglePos = this.getPosition(toggle);
+    this.clone = $(toggle.cloneNode(true));
+    var togglePos = $(toggle).getPosition(),
+        toggleSize = $(toggle).size();
 
-    $(this.clone).css({
+    this.clone.css({
       "top": togglePos.top + "px",
       "left": togglePos.left + "px",
       "position": "absolute",
-      "width": togglePos.width + "px",
-      "height": togglePos.height + "px",
+      "width": toggleSize.width + "px",
+      "height": toggleSize.height + "px",
       "margin-left": 0
     }).addClass("menu-toggle-clone");
 
@@ -299,7 +300,7 @@ ActionMenu.prototype = {
     $("[data-menu-background]")[0].removeEventListener("click", this.backgroundClose);
 
     if (!this.state.active) {
-      $(this.clone).removeClass("menu-toggle-clone");
+      this.clone.removeClass("menu-toggle-clone");
     }
 
     toggleScroll(true);

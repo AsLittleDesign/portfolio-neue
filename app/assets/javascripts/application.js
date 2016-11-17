@@ -20,70 +20,23 @@ WebFont.load({
 
 
 function Button (el) {
-  this.el = el;
-  this.$el = $(el);
+  this.el = $(el);
 }
 
 
 Button.prototype = {
-  state: {
-    hover: false
-  },
-
-
-  setState: function (state) {
-    var propsChanged = [];
-
-    for (var key in state) {
-      this.state[key] = state[key];
-      propsChanged.push(key);
-    }
-
-    propsChanged.length === 1 ? propsChanged = propsChanged[0] : null;
-    
-    this.stateChange.propsChanged = propsChanged;
-    this.el.dispatchEvent(this.stateChange);
-  },
-
-
-  handleStateChange: function (e) {
-    var propsChanged = e.propsChanged;
-
-    var processChange = function (prop) {
-      if (prop === "hover") {
-        this.onHover();
-      }
-    }.bind(this);
-
-    if (typeof propsChanged === "string") {
-      processChange(propsChanged);
-
-    } else {
-      for (var prop in propsChanged) {
-        processChange(propsChanged[prop]);
-      }
-    }
-  },
-
-
   init: function () {
-    this.el.addEventListener("click", this.onClick.bind(this));
+    this.el.click(this.onClick.bind(this));
 
     if (!isMobile()) {
       this.prepare();
-      
-      // State changes
-      if (isIE()) {
-        this.stateChange = document.createEvent("stateChange");
-        this.stateChange.initCustomEvent("stateChange", false, false);
-      
-      } else {
-        this.stateChange = new CustomEvent("stateChange");
-      }
+  
+      this.el.hover({
+        start: this.hoverStart.bind(this),
+        end: this.hoverEnd.bind(this)
+      });
 
-      this.el.addEventListener("stateChange", this.handleStateChange.bind(this));
-      this.el.addEventListener("mouseover", this.onMouseover.bind(this));
-      this.el.addEventListener("mouseleave", this.onMouseleave.bind(this));
+      window.addEventListener("resize", this.prepare.bind(this));
 
       // Prepare ghost again in canse position has changed.
       var timing = window.location.pathname === "/photography" ? 5000 : 500
@@ -95,8 +48,8 @@ Button.prototype = {
 
 
   prepare: function () {
-    var position = this.$el.getPosition(),
-        size = this.$el.size();
+    var position = this.el.getPosition(),
+        size = this.el.size();
 
     this.ghost = this.ghost || $("<div class='button--ghost'></div>");
     this.ghost.css({
@@ -104,24 +57,24 @@ Button.prototype = {
       "left": position.left + "px",
       "width": size.width + "px",
       "height": size.height + "px",
-      "background-color": $(this.el).css("background-color")
+      "background-color": this.el.css("background-color")
     });
 
     if (size.width > 300) {
       this.ghost.addClass("m-wide");
     }
 
-    this.$el.before(this.ghost);
+    this.el.before(this.ghost);
   },
 
 
-  onHover: function () {
-    if (this.state.hover) {
-      this.ghost.addClass("s-hover");
+  hoverStart: function () {
+    this.ghost.addClass("s-hover");
+  },
 
-    } else {
-      this.ghost.removeClass("s-hover");
-    }
+
+  hoverEnd: function () {
+    this.ghost.removeClass("s-hover");
   },
 
 
@@ -139,13 +92,13 @@ Button.prototype = {
       "</div>"
     ].join("\n");
 
-    this.el.insertAdjacentHTML('beforeend', ink);
+    this.el.append($(ink));
 
     setTimeout(function () {
       $(".button--ink-container").remove();
     }, 500);
 
-    var href = this.el.href,
+    var href = this.el.attr("href"),
         platform = navigator.platform,
         ctrlModifier = platform === "Mac68K" ||
                        platform === "MacPPC" ||
@@ -161,16 +114,6 @@ Button.prototype = {
       }, 300);
     }
   },
-
-
-  onMouseover: function () {
-    this.setState({ hover: true });
-  },
-
-
-  onMouseleave: function (e) {
-    this.setState({ hover: false });
-  }
 }
 
 
@@ -183,8 +126,7 @@ ready(function () {
   });
 
   $(".button").each(function (node) {
-    var button = new Button(node);
-    button.init();
+    var button = new Button(node).init();
   });
 });
 

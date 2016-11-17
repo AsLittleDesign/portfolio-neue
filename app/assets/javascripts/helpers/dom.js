@@ -534,6 +534,116 @@ DomJS.prototype = {
   },
 
 
+  // Accepts callback or object
+  // obj = {clickStart: function(e, node), clickEnd: function(e, node)}
+  click: function (arg) {
+    // If object was passed to click()
+    if (typeof arg === "object") {
+      var pointerPrefix = 'onmspointerdown' in window ? 'ms' : '';
+
+      // If object contains handler for clickStart
+      if (arg.clickStart) {
+        // Handle all input methods
+        if ("on" + pointerPrefix + "pointerdown" in window) {
+          this.each(function (node) {
+            node.addEventListener(pointerPrefix + "pointerdown", function (e) {
+              arg.clickStart(e, node);
+            });
+          });
+
+        } else {
+          this.each(function (node) {
+            node.addEventListener("mousedown", function (e) {
+              arg.clickStart(e, node);
+            });
+          });
+
+          if ('ontouchstart' in window) {
+            this.each(function (node) {
+              node.addEventListener("touchstart", function (e) {
+                arg.clickStart(e, node);
+              });
+            });
+          }
+        }
+      }
+
+      if (arg.clickEnd) {
+        // Handle all input methods
+        if ("on" + pointerPrefix + "pointerdown" in window) {
+          this.each(function (node) {
+            node.addEventListener(pointerPrefix + "pointerup", function (e) {
+              arg.clickEnd(e, node);
+            });
+          });
+
+        } else {
+          this.each(function (node) {
+            node.addEventListener("mouseup", function (e) {
+              arg.clickEnd(e, node);
+            });
+          });
+
+          if ('ontouchstart' in window) {
+            this.each(function (node) {
+              node.addEventListener("touchend", function (e) {
+                arg.clickEnd(e, node);
+              });
+            });
+          }
+        }
+      }
+
+    } else {
+      this.each(function (node) {
+        var event = node.addEventListener("click", function (e) {
+          arg(e, node);
+        });
+      });
+    }
+
+    return this;
+  },
+
+
+  // Binds event listeners
+  on: function (eventType, callback) {
+    this.each(function (node) {
+      node.addEventListener(eventType, function (e) {
+        callback(e, node);
+      });
+    });
+  },
+
+  
+  // Accepts callback or object
+  // obj = start: function (e, node), end: function (e, node)
+  hover: function (arg) {
+    if (!isMobile()) {
+      this.each(function (node) {
+        if (arg.start) {
+          node.addEventListener("mouseover", function (e) {
+            arg.start(e, node);
+          });
+
+          if (arg.end) {
+            node.addEventListener("mouseout", function (e) {
+              arg.end(e, node);
+            });
+          }
+
+        } else {
+          node.addEventListener("mouseover", function (e) {
+            arg(e, node);
+          });
+        }
+      });
+    }
+
+    return this;
+  },
+
+
   // remove()
   remove: function () {
     this.each(function (node) {
