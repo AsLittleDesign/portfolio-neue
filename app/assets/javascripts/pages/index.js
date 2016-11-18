@@ -1,20 +1,4 @@
 
-ready(function () {
-  mousemoveHandler();
-
-  $("[js-scroll-down]")[0].addEventListener("click", function () {
-    var windowHeight = isIOS() ? (window.innerHeight + 10) : window.innerHeight,
-        timing = windowHeight - window.scrollY;
-
-    scrollToY(windowHeight, timing, "easeInOutSine");
-  });
-
-  if (!isMobile()) {
-    slider();
-  }
-});
-
-
 function slider() {
   // Initialize a new plugin instance for element or array of elements.
   var focusSlider = $("[js-slider='focus']")[0],
@@ -173,22 +157,6 @@ function photographyParallax(event, props) {
 
 function updateEvent(event, data) {
   switch(event.type) {
-    case "scroll":
-      // Add direction, the current, and the last scroll top
-      // to event object
-      event.data = {};
-      event.data.lastScrollY = data.last || 0;
-      event.data.currentScrollY = data.current || getScrollOffsets().y;
-
-      if (data.current > data.last) {
-        event.data.direction = "down";
-      } else if (data.current < data.last) {
-        event.data.direction = "up";
-      } else {
-        event.data.direction = "none";
-      }
-      break;
-
     case "mousemove":
       // Add pageX, and pageY properties to event object
       if (event.pageX == null && event.clientX != null) {
@@ -261,3 +229,19 @@ function scrollToY (scrollTargetY, speed, easing) {
   // Call it once to get started
   tick();
 }
+
+
+global.ready(function () {
+  mousemoveHandler();
+
+  $("[js-scroll-down]")[0].addEventListener("click", function () {
+    var windowHeight = global.isIOS() ? (window.innerHeight + 10) : window.innerHeight,
+        timing = windowHeight - window.scrollY;
+
+    scrollToY(windowHeight, timing, "easeInOutSine");
+  });
+
+  if (!global.isMobile()) {
+    slider();
+  }
+});

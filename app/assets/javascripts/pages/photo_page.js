@@ -1,5 +1,5 @@
 
-ready(function () {
+global.ready(function () {
   delegateEvent("click", "[js-toggle-comparison]", function (e, toggle) {
     $("[js-toggle-comparison]").each(function (node) {
       $(node).removeClass("s-active");

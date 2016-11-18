@@ -1,5 +1,5 @@
 
-ready(function () {
+global.ready(function () {
   PositionImages.init();
 });
 
@@ -67,7 +67,7 @@ PositionImages = {
 
   // Spacing == 1rem
   getSpacing: function() {
-    if (isMobile() || (this.windowInfo && this.windowInfo.width < 768) || window.innerWidth < 768) {
+    if (global.isMobile() || (this.windowInfo && this.windowInfo.width < 768) || window.innerWidth < 768) {
       return 0;
     }
     
@@ -108,7 +108,7 @@ PositionImages = {
       }
 
       if (this.windowInfo.width > 768) {
-        var newHeight = isMobile() ? img.calculatedSize.height + 2 : img.calculatedSize.height;
+        var newHeight = global.isMobile() ? img.calculatedSize.height + 2 : img.calculatedSize.height;
         this.updateTotalHeight(newHeight);
       }
 
@@ -492,7 +492,7 @@ PositionImages = {
     img.el = this.createImageElement(index);
     this.images[index] = img;
 
-    var newHeight = isMobile() ? size.height + 2 : size.height;
+    var newHeight = global.isMobile() ? size.height + 2 : size.height;
     this.updateTotalHeight(newHeight);
 
     container.appendChild(img.el);

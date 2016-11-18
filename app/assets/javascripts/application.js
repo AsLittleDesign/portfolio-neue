@@ -1,6 +1,6 @@
 
 //= require fastclick
-//= require helpers/utils
+//= require helpers/global
 //= require helpers/dom
 //= require helpers/pop
 //= require helpers/nouislider
@@ -28,7 +28,7 @@ Button.prototype = {
   init: function () {
     this.el.click(this.onClick.bind(this));
 
-    if (!isMobile()) {
+    if (!global.isMobile()) {
       this.prepare();
   
       this.el.hover({
@@ -194,14 +194,14 @@ var menuData = [
 ];
 
 
-ready(function () {
+global.ready(function () {
   // Removes 300ms delay on mobile whe clicking
   new FastClick(document.body);
 
   $(".button").each(function (node) {
     var button = new Button(node).init();
   });
-  
+
   menuData.forEach(function (data) {
     var toggles = $("[data-menu-toggle=" + data.id + "]");
     if (toggles) {

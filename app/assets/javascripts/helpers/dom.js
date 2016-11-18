@@ -1,90 +1,4 @@
 
-function ready(fn) {
-  if (document.readyState != 'loading') {
-    fn();
-
-  } else {
-    document.addEventListener('DOMContentLoaded', fn);
-  }
-}
-
-
-function getScrollOffsets () {
-  var doc = document, w = window;
-  var x, y, docEl;
-
-  if (typeof w.scrollY != undefined) {
-    x = w.scrollX;
-    y = w.scrollY;
-  
-  } else if ( typeof w.pageYOffset === 'number' ) {
-    x = w.pageXOffset;
-    y = w.pageYOffset;
-
-  } else {
-      docEl = (doc.compatMode && doc.compatMode === 'CSS1Compat')?
-              doc.documentElement: doc.body;
-      x = docEl.scrollLeft;
-      y = docEl.scrollTop;
-  }
-
-  return {
-    x: x,
-    y: y
-  };
-}
-
-
-// Toggles page scrolling on and off
-window.toggleScrolling = function (value) {
-  var body = $("body");
-
-  if (value === true) {
-    body.css("overflow-y", "auto");
-    document.ontouchmove = function (e) { return true; }
-
-  } else if (value === false) {
-    body.css("overflow-y", "hidden");
-    document.ontouchmove = function (e) { e.preventDefault(); }
-
-  } else {
-    // If scrolling is enabled
-    //   -> do stuff
-    if (body.css("overflow-y") != "hidden") {
-      body.css("overflow-y", "hidden");
-      
-      // Mobile Safari
-      document.ontouchmove = function (e) { e.preventDefault(); }
-
-    } else {
-      body.css("overflow-y", "auto");
-
-      // Mobile Safari
-      document.ontouchmove = function (e) { return true; }
-    }
-  }
-}
-
-
-window.toggleBlur = function (value) {
-  var el = $("[js-blur]");
-
-  if (value != null) {
-    el.attr("js-blur", String(value));
-
-  } else {
-    if (el[0].style.willChange) {
-      el[0].style.willChange = "";
-
-    } else {
-      el[0].style.willChange = "filter";
-    }
-
-    el.toggleAttr("js-blur");
-  }
-}
-
-
 // el: element to associate the handler with.
 // type: Event type (e.g. click, scroll).
 // handler: Function to call, passed the event
@@ -153,37 +67,9 @@ function URLEncode (str) {
 
 // ======
 // ======
-// User Agent Checking
-
-function isMobile () {
-  if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-    return true;
-  }
-  return false;
-}
-
-function isAndroid () {
-  return navigator.userAgent.match('Android');
-}
-
-function isIOS () {
-  if (/iPad|iPhone|iPod/i.test(navigator.userAgent)) {
-    return true;
-  }
-  return false;
-}
-
-function isIE () {
-  navigator.userAgent.indexOf("MSIE") != -1 ? true : false;
-}
-
-
-// ======
-// ======
 // String methods
 
-
-String.prototype.replaceAt=function(index, character) {
+String.prototype.replaceAt = function(index, character) {
     return this.substr(0, index) + character + this.substr(index+character.length);
 }
 
@@ -502,7 +388,7 @@ DomJS.prototype = {
 
 
   getPosition: function () {
-    var scrollOffset = getScrollOffsets(),
+    var scrollOffset = global.getScrollOffsets(),
         element = this[0],
         left = 0,
         top = 0,
@@ -632,7 +518,7 @@ DomJS.prototype = {
   // Accepts callback or object
   // obj = start: function (e, node), end: function (e, node)
   hover: function (arg) {
-    if (!isMobile()) {
+    if (!global.isMobile()) {
       this.each(function (node) {
         if (arg.start) {
           node.addEventListener("mouseover", function (e) {

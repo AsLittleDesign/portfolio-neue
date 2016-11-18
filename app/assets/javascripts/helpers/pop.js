@@ -199,16 +199,16 @@ ActionMenu.prototype = {
     this.clone.addClass("s-active");
 
     this.setStyle();
-    window.toggleScrolling(false);
-    window.toggleBlur(true);
+    global.toggleScrolling(false);
+    global.toggleBlur(true);
   },
 
 
   close: function () {
     this.background.removeClass("s-active");
 
-    window.toggleScrolling(true);
-    window.toggleBlur(false);
+    global.toggleScrolling(true);
+    global.toggleBlur(false);
 
     this.menu.css({
       "transform": "translate3d(0, 0, 0) scale(0.1)",
