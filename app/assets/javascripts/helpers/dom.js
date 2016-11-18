@@ -36,7 +36,7 @@ function getScrollOffsets () {
 
 
 // Toggles page scrolling on and off
-function toggleScroll (value) {
+window.toggleScrolling = function (value) {
   var body = $("body");
 
   if (value === true) {
@@ -66,11 +66,11 @@ function toggleScroll (value) {
 }
 
 
-function toggleBlur (value) {
+window.toggleBlur = function (value) {
   var el = $("[js-blur]");
 
-  if (value) {
-    el.attr("js-blur", value);
+  if (value != null) {
+    el.attr("js-blur", String(value));
 
   } else {
     if (el[0].style.willChange) {
@@ -217,22 +217,35 @@ function decamelize (string) {
 // Instantiates new DomJS nodelist with string, selector, or node
 function $ (selector) {
   if (typeof selector == "string") {
+    // HTML string
     if (selector.charAt(0) === "<") {
       var temp = document.createElement("div");
       temp.innerHTML = selector;
 
-      return new DomJS(temp.childNodes);
+      if (temp.childNodes[0]) {
+        return new DomJS(temp.childNodes);
+      }
 
+    // Selector
     } else {
       var nodeList = document.querySelectorAll(selector);
-      return new DomJS(nodeList)
+
+      if (nodeList[0]) {
+        return new DomJS(nodeList);
+      }
     }
   
+  // DomJS instance
   } else if (selector instanceof DomJS) {
-    return selector;
+    if (selector[0]) {
+      return selector;
+    }
   
+  // Node
   } else {
-    return new DomJS(selector);    
+    if (selector) {
+      return new DomJS(selector);
+    }
   }
 }
 
@@ -363,7 +376,7 @@ DomJS.prototype = {
   // css( (obj || string), value )
   // returns context || value
   css: function (arg1, arg2) {
-    if (arg1 && !arg2) {
+    if (arg1 && arg2 == null) {
       // arg1 is a property name
       if (typeof arg1 === "string") {
         return window.getComputedStyle(this[0], null).getPropertyValue(decamelize(arg1));
@@ -385,7 +398,7 @@ DomJS.prototype = {
         console.error("The argument provided to css() is invalid.")
       }
     
-    } else if (arg1 && arg2) {
+    } else if (arg1 && arg2 != null) {
       this.each(function (node) {
         node.style[camelize(arg1)] = arg2;
       });

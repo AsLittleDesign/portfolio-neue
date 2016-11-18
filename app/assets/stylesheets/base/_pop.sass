@@ -3,6 +3,7 @@
   position: absolute
   top: 0
   bottom: 0
+  width: 0
 
   &--background
     transition: opacity 0.15s ease-out
@@ -23,6 +24,11 @@
 
 .menu-toggle-clone
   pointer-events: none
+  opacity: 0
+
+  &.s-active
+    pointer-events: initial
+    opacity: 1
 
 .menu
   transition: transform 0.15s ease-in-out, opacity 0.15s ease-in-out

@@ -1,84 +1,8 @@
 
-var menuData = [
-  { id: "follow",
-    options: [
-      { id: "facebook",
-        text: "Like on Facebook",
-        href: "https://www.facebook.com/aslittledesign/",
-        symbol: "facebook"
-      },
-
-      { id: "twitter",
-        text: "Follow on Twitter",
-        href: "https://twitter.com/intent/follow?user_id=1605103807",
-        symbol: "twitter"
-      },
-
-      { id: "instagram",
-        text: "Follow on Instagram",
-        href: "https://www.instagram.com/aslittledesign",
-        symbol: "instagram"
-      },
-
-      { id: "linkedin",
-        text: "Connect on LinkedIn",
-        href: "https://www.linkedin.com/in/davesmccarthy",
-        symbol: "linkedin"
-      }
-    ]
-  },
-
-  { id: "share",
-    options: [
-      { id: "facebook",
-        text: "Share on Facebook",
-        action: function () {
-          FB.ui({
-            method: 'share',
-            href: window.location.href,
-            hashtag: "#AsLittleDesign"
-          }, function(response){});
-        },
-        symbol: "facebook"
-      },
-
-      { id: "twitter",
-        text: "Share on Twitter",
-        href: "https://twitter.com/intent/tweet?url=" + URLEncode(window.location.href)  + "&via=AsLittleDesign",
-        symbol: "twitter"
-      },
-
-      { id: "linkedin",
-        text: "Share on LinkedIn",
-        action: function () {
-          window.open("https://www.linkedin.com/shareArticle?url=" + URLEncode(window.location.href)  + "&source=" + URLEncode("http://davesmccarthy.com/"), "newwindow", "width=520, height=570");
-        },
-        symbol: "linkedin"
-      }
-    ]
-  },
-
-  { id: "contact",
-    options: [
-      { id: "facebook",
-        text: "Facebook Messenger",
-        href: "http://m.me/aslittledesign",
-        symbol: "facebook"
-      },
-
-      { id: "email",
-        text: "Email",
-        href: "mailto:dave@aslittledesign.com",
-        symbol: "mail"
-      }
-    ]
-  }
-];
-
-
-function ActionMenu (data) {
-  this.data = data;
-  this.name = data.id;
+function ActionMenu (data, toggle) {
+  this.data   = data;
+  this.name   = data.id;
+  this.toggle = $(toggle);
 }
 
 
@@ -92,35 +16,38 @@ ActionMenu.prototype = {
 
   // Initialize menus
   init: function () {
-    this.createOptions();
     this.createMenu();
-    this.append();
+    this.cloneToggle();
+    this.createBackground();
     this.start();
   },
 
 
   // Create the menu element
   createMenu: function () {
-    var menu = $("<div class='menu'>\
-                    <div class='menu--close' data-menu-toggle='" + this.name + "'>Cancel</div>\
-                  </div>");
+    menu = $("<div class='menu'></div>");
+
+    menu.append($("<div class='menu--close'>Cancel</div>").click(this.toggleMenu.bind(this)));
+    options = this.createOptions();
 
     // Append options to menu.
     // Calling reverse() is due to insertBefore reversing the array.
-    this.options.forEach(function (option) {
+    options.forEach(function (option) {
       menu.prepend(option);
     });
 
     this.menu = menu;
+    $("[data-menu-wrapper]").append(this.menu);
   },
 
 
   createOptions: function () {
-    this.options = [];
+    options = [];
     this.data.options.forEach(function (data, index) {
-      var option = this.createOption(data);
-      this.options.push(option);
+      options.push(this.createOption(data));
     }.bind(this));
+
+    return options;
   },
 
 
@@ -129,7 +56,7 @@ ActionMenu.prototype = {
     
     if (data.id === "twitter") {
       attributes += " " + "rel='me'";
-    };
+    }
 
     if (data.href) {
       attributes += " " + "href='" + data.href + "' target='_blank'"
@@ -149,43 +76,15 @@ ActionMenu.prototype = {
   },
 
 
-  append: function () {
-    $("[data-menu-wrapper]").append(this.menu);
+  createBackground: function () {
+    this.background = $("<div class='pop--background'></div>").click(this.toggleMenu.bind(this));
+    $("[data-menu-wrapper]").prepend(this.background);
   },
 
 
-  getPosition: function (element) {
-    var scrollOffset = getScrollOffsets(),
-        left = 0,
-        top = 0,
-        props;
-    
-    if (element.getBoundingClientRect) {
-      props = element.getBoundingClientRect();
-      left = props.left + scrollOffset.x;
-      top = props.top + scrollOffset.y;
-
-    } else { // for older browsers
-      do {
-        left += element.offsetLeft;
-        top += element.offsetTop;
-      } while ( (el = el.offsetParent) );
-    }
-
-    return {
-      top: top,
-      bottom: top + element.offsetHeight,
-      left: left,
-      right: left + element.offsetWidth,
-      width: element.offsetWidth,
-      height: element.offsetHeight
-    };
-  },
-
-
-  checkPosition: function (toggle) {
+  checkPosition: function () {
     var menuSize = this.menu.size(),
-        togglePos = this.getPosition(toggle),
+        togglePos = this.toggle.getPosition(),
         posX, posY;
 
     if (togglePos.right - menuSize.width - this.menuSpacing < 0) {
@@ -209,9 +108,10 @@ ActionMenu.prototype = {
   },
   
 
-  setStyle: function (toggle) {
-    var togglePos = this.getPosition(toggle),
-        menuPos = this.checkPosition(toggle),
+  setStyle: function () {
+    var togglePos = this.toggle.getPosition(),
+        toggleSize = this.toggle.size(),
+        menuPos = this.checkPosition(),
         originX, originY, top, left, translateDist;
 
     if (menuPos.x === "left") {
@@ -226,12 +126,12 @@ ActionMenu.prototype = {
     if (menuPos.y === "bottom") {
       originY = "top";
       top = togglePos.top;
-      translateDist = togglePos.height + this.menuSpacing;
+      translateDist = toggleSize.height + this.menuSpacing;
 
     } else {
       originY = "bottom";
-      top = togglePos.bottom - this.menu[0].offsetHeight; 
-      translateDist = -this.menuSpacing - togglePos.height;
+      top = togglePos.bottom - this.menu[0].offsetHeight;
+      translateDist = -this.menuSpacing - toggleSize.height;
     }
 
     this.menu.css({
@@ -243,7 +143,8 @@ ActionMenu.prototype = {
       "transform-origin": originX + " " + originY,
       "-ms-transform-origin": originX + " " + originY,
       "-webkit-transform-origin": originX + " " + originY,
-      "-moz-transform-origin": originX + " " + originY
+      "-moz-transform-origin": originX + " " + originY,
+      "z-index": 1
     });
 
     if (originX === "right") {
@@ -252,10 +153,9 @@ ActionMenu.prototype = {
   },
 
 
-  cloneToggle: function (toggle) {
-    this.clone = $(toggle.cloneNode(true));
-    var togglePos = $(toggle).getPosition(),
-        toggleSize = $(toggle).size();
+  positionClone: function () {
+    var togglePos = this.toggle.getPosition(),
+        toggleSize = this.toggle.size();
 
     this.clone.css({
       "top": togglePos.top + "px",
@@ -263,76 +163,85 @@ ActionMenu.prototype = {
       "position": "absolute",
       "width": toggleSize.width + "px",
       "height": toggleSize.height + "px",
-      "margin-left": 0
-    }).addClass("menu-toggle-clone");
+      "margin-left": 0,
+      "z-index": 1
+    })
+  },
+
+
+  cloneToggle: function () {
+    this.clone = $(this.toggle[0].cloneNode(true));
+    this.clone.addClass("menu-toggle-clone").click(this.toggleMenu.bind(this))
+
+    var timing = window.location.pathname === "/photography" ? 5000 : 500;
+
+    // Fix position after page render
+    setTimeout(function () {
+      this.positionClone();
+    }.bind(this), timing);
 
     $("[data-menu-wrapper]").append(this.clone);
-
-    toggle.style.opacity = 0;
   },
 
 
   // Return menu to fully hidden state
   reset: function () {
-    $(this.menu).attr("style", "").removeClass("m-right");
-
-    if (this.clone) {
-      this.clone.remove();
-    }
+    this.menu.attr("style", "").removeClass("m-right");
   },
 
 
-  open: function (toggle) {
+  open: function () {
     this.reset();
 
-    $("[data-menu-background]").addClass("s-active").attr("data-menu-toggle", this.name);
+    this.background.addClass("s-active");
 
-    this.toggle = toggle;
-    this.cloneToggle(toggle);
-    this.setStyle(toggle);
-    toggleScroll(false);
-    toggleBlur(true);
+    this.toggle.css("opacity", 0);
+    this.clone.addClass("s-active");
+
+    this.setStyle();
+    window.toggleScrolling(false);
+    window.toggleBlur(true);
   },
 
 
   close: function () {
-    $("[data-menu-background]").removeClass("s-active");
-    $("[data-menu-background]")[0].removeEventListener("click", this.backgroundClose);
+    this.background.removeClass("s-active");
 
-    if (!this.state.active) {
-      this.clone.removeClass("menu-toggle-clone");
-    }
+    window.toggleScrolling(true);
+    window.toggleBlur(false);
 
-    toggleScroll(true);
-    toggleBlur(false);
-
-    $(this.menu).css({
+    this.menu.css({
       "transform": "translate3d(0, 0, 0) scale(0.1)",
       "opacity": 0
     });
 
     setTimeout(function () {
-      this.toggle.style.opacity = ""
-      this.toggle = null;
-
-      this.clone.remove();
-      this.clone = null;
+      this.clone.removeClass("s-active");
+      this.toggle.css("opacity", "");
 
       this.reset();
     }.bind(this), this.animationLength)
   },
 
 
-  start: function () {
-    delegateEvent("click", "[data-menu-toggle=" + this.name + "]", function (e, toggle) {
-      this.state.active = !this.state.active;
+  toggleMenu: function () {
+    this.state.active = !this.state.active;
 
-      if (this.state.active) {
-        this.open(toggle);
-      
-      } else {
-        this.close();
-      }
+    if (this.state.active) {
+      this.open();
+    
+    } else {
+      this.close();
+    }
+  },
+
+
+  start: function () {
+    this.toggle.click(this.toggleMenu.bind(this));
+
+    // Handle window resize
+    window.addEventListener("resize", function () {
+      this.positionClone();
     }.bind(this));
   }
 }

@@ -117,16 +117,99 @@ Button.prototype = {
 }
 
 
+var menuData = [
+  { id: "follow",
+    options: [
+      { id: "facebook",
+        text: "Like on Facebook",
+        href: "https://www.facebook.com/aslittledesign/",
+        symbol: "facebook"
+      },
+
+      { id: "twitter",
+        text: "Follow on Twitter",
+        href: "https://twitter.com/intent/follow?user_id=1605103807",
+        symbol: "twitter"
+      },
+
+      { id: "instagram",
+        text: "Follow on Instagram",
+        href: "https://www.instagram.com/aslittledesign",
+        symbol: "instagram"
+      },
+
+      { id: "linkedin",
+        text: "Connect on LinkedIn",
+        href: "https://www.linkedin.com/in/davesmccarthy",
+        symbol: "linkedin"
+      }
+    ]
+  },
+
+  { id: "share",
+    options: [
+      { id: "facebook",
+        text: "Share on Facebook",
+        action: function () {
+          FB.ui({
+            method: 'share',
+            href: window.location.href,
+            hashtag: "#AsLittleDesign"
+          }, function(response){});
+        },
+        symbol: "facebook"
+      },
+
+      { id: "twitter",
+        text: "Share on Twitter",
+        href: "https://twitter.com/intent/tweet?url=" + URLEncode(window.location.href)  + "&via=AsLittleDesign",
+        symbol: "twitter"
+      },
+
+      { id: "linkedin",
+        text: "Share on LinkedIn",
+        action: function () {
+          window.open("https://www.linkedin.com/shareArticle?url=" + URLEncode(window.location.href)  + "&source=" + URLEncode("http://davesmccarthy.com/"), "newwindow", "width=520, height=570");
+        },
+        symbol: "linkedin"
+      }
+    ]
+  },
+
+  { id: "contact",
+    options: [
+      { id: "facebook",
+        text: "Facebook Messenger",
+        href: "http://m.me/aslittledesign",
+        symbol: "facebook"
+      },
+
+      { id: "email",
+        text: "Email",
+        href: "mailto:dave@aslittledesign.com",
+        symbol: "mail"
+      }
+    ]
+  }
+];
+
+
 ready(function () {
   // Removes 300ms delay on mobile whe clicking
   new FastClick(document.body);
 
-  menuData.forEach(function (data) {
-    new ActionMenu(data).init();
-  });
-
   $(".button").each(function (node) {
     var button = new Button(node).init();
   });
+  
+  menuData.forEach(function (data) {
+    var toggles = $("[data-menu-toggle=" + data.id + "]");
+    if (toggles) {
+      toggles.each(function (toggle) {
+        new ActionMenu(data, toggle).init();
+      });
+    }
+  });
+
 });
 
