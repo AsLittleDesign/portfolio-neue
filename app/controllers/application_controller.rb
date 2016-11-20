@@ -64,7 +64,7 @@ class ApplicationController < ActionController::Base
     @metadata = {
       "title" => "Table.co",
       "description" => "Explore Dave's best graphic design work, from logos to watchfaces.",
-      "url" => "https://aslittledesign.com/graphic_design",
+      "url" => "https://aslittledesign.com/table",
       "type" => "website",
       "card" => "summary_large_image",
       "image" => {
@@ -81,7 +81,7 @@ class ApplicationController < ActionController::Base
     @metadata = {
       "title" => "Graphic Design",
       "description" => "Explore Dave's best graphic design work, from logos to watchfaces.",
-      "url" => "https://aslittledesign.com/graphic_design",
+      "url" => "https://aslittledesign.com/graphic-design",
       "type" => "website",
       "card" => "summary_large_image",
       "image" => {
