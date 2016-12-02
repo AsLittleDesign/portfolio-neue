@@ -65,7 +65,7 @@ ActionMenu.prototype = {
       attributes += " " + "href='" + data.href + "' target='_blank'"
     }
 
-    var option = $("<a class='menu--option'" + attributes + ">\
+    var option = $("<a class='menu--option m-no-underline'" + attributes + ">\
                       <span class='menu--symbol icon--" + data.symbol + "'></span>\
                       <span class='menu--option-text'>" + data.text + "</span>\
                     </a>");

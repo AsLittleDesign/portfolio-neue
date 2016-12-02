@@ -6,13 +6,16 @@ function delegateEvent (eventType, selector, handler) {
   document.addEventListener(eventType, function (e) {
     e = e || window.event;
 
-    var target   = e.target || e.srcElement;
+    var target = e.target || e.srcElement,
+        nodes  = $(selector);
 
-    $(selector).each(function (node) {
-      if (target === node) {
-        handler(e, node);
-      }
-    });
+    if (nodes) {
+      nodes.each(function (node) {
+        if (target === node) {
+          handler(e, node);
+        }
+      });
+    }
   });
 }
 
@@ -116,9 +119,7 @@ function $ (selector) {
     } else {
       var nodeList = document.querySelectorAll(selector);
 
-      if (nodeList[0]) {
-        return new DomJS(nodeList);
-      }
+      return new DomJS(nodeList);
     }
   
   // DomJS instance
@@ -137,7 +138,7 @@ function $ (selector) {
 
 
 function DomJS (nodeList) {
-  if (nodeList.length) {
+  if (nodeList.length != null) {
     this.length = nodeList.length;
 
     for (var i = 0; i < this.length; i++) {
@@ -158,9 +159,15 @@ DomJS.prototype = {
       console.error("Callback missing. each() takes an anonymous function as an argument.")
     }
 
+    if (!this.length) {
+      return this;
+    }
+
     for (var i = 0; i < this.length; i++) {
       callback(this[i], i);
     }
+
+    return this;
   },
 
 
@@ -246,7 +253,7 @@ DomJS.prototype = {
   // text( textValue )
   // returns context || value
   text: function (value) {
-    if (value) {
+    if (value != null) {
       this.each(function (node) {
         node.textContent = value;
       });
@@ -339,7 +346,9 @@ DomJS.prototype = {
     selector = $(selector);
 
     this.each(function (node) {
-      node.appendChild(selector[0]);
+      selector.each(function (innerNode) {
+        node.appendChild(innerNode);
+      });
     });
 
     return this;
@@ -352,7 +361,9 @@ DomJS.prototype = {
     selector = $(selector);
 
     this.each(function (node) {
-      node.insertBefore(selector[0], node.firstChild);
+      selector.each(function (innerNode) {
+        node.insertBefore(innerNode, node.firstChild);
+      });
     });
 
     return this;

@@ -211,5 +211,11 @@ global.ready(function () {
     }
   });
 
+  $("p a").each(function (node) {
+    var text = $(node).text(),
+        textNode = $("<span class='link--content'>" + text + "</span>");
+
+    $(node).text("").append(textNode);
+  });
 });
 
